@@ -1,0 +1,5 @@
+Scrapy>=2.11.0      # web scraping
+tqdm                # progress bar
+selenium
+2captcha-python
+beautifulsoup4
