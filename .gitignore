@@ -1,4 +1,5 @@
 /.idea/
 /_etc/logs/
-/_etc/_results
-/_etc/pdfs
+/_etc/_results/
+/_etc/pdfs/
+/_etc/pdfs_backup/
