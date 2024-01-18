@@ -12,6 +12,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select  # <-- Add this import for Select
+from twocaptcha import TwoCaptcha
+import twocaptcha
 from bs4 import BeautifulSoup
 
 
@@ -22,12 +24,8 @@ def setup_logging() -> Logger:
         os.makedirs(LOGS_DIRECTORY)
 
     # Configure logging to also output to a file with a unique name
-    logging.basicConfig(level=logging.INFO,
-                        format='%(asctime)s - %(levelname)s - %(message)s',
-                        handlers=[
-                            logging.FileHandler(f"NYSCaseScraper_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.log"),
-                            logging.StreamHandler()
-                        ])
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
     # Configure logging
     logger = logging.getLogger()
     logger.setLevel(logging.INFO)  # Ensuring that INFO and above level messages are captured
@@ -44,35 +42,44 @@ def setup_logging() -> Logger:
 # Please note, the code will cick on the "Name" tab on the search to search by Name.
 # When trying to access that URL directly i.e. https://iapps.courts.state.ny.us/nyscef/CaseSearch?TAB=name,
 # it doesn't seem to work properly so this was a way to accomplish it
-BASE_URL = "https://iapps.courts.state.ny.us/nyscef"
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
 # PROXY_SERVICE = API_KEY - # Figure out something for proxy IP stuff here from a giant pool of IP's
 PDF_DOWNLOAD_DELAY = 2  # seconds
 DAYS_BACK = 10          # Look for cases from the last 60 days
+TWO_CAPTCHA_API_KEY = '3408dd86d795e88a4c8e8e2860b25e94'
 
 
 class Crawler:
+    BASE_URL = "https://iapps.courts.state.ny.us/nyscef"
+
     def __init__(self):
-        self.driver: webdriver.Firefox = None
         self.logger = setup_logging()
 
         options = Options()
-        options.headless = False  # Set to True if you don't need the browser window
+        options.add_argument("-headless")
+        self.driver = webdriver.Firefox(options=options)
+
+        self.solver = TwoCaptcha(apiKey=TWO_CAPTCHA_API_KEY)
+        self.current_captcha_retries, self.max_captcha_retries = 0, 5
+
+    @staticmethod
+    def get_queries() -> list[str]:
+        return ['J.G. Wentworth Originations, LLC']
 
     def main(self):
-        self.driver = webdriver.Firefox(options=options)
-        self.logger.info("Starting the scraper.")
-        self.scrape_data('J.G. Wentworth Originations, LLC')  # Pass the driver to scrape data
-        self.process_cases()  # Use the same driver to process each case
+        for name in self.get_queries():
+            self.logger.info(f"Starting the scraper for {name}.")
+            self.scrape_data(name)  # Pass the driver to scrape data
+            self.process_cases()  # Use the same driver to process each case
+
         self.logger.info("The script has completed running successfully, please check your PDF and Log folders for more information.")
-        self.driver.close()
 
     def scrape_data(self, business_name):
         wait = WebDriverWait(self.driver, 30)
         data = []
         date_cutoff = datetime.datetime.now() - datetime.timedelta(days=DAYS_BACK)
 
-        self.driver.get(f"{BASE_URL}/CaseSearch?TAB=name")
+        self.driver.get(f"{self.BASE_URL}/CaseSearch?TAB=name")
         self.logger.info("Accessed the NYSCef Case Search page.")
         input_field = wait.until(EC.visibility_of_element_located((By.NAME, 'txtBusinessOrgName')))
         input_field.send_keys(business_name)
@@ -82,7 +89,7 @@ class Crawler:
         search_button.click()
         self.logger.info("Clicked the search button.")
 
-        self.check_for_captcha()
+        self.solve_captcha()
 
         wait.until(EC.visibility_of_element_located((By.CLASS_NAME, 'NewSearchResults')))
         self.logger.info("Search results loaded.")
@@ -112,8 +119,38 @@ class Crawler:
 
         self.save_to_csv(data)
 
-    def check_for_captcha(self):
-        input("CAPTCHA check: Please manually check the browser for a CAPTCHA. Solve it (if present - otherwise code will proceed automatically), then press Enter here to continue...")
+    # def solve_captcha(self):
+    #     input("CAPTCHA check: Please manually check the browser for a CAPTCHA. Solve it (if present - otherwise code will proceed automatically), then press Enter here to continue...")
+
+    def solve_captcha(self) -> None:
+        captcha_code = self.get_captcha_response_code(url=self.driver.current_url)
+        self.logger.info(f"Captcha Response Code: {captcha_code}")
+
+        # insert captcha into g-recaptcha-response textarea and submit form
+        form = self.driver.find_element(By.NAME, 'captcha_form')
+        textarea = form.find_element(By.NAME, 'g-recaptcha-response')
+        self.driver.execute_script("arguments[0].value = arguments[1];", textarea, captcha_code)
+        form.submit()
+
+    def get_captcha_response_code(self, url) -> str:
+        self.current_captcha_retries += 1
+        self.logger.info(f'Captcha solving try #{self.current_captcha_retries}')
+
+        try:
+            self.logger.info(f"Started solving catpcha for {url}\nPlease wait.")
+            result = self.solver.recaptcha(sitekey='6LdiezYUAAAAAGJqdPJPP7mAUgQUEJxyLJRUlvN6',
+                                           url=url,
+                                           invisible=1,
+                                           enterprise=1)
+        except twocaptcha.api.ApiException as e:
+            self.logger.info(str(e))
+            if self.current_captcha_retries >= self.max_captcha_retries:
+                raise ValueError(f"Max {self.current_captcha_retries} Captcha Retries reached")
+
+            return self.get_captcha_response_code(url)
+
+        self.current_captcha_retries = 0
+        return result['code']
 
     def extract_and_save_data(self, data, date_cutoff):
         rows = self.driver.find_elements(By.XPATH, "//table[@class='NewSearchResults']/tbody/tr")
@@ -169,7 +206,7 @@ class Crawler:
             pdf_links =  [link['href'] for link in links if 'ConfirmationNotice?docId=' in link['href'] or 'ViewDocument?docIndex=' in link['href']]
 
             for pdf_link in pdf_links:
-                self.download_pdf(f"{BASE_URL}/{pdf_link}", directory)
+                self.download_pdf(f"{self.BASE_URL}/{pdf_link}", directory)
         except Exception as e:
             self.logger.error(f"Error processing case {case_url}: {e}")
 
@@ -194,7 +231,7 @@ class Crawler:
             self.logger.error(f"Failed to download {url}. Status code: {response.status_code}")
 
     def __del__(self):
-        print(self.driver.close())
+        self.driver.quit()
 
 
 if __name__ == "__main__":
