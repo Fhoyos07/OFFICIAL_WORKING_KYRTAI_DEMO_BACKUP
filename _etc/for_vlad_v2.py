@@ -195,9 +195,9 @@ class Crawler:
             for row in reader:
                 case_number = row['Case Number'].split('\n')[0].replace('/', '_')
                 url = row['URL']
-                self.scrape_and_download_case_pdfs(case_url=url, directory=case_number)
+                self.scrape_and_download_case_pdfs(case_url=url, case_number=case_number)
 
-    def scrape_and_download_case_pdfs(self, case_url, directory):
+    def scrape_and_download_case_pdfs(self, case_url, case_number):
         try:
             self.driver.get(case_url)
             WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "html")))
@@ -209,7 +209,7 @@ class Crawler:
             pdf_links =  [link['href'] for link in links if 'ConfirmationNotice?docId=' in link['href'] or 'ViewDocument?docIndex=' in link['href']]
 
             for pdf_link in pdf_links:
-                self.download_pdf(f"{self.BASE_URL}/{pdf_link}", directory)
+                self.download_pdf(f"{self.BASE_URL}/{pdf_link}", case_number)
         except Exception as e:
             self.logger.error(f"Error processing case {case_url}: {e}")
 

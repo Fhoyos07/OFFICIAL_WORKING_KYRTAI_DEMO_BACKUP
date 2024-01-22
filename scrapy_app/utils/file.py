@@ -66,9 +66,15 @@ def load_file(file_path: str) -> str:
 
 
 def load_json(file_path: str) -> dict:
-    """Load dict from json file"""
+    """Dump dict to json file"""
     with open(file_path, mode='r', encoding='utf-8') as f:
         return json.load(f)
+
+
+def save_json(data: dict, file_path: str):
+    """Load dict from json file"""
+    with open(file_path, mode='w', encoding='utf-8') as f:
+        json.dump(data, fp=f, indent=2, ensure_ascii=False)
 
 
 def load_csv(file_paths: str, encoding: str = 'utf-8-sig') -> list[dict]:

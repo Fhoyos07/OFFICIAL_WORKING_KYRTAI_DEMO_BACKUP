@@ -1,5 +1,6 @@
 Scrapy>=2.11.0      # web scraping
 tqdm                # progress bar
 selenium
+requests
 2captcha-python
 beautifulsoup4

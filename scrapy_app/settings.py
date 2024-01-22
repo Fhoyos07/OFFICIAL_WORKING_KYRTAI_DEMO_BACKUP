@@ -3,17 +3,22 @@
 #     https://docs.scrapy.org/en/latest/topics/settings.html
 import os
 
-
 # folders
 PROJECT_DIR = os.path.dirname(os.path.dirname(__file__))    # root project dir
 LOG_DIR = os.path.join(PROJECT_DIR, '_etc', 'logs')
-CSV_DIR = os.path.join(PROJECT_DIR, '_etc', '_results')
+
+INPUT_CSV_PATH = os.path.join(PROJECT_DIR, 'input.csv')
+RESULTS_DIR = os.path.join(PROJECT_DIR, 'results')
+
+CACHE_JSON_PATH = os.path.join(PROJECT_DIR, '_etc', 'session_cache.json')
 
 
-# Configure item pipelines: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
-   "scrapy_app.pipelines.CsvOnClosePipeline": 300,
-}
+# crawling settings
+DAYS_BACK = 10
+
+TWO_CAPTCHA_API_KEY = '3408dd86d795e88a4c8e8e2860b25e94'
+TWO_CAPTCHA_SITE_KEY = '6LdiezYUAAAAAGJqdPJPP7mAUgQUEJxyLJRUlvN6'
+MAX_CAPTCHA_RETRIES = 10
 
 
 # User-Agent
@@ -22,14 +27,6 @@ USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTM
 # standard settings
 BOT_NAME = "CourtUsCrawler"
 SPIDER_MODULES = ["scrapy_app.spiders"]
-
-# CONCURRENT_REQUESTS = 32                  # default: 32
-# DOWNLOAD_DELAY = 3                        # default: 0
-# DEFAULT_REQUEST_HEADERS = {
-#    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-#    "Accept-Language": "en",
-# }
-# ROBOTSTXT_OBEY = False                    # don't obey robots.txt rules
 
 
 # logging settings
