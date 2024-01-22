@@ -24,7 +24,6 @@ BOT_NAME = "CourtUsCrawler"
 SPIDER_MODULES = ["scrapy_app.spiders"]
 
 # CONCURRENT_REQUESTS = 32                  # default: 32
-# CONCURRENT_REQUESTS_PER_DOMAIN = 16       # default: 16
 # DOWNLOAD_DELAY = 3                        # default: 0
 # DEFAULT_REQUEST_HEADERS = {
 #    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",

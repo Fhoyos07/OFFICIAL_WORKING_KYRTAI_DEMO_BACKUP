@@ -17,6 +17,17 @@ import twocaptcha
 from bs4 import BeautifulSoup
 
 
+# Please note, the code will cick on the "Name" tab on the search to search by Name.
+# When trying to access that URL directly i.e. https://iapps.courts.state.ny.us/nyscef/CaseSearch?TAB=name,
+# it doesn't seem to work properly so this was a way to accomplish it
+USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
+# PROXY_SERVICE = API_KEY - # Figure out something for proxy IP stuff here from a giant pool of IP's
+PDF_DOWNLOAD_DELAY = 2  # seconds
+DAYS_BACK = 10          # Look for cases from the last 60 days
+TWO_CAPTCHA_API_KEY = '3408dd86d795e88a4c8e8e2860b25e94'
+MAX_CAPTCHA_RETRIES = 7
+
+
 def setup_logging() -> Logger:
     LOGS_DIRECTORY = "logs"  # Directory to store logs
     # Ensure the logs directory exists
@@ -39,16 +50,6 @@ def setup_logging() -> Logger:
     return logger
 
 
-# Please note, the code will cick on the "Name" tab on the search to search by Name.
-# When trying to access that URL directly i.e. https://iapps.courts.state.ny.us/nyscef/CaseSearch?TAB=name,
-# it doesn't seem to work properly so this was a way to accomplish it
-USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
-# PROXY_SERVICE = API_KEY - # Figure out something for proxy IP stuff here from a giant pool of IP's
-PDF_DOWNLOAD_DELAY = 2  # seconds
-DAYS_BACK = 10          # Look for cases from the last 60 days
-TWO_CAPTCHA_API_KEY = '3408dd86d795e88a4c8e8e2860b25e94'
-
-
 class Crawler:
     BASE_URL = "https://iapps.courts.state.ny.us/nyscef"
 
@@ -60,7 +61,7 @@ class Crawler:
         self.driver = webdriver.Firefox(options=options)
 
         self.solver = TwoCaptcha(apiKey=TWO_CAPTCHA_API_KEY)
-        self.current_captcha_retries, self.max_captcha_retries = 0, 5
+        self.current_captcha_retries, self.max_captcha_retries = 0, MAX_CAPTCHA_RETRIES
 
     @staticmethod
     def get_queries() -> list[str]:
@@ -123,6 +124,10 @@ class Crawler:
     #     input("CAPTCHA check: Please manually check the browser for a CAPTCHA. Solve it (if present - otherwise code will proceed automatically), then press Enter here to continue...")
 
     def solve_captcha(self) -> None:
+        if not self.driver.find_elements(By.NAME, 'captcha_form'):
+            self.logger.info(f"Captcha not found")
+            return
+
         captcha_code = self.get_captcha_response_code(url=self.driver.current_url)
         self.logger.info(f"Captcha Response Code: {captcha_code}")
 
@@ -134,7 +139,7 @@ class Crawler:
 
     def get_captcha_response_code(self, url) -> str:
         self.current_captcha_retries += 1
-        self.logger.info(f'Captcha solving try #{self.current_captcha_retries}')
+        self.logger.info(f'Captcha solving try {self.current_captcha_retries} of {self.max_captcha_retries}')
 
         try:
             self.logger.info(f"Started solving catpcha for {url}\nPlease wait.")
@@ -184,15 +189,13 @@ class Crawler:
             dict_writer.writerows(data)
         self.logger.info(f"Saved scraped data to 'pdfs/scraped_data.csv'.")
 
-
     def process_cases(self):
         with open('pdfs/scraped_data.csv', newline='') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 case_number = row['Case Number'].split('\n')[0].replace('/', '_')
                 url = row['URL']
-                directory = case_number
-                self.scrape_and_download_case_pdfs(url, directory)
+                self.scrape_and_download_case_pdfs(case_url=url, directory=case_number)
 
     def scrape_and_download_case_pdfs(self, case_url, directory):
         try:

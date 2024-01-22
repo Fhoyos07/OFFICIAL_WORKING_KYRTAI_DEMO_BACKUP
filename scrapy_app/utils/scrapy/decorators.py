@@ -54,7 +54,7 @@ def save_response(f: Callable) -> Callable:
         if not PROJECT_DIR:
             raise AttributeError("PROJECT_DIR attribute wasn't found in settings.py")
 
-        HTML_DIR = HTML_DIR or os.path.join(PROJECT_DIR, 'etc', 'html')
+        HTML_DIR = HTML_DIR or os.path.join(PROJECT_DIR, '_etc', 'html')
         html_dir_for_spider = os.path.join(HTML_DIR, self.name)
 
         pathlib.Path(html_dir_for_spider).mkdir(parents=True, exist_ok=True)
