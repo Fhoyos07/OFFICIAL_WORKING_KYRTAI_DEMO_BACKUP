@@ -24,6 +24,24 @@ TWO_CAPTCHA_SITE_KEY = '6LdiezYUAAAAAGJqdPJPP7mAUgQUEJxyLJRUlvN6'
 MAX_CAPTCHA_RETRIES = 10
 
 
+# proxy settings
+DOWNLOADER_MIDDLEWARES = {
+    'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 110,
+    # 'scrapy_app.proxies.proxymesh.ProxyMeshMiddleware': 110,      # uncomment for Proxymesh
+    # 'scrapy_app.proxies.smartproxy.SmartProxyMiddleware': 100,    # uncomment for Smartproxy
+}
+
+# # Proxymesh Settings
+# PROXYMESH_URL = 'http://us-il.proxymesh.com:31280'
+# PROXYMESH_TIMEOUT = 60    # Proxymesh request timeout
+
+# # Smartproxy Settings
+# SMARTPROXY_USER = 'spdd59c579'
+# SMARTPROXY_PASSWORD = 'password'
+# SMARTPROXY_ENDPOINT = 'us.smartproxy.com'
+# SMARTPROXY_PORT = '10000'
+
+
 # User-Agent
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
 
