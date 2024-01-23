@@ -9,12 +9,12 @@ import os
 from ..utils.scrapy.decorators import log_response, save_response, log_method
 from ..utils.file import load_json, save_json, load_csv
 from ..utils.scrapy.url import parse_url_params
-from ..settings import (USE_CACHE, CACHE_JSON_PATH, INPUT_CSV_PATH, RESULTS_DIR, DAYS_BACK, MAX_COMPANIES,
+from ..settings import (USE_CACHE, CACHE_JSON_PATH, INPUT_CSV_PATH, FILES_DIR, DAYS_BACK, MAX_COMPANIES,
                         TWO_CAPTCHA_API_KEY, TWO_CAPTCHA_SITE_KEY, MAX_CAPTCHA_RETRIES)
 
 
-class CourtsNySpider(Spider):
-    name = 'courts_ny'
+class KyrtNyCaseSpider(Spider):
+    name = 'kyrt_ny'
 
     custom_settings = dict(
         CONCURRENT_REQUESTS=1,  # only 1 parallel request! don't change this
@@ -307,8 +307,8 @@ class CourtsNySpider(Spider):
         return result['code']
 
 
-class CourtsNyFileSpider(Spider):
-    name = 'courts_ny_files'
+class KyrtNyFileSpider(Spider):
+    name = 'kyrt_ny_files'
 
     custom_settings = dict(
         CONCURRENT_REQUESTS=1,
@@ -323,10 +323,11 @@ class CourtsNyFileSpider(Spider):
         self.document_name_by_url: dict[str, str] = {}
         cases_with_privacy_notices: set[str] = set()
 
-        for row in load_csv(os.path.join(RESULTS_DIR, 'courts_ny_documents.csv')):
+        input_file_name = f'{KyrtNyCaseSpider.name}_documents.csv'
+        for row in load_csv(os.path.join(FILES_DIR, input_file_name)):
             company, doc_id, case_number = row['Company'], row['Document ID'], row['Case Number']
 
-            # format name to exclude slaches
+            # format name to exclude slashes
             company = company.replace('/', '_')
             case_dir = case_number.replace('/', '_')
             doc_id = doc_id.replace('/', '_')

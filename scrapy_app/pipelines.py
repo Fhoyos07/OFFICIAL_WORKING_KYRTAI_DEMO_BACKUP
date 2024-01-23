@@ -17,10 +17,10 @@ class BasePipeline:
         self.settings = spider.settings
         self.logger = spider.logger
 
-        self.results_dir = self.settings.get('RESULTS_DIR')
-        if not self.results_dir:
-            raise ValueError('RESULTS_DIR not specified in settings')
-        os.makedirs(self.results_dir, exist_ok=True)
+        self.files_dir = self.settings.get('FILES_DIR')
+        if not self.files_dir:
+            raise ValueError('FILES_DIR not specified in settings')
+        os.makedirs(self.files_dir, exist_ok=True)
 
     @classmethod
     def from_crawler(cls, crawler: Crawler):
@@ -30,7 +30,7 @@ class BasePipeline:
 class DocumentSavePipeline(BasePipeline):
     def process_item(self, item, spider):
         # generate pdf path
-        pdf_path = Path(self.results_dir) / 'pdfs' / item['relative_file_path']
+        pdf_path = Path(self.files_dir) / 'pdfs' / item['relative_file_path']
         pdf_path.parent.mkdir(parents=True, exist_ok=True)
 
         # save to file
@@ -61,7 +61,7 @@ class CsvPipeline(BasePipeline):
 
     def export_items_to_csv(self, items: list[dict], csv_name: str):
         # get CSV path and collect CSV fields
-        csv_path = os.path.join(self.results_dir, csv_name)
+        csv_path = os.path.join(self.files_dir, csv_name)
 
         if not items:
             self.logger.info(f"No items to export to {csv_name}. Skipping.")

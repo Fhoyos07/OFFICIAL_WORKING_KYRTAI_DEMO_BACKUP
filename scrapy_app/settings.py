@@ -9,7 +9,7 @@ PROJECT_DIR = os.path.dirname(os.path.dirname(__file__))    # root project dir
 LOG_DIR = os.path.join(PROJECT_DIR, '_etc', 'logs')
 
 INPUT_CSV_PATH = os.path.join(PROJECT_DIR, 'input.csv')
-RESULTS_DIR = os.path.join(PROJECT_DIR, 'results')
+FILES_DIR = os.path.join(PROJECT_DIR, 'files')
 
 
 # crawling settings
