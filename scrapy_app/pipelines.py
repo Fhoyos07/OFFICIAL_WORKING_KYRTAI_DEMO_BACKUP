@@ -28,41 +28,36 @@ class BasePipeline:
 
 
 
-class DocumentDownloadPipeline(BasePipeline):
-    def process_item(self, item, spider):
-        if item['_item_type'] == 'Document':
-            self.download_pdf(url=item['Document URL'],
-                              case_number=item['Case Number'],
-                              document_id=item['Document ID'])
-
-            if item.get('Status Document URL'):
-                status_document_slug = item['Status Document Name'].lower().replace(' ', '_')
-                self.download_pdf(url=item['Status Document URL'],
-                                  case_number=item['Case Number'],
-                                  document_id=f"{item['Document ID']}_{status_document_slug}")
-        return item
-
-    def download_pdf(self, url: str, case_number: str, document_id: str):
-        # generate pdf path
-        case_dir_name = case_number.replace('/', '_')
-        pdf_path = Path(self.results_dir) / 'pdfs' / case_dir_name / f"{document_id}.pdf"
-
-        # create parent directory for the pdf_path if not exist
-        pdf_path.parent.mkdir(parents=True, exist_ok=True)
-
-        # # download pdf after 1-sec delay
-        # time.sleep(1)
-
-        # download pdf
-        response = requests.get(url, headers={'User-Agent': self.settings.get('USER_AGENT')}, stream=True)
-        if not response.ok:
-            self.logger.error(f"Failed to download {url}. Status code: {response.status_code}")
-            return
-
-        # save to file
-        with open(pdf_path, 'wb') as file:
-            file.write(response.content)
-        self.logger.info(f"Wrote {document_id} to {pdf_path}")
+# class DocumentSavePipeline(BasePipeline):
+#     def process_item(self, item, spider):
+#             self.download_pdf(url=item['Document URL'],
+#                               case_number=item['Case Number'],
+#                               document_id=item['Document ID'])
+#
+#         name = f"{item['Document ID']}_{status_document_slug}")
+#         return item
+#
+#     def download_pdf(self, url: str, case_number: str, document_id: str):
+#         # generate pdf path
+#         case_dir_name = case_number.replace('/', '_')
+#         pdf_path = Path(self.results_dir) / 'pdfs' / case_dir_name / f"{document_id}.pdf"
+#
+#         # create parent directory for the pdf_path if not exist
+#         pdf_path.parent.mkdir(parents=True, exist_ok=True)
+#
+#         # # download pdf after 1-sec delay
+#         # time.sleep(1)
+#
+#         # download pdf
+#         response = requests.get(url, headers={'User-Agent': self.settings.get('USER_AGENT')}, stream=True)
+#         if not response.ok:
+#             self.logger.error(f"Failed to download {url}. Status code: {response.status_code}")
+#             return
+#
+#         # save to file
+#         with open(pdf_path, 'wb') as file:
+#             file.write(response.content)
+#         self.logger.info(f"Wrote {document_id} to {pdf_path}")
 
 
 class CsvOnClosePipeline(BasePipeline):

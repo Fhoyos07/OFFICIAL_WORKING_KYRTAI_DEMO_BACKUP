@@ -10,6 +10,9 @@ LOG_DIR = os.path.join(PROJECT_DIR, '_etc', 'logs')
 INPUT_CSV_PATH = os.path.join(PROJECT_DIR, 'input.csv')
 RESULTS_DIR = os.path.join(PROJECT_DIR, 'results')
 
+
+# ENABLING CACHE SPEEDS UP THE FIRST CRAWLING (UNTIL CAPTCHA FACED), BUT MAY LEAD TO UNSOLVABLE CAPTCHAS
+USE_CACHE = True
 CACHE_JSON_PATH = os.path.join(PROJECT_DIR, '_etc', 'session_cache.json')
 
 
