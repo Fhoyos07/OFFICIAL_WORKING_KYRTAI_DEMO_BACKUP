@@ -28,7 +28,10 @@ class CourtsNySpider(Spider):
 
     def __init__(self):
         # parse input CSV
-        self.QUERIES = [row['Competitor / Fictitious LLC Name'].strip() for row in load_csv(INPUT_CSV_PATH)][:100]
+        companies = [row['Competitor / Fictitious LLC Name'] for row in load_csv(INPUT_CSV_PATH)][:100]
+        companies_formatted = [c.strip().upper().replace(', LLC', ' LLC') for c in companies]
+        self.QUERIES = sorted(list(set(companies_formatted)))
+        self.logger.info(f"len(self.QUERIES): {len(self.QUERIES)}")
 
         # min case date to crawl
         self.MIN_DATE = date.today() - timedelta(days=DAYS_BACK)
