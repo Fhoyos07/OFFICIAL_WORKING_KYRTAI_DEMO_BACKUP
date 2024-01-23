@@ -12,7 +12,10 @@ INPUT_CSV_PATH = os.path.join(PROJECT_DIR, 'input.csv')
 RESULTS_DIR = os.path.join(PROJECT_DIR, 'results')
 
 
-# min date to scrape
+# crawling settings
+MAX_COMPANIES = None    # crawl all input.csv
+# MAX_COMPANIES = 80    # crawl firxt X rows from input.csv
+
 DAYS_BACK = 10
 
 

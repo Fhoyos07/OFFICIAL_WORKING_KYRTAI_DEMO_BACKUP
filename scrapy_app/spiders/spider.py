@@ -9,7 +9,7 @@ import os
 from ..utils.scrapy.decorators import log_response, save_response, log_method
 from ..utils.file import load_json, save_json, load_csv
 from ..utils.scrapy.url import parse_url_params
-from ..settings import (USE_CACHE, CACHE_JSON_PATH, INPUT_CSV_PATH, RESULTS_DIR, DAYS_BACK,
+from ..settings import (USE_CACHE, CACHE_JSON_PATH, INPUT_CSV_PATH, RESULTS_DIR, DAYS_BACK, MAX_COMPANIES,
                         TWO_CAPTCHA_API_KEY, TWO_CAPTCHA_SITE_KEY, MAX_CAPTCHA_RETRIES)
 
 
@@ -29,8 +29,13 @@ class CourtsNySpider(Spider):
         # parse input CSV
         companies = [row['Competitor / Fictitious LLC Name'] for row in load_csv(INPUT_CSV_PATH)]
         companies = [c.strip().upper().replace(', LLC', ' LLC') for c in companies]
+        if MAX_COMPANIES:
+            companies = companies[:MAX_COMPANIES]
+            self.logger.info(f"Cut companies to only {MAX_COMPANIES} first")
+
         self.QUERIES = sorted(list(set(c for c in companies if c)))
 
+        # set up progress bar
         self.logger.info(f"len(self.QUERIES): {len(self.QUERIES)}")
         self.progress_bar = tqdm(total=len(self.QUERIES))
 
