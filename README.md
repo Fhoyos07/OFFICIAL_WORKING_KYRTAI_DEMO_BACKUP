@@ -51,11 +51,8 @@ Installation of requirements:
 ### Debug logs:
 - `/_etc/logs/debug.log`
 
-
----
-### Client:
-Anthony
-
-### Developer:
-Vlad Tyazhov  
-`tva1992@gmail.com`
+### 
+settings.py
+MAX_COMPANIES = 80
+/
+MAX_COMPANIES = None # crawl all
