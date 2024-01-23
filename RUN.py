@@ -1,12 +1,22 @@
-from scrapy.crawler import CrawlerProcess
+from scrapy.crawler import Crawler, CrawlerRunner
 from scrapy.utils.project import get_project_settings
-import os
+from twisted.internet import reactor, defer
+from scrapy_app.spiders.spider import CourtsNySpider, CourtsNyFileSpider
 
-from scrapy_app.spiders.spider import CourtsNySpider
+
+def run():
+    # https://docs.scrapy.org/en/latest/topics/practices.html#running-multiple-spiders-in-the-same-process
+    runner: CrawlerRunner = CrawlerRunner(get_project_settings())
+
+    @defer.inlineCallbacks
+    def crawl():
+        yield runner.crawl(CourtsNySpider)
+        yield runner.crawl(CourtsNyFileSpider)
+        reactor.stop()
+
+    crawl()
+    reactor.run()
 
 
-if __name__ == "__main__":
-    os.chdir(os.path.dirname(__file__))   # set working dir to current
-    process = CrawlerProcess(get_project_settings())
-    process.crawl(CourtsNySpider)
-    process.start()                       # script will block here until crawling finish
+if __name__ == '__main__':
+    run()

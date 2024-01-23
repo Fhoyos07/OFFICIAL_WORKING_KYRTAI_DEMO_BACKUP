@@ -9,7 +9,7 @@ import os
 from ..utils.scrapy.decorators import log_response, save_response, log_method
 from ..utils.file import load_json, save_json, load_csv
 from ..utils.scrapy.url import parse_url_params
-from ..settings import (USE_CACHE, CACHE_JSON_PATH, INPUT_CSV_PATH, DAYS_BACK,
+from ..settings import (USE_CACHE, CACHE_JSON_PATH, INPUT_CSV_PATH, RESULTS_DIR, DAYS_BACK,
                         TWO_CAPTCHA_API_KEY, TWO_CAPTCHA_SITE_KEY, MAX_CAPTCHA_RETRIES)
 
 
@@ -19,11 +19,9 @@ class CourtsNySpider(Spider):
     custom_settings = dict(
         CONCURRENT_REQUESTS=1,  # only 1 parallel request! don't change this
         DOWNLOAD_DELAY=0,
-        DEPTH_PRIORITY=-100,
-        # CONCURRENT_REQUESTS_PER_DOMAIN=1,  # only 1 parallel request! don't change this
+        DEPTH_PRIORITY=-100,    # depth-first order
         ITEM_PIPELINES={
-            # "scrapy_app.pipelines.DocumentDownloadPipeline": 300,  # download PDFs in pipeline
-            "scrapy_app.pipelines.CsvOnClosePipeline": 500,  # save Cases and Documents in CSV
+            "scrapy_app.pipelines.CsvPipeline": 500,  # save Cases and Documents in CSV
         },
     )
 
@@ -32,6 +30,7 @@ class CourtsNySpider(Spider):
         companies = [row['Competitor / Fictitious LLC Name'] for row in load_csv(INPUT_CSV_PATH)]
         companies = [c.strip().upper().replace(', LLC', ' LLC') for c in companies]
         self.QUERIES = sorted(list(set(c for c in companies if c)))
+
         self.logger.info(f"len(self.QUERIES): {len(self.QUERIES)}")
         self.progress_bar = tqdm(total=len(self.QUERIES))
 
@@ -45,9 +44,11 @@ class CourtsNySpider(Spider):
         # get session values from cache
         self._session_id = None
         self._recaptcha_code = None
-
         if USE_CACHE:
             self._load_session_from_cache()
+
+        # collect existing ids to avoid scraping same case twice
+        self.existing_case_ids = set()
         super().__init__()
 
     def start_requests(self):
@@ -188,8 +189,16 @@ class CourtsNySpider(Spider):
                 self.logger.error(f'Invalid case_url {case_url} at {response.url}')
                 continue
 
+            # don't re-scrape same case twice
+            case_id = parse_url_params(case_url)['docketId']
+            if case_id in self.existing_case_ids:
+                continue
+
+            self.existing_case_ids.add(case_id)
+
             case_item = {
                 "_item_type": 'Case',
+                "Case Id": case_id,
                 "Company": company,
                 "Date": date_obj.isoformat(),
                 "Case Number": case_number,
@@ -207,7 +216,7 @@ class CourtsNySpider(Spider):
             # crawl case page to parse documents
             yield response.follow(case_url,
                                   callback=self.parse_case,
-                                  cb_kwargs=dict(case_number=case_number),
+                                  cb_kwargs=dict(company=company, case_number=case_number),
                                   dont_filter=True)
 
         # return company item to csv
@@ -222,8 +231,8 @@ class CourtsNySpider(Spider):
             }
             yield company_item
 
-        if result_rows and not date_before_threshold_found:
-            next_page_url = response.xpath('//span[contains(@class,"pageNumbers")]/a[text()=">>"]/@href').get()
+        next_page_url = response.xpath('//span[contains(@class,"pageNumbers")]/a[text()=">>"]/@href').get()
+        if next_page_url and not date_before_threshold_found:
             yield response.follow(next_page_url,
                                   callback=self.parse_sorted_cases,
                                   cb_kwargs=dict(company=company, page=page+1),
@@ -233,10 +242,11 @@ class CourtsNySpider(Spider):
             self.progress_bar.update()
 
     @log_response
-    def parse_case(self, response, case_number: str):
+    def parse_case(self, response, company: str, case_number: str):
         for document_tr in response.css('table.NewSearchResults tbody tr'):
             document_item = {
                 '_item_type': 'Document',
+                'Company': company,
                 'Case Number': case_number,
             }
             document_url = document_tr.xpath('td[2]/a/@href').get()
@@ -296,9 +306,50 @@ class CourtsNyFileSpider(Spider):
     name = 'courts_ny_files'
 
     custom_settings = dict(
-        CONCURRENT_REQUESTS=15,  # only 1 parallel request! don't change this
-        CONCURRENT_REQUESTS_PER_DOMAIN=15,  # only 1 parallel request! don't change this
+        CONCURRENT_REQUESTS=1,
+        DOWNLOAD_DELAY=0,
         ITEM_PIPELINES={
             "scrapy_app.pipelines.DocumentSavePipeline": 300,  # download PDFs in pipeline
         }
     )
+
+    def __init__(self):
+        # parse input CSV
+        self.document_name_by_url: dict[str, str] = {}
+        cases_with_privacy_notices: set[str] = set()
+
+        for row in load_csv(os.path.join(RESULTS_DIR, 'courts_ny_documents.csv')):
+            company, doc_id, case_number = row['Company'], row['Document ID'], row['Case Number']
+
+            # format name to exclude slaches
+            company = company.replace('/', '_')
+            case_dir = case_number.replace('/', '_')
+            doc_id = doc_id.replace('/', '_')
+
+            # save url
+            self.document_name_by_url[row['Document URL']] = f"{company}/{case_dir}/{doc_id}.pdf"
+
+            # add privacy notice only once per case
+            if case_number in cases_with_privacy_notices:
+                continue
+            cases_with_privacy_notices.add(case_number)
+
+            status_doc_slug = row['Status Document Name'].lower().replace(' ', '_')
+            self.document_name_by_url[row['Status Document URL']] = f"{company}/{case_dir}/{status_doc_slug}.pdf"
+
+        self.progress_bar = tqdm(total=len(self.document_name_by_url))
+        super().__init__()
+
+    def start_requests(self):
+        for url, relative_file_path in self.document_name_by_url.items():
+            yield Request(url,
+                          callback=self.parse_document,
+                          cb_kwargs=dict(relative_file_path=relative_file_path),
+                          dont_filter=True)
+
+    def parse_document(self, response, relative_file_path: str):
+        self.progress_bar.update()
+        yield dict(
+            body=response.body,
+            relative_file_path=relative_file_path
+        )

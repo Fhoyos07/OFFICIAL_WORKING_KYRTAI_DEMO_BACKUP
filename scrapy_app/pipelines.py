@@ -27,40 +27,19 @@ class BasePipeline:
         return cls(spider=crawler.spider)
 
 
+class DocumentSavePipeline(BasePipeline):
+    def process_item(self, item, spider):
+        # generate pdf path
+        pdf_path = Path(self.results_dir) / 'pdfs' / item['relative_file_path']
+        pdf_path.parent.mkdir(parents=True, exist_ok=True)
 
-# class DocumentSavePipeline(BasePipeline):
-#     def process_item(self, item, spider):
-#             self.download_pdf(url=item['Document URL'],
-#                               case_number=item['Case Number'],
-#                               document_id=item['Document ID'])
-#
-#         name = f"{item['Document ID']}_{status_document_slug}")
-#         return item
-#
-#     def download_pdf(self, url: str, case_number: str, document_id: str):
-#         # generate pdf path
-#         case_dir_name = case_number.replace('/', '_')
-#         pdf_path = Path(self.results_dir) / 'pdfs' / case_dir_name / f"{document_id}.pdf"
-#
-#         # create parent directory for the pdf_path if not exist
-#         pdf_path.parent.mkdir(parents=True, exist_ok=True)
-#
-#         # # download pdf after 1-sec delay
-#         # time.sleep(1)
-#
-#         # download pdf
-#         response = requests.get(url, headers={'User-Agent': self.settings.get('USER_AGENT')}, stream=True)
-#         if not response.ok:
-#             self.logger.error(f"Failed to download {url}. Status code: {response.status_code}")
-#             return
-#
-#         # save to file
-#         with open(pdf_path, 'wb') as file:
-#             file.write(response.content)
-#         self.logger.info(f"Wrote {document_id} to {pdf_path}")
+        # save to file
+        with open(pdf_path, 'wb') as file:
+            file.write(item['body'])
+        self.logger.debug(f"Wrote to {pdf_path}")
 
 
-class CsvOnClosePipeline(BasePipeline):
+class CsvPipeline(BasePipeline):
     """
     Pipeline for writing to CSV file, collecting all items and writing them at once on spider finish
     """
