@@ -2,10 +2,11 @@ from scrapy import Spider
 from scrapy.http import Request, FormRequest, TextResponse
 from datetime import date, datetime, timedelta
 from http.cookies import SimpleCookie
+from tqdm import tqdm
 import twocaptcha
-
 import os
-from ..utils.scrapy.decorators import log_response, save_response
+
+from ..utils.scrapy.decorators import log_response, save_response, log_method
 from ..utils.file import load_json, save_json, load_csv
 from ..utils.scrapy.url import parse_url_params
 from ..settings import (USE_CACHE, CACHE_JSON_PATH, INPUT_CSV_PATH, DAYS_BACK,
@@ -28,10 +29,11 @@ class CourtsNySpider(Spider):
 
     def __init__(self):
         # parse input CSV
-        companies = [row['Competitor / Fictitious LLC Name'] for row in load_csv(INPUT_CSV_PATH)][:100]
-        companies_formatted = [c.strip().upper().replace(', LLC', ' LLC') for c in companies]
-        self.QUERIES = sorted(list(set(companies_formatted)))
+        companies = [row['Competitor / Fictitious LLC Name'] for row in load_csv(INPUT_CSV_PATH)]
+        companies = [c.strip().upper().replace(', LLC', ' LLC') for c in companies]
+        self.QUERIES = sorted(list(set(c for c in companies if c)))
         self.logger.info(f"len(self.QUERIES): {len(self.QUERIES)}")
+        self.progress_bar = tqdm(total=len(self.QUERIES))
 
         # min case date to crawl
         self.MIN_DATE = date.today() - timedelta(days=DAYS_BACK)
@@ -44,21 +46,13 @@ class CourtsNySpider(Spider):
         self._session_id = None
         self._recaptcha_code = None
 
-        # if USE_CACHE:
-        self._load_session_from_cache()
+        if USE_CACHE:
+            self._load_session_from_cache()
         super().__init__()
 
     def start_requests(self):
-        yield self.start_search_request()
-
-    def start_search_request(self):
-        if not self.QUERIES:
-            self.logger.info('No queries left. Finishing.')
-            return
-
-        company = self.QUERIES.pop(0)
-        self.logger.info(f"Starting search request for {company}")
-        return self.make_search_request(company)
+        for company in self.QUERIES:
+            yield self.make_search_request(company)
 
     def make_search_request(self, company: str) -> Request:
         """
@@ -70,7 +64,8 @@ class CourtsNySpider(Spider):
 
             return Request(url='https://iapps.courts.state.ny.us/nyscef/CaseSearch?TAB=name',
                            callback=self.parse_search_form,
-                           cb_kwargs=dict(company=company))
+                           cb_kwargs=dict(company=company),
+                           dont_filter=True)
 
         # send search company
         headers = {'Content-Type': 'application/x-www-form-urlencoded'}
@@ -115,7 +110,8 @@ class CourtsNySpider(Spider):
                                          formname='form',
                                          formdata={'txtBusinessOrgName': company},
                                          callback=self.parse_captcha_page,
-                                         cb_kwargs=dict(company=company))
+                                         cb_kwargs=dict(company=company),
+                                         dont_filter=True)
 
     @log_response
     def parse_captcha_page(self, response: TextResponse, company: str):
@@ -127,7 +123,8 @@ class CourtsNySpider(Spider):
                                         formname='captcha_form',
                                         formdata={'g-recaptcha-response': self._recaptcha_code},
                                         callback=self.parse_after_captcha,
-                                        cb_kwargs=dict(company=company))
+                                        cb_kwargs=dict(company=company),
+                                        dont_filter=True)
 
     @log_response
     def parse_after_captcha(self, response: TextResponse, company: str):
@@ -208,7 +205,10 @@ class CourtsNySpider(Spider):
             yield case_item
 
             # crawl case page to parse documents
-            yield response.follow(case_url, callback=self.parse_case, cb_kwargs=dict(case_number=case_number))
+            yield response.follow(case_url,
+                                  callback=self.parse_case,
+                                  cb_kwargs=dict(case_number=case_number),
+                                  dont_filter=True)
 
         # return company item to csv
         if page == 1:
@@ -226,10 +226,11 @@ class CourtsNySpider(Spider):
             next_page_url = response.xpath('//span[contains(@class,"pageNumbers")]/a[text()=">>"]/@href').get()
             yield response.follow(next_page_url,
                                   callback=self.parse_sorted_cases,
-                                  cb_kwargs=dict(company=company, page=page+1))
+                                  cb_kwargs=dict(company=company, page=page+1),
+                                  dont_filter=True)
         else:
-            # continue with the next query
-            yield self.start_search_request()
+            # finished scraping company
+            self.progress_bar.update()
 
     @log_response
     def parse_case(self, response, case_number: str):
