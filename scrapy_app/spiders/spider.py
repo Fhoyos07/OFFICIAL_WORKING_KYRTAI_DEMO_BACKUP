@@ -82,8 +82,9 @@ class KyrNySearchSpider(Spider):
                            cb_kwargs=dict(company=company),
                            dont_filter=True)
 
-        today = date.today()
-        date_from, date_to = today - timedelta(days=DAYS_BACK), today + timedelta(days=1)
+        # don't use filter by date
+        # today = date.today()
+        # date_from, date_to = today - timedelta(days=DAYS_BACK), today + timedelta(days=1)
 
         # send search company
         headers = {'Content-Type': 'application/x-www-form-urlencoded'}
@@ -98,8 +99,8 @@ class KyrNySearchSpider(Spider):
             "g-recaptcha-response": self._recaptcha_code,
             "txtCounty": "-1",
             "txtCaseType": "",
-            "txtFilingDateFrom": date_from.strftime("%m/%d/%Y"),
-            "txtFilingDateTo": date_to.strftime("%m/%d/%Y"),
+            "txtFilingDateFrom": "",    # date_from.strftime("%m/%d/%Y"),
+            "txtFilingDateTo": "",      # date_to.strftime("%m/%d/%Y"),
             "btnSubmit": "Search",
 
         }
@@ -178,8 +179,8 @@ class KyrNySearchSpider(Spider):
     def parse_sorted_cases(self, response: TextResponse, company: str, page: int = 1):
         self.logger.info(f"{company}: Opened SORTED CASES page #{page}")
         result_rows = response.css('.NewSearchResults tbody tr')
-        search_dates, company_name = response.css('.Document_Row strong::text').getall()
-        self.logger.info(f'{company}: Search results page for {company_name} ({search_dates}): {len(result_rows)} rows')
+        search_title = response.css('.Document_Row strong::text').get()
+        self.logger.info(f'{company}: Search results page for {search_title}: {len(result_rows)} rows')
 
         date_before_threshold_found = False
         case_items = []
