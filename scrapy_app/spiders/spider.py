@@ -34,6 +34,7 @@ class KyrtNyCaseSpider(Spider):
             self.logger.info(f"Cut companies to only {MAX_COMPANIES} first")
 
         self.QUERIES = sorted(list(set(c for c in companies if c)))
+        self.logger.info(f"After deduplication: {len(self.QUERIES)} companies")
 
         # set up progress bar
         self.logger.info(f"len(self.QUERIES): {len(self.QUERIES)}")

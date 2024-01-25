@@ -8,8 +8,8 @@ from datetime import date
 PROJECT_DIR = os.path.dirname(os.path.dirname(__file__))    # root project dir
 LOG_DIR = os.path.join(PROJECT_DIR, '_etc', 'logs')
 
-INPUT_CSV_PATH = os.path.join(PROJECT_DIR, 'input.csv')
 FILES_DIR = os.path.join(PROJECT_DIR, 'files')
+INPUT_CSV_PATH = os.path.join(FILES_DIR, 'input.csv')
 
 
 # crawling settings

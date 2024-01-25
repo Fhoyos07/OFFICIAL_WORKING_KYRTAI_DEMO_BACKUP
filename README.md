@@ -9,22 +9,22 @@ Python/Scrapy script with input from CSV and output to CSV and download PDF file
 `python3 step1_csv.py`
 
 #### Input:
-- `/input.csv` - list of companies under column "Competitor / Fictitious LLC Name"
+- `/files/input.csv` - list of companies under column "Competitor / Fictitious LLC Name"
 
 #### Output: 
-- `/results/courts_ny_companies.csv` - stats of company scraping (how many cases, when was the latest)
-- `/results/courts_ny_cases.csv` - cases results
-- `/results/courts_ny_documents.csv` - documents results
+- `/files/kyrt_ny_companies.csv` - stats of company scraping (how many cases, when was the latest)
+- `/files/kyrt_ny_cases.csv` - cases results
+- `/files/kyrt_ny_documents.csv` - documents results
 
 
 ### Step 2: Download all PDFs
 `python3 step2_pdf.py`
 
 #### Input:
-- `/results/courts_ny_documents.csv` - list of urls, under columns Document URL and Status Document URL (once per case)
+- `/files/kyrt_ny_documents.csv` - list of urls, under columns Document URL and Status Document URL (once per case)
 
 #### Output: 
-- `/results/pdf` - pdf dir with files grouped by Case Number
+- `/files/pdfs` - pdf dir with files grouped by Case Number
 
 ## Settings:
 - `/scrapy_app/settings.py` - scraping settings. Main:
