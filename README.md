@@ -21,7 +21,7 @@ Python/Scrapy script with input from CSV and output to CSV and download PDF file
 `python3 step2_pdf.py`
 
 #### Input:
-- `/files/kyrt_ny_documents.csv` - list of urls, under columns Document URL and Status Document URL (once per case)
+- `/files/kyrt_ny_documents.csv` - list of URLs, under columns Document URL and Status Document URL (once per case)
 
 #### Output: 
 - `/files/pdfs` - pdf dir with files grouped by Case Number
@@ -29,9 +29,9 @@ Python/Scrapy script with input from CSV and output to CSV and download PDF file
 ## Settings:
 - `/scrapy_app/settings.py` - scraping settings. Main:
   * `DAYS_BACK` (default 10) - min date to scrape cases
-  * `MAX_CAPTCHA_RETRIES` (default 10) - max sequential failes to give up with 2captcha
+  * `MAX_CAPTCHA_RETRIES` (default 10) - max sequential fails to give up with 2captcha
   * `TWO_CAPTCHA_API_KEY`
-  * `USE_CACHE` (default False) - if True, tries to load session from previous session on start. may be unstable.
+  * `USE_CACHE` (default False) - if True, tries to load the session from the previous session on start. may be unstable.
 
   
 ---
