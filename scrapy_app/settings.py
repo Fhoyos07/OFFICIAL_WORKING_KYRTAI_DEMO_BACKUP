@@ -2,7 +2,9 @@
 # For simplicity, this file contains only settings considered important or commonly used. Documentation:
 #     https://docs.scrapy.org/en/latest/topics/settings.html
 import os
+import logging
 from datetime import date
+from .utils.logging import create_console_handler, create_file_handler, DEFAULT_LOG_FORMAT, DATE_FORMAT
 
 # folders
 PROJECT_DIR = os.path.dirname(os.path.dirname(__file__))    # root project dir
@@ -59,13 +61,6 @@ SPIDER_MODULES = ["scrapy_app.spiders"]
 
 
 # logging settings
-import logging
-from .utils.logging import create_console_handler, create_file_handler, DEFAULT_LOG_FORMAT, DATE_FORMAT
-
-# setup Console logging using standard Scrapy log
-LOG_LEVEL = logging.INFO
-
-
 def setup_logging():
     if hasattr(setup_logging, "has_been_called"): return
 
@@ -82,7 +77,7 @@ def setup_logging():
     setup_logging.has_been_called = True
 
 # Initialize Logging (only once)
-setup_logging()      # should be called after Django Init!
+setup_logging()
 
 # Set settings whose default value is deprecated to a future-proof value
 REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
