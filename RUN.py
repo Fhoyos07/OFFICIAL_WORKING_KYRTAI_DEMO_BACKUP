@@ -1,7 +1,7 @@
 from scrapy.crawler import Crawler, CrawlerRunner
 from scrapy.utils.project import get_project_settings
 from twisted.internet import reactor, defer
-from scrapy_app.spiders.spider import KyrtNyCaseSpider, KyrtNyFileSpider
+from scrapy_app.spiders.spider import KyrNySearchSpider, KyrtNyCaseSpider, KyrtNyDocumentSpider
 
 
 def run():
@@ -10,8 +10,9 @@ def run():
 
     @defer.inlineCallbacks
     def crawl():
+        yield runner.crawl(KyrNySearchSpider)
         yield runner.crawl(KyrtNyCaseSpider)
-        yield runner.crawl(KyrtNyFileSpider)
+        yield runner.crawl(KyrtNyDocumentSpider)
         reactor.stop()
 
     crawl()

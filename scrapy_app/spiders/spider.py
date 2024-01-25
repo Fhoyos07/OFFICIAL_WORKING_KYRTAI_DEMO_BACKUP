@@ -1,3 +1,5 @@
+from typing import Iterable
+
 from scrapy import Spider
 from scrapy.http import Request, FormRequest, TextResponse
 from datetime import date, datetime, timedelta
@@ -14,16 +16,13 @@ from ..settings import (USE_CACHE, CACHE_JSON_PATH, INPUT_CSV_PATH, FILES_DIR, D
                         TWO_CAPTCHA_API_KEY, MAX_CAPTCHA_RETRIES)
 
 
-class KyrtNyCaseSpider(Spider):
-    name = 'kyrt_ny'
+# Step 1 - search each company
+class KyrNySearchSpider(Spider):
+    name = 'kyrt_ny_search'
 
     custom_settings = dict(
         CONCURRENT_REQUESTS=1,  # only 1 parallel request! don't change this
-        DOWNLOAD_DELAY=0,
-        DEPTH_PRIORITY=-100,    # depth-first order
-        ITEM_PIPELINES={
-            "scrapy_app.pipelines.CsvPipeline": 500,  # save Cases and Documents in CSV
-        },
+        ITEM_PIPELINES={"scrapy_app.pipelines.CsvPipeline": 500}  # save Cases and Documents in CSV
     )
 
     def __init__(self):
@@ -39,7 +38,6 @@ class KyrtNyCaseSpider(Spider):
         self.logger.info(f"After deduplication: {len(self.QUERIES)} companies")
 
         # set up progress bar
-        self.logger.info(f"len(self.QUERIES): {len(self.QUERIES)}")
         self.progress_bar = tqdm(total=len(self.QUERIES), file=sys.stdout, leave=False)
 
         # min case date to crawl
@@ -58,13 +56,18 @@ class KyrtNyCaseSpider(Spider):
 
         # collect existing ids to avoid scraping same case twice
         self.existing_case_ids = set()
-
-
         super().__init__()
 
     def start_requests(self):
-        for company in self.QUERIES:
-            yield self.make_search_request(company)
+        yield self.process_next_company()
+
+    def process_next_company(self):
+        if not self.QUERIES:
+            self.logger.info(f"Finished")
+            return
+
+        company = self.QUERIES.pop(0)
+        return self.make_search_request(company)
 
     def make_search_request(self, company: str) -> Request:
         """
@@ -129,7 +132,6 @@ class KyrtNyCaseSpider(Spider):
                                          cb_kwargs=dict(company=company),
                                          dont_filter=True)
 
-    @log_response
     def parse_captcha_page(self, response: TextResponse, company: str):
         """
         Captcha page. Solve using 2captcha and submit code.
@@ -151,25 +153,38 @@ class KyrtNyCaseSpider(Spider):
         yield self.make_search_request(company)
 
     # @log_response
-    def parse_cases(self, response: TextResponse, company: str, page: int = 1):
+    def parse_cases(self, response: TextResponse, company: str):
         """
         Page with cases search results
         """
-        self.logger.info(f"{company}: Opened CASES page #{page}")
+        self.logger.info(f"{company}: Opened CASES page")
         captcha_form = response.xpath('//form[@name="captcha_form"]')
         if captcha_form:
             self.logger.info(f"{company}: Captcha found.")
             yield from self.parse_captcha_page(response, company=company)
             return
 
+        data = {
+            'courtType': '',
+            'selSortBy': 'FilingDateDesc',
+            'btnSort': 'Sort'
+        }
+        yield FormRequest(url=response.url,
+                          formdata=data,
+                          callback=self.parse_sorted_cases,
+                          cb_kwargs=dict(company=company),
+                          dont_filter=True)
+
+    def parse_sorted_cases(self, response: TextResponse, company: str, page: int = 1):
+        self.logger.info(f"{company}: Opened SORTED CASES page #{page}")
         result_rows = response.css('.NewSearchResults tbody tr')
         search_dates, company_name = response.css('.Document_Row strong::text').getall()
-
-        self.logger.info(f'{company}: Company {company_name}; {search_dates}; {len(result_rows)} row(s)')
+        self.logger.info(f'{company}: Search results page for {company_name} ({search_dates}): {len(result_rows)} rows')
 
         date_before_threshold_found = False
         case_items = []
         newest_date = None
+
         for tr in result_rows:
             # parse case number and date
             first_cell_texts: list[str] = tr.xpath('td[1]//text()[normalize-space()]').getall()
@@ -199,7 +214,7 @@ class KyrtNyCaseSpider(Spider):
             self.existing_case_ids.add(case_id)
 
             case_item = {
-                "_item_type": 'Case',
+                "_item_type": 'Cases',
                 "Case Id": case_id,
                 "Company": company,
                 "Date": date_obj.isoformat(),
@@ -215,17 +230,11 @@ class KyrtNyCaseSpider(Spider):
             case_items.append(case_item)
             yield case_item
 
-            # crawl case page to parse documents
-            yield response.follow(case_url,
-                                  callback=self.parse_case,
-                                  cb_kwargs=dict(company=company, case_number=case_number),
-                                  dont_filter=True)
-
         # return company item to csv
         if page == 1:
             results_count, items_count = len(result_rows), len(case_items)
             company_item = {
-                "_item_type": 'Company',
+                "_item_type": 'Companies',
                 "Company": company,
                 "Cases Total": results_count if results_count < 25 else f'{results_count}+',
                 f"Cases in Last {DAYS_BACK} Days": items_count if items_count < 25 else f'{items_count}+',
@@ -236,35 +245,13 @@ class KyrtNyCaseSpider(Spider):
         next_page_url = response.xpath('//span[contains(@class,"pageNumbers")]/a[text()=">>"]/@href').get()
         if next_page_url and not date_before_threshold_found:
             yield response.follow(next_page_url,
-                                  callback=self.parse_cases,
+                                  callback=self.parse_sorted_cases,
                                   cb_kwargs=dict(company=company, page=page+1),
                                   dont_filter=True)
         else:
             # finished scraping company
             self.progress_bar.update()
-
-    @log_response
-    def parse_case(self, response, company: str, case_number: str):
-        for document_tr in response.css('table.NewSearchResults tbody tr'):
-            document_item = {
-                '_item_type': 'Document',
-                'Company': company,
-                'Case Number': case_number,
-            }
-            document_url = document_tr.xpath('td[2]/a/@href').get()
-            if not document_url:
-                self.logger.warning(f'Invalid document_url: {document_url} at {response.url}')
-                continue
-
-            document_item['Document URL'] = response.urljoin(document_url)
-            document_item['Document Name'] = document_tr.xpath('td[2]/a/text()').get()
-            document_item['Document ID'] = parse_url_params(document_url)['docIndex'].strip('/').replace('/', '_')
-
-            status_document_url = document_tr.xpath('td[4]/a/@href').get()
-            if status_document_url:
-                document_item['Status Document URL'] = response.urljoin(status_document_url)
-                document_item['Status Document Name'] = document_tr.xpath('td[4]/a/text()').get()
-            yield document_item
+            yield self.process_next_company()
 
     def _save_session_to_cache(self):
         session_cache = dict(
@@ -303,15 +290,57 @@ class KyrtNyCaseSpider(Spider):
         return result['code']
 
 
-class KyrtNyFileSpider(Spider):
-    name = 'kyrt_ny_files'
+# Step2 - Open each case and save document urls
+class KyrtNyCaseSpider(Spider):
+    name = 'kyrt_ny_cases'
 
     custom_settings = dict(
         CONCURRENT_REQUESTS=1,
-        DOWNLOAD_DELAY=0,
-        ITEM_PIPELINES={
-            "scrapy_app.pipelines.DocumentSavePipeline": 300,  # download PDFs in pipeline
-        }
+        ITEM_PIPELINES={"scrapy_app.pipelines.CsvPipeline": 300}
+    )
+
+    def __init__(self):
+        input_file_name = os.path.join(FILES_DIR, f'cases.csv')
+        self.cases: list[dict] = load_csv(input_file_name)
+        self.progress_bar = tqdm(total=len(self.cases), file=sys.stdout)
+        super().__init__()
+
+    def start_requests(self) -> Iterable[Request]:
+        for case in self.cases:
+            # crawl case page to parse documents
+            yield Request(case['URL'], callback=self.parse_case, cb_kwargs=dict(case=case), dont_filter=True)
+
+    def parse_case(self, response, case: dict):
+        self.progress_bar.update()
+        for document_tr in response.css('table.NewSearchResults tbody tr'):
+            document_item = {
+                '_item_type': 'Documents',
+                'Company': case['Company'],
+                'Case Number': case['Case Number'],
+            }
+            document_url = document_tr.xpath('td[2]/a/@href').get()
+            if not document_url:
+                self.logger.warning(f'Invalid document_url: {document_url} at {response.url}')
+                continue
+
+            document_item['Document URL'] = response.urljoin(document_url)
+            document_item['Document Name'] = document_tr.xpath('td[2]/a/text()').get()
+            document_item['Document ID'] = parse_url_params(document_url)['docIndex'].strip('/').replace('/', '_')
+
+            status_document_url = document_tr.xpath('td[4]/a/@href').get()
+            if status_document_url:
+                document_item['Status Document URL'] = response.urljoin(status_document_url)
+                document_item['Status Document Name'] = document_tr.xpath('td[4]/a/text()').get()
+            yield document_item
+
+
+# Step 3 - open and download each document
+class KyrtNyDocumentSpider(Spider):
+    name = 'kyrt_ny_documents'
+
+    custom_settings = dict(
+        CONCURRENT_REQUESTS=1,
+        ITEM_PIPELINES={"scrapy_app.pipelines.DocumentSavePipeline": 300}  # download PDFs in pipeline
     )
 
     def __init__(self):
@@ -319,17 +348,13 @@ class KyrtNyFileSpider(Spider):
         self.document_name_by_url: dict[str, str] = {}
         cases_with_privacy_notices: set[str] = set()
 
-        input_file_name = f'{KyrtNyCaseSpider.name}_documents.csv'
-        for row in load_csv(os.path.join(FILES_DIR, input_file_name)):
+        input_file_name = os.path.join(FILES_DIR, f'documents.csv')
+        for row in load_csv(input_file_name):
             company, doc_id, case_number = row['Company'], row['Document ID'], row['Case Number']
-
-            # format name to exclude slashes
-            company = company.replace('/', '_')
-            case_dir = case_number.replace('/', '_')
-            doc_id = doc_id.replace('/', '_')
+            base_dir = f"{company.replace('/', '_')}/{case_number.replace('/', '_')}"
 
             # save url
-            self.document_name_by_url[row['Document URL']] = f"{company}/{case_dir}/{doc_id}.pdf"
+            self.document_name_by_url[row['Document URL']] = f"{base_dir}/{doc_id.replace('/', '_')}.pdf"
 
             # add privacy notice only once per case
             if case_number in cases_with_privacy_notices:
@@ -337,7 +362,7 @@ class KyrtNyFileSpider(Spider):
             cases_with_privacy_notices.add(case_number)
 
             status_doc_slug = row['Status Document Name'].lower().replace(' ', '_')
-            self.document_name_by_url[row['Status Document URL']] = f"{company}/{case_dir}/{status_doc_slug}.pdf"
+            self.document_name_by_url[row['Status Document URL']] = f"{base_dir}/{status_doc_slug}.pdf"
 
         self.progress_bar = tqdm(total=len(self.document_name_by_url), file=sys.stdout)
         super().__init__()
