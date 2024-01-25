@@ -1,4 +1,4 @@
-# Web crawling project for iapps.courts.state.ny.us
+# KYRT - iapps.courts.state.ny.us
 
 ## Summary:
 Python/Scrapy script with input from CSV and output to CSV and download PDF files.
