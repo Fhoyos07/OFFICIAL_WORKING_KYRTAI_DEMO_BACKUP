@@ -33,45 +33,29 @@ class CsvPipeline(BasePipeline):
     """
     def __init__(self, spider: Spider):
         # lists to store scraped items
-        self.items_by_type: dict[str, list[dict]] = {}
+        self.dict_writer_by_type: dict[str, csv.DictWriter] = {}
         super().__init__(spider)
 
     def process_item(self, item, spider):
         item_type = item.pop('_item_type')
-        self.items_by_type.setdefault(item_type, []).append(item)
+
+        # get CSV file writer for item type, or start a new one
+        csv_writer = self.dict_writer_by_type.get(item_type)
+        if not csv_writer:
+            csv_writer = self.init_dict_writer(item_type, fieldnames=list(item.keys()))
+            self.dict_writer_by_type[item_type] = csv_writer
+
+        # write item to CSV
+        csv_writer.writerow(item)
         return item
 
-    def close_spider(self, spider):
-        for item_type, items in self.items_by_type.items():
-            self.export_items_to_csv(items, csv_name=f'{item_type.lower()}.csv')
+    def init_dict_writer(self, item_type: str, fieldnames: list[str]):
+        csv_path = os.path.join(self.files_dir, f'{item_type.lower()}.csv')
 
-    def export_items_to_csv(self, items: list[dict], csv_name: str):
-        # get CSV path and collect CSV fields
-        csv_path = os.path.join(self.files_dir, csv_name)
-
-        if not items:
-            self.logger.info(f"No items to export to {csv_name}. Skipping.")
-            if os.path.exists(csv_path):
-                os.remove(csv_path)
-            return
-
-        fields_to_export = self.collect_fields(items)
-
-        # export items
-        with open(csv_path, mode='w', encoding='utf-8-sig') as f:
-            csv_writer = csv.DictWriter(f, fieldnames=fields_to_export)
-            csv_writer.writeheader()
-            csv_writer.writerows(items)
-        self.logger.info(f"Exported {len(items)} to {csv_path}")
-
-    @staticmethod
-    def collect_fields(items: list[dict]) -> list[str]:
-        fields = []  # list of all fields (used as csv header)
-        for item in items:
-            for field in item:
-                if field not in fields:
-                    fields.append(field)
-        return fields
+        csv_file = open(csv_path, mode='w', encoding='utf-8-sig')
+        csv_writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+        csv_writer.writeheader()
+        return csv_writer
 
 
 class DocumentSavePipeline(BasePipeline):

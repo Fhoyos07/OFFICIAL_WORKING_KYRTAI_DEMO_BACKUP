@@ -9,7 +9,6 @@ from .utils.logging import create_console_handler, create_file_handler, DEFAULT_
 # folders
 PROJECT_DIR = os.path.dirname(os.path.dirname(__file__))    # root project dir
 LOG_DIR = os.path.join(PROJECT_DIR, '_etc', 'logs')
-
 FILES_DIR = os.path.join(PROJECT_DIR, 'files')
 INPUT_CSV_PATH = os.path.join(FILES_DIR, 'input.csv')
 
