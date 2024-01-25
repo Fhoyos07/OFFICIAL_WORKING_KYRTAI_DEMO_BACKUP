@@ -5,6 +5,8 @@ Python/Scrapy script with input from CSV and output to CSV and download PDF file
 
 ## Executables:
 
+## python3 RUN.py will run both Step 1 and Step 2. Alternativly, you can run Step 1, then run Step 2 manually. For full automation, just run python3 RUN.py
+
 ### Step 1: Find all cases and documents
 `python3 step1_csv.py`
 
