@@ -303,6 +303,8 @@ class KyrtNyCaseSpider(Spider):
     def __init__(self):
         input_file_name = os.path.join(FILES_DIR, f'cases.csv')
         self.cases: list[dict] = load_csv(input_file_name)
+
+        self.logger.info(f"Found {len(self.cases)} cases to process")
         self.progress_bar = tqdm(total=len(self.cases), file=sys.stdout)
         super().__init__()
 

@@ -1,5 +1,6 @@
 import os
 import csv
+from typing import IO
 import requests
 import time
 from pathlib import Path
@@ -33,28 +34,34 @@ class CsvPipeline(BasePipeline):
     """
     def __init__(self, spider: Spider):
         # lists to store scraped items
-        self.dict_writer_by_type: dict[str, csv.DictWriter] = {}
+        self.csv_writer_by_type: dict[str, csv.DictWriter] = {}
+        self.csv_file_by_type: dict[str, IO] = {}
         super().__init__(spider)
 
     def process_item(self, item, spider):
         item_type = item.pop('_item_type')
 
         # get CSV file writer for item type, or start a new one
-        csv_writer = self.dict_writer_by_type.get(item_type)
+        csv_writer = self.csv_writer_by_type.get(item_type)
         if not csv_writer:
             csv_writer = self.init_dict_writer(item_type, fieldnames=list(item.keys()))
-            self.dict_writer_by_type[item_type] = csv_writer
 
         # write item to CSV
         csv_writer.writerow(item)
         return item
 
-    def init_dict_writer(self, item_type: str, fieldnames: list[str]):
+    def close_spider(self, spider):
+        for csv_file in self.csv_file_by_type.values():
+            csv_file.close()
+
+    def init_dict_writer(self, item_type: str, fieldnames: list[str]) -> tuple[csv.DictWriter, IO]:
         csv_path = os.path.join(self.files_dir, f'{item_type.lower()}.csv')
 
         csv_file = open(csv_path, mode='w', encoding='utf-8-sig')
         csv_writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
         csv_writer.writeheader()
+        self.csv_writer_by_type[item_type] = csv_writer
+        self.csv_file_by_type[item_type] = csv_file
         return csv_writer
 
 
