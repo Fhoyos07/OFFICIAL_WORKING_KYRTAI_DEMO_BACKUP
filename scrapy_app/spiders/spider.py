@@ -4,13 +4,14 @@ from datetime import date, datetime, timedelta
 from http.cookies import SimpleCookie
 from tqdm import tqdm
 import twocaptcha
+import sys
 import os
 
 from ..utils.scrapy.decorators import log_response, save_response, log_method
 from ..utils.file import load_json, save_json, load_csv
 from ..utils.scrapy.url import parse_url_params
 from ..settings import (USE_CACHE, CACHE_JSON_PATH, INPUT_CSV_PATH, FILES_DIR, DAYS_BACK, MAX_COMPANIES,
-                        TWO_CAPTCHA_API_KEY, TWO_CAPTCHA_SITE_KEY, MAX_CAPTCHA_RETRIES)
+                        TWO_CAPTCHA_API_KEY, MAX_CAPTCHA_RETRIES)
 
 
 class KyrtNyCaseSpider(Spider):
@@ -32,19 +33,21 @@ class KyrtNyCaseSpider(Spider):
         if MAX_COMPANIES:
             companies = companies[:MAX_COMPANIES]
             self.logger.info(f"Cut companies to only {MAX_COMPANIES} first")
+        self.logger.info(f"Before deduplication: {len(companies)} companies")
 
         self.QUERIES = sorted(list(set(c for c in companies if c)))
         self.logger.info(f"After deduplication: {len(self.QUERIES)} companies")
 
         # set up progress bar
         self.logger.info(f"len(self.QUERIES): {len(self.QUERIES)}")
-        self.progress_bar = tqdm(total=len(self.QUERIES))
+        self.progress_bar = tqdm(total=len(self.QUERIES), file=sys.stdout, leave=False)
 
         # min case date to crawl
         self.MIN_DATE = date.today() - timedelta(days=DAYS_BACK)
 
         # captcha settings
         self.solver = twocaptcha.TwoCaptcha(apiKey=TWO_CAPTCHA_API_KEY)
+        self.recaptcha_sitekey = '6LdiezYUAAAAAGJqdPJPP7mAUgQUEJxyLJRUlvN6'  # don't change
         self.current_captcha_retries, self.max_captcha_retries = 0, MAX_CAPTCHA_RETRIES
 
         # get session values from cache
@@ -55,6 +58,8 @@ class KyrtNyCaseSpider(Spider):
 
         # collect existing ids to avoid scraping same case twice
         self.existing_case_ids = set()
+
+
         super().__init__()
 
     def start_requests(self):
@@ -74,6 +79,9 @@ class KyrtNyCaseSpider(Spider):
                            cb_kwargs=dict(company=company),
                            dont_filter=True)
 
+        today = date.today()
+        date_from, date_to = today - timedelta(days=DAYS_BACK), today + timedelta(days=1)
+
         # send search company
         headers = {'Content-Type': 'application/x-www-form-urlencoded'}
         cookies = {'JSESSIONID': self._session_id}
@@ -87,9 +95,10 @@ class KyrtNyCaseSpider(Spider):
             "g-recaptcha-response": self._recaptcha_code,
             "txtCounty": "-1",
             "txtCaseType": "",
-            "txtFilingDateFrom": "",
-            "txtFilingDateTo": "",
-            "btnSubmit": "Search"
+            "txtFilingDateFrom": date_from.strftime("%m/%d/%Y"),
+            "txtFilingDateTo": date_to.strftime("%m/%d/%Y"),
+            "btnSubmit": "Search",
+
         }
         self.logger.debug(f"cookies: {cookies}")
         self.logger.debug(f"data: {data}")
@@ -141,35 +150,22 @@ class KyrtNyCaseSpider(Spider):
         self._save_session_to_cache()
         yield self.make_search_request(company)
 
-    @log_response
-    def parse_cases(self, response: TextResponse, company: str):
+    # @log_response
+    def parse_cases(self, response: TextResponse, company: str, page: int = 1):
         """
-        Page with cases search results (unsorted). Set sort by filling date desc and submit.
+        Page with cases search results
         """
+        self.logger.info(f"{company}: Opened CASES page #{page}")
         captcha_form = response.xpath('//form[@name="captcha_form"]')
         if captcha_form:
             self.logger.info(f"{company}: Captcha found.")
             yield from self.parse_captcha_page(response, company=company)
             return
 
-        data = {
-            'courtType': '',
-            'selSortBy': 'FilingDateDesc',
-            'btnSort': 'Sort'
-        }
-        yield FormRequest(url=response.url,
-                          formdata=data,
-                          callback=self.parse_sorted_cases,
-                          cb_kwargs=dict(company=company),
-                          dont_filter=True)
-
-    def parse_sorted_cases(self, response: TextResponse, company: str, page: int = 1):
-        """
-        Page with cases search results (sorted).
-        """
-        self.logger.info(f"{company}: Opened SORTED_CASES page #{page}")
         result_rows = response.css('.NewSearchResults tbody tr')
-        self.logger.info(f'{company}: {len(result_rows)} total rows')
+        search_dates, company_name = response.css('.Document_Row strong::text').getall()
+
+        self.logger.info(f'{company}: Company {company_name}; {search_dates}; {len(result_rows)} row(s)')
 
         date_before_threshold_found = False
         case_items = []
@@ -240,7 +236,7 @@ class KyrtNyCaseSpider(Spider):
         next_page_url = response.xpath('//span[contains(@class,"pageNumbers")]/a[text()=">>"]/@href').get()
         if next_page_url and not date_before_threshold_found:
             yield response.follow(next_page_url,
-                                  callback=self.parse_sorted_cases,
+                                  callback=self.parse_cases,
                                   cb_kwargs=dict(company=company, page=page+1),
                                   dont_filter=True)
         else:
@@ -288,11 +284,10 @@ class KyrtNyCaseSpider(Spider):
 
     def _get_captcha_response_code(self, url: str) -> str:
         self.current_captcha_retries += 1
-        self.logger.info(f'Captcha solving try {self.current_captcha_retries} of {self.max_captcha_retries}')
+        self.logger.info(f'Started captcha solving try {self.current_captcha_retries} of {self.max_captcha_retries} (url: {url})')
 
         try:
-            self.logger.info(f"Started solving captcha for {url}\nPlease wait.")
-            result = self.solver.recaptcha(sitekey=TWO_CAPTCHA_SITE_KEY,
+            result = self.solver.recaptcha(sitekey=self.recaptcha_sitekey,
                                            url=url,
                                            # invisible=1,
                                            enterprise=1)
@@ -344,7 +339,7 @@ class KyrtNyFileSpider(Spider):
             status_doc_slug = row['Status Document Name'].lower().replace(' ', '_')
             self.document_name_by_url[row['Status Document URL']] = f"{company}/{case_dir}/{status_doc_slug}.pdf"
 
-        self.progress_bar = tqdm(total=len(self.document_name_by_url))
+        self.progress_bar = tqdm(total=len(self.document_name_by_url), file=sys.stdout)
         super().__init__()
 
     def start_requests(self):

@@ -27,7 +27,6 @@ CACHE_JSON_PATH = os.path.join(PROJECT_DIR, '_etc', 'session_cache.json')
 # captcha settings
 TWO_CAPTCHA_API_KEY = '3408dd86d795e88a4c8e8e2860b25e94'
 
-TWO_CAPTCHA_SITE_KEY = '6LdiezYUAAAAAGJqdPJPP7mAUgQUEJxyLJRUlvN6'   # don't change
 MAX_CAPTCHA_RETRIES = 10
 
 
@@ -45,8 +44,8 @@ SMARTPROXY_ENDPOINT = 'us.smartproxy.com'
 SMARTPROXY_PORT = '10000'
 
 DOWNLOADER_MIDDLEWARES = {
-    'scrapy_app.proxies.proxymesh.ProxyMeshMiddleware': 110,    # set PROXYMESH_ENABLED to True to activate
-    'scrapy_app.proxies.smartproxy.SmartProxyMiddleware': 110,  # set SMARTPROXY_ENABLED to True to activate
+    # 'scrapy_app.proxies.proxymesh.ProxyMeshMiddleware': 110,    # set PROXYMESH_ENABLED to True to activate
+    # 'scrapy_app.proxies.smartproxy.SmartProxyMiddleware': 110,  # set SMARTPROXY_ENABLED to True to activate
 }
 
 
@@ -61,24 +60,29 @@ SPIDER_MODULES = ["scrapy_app.spiders"]
 
 # logging settings
 import logging
-from .utils.logging import create_console_handler, create_file_handler, DEFAULT_LOG_FORMAT, DATE_FORMAT, reload_logging
+from .utils.logging import create_console_handler, create_file_handler, DEFAULT_LOG_FORMAT, DATE_FORMAT
 
 # setup Console logging using standard Scrapy log
 LOG_LEVEL = logging.INFO
 
-# setup File logging
-# in Scrapy 2.11, file_mode='w' doesn't work properly, so only 'a' for now
-logging.basicConfig(
-    handlers=[
-        create_console_handler(level=logging.INFO),    # scrapy handles it based on LOG_LEVEL
-        # create_file_handler(level=logging.DEBUG, file_name='debug.log', dir_name=LOG_DIR, file_mode='w'),
-        create_file_handler(level=logging.INFO, file_name=f'log_{date.today().isoformat()}.log', dir_name=LOG_DIR, file_mode='w')
-    ],
-    format=DEFAULT_LOG_FORMAT,
-    datefmt=DATE_FORMAT,
-    level=logging.DEBUG     # not used, overriden in handlers
-)
 
+def setup_logging():
+    if hasattr(setup_logging, "has_been_called"): return
+
+    logging.basicConfig(
+        handlers=[
+            create_console_handler(level=logging.INFO),
+            create_file_handler(level=logging.INFO, file_name=f'log_{date.today().isoformat()}.log', dir_name=LOG_DIR, file_mode='w')
+        ],
+        format=DEFAULT_LOG_FORMAT,
+        datefmt=DATE_FORMAT,
+        level=logging.DEBUG  # not used, overriden in handlers
+    )
+    logging.debug('Init logging')
+    setup_logging.has_been_called = True
+
+# Initialize Logging (only once)
+setup_logging()      # should be called after Django Init!
 
 # Set settings whose default value is deprecated to a future-proof value
 REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"

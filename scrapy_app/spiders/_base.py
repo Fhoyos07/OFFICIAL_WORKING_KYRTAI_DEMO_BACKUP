@@ -10,8 +10,7 @@ import os
 from ..utils.scrapy.decorators import log_response, save_response, log_method
 from ..utils.file import load_json, save_json, load_csv
 from ..utils.scrapy.url import parse_url_params
-from ..settings import (USE_CACHE, CACHE_JSON_PATH, INPUT_CSV_PATH, FILES_DIR, DAYS_BACK, MAX_COMPANIES,
-                        TWO_CAPTCHA_API_KEY, TWO_CAPTCHA_SITE_KEY, MAX_CAPTCHA_RETRIES)
+from ..settings import (INPUT_CSV_PATH, DAYS_BACK, MAX_COMPANIES, TWO_CAPTCHA_API_KEY, MAX_CAPTCHA_RETRIES)
 
 
 class KyrtBaseCaseSpider(ABC, Spider):
