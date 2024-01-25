@@ -308,7 +308,7 @@ class KyrtNyCaseSpider(Spider):
     def start_requests(self) -> Iterable[Request]:
         for case in self.cases:
             # crawl case page to parse documents
-            yield Request(case['URL'], callback=self.parse_case, cb_kwargs=dict(case=case), dont_filter=True)
+            yield Request(case['URL'], callback=self.parse_case, cb_kwargs=dict(case=case))
 
     def parse_case(self, response, case: dict):
         self.progress_bar.update()
@@ -364,15 +364,14 @@ class KyrtNyDocumentSpider(Spider):
             status_doc_slug = row['Status Document Name'].lower().replace(' ', '_')
             self.document_name_by_url[row['Status Document URL']] = f"{base_dir}/{status_doc_slug}.pdf"
 
-        self.progress_bar = tqdm(total=len(self.document_name_by_url), file=sys.stdout)
+        self.progress_bar = tqdm(total=len(self.document_name_by_url), file=sys.stdout, leave=False)
         super().__init__()
 
     def start_requests(self):
         for url, relative_file_path in self.document_name_by_url.items():
             yield Request(url,
                           callback=self.parse_document,
-                          cb_kwargs=dict(relative_file_path=relative_file_path),
-                          dont_filter=True)
+                          cb_kwargs=dict(relative_file_path=relative_file_path))
 
     def parse_document(self, response, relative_file_path: str):
         self.progress_bar.update()
