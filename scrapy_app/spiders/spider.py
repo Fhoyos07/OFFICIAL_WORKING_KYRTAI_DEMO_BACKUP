@@ -374,7 +374,8 @@ class KyrtNyDocumentSpider(Spider):
         for url, relative_file_path in self.document_name_by_url.items():
             yield Request(url,
                           callback=self.parse_document,
-                          cb_kwargs=dict(relative_file_path=relative_file_path))
+                          cb_kwargs=dict(relative_file_path=relative_file_path),
+                          dont_filter=True)  # there are documents with different links redirecting to the same page
 
     def parse_document(self, response, relative_file_path: str):
         self.progress_bar.update()
