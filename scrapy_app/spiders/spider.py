@@ -4,6 +4,7 @@ from scrapy import Spider
 from scrapy.http import Request, FormRequest, TextResponse
 from datetime import date, datetime, timedelta
 from http.cookies import SimpleCookie
+from pathlib import Path
 from tqdm import tqdm
 import twocaptcha
 import sys
@@ -12,7 +13,7 @@ import os
 from ..utils.scrapy.decorators import log_response, save_response, log_method
 from ..utils.file import load_json, save_json, load_csv
 from ..utils.scrapy.url import parse_url_params
-from ..settings import (USE_CACHE, CACHE_JSON_PATH, INPUT_CSV_PATH, FILES_DIR, DAYS_BACK, MAX_COMPANIES,
+from ..settings import (USE_CACHE, CACHE_JSON_PATH, INPUT_CSV_PATH, CSV_DIR, DAYS_BACK, MAX_COMPANIES,
                         TWO_CAPTCHA_API_KEY, MAX_CAPTCHA_RETRIES)
 
 
@@ -22,7 +23,7 @@ class KyrNySearchSpider(Spider):
 
     custom_settings = dict(
         CONCURRENT_REQUESTS=1,  # only 1 parallel request! don't change this
-        ITEM_PIPELINES={"scrapy_app.pipelines.CsvPipeline": 500}  # save Cases and Documents in CSV
+        ITEM_PIPELINES={"scrapy_app.utils.scrapy.pipelines.CsvPipeline": 500}  # save Cases and Companies to CSV
     )
 
     def __init__(self):
@@ -215,7 +216,7 @@ class KyrNySearchSpider(Spider):
             self.existing_case_ids.add(case_id)
 
             case_item = {
-                "_item_type": 'Cases',
+                "_type": 'Cases',
                 "Case Id": case_id,
                 "Company": company,
                 "Date": date_obj.isoformat(),
@@ -235,7 +236,7 @@ class KyrNySearchSpider(Spider):
         if page == 1:
             results_count, items_count = len(result_rows), len(case_items)
             company_item = {
-                "_item_type": 'Companies',
+                "_type": 'Companies',
                 "Company": company,
                 "Cases Total": results_count if results_count < 25 else f'{results_count}+',
                 f"Cases in Last {DAYS_BACK} Days": items_count if items_count < 25 else f'{items_count}+',
@@ -263,7 +264,7 @@ class KyrNySearchSpider(Spider):
         self.logger.info(f'Saved session to {CACHE_JSON_PATH}')
 
     def _load_session_from_cache(self):
-        if not os.path.exists(CACHE_JSON_PATH):
+        if not CACHE_JSON_PATH.exists():
             return
         session_cache = load_json(CACHE_JSON_PATH)
         self._session_id = session_cache['session_id']
@@ -297,16 +298,16 @@ class KyrtNyCaseSpider(Spider):
 
     custom_settings = dict(
         CONCURRENT_REQUESTS=1,
-        ITEM_PIPELINES={"scrapy_app.pipelines.CsvPipeline": 300}
+        ITEM_PIPELINES={"scrapy_app.utils.scrapy.pipelines.CsvPipeline": 300}   # save documents to CSV
     )
 
     def __init__(self):
-        input_file_name = os.path.join(FILES_DIR, f'cases.csv')
-        self.cases: list[dict] = load_csv(input_file_name)
+        super().__init__()
 
+        cases_path: Path = CSV_DIR / f'cases.csv'
+        self.cases: list[dict] = load_csv(cases_path) if cases_path.exists() else []
         self.logger.info(f"Found {len(self.cases)} cases to process")
         self.progress_bar = tqdm(total=len(self.cases), file=sys.stdout)
-        super().__init__()
 
     def start_requests(self) -> Iterable[Request]:
         for case in self.cases:
@@ -317,7 +318,7 @@ class KyrtNyCaseSpider(Spider):
         self.progress_bar.update()
         for document_tr in response.css('table.NewSearchResults tbody tr'):
             document_item = {
-                '_item_type': 'Documents',
+                '_type': 'Documents',
                 'Company': case['Company'],
                 'Case Number': case['Case Number'],
             }
@@ -343,16 +344,19 @@ class KyrtNyDocumentSpider(Spider):
 
     custom_settings = dict(
         CONCURRENT_REQUESTS=1,
-        ITEM_PIPELINES={"scrapy_app.pipelines.DocumentSavePipeline": 300}  # download PDFs in pipeline
+        ITEM_PIPELINES={"scrapy_app.pipelines.DocumentSavePipeline": 300}  # download PDFs
     )
 
     def __init__(self):
+        super().__init__()
+
         # parse input CSV
         self.document_name_by_url: dict[str, str] = {}
         cases_with_privacy_notices: set[str] = set()
 
-        input_file_name = os.path.join(FILES_DIR, f'documents.csv')
-        for row in load_csv(input_file_name):
+        documents_path = CSV_DIR / f'documents.csv'
+        documents = load_csv(documents_path) if documents_path.exists() else []
+        for row in documents:
             company, doc_id, case_number = row['Company'], row['Document ID'], row['Case Number']
             base_dir = f"{company.replace('/', '_')}/{case_number.replace('/', '_')}"
 
@@ -368,7 +372,6 @@ class KyrtNyDocumentSpider(Spider):
             self.document_name_by_url[row['Status Document URL']] = f"{base_dir}/{status_doc_slug}.pdf"
 
         self.progress_bar = tqdm(total=len(self.document_name_by_url), file=sys.stdout, leave=False)
-        super().__init__()
 
     def start_requests(self):
         for url, relative_file_path in self.document_name_by_url.items():

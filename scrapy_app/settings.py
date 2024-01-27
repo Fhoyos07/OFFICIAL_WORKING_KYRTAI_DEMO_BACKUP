@@ -1,34 +1,35 @@
 # Scrapy settings for CourtUsCrawler project
 # For simplicity, this file contains only settings considered important or commonly used. Documentation:
 #     https://docs.scrapy.org/en/latest/topics/settings.html
-import os
+from pathlib import Path
 import logging
 from datetime import date
 from .utils.logging import create_console_handler, create_file_handler, DEFAULT_LOG_FORMAT, DATE_FORMAT
 
 # folders
-PROJECT_DIR = os.path.dirname(os.path.dirname(__file__))    # root project dir
-LOG_DIR = os.path.join(PROJECT_DIR, '_etc', 'logs')
-FILES_DIR = os.path.join(PROJECT_DIR, 'files')
-INPUT_CSV_PATH = os.path.join(FILES_DIR, 'input.csv')
+PROJECT_DIR = Path(__file__).resolve().parent.parent  # root project dir
+LOG_DIR = PROJECT_DIR / '_etc' / 'logs'
+FILES_DIR = PROJECT_DIR / 'files'       # root dir for csvs, input and pdfs
+CSV_DIR = FILES_DIR
+INPUT_CSV_PATH = FILES_DIR / 'input.csv'
 
 
 # crawling settings
 MAX_COMPANIES = None    # crawl all input.csv
 # MAX_COMPANIES = 80    # crawl firxt X rows from input.csv
 
-DAYS_BACK = 10
+DAYS_BACK = 14
 
 
 # ENABLING CACHE SPEEDS UP THE FIRST CRAWLING (UNTIL CAPTCHA FACED), BUT MAY LEAD TO UNSOLVABLE CAPTCHAS
 USE_CACHE = False
-CACHE_JSON_PATH = os.path.join(PROJECT_DIR, '_etc', 'session_cache.json')
+CACHE_JSON_PATH = PROJECT_DIR / '_etc' / 'session_cache.json'
 
 
 # captcha settings
 TWO_CAPTCHA_API_KEY = '3408dd86d795e88a4c8e8e2860b25e94'
 
-MAX_CAPTCHA_RETRIES = 10
+MAX_CAPTCHA_RETRIES = 20
 
 
 # Proxymesh Settings
