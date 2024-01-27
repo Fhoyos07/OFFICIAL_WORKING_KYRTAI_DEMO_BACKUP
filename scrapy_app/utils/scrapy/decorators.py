@@ -4,8 +4,7 @@ from scrapy.http import Response
 from scrapy.spidermiddlewares.httperror import HttpError
 from twisted.python.failure import Failure
 
-import pathlib
-import os
+from pathlib import Path
 import json
 import logging
 
@@ -44,20 +43,15 @@ def save_response(f: Callable) -> Callable:
     """
     Spider decorator to save response to file
     Required Scrapy settings:
-    - PROJECT_DIR
-    Optional Scrapy settings:
     - HTML_DIR - main directory to store htmls (have subfolders per each spider)
     """
     @wraps(f)
     def wrap(self: Spider, response_or_failure: Response | HttpError | Failure, **kwargs) -> Callable:
-        HTML_DIR, PROJECT_DIR = self.settings.get('HTML_DIR'), self.settings.get('PROJECT_DIR')
-        if not PROJECT_DIR:
-            raise AttributeError("PROJECT_DIR attribute wasn't found in settings.py")
+        if not self.settings.get('HTML_DIR'):
+            raise AttributeError("HTML_DIR not specified in settings")
 
-        HTML_DIR = HTML_DIR or os.path.join(PROJECT_DIR, '_etc', 'html')
-        html_dir_for_spider = os.path.join(HTML_DIR, self.name)
-
-        pathlib.Path(html_dir_for_spider).mkdir(parents=True, exist_ok=True)
+        html_dir = Path(self.settings.get('HTML_DIR')) / self.name
+        html_dir.mkdir(parents=True, exist_ok=True)
 
         page_title = f.__name__.replace('parse_', '')
 
@@ -79,11 +73,11 @@ def save_response(f: Callable) -> Callable:
                 file_name = f'{page_title}.html'
                 file_content = response.text
 
-            file_path = os.path.join(html_dir_for_spider, file_name)
+            file_path = html_dir / file_name
             with open(file_path, mode='w', encoding='utf-8') as fp:
                 fp.write(file_content)
 
-            self.logger.info(f'Saved response to {pathlib.Path(file_path).as_uri()}')
+            self.logger.info(f'Saved response to {file_path.as_uri()}')
 
         return f(self, response_or_failure, **kwargs)
     return wrap
@@ -134,5 +128,3 @@ def update_progress(f):
         self.progress_bar.update()
         return f(self, *args, **kwargs)
     return wrap
-
-

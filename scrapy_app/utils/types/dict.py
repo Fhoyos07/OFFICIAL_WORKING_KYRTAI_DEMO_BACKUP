@@ -25,7 +25,7 @@ def replace_key(data: dict[str, any], replace_from: str, replace_to: str) -> dic
 def flatten_dict(d, sep="_", parent_key=""):
     """Make nested dicts flat"""
     items = []
-    for key, value in d.case_items():
+    for key, value in d.items():
         key = f"{parent_key}{sep}{key}" if parent_key else key
         if is_dict(value):
             items.extend(flatten_dict(value, sep=sep, parent_key=key).items())
