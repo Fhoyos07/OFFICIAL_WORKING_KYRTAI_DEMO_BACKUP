@@ -59,24 +59,13 @@ def split_file_path(file_path: str) -> (str, str, str):
     return p.parent, p.stem, p.suffix.strip('.')
 
 
-def load_file(file_path: str | Path) -> str:
-    """Load string from text file"""
-    with open(file_path, mode='r', encoding='utf-8') as f:
-        return f.read()
+def recreate_folder(folder_path: str) -> None:
+    """Delete folder and create it again"""
+    shutil.rmtree(folder_path, ignore_errors=True)
+    os.makedirs(folder_path)
 
 
-def load_json(file_path: str | Path) -> dict:
-    """Dump dict to json file"""
-    with open(file_path, mode='r', encoding='utf-8') as f:
-        return json.load(f)
-
-
-def save_json(data: dict , file_path: str):
-    """Load dict from json file"""
-    with open(file_path, mode='w', encoding='utf-8') as f:
-        json.dump(data, fp=f, indent=2, ensure_ascii=False)
-
-
+# CSV operations
 def load_csv(file_paths: str | Path, encoding: str = 'utf-8') -> list[dict]:
     """Load list of dicts from CSV file"""
     with open(file_paths, mode='r', encoding=encoding) as f:
@@ -84,7 +73,36 @@ def load_csv(file_paths: str | Path, encoding: str = 'utf-8') -> list[dict]:
         return list(csv_reader)
 
 
-def recreate_folder(folder_path: str) -> None:
-    """Delete folder and create it again"""
-    shutil.rmtree(folder_path, ignore_errors=True)
-    os.makedirs(folder_path)
+def save_csv(data: list[dict], file_paths: str | Path, encoding: str = 'utf-8'):
+    """Save list of dicts to CSV file"""
+    if not data: return
+    with open(file_paths, mode='w', encoding=encoding) as f:
+        csv_writer = csv.DictWriter(f, fieldnames=data[0].keys())
+        csv_writer.writeheader()
+        csv_writer.writerows(data)
+
+
+# JSON operations
+def load_json(file_path: str | Path) -> dict:
+    """Dump dict to json file"""
+    with open(file_path, mode='r', encoding='utf-8') as f:
+        return json.load(f)
+
+
+def save_json(data: any, file_path: str, indent: int = 2):
+    """Load dict from json file"""
+    with open(file_path, mode='w', encoding='utf-8') as f:
+        json.dump(data, fp=f, indent=indent, ensure_ascii=False)
+
+
+# File operations
+def load_file(file_path: str | Path) -> str:
+    """Load string from text file"""
+    with open(file_path, mode='r', encoding='utf-8') as f:
+        return f.read()
+
+
+def save_file(data: str, file_path: str | Path):
+    """Load string from text file"""
+    with open(file_path, mode='w', encoding='utf-8') as f:
+        return f.write(data)
