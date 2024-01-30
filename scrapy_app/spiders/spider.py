@@ -13,18 +13,18 @@ import os
 from ..utils.scrapy.decorators import log_response, save_response, log_method
 from ..utils.file import load_json, save_json, load_csv
 from ..utils.scrapy.url import parse_url_params
-from ..settings import (USE_CACHE, CACHE_JSON_PATH, INPUT_CSV_PATH, CSV_DIR, DAYS_BACK, MAX_COMPANIES,
+from ..settings import (USE_CACHE, CACHE_JSON_PATH, INPUT_CSV_PATH, FILES_DIR, DAYS_BACK, MAX_COMPANIES,
                         TWO_CAPTCHA_API_KEY, MAX_CAPTCHA_RETRIES)
 
 
 # Step 1 - search each company
-class KyrNySearchSpider(Spider):
+class KyrtNySearchSpider(Spider):
     name = 'kyrt_ny_search'
-
     custom_settings = dict(
         CONCURRENT_REQUESTS=1,  # only 1 parallel request! don't change this
-        ITEM_PIPELINES={"scrapy_app.utils.scrapy.pipelines.CsvPipeline": 500}  # save Cases and Companies to CSV
+        ITEM_PIPELINES={"scrapy_app.pipelines.CsvPipeline": 500}  # save Cases and Companies to CSV
     )
+    state_code = 'NY'
 
     def __init__(self):
         # parse input CSV
@@ -67,10 +67,10 @@ class KyrNySearchSpider(Spider):
             self.logger.info(f"Finished")
             return
 
-        company = self.QUERIES.pop(0)
-        return self.make_search_request(company)
+        company_name = self.QUERIES.pop(0)
+        return self.make_search_request(company_name)
 
-    def make_search_request(self, company: str) -> Request:
+    def make_search_request(self, company_name: str) -> Request:
         """
         Make direct POST search request for current company
         """
@@ -80,7 +80,7 @@ class KyrNySearchSpider(Spider):
 
             return Request(url='https://iapps.courts.state.ny.us/nyscef/CaseSearch?TAB=name',
                            callback=self.parse_search_form,
-                           cb_kwargs=dict(company=company),
+                           cb_kwargs=dict(company=company_name),
                            dont_filter=True)
 
         # don't use filter by date
@@ -91,7 +91,7 @@ class KyrNySearchSpider(Spider):
         headers = {'Content-Type': 'application/x-www-form-urlencoded'}
         cookies = {'JSESSIONID': self._session_id}
         data = {
-            "txtBusinessOrgName": company,
+            "txtBusinessOrgName": company_name,
             "recaptcha-is-invisible": "true",
             "rbnameType": "partyName",
             "txtPartyFirstName": "",
@@ -112,7 +112,7 @@ class KyrNySearchSpider(Spider):
                            cookies=cookies,
                            formdata=data,
                            callback=self.parse_cases,
-                           cb_kwargs=dict(company=company),
+                           cb_kwargs=dict(company=company_name),
                            dont_filter=True)
 
     @log_response
@@ -295,16 +295,17 @@ class KyrNySearchSpider(Spider):
 # Step2 - Open each case and save document urls
 class KyrtNyCaseSpider(Spider):
     name = 'kyrt_ny_cases'
+    state_code = 'NY'
 
     custom_settings = dict(
         CONCURRENT_REQUESTS=1,
-        ITEM_PIPELINES={"scrapy_app.utils.scrapy.pipelines.CsvPipeline": 300}   # save documents to CSV
+        ITEM_PIPELINES={"scrapy_app.pipelines.CsvPipeline": 300}   # save documents to CSV
     )
 
     def __init__(self):
         super().__init__()
 
-        cases_path: Path = CSV_DIR / f'cases.csv'
+        cases_path: Path = FILES_DIR / self.state_code / f'cases.csv'
         self.cases: list[dict] = load_csv(cases_path) if cases_path.exists() else []
         self.logger.info(f"Found {len(self.cases)} cases to process")
         self.progress_bar = tqdm(total=len(self.cases), file=sys.stdout)
@@ -341,6 +342,7 @@ class KyrtNyCaseSpider(Spider):
 # Step 3 - open and download each document
 class KyrtNyDocumentSpider(Spider):
     name = 'kyrt_ny_documents'
+    state_code = 'NY'
 
     custom_settings = dict(
         CONCURRENT_REQUESTS=1,
@@ -354,7 +356,7 @@ class KyrtNyDocumentSpider(Spider):
         self.document_name_by_url: dict[str, str] = {}
         cases_with_privacy_notices: set[str] = set()
 
-        documents_path = CSV_DIR / f'documents.csv'
+        documents_path: Path = FILES_DIR / self.state_code / f'documents.csv'
         documents = load_csv(documents_path) if documents_path.exists() else []
         for row in documents:
             company, doc_id, case_number = row['Company'], row['Document ID'], row['Case Number']

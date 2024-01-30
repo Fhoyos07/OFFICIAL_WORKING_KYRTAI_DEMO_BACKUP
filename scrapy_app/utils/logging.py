@@ -15,6 +15,7 @@ setup_logging_handlers(
 logging.debug('Debug')
 logging.info('Info')
 """
+from pathlib import Path
 import logging
 import os
 
@@ -31,7 +32,7 @@ def create_console_handler(level: int) -> logging.Handler:
 
 
 def create_file_handler(level: int,
-                        dir_name: str,
+                        dir_name: str | Path,
                         file_name: str = 'log.log',
                         file_mode: str = 'w') -> logging.Handler:
     """Returns File handler with specified level, file and fileMode"""

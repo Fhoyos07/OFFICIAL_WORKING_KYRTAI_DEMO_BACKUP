@@ -10,19 +10,18 @@ from .utils.logging import create_console_handler, create_file_handler, DEFAULT_
 PROJECT_DIR = Path(__file__).resolve().parent.parent  # root project dir
 LOG_DIR = PROJECT_DIR / '_etc' / 'logs'
 FILES_DIR = PROJECT_DIR / 'files'       # root dir for csvs, input and pdfs
-CSV_DIR = FILES_DIR
 INPUT_CSV_PATH = FILES_DIR / 'input.csv'
 
 
 # crawling settings
-MAX_COMPANIES = None    # crawl all input.csv
-# MAX_COMPANIES = 80    # crawl firxt X rows from input.csv
+# MAX_COMPANIES = None    # crawl all input.csv
+MAX_COMPANIES = 70    # crawl firxt X rows from input.csv
 
 DAYS_BACK = 14
 
 
 # ENABLING CACHE SPEEDS UP THE FIRST CRAWLING (UNTIL CAPTCHA FACED), BUT MAY LEAD TO UNSOLVABLE CAPTCHAS
-USE_CACHE = False
+USE_CACHE = True
 CACHE_JSON_PATH = PROJECT_DIR / '_etc' / 'session_cache.json'
 
 

@@ -66,17 +66,17 @@ def recreate_folder(folder_path: str) -> None:
 
 
 # CSV operations
-def load_csv(file_paths: str | Path, encoding: str = 'utf-8') -> list[dict]:
+def load_csv(file_path: str | Path, encoding: str = 'utf-8') -> list[dict]:
     """Load list of dicts from CSV file"""
-    with open(file_paths, mode='r', encoding=encoding) as f:
+    with open(file_path, mode='r', encoding=encoding) as f:
         csv_reader = csv.DictReader(f)
         return list(csv_reader)
 
 
-def save_csv(data: list[dict], file_paths: str | Path, encoding: str = 'utf-8'):
+def save_csv(data: list[dict], file_path: str | Path, encoding: str = 'utf-8'):
     """Save list of dicts to CSV file"""
     if not data: return
-    with open(file_paths, mode='w', encoding=encoding) as f:
+    with open(file_path, mode='w', encoding=encoding) as f:
         csv_writer = csv.DictWriter(f, fieldnames=data[0].keys())
         csv_writer.writeheader()
         csv_writer.writerows(data)

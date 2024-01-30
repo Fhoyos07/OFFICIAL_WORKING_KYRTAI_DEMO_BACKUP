@@ -1,10 +1,10 @@
 from scrapy_app.utils.scrapy.crawler import crawl_sequential
-from scrapy_app.spiders.spider import KyrNySearchSpider, KyrtNyCaseSpider, KyrtNyDocumentSpider
+from scrapy_app.spiders.spider import KyrtNySearchSpider, KyrtNyCaseSpider, KyrtNyDocumentSpider
 
 
 def run():
     crawl_sequential(
-        KyrNySearchSpider,
+        KyrtNySearchSpider,
         KyrtNyCaseSpider,
         KyrtNyDocumentSpider
     )
