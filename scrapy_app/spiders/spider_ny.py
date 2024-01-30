@@ -77,20 +77,9 @@ class KyrtNySearchSpider(BaseCaseSearchSpider):
         # send search company
         headers = {'Content-Type': 'application/x-www-form-urlencoded'}
         cookies = {'JSESSIONID': self._session_id}
-        data = {
+        data = self.default_form_data | {
             "txtBusinessOrgName": company_name,
-            "recaptcha-is-invisible": "true",
-            "rbnameType": "partyName",
-            "txtPartyFirstName": "",
-            "txtPartyMiddleName": "",
-            "txtPartyLastName": "",
             "g-recaptcha-response": self._recaptcha_code,
-            "txtCounty": "-1",
-            "txtCaseType": "",
-            "txtFilingDateFrom": "",    # date_from.strftime("%m/%d/%Y"),
-            "txtFilingDateTo": "",      # date_to.strftime("%m/%d/%Y"),
-            "btnSubmit": "Search",
-
         }
         self.logger.debug(f"cookies: {cookies}")
         self.logger.debug(f"data: {data}")
@@ -101,6 +90,21 @@ class KyrtNySearchSpider(BaseCaseSearchSpider):
                            callback=self.parse_cases,
                            cb_kwargs=dict(company=company_name),
                            dont_filter=True)
+
+    @property
+    def default_form_data(self):
+        return {
+            "recaptcha-is-invisible": "true",
+            "rbnameType": "partyName",
+            "txtPartyFirstName": "",
+            "txtPartyMiddleName": "",
+            "txtPartyLastName": "",
+            "txtCounty": "-1",
+            "txtCaseType": "",
+            "txtFilingDateFrom": "",    # date_from.strftime("%m/%d/%Y"),
+            "txtFilingDateTo": "",      # date_to.strftime("%m/%d/%Y"),
+            "btnSubmit": "Search",
+        }
 
     @log_response
     def parse_search_form(self, response: TextResponse, company: str):

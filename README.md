@@ -1,39 +1,40 @@
-# KYRT - iapps.courts.state.ny.us
+# KYRT
+### Spiders for:  
+- iapps.courts.state.ny.us
+- civilinquiry.jud.ct.gov (CT)
 
 ## Summary:
-Python/Scrapy script with input from CSV and output to CSV and download PDF files.
+Python/Scrapy scripts with input from CSV and output to CSV and download PDF files.
+All scripts share the same flow:
+- Read input CSV.
+- Find all companies.
+- Export company statistics (cases found) to `companies.csv` - overriding existing file/
+- Export cases to `cases.csv` - appending to end of file.
+- Export documents metadata (url, name) to `documents.csv` - appending to end of file.
+- Cases and documents are added only once, later crawlings skip existing items from CSV.
+- Download document pdfs to folder.
 
 ## Executables:
+#### NY Spider
+- `python3 RUN_NY.py`
+- Input: `/files/input.csv`
+- Output: `/files/NY/`
 
-## python3 RUN.py will run both Step 1 and Step 2. Alternativly, you can run Step 1, then run Step 2 manually. For full automation, just run python3 RUN.py
+## python3 RUN_CT.py
+- `python3 RUN_CT.py`
+- Input: `/files/input.csv`
+- Output: `/files/CT/`
 
-### Step 1: Find all cases and documents
-`python3 step1_csv.py`
-
-#### Input:
-- `/files/input.csv` - list of companies under column "Competitor / Fictitious LLC Name"
-
-#### Output: 
-- `/files/companies.csv` - stats of company scraping (how many cases, when was the latest)
-- `/files/cases.csv` - cases results
-- `/files/documents.csv` - documents results
-
-
-### Step 2: Download all PDFs
-`python3 step2_pdf.py`
-
-#### Input:
-- `/files/documents.csv` - list of URLs, under columns Document URL and Status Document URL (once per case)
-
-#### Output: 
-- `/files/pdfs` - pdf dir with files grouped by Case Number
+## python3 RUN_NY_proceedings.py
+- `python3 RUN_NY_proceedings.py`
+- Input: `/files/input_ny_proceedings.csv`
+- Output: `/files/NY_proceedings/`
 
 ## Settings:
 - `/scrapy_app/settings.py` - scraping settings. Main:
-  * `DAYS_BACK` (default 10) - min date to scrape cases
-  * `MAX_CAPTCHA_RETRIES` (default 10) - max sequential fails to give up with 2captcha
+  * `DAYS_BACK` (default 14) - min date to scrape cases
+  * `MAX_CAPTCHA_RETRIES` (default 20) - max sequential fails to give up with 2captcha
   * `TWO_CAPTCHA_API_KEY`
-  * `USE_CACHE` (default False) - if True, tries to load the session from the previous session on start. may be unstable.
 
   
 ---
