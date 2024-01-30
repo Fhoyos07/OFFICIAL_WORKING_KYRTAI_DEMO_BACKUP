@@ -1,7 +1,17 @@
+from itemadapter import ItemAdapter
 from scrapy.crawler import Crawler
 from pathlib import Path
 from scrapy import Spider
+import json
+
 from .utils.scrapy.pipelines import CsvWriterWrapper
+
+
+class LoggingPipeline:
+    def process_item(self, item, spider):
+        item_dict = ItemAdapter(item).asdict()
+        spider.logger.info(json.dumps(item_dict, indent=2))
+        return item
 
 
 class BasePipeline:
