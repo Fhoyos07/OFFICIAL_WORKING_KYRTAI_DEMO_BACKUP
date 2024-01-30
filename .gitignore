@@ -1,8 +1,10 @@
 /.idea/
-/files/
+/files/CT/
+/files/NY/
+
 /_etc/logs/
 /_etc/pdfs_backup/
 /_etc/html/
-/_etc/session_cache.json
+/_etc/ny_session_cache.json
 /_etc/input_backup.csv
 /test.py
