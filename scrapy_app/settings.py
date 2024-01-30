@@ -9,25 +9,19 @@ from .utils.logging import create_console_handler, create_file_handler, DEFAULT_
 # folders
 PROJECT_DIR = Path(__file__).resolve().parent.parent  # root project dir
 LOG_DIR = PROJECT_DIR / '_etc' / 'logs'
+HTML_DEBUG_DIR = PROJECT_DIR / '_etc' / 'html'
 FILES_DIR = PROJECT_DIR / 'files'       # root dir for csvs, input and pdfs
 INPUT_CSV_PATH = FILES_DIR / 'input.csv'
 
 
 # crawling settings
-# MAX_COMPANIES = None    # crawl all input.csv
-MAX_COMPANIES = 70    # crawl firxt X rows from input.csv
-
 DAYS_BACK = 14
-
-
-# ENABLING CACHE SPEEDS UP THE FIRST CRAWLING (UNTIL CAPTCHA FACED), BUT MAY LEAD TO UNSOLVABLE CAPTCHAS
-USE_CACHE = True
-CACHE_JSON_PATH = PROJECT_DIR / '_etc' / 'session_cache.json'
+MAX_COMPANIES = None    # crawl all input.csv
+# MAX_COMPANIES = 70    # crawl first X rows from input.csv
 
 
 # captcha settings
 TWO_CAPTCHA_API_KEY = '3408dd86d795e88a4c8e8e2860b25e94'
-
 MAX_CAPTCHA_RETRIES = 20
 
 
@@ -66,7 +60,7 @@ def setup_logging():
     logging.basicConfig(
         handlers=[
             create_console_handler(level=logging.INFO),
-            create_file_handler(level=logging.INFO, file_name=f'log_{date.today().isoformat()}.log', dir_name=LOG_DIR, file_mode='w')
+            create_file_handler(level=logging.DEBUG, file_name=f'log_{date.today().isoformat()}.log', dir_name=LOG_DIR, file_mode='w')
         ],
         format=DEFAULT_LOG_FORMAT,
         datefmt=DATE_FORMAT,

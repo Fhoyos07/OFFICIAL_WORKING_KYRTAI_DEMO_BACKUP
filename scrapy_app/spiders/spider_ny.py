@@ -2,47 +2,38 @@ from typing import Iterable
 
 from scrapy import Spider
 from scrapy.http import Request, FormRequest, TextResponse
-from datetime import date, datetime, timedelta
+from datetime import datetime
 from http.cookies import SimpleCookie
 from pathlib import Path
 from tqdm import tqdm
 import twocaptcha
 import sys
-import os
 
 from ..utils.scrapy.decorators import log_response, save_response, log_method
 from ..utils.file import load_json, save_json, load_csv
 from ..utils.scrapy.url import parse_url_params
-from ..settings import (USE_CACHE, CACHE_JSON_PATH, INPUT_CSV_PATH, FILES_DIR, DAYS_BACK, MAX_COMPANIES,
-                        TWO_CAPTCHA_API_KEY, MAX_CAPTCHA_RETRIES)
+from ..utils.scrapy.response import extract_text_from_el
+from ..settings import PROJECT_DIR, FILES_DIR, DAYS_BACK, TWO_CAPTCHA_API_KEY, MAX_CAPTCHA_RETRIES
+from ._base import BaseCaseSearchSpider, BaseDocumentDownloadSpider
 
 
 # Step 1 - search each company
-class KyrtNySearchSpider(Spider):
+class KyrtNySearchSpider(BaseCaseSearchSpider):
     name = 'kyrt_ny_search'
     custom_settings = dict(
         CONCURRENT_REQUESTS=1,  # only 1 parallel request! don't change this
         ITEM_PIPELINES={"scrapy_app.pipelines.CsvPipeline": 500}  # save Cases and Companies to CSV
     )
-    state_code = 'NY'
+
+    @property
+    def state_code(self) -> str: return 'NY'
 
     def __init__(self):
-        # parse input CSV
-        companies = [row['Competitor / Fictitious LLC Name'] for row in load_csv(INPUT_CSV_PATH)]
-        companies = [c.strip().upper().replace(', LLC', ' LLC') for c in companies]
-        if MAX_COMPANIES:
-            companies = companies[:MAX_COMPANIES]
-            self.logger.info(f"Cut companies to only {MAX_COMPANIES} first")
-        self.logger.info(f"Before deduplication: {len(companies)} companies")
+        super().__init__()
 
-        self.QUERIES = sorted(list(set(c for c in companies if c)))
-        self.logger.info(f"After deduplication: {len(self.QUERIES)} companies")
-
-        # set up progress bar
-        self.progress_bar = tqdm(total=len(self.QUERIES), file=sys.stdout, leave=False)
-
-        # min case date to crawl
-        self.MIN_DATE = date.today() - timedelta(days=DAYS_BACK)
+        # ENABLING CACHE SPEEDS UP THE FIRST CRAWLING (UNTIL CAPTCHA FACED), BUT MAY LEAD TO UNSOLVABLE CAPTCHAS
+        self.use_cache = False
+        self.session_cache_path = PROJECT_DIR / '_etc' / 'ny_session_cache.json'
 
         # captcha settings
         self.solver = twocaptcha.TwoCaptcha(apiKey=TWO_CAPTCHA_API_KEY)
@@ -52,12 +43,8 @@ class KyrtNySearchSpider(Spider):
         # get session values from cache
         self._session_id = None
         self._recaptcha_code = None
-        if USE_CACHE:
+        if self.use_cache:
             self._load_session_from_cache()
-
-        # collect existing ids to avoid scraping same case twice
-        self.existing_case_ids = set()
-        super().__init__()
 
     def start_requests(self):
         yield self.process_next_company()
@@ -151,7 +138,8 @@ class KyrtNySearchSpider(Spider):
         """
         Page opened after captcha submission. Save captcha code to json cache and retry search request.
         """
-        self._save_session_to_cache()
+        if self.use_cache:
+            self._save_session_to_cache()
         yield self.make_search_request(company)
 
     # @log_response
@@ -207,12 +195,11 @@ class KyrtNySearchSpider(Spider):
             if not case_url:
                 self.logger.error(f'Invalid case_url {case_url} at {response.url}')
                 continue
-
-            # don't re-scrape same case twice
             case_id = parse_url_params(case_url)['docketId']
+
+            # avoid scraping same case twice
             if case_id in self.existing_case_ids:
                 continue
-
             self.existing_case_ids.add(case_id)
 
             case_item = {
@@ -255,22 +242,6 @@ class KyrtNySearchSpider(Spider):
             self.progress_bar.update()
             yield self.process_next_company()
 
-    def _save_session_to_cache(self):
-        session_cache = dict(
-            session_id=self._session_id,
-            recaptcha_code=self._recaptcha_code
-        )
-        save_json(data=session_cache, file_path=CACHE_JSON_PATH)
-        self.logger.info(f'Saved session to {CACHE_JSON_PATH}')
-
-    def _load_session_from_cache(self):
-        if not CACHE_JSON_PATH.exists():
-            return
-        session_cache = load_json(CACHE_JSON_PATH)
-        self._session_id = session_cache['session_id']
-        self._recaptcha_code = session_cache['recaptcha_code']
-        self.logger.info(f"Loaded cached session from {CACHE_JSON_PATH}")
-
     def _get_captcha_response_code(self, url: str) -> str:
         self.current_captcha_retries += 1
         self.logger.info(f'Started captcha solving try {self.current_captcha_retries} of {self.max_captcha_retries} (url: {url})')
@@ -291,22 +262,42 @@ class KyrtNySearchSpider(Spider):
         self.current_captcha_retries = 0
         return result['code']
 
+    def _save_session_to_cache(self):
+        session_cache = dict(
+            session_id=self._session_id,
+            recaptcha_code=self._recaptcha_code
+        )
+        save_json(data=session_cache, file_path=self.session_cache_path)
+        self.logger.info(f'Saved session to {self.session_cache_path}')
+
+    def _load_session_from_cache(self):
+        if not self.session_cache_path.exists():
+            return
+        session_cache = load_json(self.session_cache_path)
+        self._session_id = session_cache['session_id']
+        self._recaptcha_code = session_cache['recaptcha_code']
+        self.logger.info(f"Loaded cached session from {self.session_cache_path}")
+
 
 # Step2 - Open each case and save document urls
 class KyrtNyCaseSpider(Spider):
     name = 'kyrt_ny_cases'
-    state_code = 'NY'
-
     custom_settings = dict(
         CONCURRENT_REQUESTS=1,
         ITEM_PIPELINES={"scrapy_app.pipelines.CsvPipeline": 300}   # save documents to CSV
     )
+    @property
+    def state_code(self) -> str: return 'NY'
 
     def __init__(self):
         super().__init__()
 
         cases_path: Path = FILES_DIR / self.state_code / f'cases.csv'
         self.cases: list[dict] = load_csv(cases_path) if cases_path.exists() else []
+
+        documents_path: Path = FILES_DIR / self.state_code / f'documents.csv'
+        self.existing_document_ids = {r['Document ID'] for r in load_csv(documents_path)} if documents_path.exists() else set()
+
         self.logger.info(f"Found {len(self.cases)} cases to process")
         self.progress_bar = tqdm(total=len(self.cases), file=sys.stdout)
 
@@ -328,9 +319,14 @@ class KyrtNyCaseSpider(Spider):
                 self.logger.warning(f'Invalid document_url: {document_url} at {response.url}')
                 continue
 
+            document_id = parse_url_params(document_url)['docIndex'].strip('/').replace('/', '_')
+            if document_id in self.existing_document_ids:
+                continue
+
             document_item['Document URL'] = response.urljoin(document_url)
             document_item['Document Name'] = document_tr.xpath('td[2]/a/text()').get()
-            document_item['Document ID'] = parse_url_params(document_url)['docIndex'].strip('/').replace('/', '_')
+            document_item['Document ID'] = document_id
+            # document_item['File Name'] = f"{document_id}.pdf"
 
             status_document_url = document_tr.xpath('td[4]/a/@href').get()
             if status_document_url:
@@ -340,51 +336,25 @@ class KyrtNyCaseSpider(Spider):
 
 
 # Step 3 - open and download each document
-class KyrtNyDocumentSpider(Spider):
+class KyrtNyDocumentSpider(BaseDocumentDownloadSpider):
     name = 'kyrt_ny_documents'
-    state_code = 'NY'
-
     custom_settings = dict(
         CONCURRENT_REQUESTS=1,
         ITEM_PIPELINES={"scrapy_app.pipelines.DocumentSavePipeline": 300}  # download PDFs
     )
+    @property
+    def state_code(self) -> str: return 'NY'
 
-    def __init__(self):
-        super().__init__()
-
-        # parse input CSV
-        self.document_name_by_url: dict[str, str] = {}
+    def _prepare_documents_to_scrape(self, csv_rows: list[dict]) -> Iterable[tuple[str, str]]:
         cases_with_privacy_notices: set[str] = set()
-
-        documents_path: Path = FILES_DIR / self.state_code / f'documents.csv'
-        documents = load_csv(documents_path) if documents_path.exists() else []
-        for row in documents:
-            company, doc_id, case_number = row['Company'], row['Document ID'], row['Case Number']
-            base_dir = f"{company.replace('/', '_')}/{case_number.replace('/', '_')}"
-
-            # save url
-            self.document_name_by_url[row['Document URL']] = f"{base_dir}/{doc_id.replace('/', '_')}.pdf"
+        for row in csv_rows:
+            file_path = self._generate_file_path(row, fields=['Company', 'Case Number', 'Document ID'])
+            yield row['Document URL'], file_path
 
             # add privacy notice only once per case
-            if case_number in cases_with_privacy_notices:
-                continue
-            cases_with_privacy_notices.add(case_number)
+            if row['Case Number'] not in cases_with_privacy_notices:
+                cases_with_privacy_notices.add(row['Case Number'])
 
-            status_doc_slug = row['Status Document Name'].lower().replace(' ', '_')
-            self.document_name_by_url[row['Status Document URL']] = f"{base_dir}/{status_doc_slug}.pdf"
-
-        self.progress_bar = tqdm(total=len(self.document_name_by_url), file=sys.stdout, leave=False)
-
-    def start_requests(self):
-        for url, relative_file_path in self.document_name_by_url.items():
-            yield Request(url,
-                          callback=self.parse_document,
-                          cb_kwargs=dict(relative_file_path=relative_file_path),
-                          dont_filter=True)  # there are documents with different links redirecting to the same page
-
-    def parse_document(self, response, relative_file_path: str):
-        self.progress_bar.update()
-        yield dict(
-            body=response.body,
-            relative_file_path=relative_file_path
-        )
+                row['Status Document Name'] = row['Status Document Name'].lower().replace(' ', '_')
+                file_path = self._generate_file_path(row, fields=['Company', 'Case Number', 'Status Document Name'])
+                yield row['Status Document URL'], file_path
