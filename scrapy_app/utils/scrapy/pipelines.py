@@ -15,9 +15,9 @@ class CsvWriterWrapper:
 
     def __init__(self, csv_path: Path, fieldnames: list[str], encoding: str = 'utf-8'):
         self._encoding = encoding
-        self._header_written = False
+        self._header_written = csv_path.exists()
 
-        self._file = open(csv_path, mode='w', encoding=self._encoding, newline='')
+        self._file = open(csv_path, mode='a', encoding=self._encoding, newline='')
         self._writer = csv.DictWriter(self._file, fieldnames=fieldnames)
 
     def writeheader(self):
