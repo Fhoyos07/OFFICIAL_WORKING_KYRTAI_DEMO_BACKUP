@@ -7,7 +7,7 @@
 Python/Scrapy scripts with input from CSV and output to CSV and download PDF files.
 All scripts share the same flow:
 - Read input CSV.
-- Find all companies.
+- Find cases for all companies.
 - Export company statistics (cases found) to `companies.csv` - overriding existing file/
 - Export cases to `cases.csv` - appending to end of file.
 - Export documents metadata (url, name) to `documents.csv` - appending to end of file.
