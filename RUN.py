@@ -53,7 +53,7 @@ def main():
         choices_text = "\n".join(choices)
         choice_input = int(input(f"{choices_text}\nYour choice:\n"))
         if choice_input == 1:
-            selected_key = get_all_spiders()
+            selected_key = 'ALL'
         elif 2 <= choice_input < len(configurations) + 2:
             selected_key = list(configurations.keys())[choice_input - 2]
 
@@ -61,7 +61,7 @@ def main():
     if selected_key == 'ALL':
         run_spiders(get_all_spiders())
     elif selected_key in configurations:
-        run_spiders(configurations[args.name].spiders)
+        run_spiders(configurations[selected_key].spiders)
     else:
         print("Invalid choice. Exiting.")
 
