@@ -8,25 +8,28 @@ Python/Scrapy scripts with input from CSV and output to CSV and download PDF fil
 All scripts share the same flow:
 - Read input CSV.
 - Find cases for all companies.
-- Export company statistics (cases found) to `companies.csv` - overriding existing file/
+- Export company statistics (cases found) to `companies.csv` - overriding existing file.
 - Export cases to `cases.csv` - appending to end of file.
 - Export documents metadata (url, name) to `documents.csv` - appending to end of file.
 - Cases and documents are added only once, later crawlings skip existing items from CSV.
 - Download document pdfs to folder.
 
 ## Executables:
+#### Main Script
+- `python3 RUN.py` - provides list of spiders to choose
+
 #### NY Spider
-- `python3 RUN_NY.py`
+- `python3 RUN.py NY`
 - Input: `/files/input.csv`
 - Output: `/files/NY/`
 
-## python3 RUN_CT.py
-- `python3 RUN_CT.py`
+#### CT Spider
+- `python3 RUN.py CT`
 - Input: `/files/input.csv`
 - Output: `/files/CT/`
 
-## python3 RUN_NY_proceedings.py
-- `python3 RUN_NY_proceedings.py`
+#### NY Proceedings Spider
+- `python3 RUN.py NY_proceedings`
 - Input: `/files/input_ny_proceedings.csv`
 - Output: `/files/NY_proceedings/`
 
@@ -36,6 +39,10 @@ All scripts share the same flow:
   * `MAX_CAPTCHA_RETRIES` (default 20) - max sequential fails to give up with 2captcha
   * `TWO_CAPTCHA_API_KEY`
 
+
+## Flows:
+24STCP00074
+https://www.lacourt.org/casesummary/ui/index.aspx?casetype=civil
   
 ---
 ### Technical details:
