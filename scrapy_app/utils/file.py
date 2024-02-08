@@ -73,13 +73,22 @@ def load_csv(file_path: str | Path, encoding: str = 'utf-8') -> list[dict]:
         return list(csv_reader)
 
 
-def save_csv(data: list[dict], file_path: str | Path, encoding: str = 'utf-8'):
+def save_csv(rows: list[dict], file_path: str | Path, encoding: str = 'utf-8'):
     """Save list of dicts to CSV file"""
-    if not data: return
+    if not rows: raise ValueError('No rows found')
+
+    # collect unique keys from all rows
+    fields_dict = {}
+    for r in rows:
+        for k in r:
+            fields_dict[k] = None
+    fieldnames = list(fields_dict.keys())
+
+    # dumps to CSV
     with open(file_path, mode='w', encoding=encoding) as f:
-        csv_writer = csv.DictWriter(f, fieldnames=data[0].keys())
+        csv_writer = csv.DictWriter(f, fieldnames=fieldnames)
         csv_writer.writeheader()
-        csv_writer.writerows(data)
+        csv_writer.writerows(rows)
 
 
 # JSON operations

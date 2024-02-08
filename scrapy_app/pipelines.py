@@ -81,7 +81,7 @@ class CsvPipeline(BasePipeline):
     def _open_csv_writer(self, csv_name: str, fieldnames: list[str], write_header: bool = False) -> 'CsvWriterWrapper':
         csv_path = self.csv_dir / f'{csv_name.lower()}.csv'
         self.logger.info(f"Opening CSV writer at {csv_path} with fieldnames:\n {','.join(fieldnames)}")
-        csv_writer = CsvWriterWrapper(csv_path=csv_path, fieldnames=fieldnames)
+        csv_writer = CsvWriterWrapper(csv_path=csv_path, fieldnames=fieldnames, override=False)
         if write_header:
             csv_writer.writeheader()
         return csv_writer

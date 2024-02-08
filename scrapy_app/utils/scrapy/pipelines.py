@@ -13,7 +13,10 @@ class CsvWriterWrapper:
     _writer: csv.DictWriter
     _file: IO
 
-    def __init__(self, csv_path: Path, fieldnames: list[str], encoding: str = 'utf-8'):
+    def __init__(self, csv_path: Path, fieldnames: list[str], encoding: str = 'utf-8', override: bool = True):
+        if override is True and csv_path.exists():
+            csv_path.unlink()  # delete existing file
+
         self._encoding = encoding
         self._header_written = csv_path.exists()
 
