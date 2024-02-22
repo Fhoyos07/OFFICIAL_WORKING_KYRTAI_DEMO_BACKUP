@@ -40,7 +40,7 @@ DJANGO_SETTINGS_MODULE = 'config.settings'
 SECRET_KEY = 'django-insecure-xt_$(^cw9bl%qrk85s$9w4_&f*wrra5(*h!l#y+mcl9p+yls%6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = ENVIRONMENT is 'dev'
+DEBUG = ENVIRONMENT == 'dev'
 
 ALLOWED_HOSTS = [
     '52.14.243.148'
@@ -148,6 +148,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'config' / 'static'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
