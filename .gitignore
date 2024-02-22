@@ -8,4 +8,5 @@
 /_etc/html/
 /_etc/ny_session_cache.json
 /_etc/input_backup.csv
-/test.py
+/_etc/_credentials/
+/_etc/ai/

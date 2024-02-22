@@ -1,5 +1,6 @@
 import base64
 
+
 class SmartProxyMiddleware:
     @classmethod
     def from_crawler(cls, crawler):

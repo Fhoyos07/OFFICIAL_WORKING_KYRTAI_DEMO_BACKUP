@@ -4,3 +4,4 @@ selenium
 requests
 2captcha-python
 beautifulsoup4
+Django

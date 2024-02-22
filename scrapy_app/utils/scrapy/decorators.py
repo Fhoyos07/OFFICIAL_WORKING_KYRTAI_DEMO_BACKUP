@@ -43,14 +43,14 @@ def save_response(f: Callable) -> Callable:
     """
     Spider decorator to save response to file
     Required Scrapy settings:
-    - HTML_DIR - main directory to store htmls (have subfolders per each spider)
+    - HTML_DEBUG_DIR - main directory to store htmls (have subfolders per each spider)
     """
     @wraps(f)
     def wrap(self: Spider, response_or_failure: Response | HttpError | Failure, **kwargs) -> Callable:
-        if not self.settings.get('HTML_DIR'):
-            raise AttributeError("HTML_DIR not specified in settings")
+        if not self.settings.get('HTML_DEBUG_DIR'):
+            raise AttributeError("HTML_DEBUG_DIR not specified in settings")
 
-        html_dir = Path(self.settings.get('HTML_DIR')) / self.name
+        html_dir = Path(self.settings.get('HTML_DEBUG_DIR')) / self.name
         html_dir.mkdir(parents=True, exist_ok=True)
 
         page_title = f.__name__.replace('parse_', '')

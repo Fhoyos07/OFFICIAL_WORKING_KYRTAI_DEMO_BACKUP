@@ -1,4 +1,12 @@
 # KYRT
+TODO:
+1. connect
+2. setup postgres
+3. setup git
+4. setup django
+5. create models for scrapy apps.
+
+
 ### Spiders for:  
 - iapps.courts.state.ny.us
 - civilinquiry.jud.ct.gov (CT)
