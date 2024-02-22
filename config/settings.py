@@ -30,6 +30,9 @@ if not ENVIRONMENT:
     ENVIRONMENT = os.environ['ENVIRONMENT'].lower()
 
 
+# used for django.setup
+DJANGO_SETTINGS_MODULE = 'config.settings'
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 

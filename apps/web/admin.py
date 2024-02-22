@@ -1,3 +1,7 @@
 from django.contrib import admin
+from .models import State, CompanyInputName, Case
 
-# Register your models here.
+
+admin.site.register(State)
+admin.site.register(CompanyInputName)
+admin.site.register(Case)

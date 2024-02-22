@@ -10,8 +10,11 @@ class State(models.Model):
         return self.name
 
 
-class Company(models.Model):
+class CompanyInputName(models.Model):
     name = models.CharField(max_length=255)
+
+    class Meta:
+        verbose_name_plural = "Companies"
 
     def __str__(self):
         return self.name
@@ -19,7 +22,7 @@ class Company(models.Model):
 
 class Case(models.Model):
     state = models.ForeignKey(State, on_delete=models.CASCADE, related_name='cases')
-    company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='cases')
+    company = models.ForeignKey(CompanyInputName, on_delete=models.CASCADE, related_name='cases')
     court = models.CharField(max_length=255)
     case_id = models.CharField(max_length=255, unique=True)
     case_type = models.CharField(max_length=100)
