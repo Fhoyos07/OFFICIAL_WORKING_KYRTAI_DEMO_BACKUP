@@ -29,7 +29,6 @@ load_dotenv(ENV_DIR / '.env.override', override=True)
 if not ENVIRONMENT:
     ENVIRONMENT = os.environ['ENVIRONMENT'].lower()
 
-
 # used for django.setup
 DJANGO_SETTINGS_MODULE = 'config.settings'
 
@@ -48,7 +47,6 @@ ALLOWED_HOSTS = [
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
