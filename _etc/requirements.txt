@@ -9,3 +9,4 @@ beautifulsoup4
 
 psycopg2-binary         # postgres connection
 python-dotenv           # get env credentials
+gunicorn
