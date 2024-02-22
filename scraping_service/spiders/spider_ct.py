@@ -13,7 +13,7 @@ class KyrtCtSearchSpider(BaseCaseSearchSpider):
     name = 'kyrt_ct_search'
     custom_settings = dict(
         CONCURRENT_REQUESTS=1,  # only 1 parallel request! don't change this
-        ITEM_PIPELINES={"scrapy_app.pipelines.CsvPipeline": 500}
+        ITEM_PIPELINES={"scraping_service.pipelines.CsvPipeline": 500}
     )
 
     @property
@@ -162,5 +162,5 @@ class KyrtCtDocumentSpider(BaseDocumentDownloadSpider):
 
     custom_settings = dict(
         CONCURRENT_REQUESTS=10,
-        ITEM_PIPELINES={"scrapy_app.pipelines.DocumentSavePipeline": 300}  # download PDFs
+        ITEM_PIPELINES={"scraping_service.pipelines.DocumentSavePipeline": 300}  # download PDFs
     )

@@ -42,7 +42,7 @@ All scripts share the same flow:
 - Output: `/files/NY_proceedings/`
 
 ## Settings:
-- `/scrapy_app/settings.py` - scraping settings. Main:
+- `/scraping_service/settings.py` - scraping settings. Main:
   * `DAYS_BACK` (default 14) - min date to scrape cases
   * `MAX_CAPTCHA_RETRIES` (default 20) - max sequential fails to give up with 2captcha
   * `TWO_CAPTCHA_API_KEY`

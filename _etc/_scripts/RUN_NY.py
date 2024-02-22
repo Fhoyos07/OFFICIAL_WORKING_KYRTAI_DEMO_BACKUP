@@ -1,5 +1,5 @@
-from scrapy_app.utils.scrapy.crawler import crawl_sequential
-from scrapy_app.spiders.spider_ny import KyrtNySearchSpider, KyrtNyCaseSpider, KyrtNyDocumentSpider
+from scraping_service.utils.scrapy.crawler import crawl_sequential
+from scraping_service.spiders.spider_ny import KyrtNySearchSpider, KyrtNyCaseSpider, KyrtNyDocumentSpider
 
 
 def run():

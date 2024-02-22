@@ -39,8 +39,8 @@ SMARTPROXY_ENDPOINT = 'us.smartproxy.com'
 SMARTPROXY_PORT = '10000'
 
 DOWNLOADER_MIDDLEWARES = {
-    # 'scrapy_app.proxies.proxymesh.ProxyMeshMiddleware': 110,    # set PROXYMESH_ENABLED to True to activate
-    # 'scrapy_app.proxies.smartproxy.SmartProxyMiddleware': 110,  # set SMARTPROXY_ENABLED to True to activate
+    # 'scraping_service.proxies.proxymesh.ProxyMeshMiddleware': 110,    # set PROXYMESH_ENABLED to True to activate
+    # 'scraping_service.proxies.smartproxy.SmartProxyMiddleware': 110,  # set SMARTPROXY_ENABLED to True to activate
 }
 
 
@@ -50,7 +50,7 @@ USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTM
 
 # standard settings
 BOT_NAME = "CourtUsCrawler"
-SPIDER_MODULES = ["scrapy_app.spiders"]
+SPIDER_MODULES = ["scraping_service.spiders"]
 
 
 # logging settings

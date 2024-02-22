@@ -22,7 +22,7 @@ class KyrtNySearchSpider(BaseCaseSearchSpider):
     name = 'kyrt_ny_search'
     custom_settings = dict(
         CONCURRENT_REQUESTS=1,  # only 1 parallel request! don't change this
-        ITEM_PIPELINES={"scrapy_app.pipelines.CsvPipeline": 500}  # save Cases and Companies to CSV
+        ITEM_PIPELINES={"scraping_service.pipelines.CsvPipeline": 500}  # save Cases and Companies to CSV
     )
 
     @property
@@ -288,7 +288,7 @@ class KyrtNyCaseSpider(Spider):
     name = 'kyrt_ny_cases'
     custom_settings = dict(
         CONCURRENT_REQUESTS=1,
-        ITEM_PIPELINES={"scrapy_app.pipelines.CsvPipeline": 300}   # save documents to CSV
+        ITEM_PIPELINES={"scraping_service.pipelines.CsvPipeline": 300}   # save documents to CSV
     )
     @property
     def state_code(self) -> str: return 'NY'
@@ -344,7 +344,7 @@ class KyrtNyDocumentSpider(BaseDocumentDownloadSpider):
     name = 'kyrt_ny_documents'
     custom_settings = dict(
         CONCURRENT_REQUESTS=1,
-        ITEM_PIPELINES={"scrapy_app.pipelines.DocumentSavePipeline": 300}  # download PDFs
+        ITEM_PIPELINES={"scraping_service.pipelines.DocumentSavePipeline": 300}  # download PDFs
     )
     @property
     def state_code(self) -> str: return 'NY'
