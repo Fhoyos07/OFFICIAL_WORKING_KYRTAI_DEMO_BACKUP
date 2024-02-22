@@ -40,7 +40,7 @@ DJANGO_SETTINGS_MODULE = 'config.settings'
 SECRET_KEY = 'django-insecure-xt_$(^cw9bl%qrk85s$9w4_&f*wrra5(*h!l#y+mcl9p+yls%6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = ENVIRONMENT is 'dev'
 
 ALLOWED_HOSTS = [
     '52.14.243.148'

@@ -104,5 +104,5 @@ def find_duplicates():
 
 
 if __name__ == '__main__':
-    import_ct_cases()
-    # find_duplicates()
+    # import_ct_cases()
+    find_duplicates()
