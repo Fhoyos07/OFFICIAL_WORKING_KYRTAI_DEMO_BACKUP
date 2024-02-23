@@ -13,7 +13,7 @@ from ..utils.scrapy.decorators import log_response, save_response, log_method
 from ..utils.file import load_json, save_json, load_csv
 from ..utils.scrapy.url import parse_url_params
 from ..utils.scrapy.response import extract_text_from_el
-from ..settings import PROJECT_DIR, FILES_DIR, DAYS_BACK, TWO_CAPTCHA_API_KEY, MAX_CAPTCHA_RETRIES
+from ..settings import ETC_DIR, FILES_DIR, DAYS_BACK, TWO_CAPTCHA_API_KEY, MAX_CAPTCHA_RETRIES
 from ._base import BaseCaseSearchSpider, BaseDocumentDownloadSpider
 
 
@@ -33,7 +33,7 @@ class KyrtNySearchSpider(BaseCaseSearchSpider):
 
         # ENABLING CACHE SPEEDS UP THE FIRST CRAWLING (UNTIL CAPTCHA FACED), BUT MAY LEAD TO UNSOLVABLE CAPTCHAS
         self.use_cache = False
-        self.session_cache_path = PROJECT_DIR / '_etc' / 'ny_session_cache.json'
+        self.session_cache_path = ETC_DIR / 'ny_session_cache.json'
 
         # captcha settings
         self.solver = twocaptcha.TwoCaptcha(apiKey=TWO_CAPTCHA_API_KEY)

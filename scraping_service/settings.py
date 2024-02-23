@@ -4,13 +4,14 @@
 from pathlib import Path
 import logging
 from datetime import date
+from config.settings import BASE_DIR
 from .utils.logging import create_console_handler, create_file_handler, DEFAULT_LOG_FORMAT, DATE_FORMAT
 
 # folders
-PROJECT_DIR = Path(__file__).resolve().parent.parent  # root project dir
-LOG_DIR = PROJECT_DIR / '_etc' / 'logs'
-HTML_DEBUG_DIR = PROJECT_DIR / '_etc' / 'html'
-FILES_DIR = PROJECT_DIR / 'files'       # root dir for csvs, input and pdfs
+ETC_DIR = BASE_DIR / '_etc'
+LOG_DIR = ETC_DIR / 'logs'
+HTML_DEBUG_DIR = ETC_DIR / 'html'
+FILES_DIR = BASE_DIR / 'files'       # root dir for csvs, input and pdfs
 INPUT_CSV_PATH = FILES_DIR / 'input.csv'
 
 
