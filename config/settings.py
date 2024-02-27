@@ -42,7 +42,8 @@ SECRET_KEY = 'django-insecure-xt_$(^cw9bl%qrk85s$9w4_&f*wrra5(*h!l#y+mcl9p+yls%6
 DEBUG = ENVIRONMENT == 'dev'
 
 ALLOWED_HOSTS = [
-    '52.14.243.148'
+    '52.14.243.148',
+    'kyrt.ai'
 ]
 
 
