@@ -6,8 +6,7 @@ from twocaptcha import TwoCaptcha
 from parsel import Selector
 
 TWO_CAPTCHA_API_KEY = '3408dd86d795e88a4c8e8e2860b25e94'
-SITE_KEY = '0f0ec7a6-d804-427d-8cfb-3cd7fad01f00'
-
+SITE_KEY = '41b778e7-8f20-45cc-a804-1f1ebb45c579'
 
 class SolverPOC:
     def __init__(self):
@@ -19,52 +18,29 @@ class SolverPOC:
         options.add_argument("--window-size=1920x1080")
         options.add_argument("--verbose")
         # options.add_argument("--headless")
-        user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36"
-        options.add_argument(f"user-agent={user_agent}")
-        options.add_experimental_option("excludeSwitches", ["enable-automation"])
-        options.add_experimental_option("useAutomationExtension", False)
-        options.add_argument("--disable-notifications")
-        options.add_argument("--disable-popup-blocking")
-        options.add_argument("--enable-javascript")
 
         self.driver = webdriver.Chrome(options=options)
 
-    def run(self, query: str):
+    def run(self):
         # open search page
-        # self.driver.get(f'https://iapps.courts.state.ny.us/nyscef/CaseSearch?TAB=name')
-        # input('Continue?')
-        #
-        # # populate search query and click button (don't use form.submit, cause empty page after solving captcha)
-        # form = self.driver.find_element(By.NAME, 'form')
-        # company_input = form.find_element(By.NAME, 'txtBusinessOrgName')
-        # company_input.send_keys(query)
-        # button = self.driver.find_element(By.CSS_SELECTOR, 'button[data-action="submit"]')
-        # button.click()
+        self.driver.get(f'https://2captcha.com/demo/hcaptcha')
 
-        # solve captcha
+        print('Start solving captcha?')
+        # solve captcha using 2captcha
         self.solve_captcha()
 
-        response = Selector(text=self.driver.page_source)
-        result_rows = response.css('.NewSearchResults tbody tr')
-        print(f'{len(result_rows)} total rows')
-        for result_row in result_rows:
-            url = result_row.xpath('td[1]/a/@href').get()
-            print(url)
-
-        # process results...
         input('Continue?')
 
     def solve_captcha(self) -> None:
-        input('Solve Captcha Manually, then click Enter')
-        return
         captcha_code = self.get_captcha_response_code(url=self.driver.current_url)
         print(f"Captcha Response Code: {captcha_code}")
 
         # insert captcha into g-recaptcha-response textarea and submit form
-        form = self.driver.find_element(By.NAME, 'captcha_form')
+        form = self.driver.find_element(By.XPATH, '//form[@novalidate]')
         textarea = form.find_element(By.NAME, 'h-captcha-response')
         self.driver.execute_script("arguments[0].value = arguments[1];", textarea, captcha_code)
         form.submit()
+
 
     def get_captcha_response_code(self, url) -> str:
         self.current_captcha_retries += 1
@@ -85,4 +61,4 @@ class SolverPOC:
 
 
 if __name__ == '__main__':
-    SolverPOC().run(query='J.G. Wentworth Originations, LLC')
+    SolverPOC().run()
