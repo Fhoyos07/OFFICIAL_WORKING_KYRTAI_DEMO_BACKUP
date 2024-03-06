@@ -43,7 +43,8 @@ DEBUG = ENVIRONMENT == 'dev'
 
 ALLOWED_HOSTS = [
     '52.14.243.148',
-    'kyrt.ai'
+    'kyrt.ai',
+    'localhost'
 ]
 
 

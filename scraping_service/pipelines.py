@@ -4,7 +4,7 @@ from pathlib import Path
 from scrapy import Spider
 import json
 
-from .utils.scrapy.pipelines import CsvWriterWrapper
+from utils.scrapy.pipelines import CsvWriterWrapper
 
 
 class LoggingPipeline:

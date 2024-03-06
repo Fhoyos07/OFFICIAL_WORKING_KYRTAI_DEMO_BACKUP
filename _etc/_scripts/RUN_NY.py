@@ -1,4 +1,4 @@
-from scraping_service.utils.scrapy.crawler import crawl_sequential
+from utils.scrapy.crawler import crawl_sequential
 from scraping_service.spiders.spider_ny import KyrtNySearchSpider, KyrtNyCaseSpider, KyrtNyDocumentSpider
 
 

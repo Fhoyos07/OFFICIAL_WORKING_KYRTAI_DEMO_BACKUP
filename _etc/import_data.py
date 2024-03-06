@@ -1,6 +1,6 @@
 from scraping_service.settings import INPUT_CSV_PATH, FILES_DIR
-from scraping_service.utils.django import django_setup, django_setup_decorator
-from scraping_service.utils.file import load_csv
+from utils.django import django_setup_decorator
+from utils.file import load_csv
 from django.db import transaction
 from datetime import datetime
 from django.db.models import Count
@@ -92,7 +92,7 @@ def import_ct_cases():
 
 @django_setup_decorator(environment='dev')
 def find_duplicates():
-    from apps.web.models import State, CompanyInputName, Case
+    from apps.web.models import CompanyInputName
     # Aggregate companies by name, counting the number of occurrences of each name
     company_counts = CompanyInputName.objects.values('name').annotate(name_count=Count('id')).order_by().filter(name_count__gt=1)
     companies = CompanyInputName.objects.filter(name__in=[r['name'] for r in company_counts]).prefetch_related('cases')

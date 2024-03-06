@@ -6,8 +6,8 @@ from pathlib import Path
 from typing import Iterable
 import sys
 
-from ..utils.file import load_csv
-from ..settings import (INPUT_CSV_PATH, FILES_DIR, DAYS_BACK, MAX_COMPANIES)
+from utils.file import load_csv
+from scraping_service.settings import (INPUT_CSV_PATH, FILES_DIR, DAYS_BACK, MAX_COMPANIES)
 
 
 class BaseCaseSearchSpider(ABC, Spider):

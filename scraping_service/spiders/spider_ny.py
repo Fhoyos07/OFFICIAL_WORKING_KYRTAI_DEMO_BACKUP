@@ -9,11 +9,10 @@ from tqdm import tqdm
 import twocaptcha
 import sys
 
-from ..utils.scrapy.decorators import log_response, save_response, log_method
-from ..utils.file import load_json, save_json, load_csv
-from ..utils.scrapy.url import parse_url_params
-from ..utils.scrapy.response import extract_text_from_el
-from ..settings import ETC_DIR, FILES_DIR, DAYS_BACK, TWO_CAPTCHA_API_KEY, MAX_CAPTCHA_RETRIES
+from utils.scrapy.decorators import log_response
+from utils.scrapy.url import parse_url_params
+from utils.file import load_json, save_json, load_csv
+from scraping_service.settings import ETC_DIR, FILES_DIR, DAYS_BACK, TWO_CAPTCHA_API_KEY, MAX_CAPTCHA_RETRIES
 from ._base import BaseCaseSearchSpider, BaseDocumentDownloadSpider
 
 

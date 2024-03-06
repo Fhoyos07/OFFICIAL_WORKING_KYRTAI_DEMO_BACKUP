@@ -2,9 +2,9 @@ from scrapy.http import Request, FormRequest, TextResponse
 from datetime import datetime
 import re
 
-from ..utils.scrapy.response import extract_text_from_el
-from ..utils.scrapy.decorators import log_response
-from ..utils.scrapy.url import parse_url_params
+from utils.scrapy.response import extract_text_from_el
+from utils.scrapy.decorators import log_response
+from utils.scrapy.url import parse_url_params
 from ._base import BaseCaseSearchSpider, BaseDocumentDownloadSpider
 
 

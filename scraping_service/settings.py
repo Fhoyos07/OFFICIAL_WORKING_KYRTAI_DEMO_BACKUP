@@ -1,11 +1,10 @@
 # Scrapy settings for CourtUsCrawler project
 # For simplicity, this file contains only settings considered important or commonly used. Documentation:
 #     https://docs.scrapy.org/en/latest/topics/settings.html
-from pathlib import Path
 import logging
 from datetime import date
 from config.settings import BASE_DIR
-from .utils.logging import create_console_handler, create_file_handler, DEFAULT_LOG_FORMAT, DATE_FORMAT
+from utils.logging import create_console_handler, create_file_handler, DEFAULT_LOG_FORMAT, DATE_FORMAT
 
 # folders
 ETC_DIR = BASE_DIR / '_etc'

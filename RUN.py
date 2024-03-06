@@ -1,7 +1,7 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Type
 from scrapy.spiders import Spider
-from scraping_service.utils.scrapy.crawler import crawl_sequential
+from utils.scrapy.crawler import crawl_sequential
 # Assuming these imports are correct and the spiders are defined in your scrapy project
 from scraping_service.spiders.spider_ct import KyrtCtSearchSpider, KyrtCtDocumentSpider
 from scraping_service.spiders.spider_ny import KyrtNySearchSpider, KyrtNyCaseSpider, KyrtNyDocumentSpider
