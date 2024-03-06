@@ -32,12 +32,12 @@ class KyrtNySearchSpider(BaseCaseSearchSpider):
         super().__init__()
 
         # ENABLING CACHE SPEEDS UP THE FIRST CRAWLING (UNTIL CAPTCHA FACED), BUT MAY LEAD TO UNSOLVABLE CAPTCHAS
-        self.use_cache = False
+        self.use_cache = True
         self.session_cache_path = ETC_DIR / 'ny_session_cache.json'
 
         # captcha settings
         self.solver = twocaptcha.TwoCaptcha(apiKey=TWO_CAPTCHA_API_KEY)
-        self.recaptcha_sitekey = '6LdiezYUAAAAAGJqdPJPP7mAUgQUEJxyLJRUlvN6'  # don't change
+        self.captcha_sitekey = '0f0ec7a6-d804-427d-8cfb-3cd7fad01f00'  # don't change
         self.current_captcha_retries, self.max_captcha_retries = 0, MAX_CAPTCHA_RETRIES
 
         # get session values from cache
@@ -79,7 +79,7 @@ class KyrtNySearchSpider(BaseCaseSearchSpider):
         cookies = {'JSESSIONID': self._session_id}
         data = self.default_form_data | {
             "txtBusinessOrgName": company_name,
-            "g-recaptcha-response": self._recaptcha_code,
+            # "h-captcha-response": self._recaptcha_code,
         }
         self.logger.debug(f"cookies: {cookies}")
         self.logger.debug(f"data: {data}")
@@ -129,10 +129,17 @@ class KyrtNySearchSpider(BaseCaseSearchSpider):
         """
         Captcha page. Solve using 2captcha and submit code.
         """
+        # input('Solve captcha, then press enter')
+        # yield self.make_search_request(company)
+        # return
         self._recaptcha_code = self._get_captcha_response_code(url=response.url)
+        self.logger.info(f"self._recaptcha_code: {self._recaptcha_code}")
         yield FormRequest.from_response(response=response,
                                         formname='captcha_form',
-                                        formdata={'g-recaptcha-response': self._recaptcha_code},
+                                        formdata={
+                                            'g-recaptcha-response': self._recaptcha_code,
+                                            'h-captcha-response': self._recaptcha_code
+                                        },
                                         callback=self.parse_after_captcha,
                                         cb_kwargs=dict(company=company),
                                         dont_filter=True)
@@ -248,14 +255,11 @@ class KyrtNySearchSpider(BaseCaseSearchSpider):
 
     def _get_captcha_response_code(self, url: str) -> str:
         self.current_captcha_retries += 1
-        self.logger.info(f'Started captcha solving try {self.current_captcha_retries} of {self.max_captcha_retries} (url: {url})')
+        self.logger.info(f'Started captcha solving try {self.current_captcha_retries} of {self.max_captcha_retries} (url: {url} sitekey: {self.captcha_sitekey})')
 
         try:
-            result = self.solver.recaptcha(sitekey=self.recaptcha_sitekey,
-                                           url=url,
-                                           # invisible=1,
-                                           enterprise=1)
-        except twocaptcha.api.ApiException as e:
+            result = self.solver.hcaptcha(sitekey=self.captcha_sitekey, url=url)
+        except (twocaptcha.api.ApiException, twocaptcha.TimeoutException) as e:
             self.logger.info(str(e))
             if self.current_captcha_retries >= self.max_captcha_retries:
                 raise ValueError(f"Max {self.current_captcha_retries} Captcha Retries reached")
@@ -346,6 +350,7 @@ class KyrtNyDocumentSpider(BaseDocumentDownloadSpider):
         CONCURRENT_REQUESTS=1,
         ITEM_PIPELINES={"scraping_service.pipelines.DocumentSavePipeline": 300}  # download PDFs
     )
+
     @property
     def state_code(self) -> str: return 'NY'
 
