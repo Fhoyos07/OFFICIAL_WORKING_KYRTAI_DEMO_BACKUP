@@ -31,8 +31,23 @@ class SolverPOC:
 
     def run(self, query: str):
         # open search page
-        # self.driver.get(f'https://iapps.courts.state.ny.us/nyscef/CaseSearch?TAB=name')
-        # input('Continue?')
+        self.driver.get(f'https://iapps.courts.state.ny.us/nyscef/CaseSearch?TAB=name')
+
+        cookie = {
+            'name': 'JSESSIONID',
+            'value': 'E7BC76B10545C8887056E28FE2222A84.server2068',
+            # Specify additional properties as needed, for example:
+            'path': '/nyscef',
+            # 'domain': 'iapps.courts.state.ny.us',  # Uncomment and replace with the domain if needed
+            # 'secure': True,  # Uncomment if the cookie should be sent over HTTPS only
+            'httpOnly': True,  # Uncomment if the cookie is HTTP onlym
+            'priority': 'High'
+        }
+
+        # Adding the cookie to the current session
+        self.driver.add_cookie(cookie)
+
+        input('Continue?')
         #
         # # populate search query and click button (don't use form.submit, cause empty page after solving captcha)
         # form = self.driver.find_element(By.NAME, 'form')
