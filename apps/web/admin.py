@@ -21,7 +21,6 @@ class CompanyNameVariationInline(admin.TabularInline):
 @admin.register(Company)
 class CompanyAdmin(admin.ModelAdmin):
     list_display = [
-        'id',
         'name',
         'name_variations_list'
     ]
