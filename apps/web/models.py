@@ -75,11 +75,11 @@ class CaseDetailsCT(models.Model):
 
 
 class Document(models.Model):
-    url = models.URLField(max_length=255, blank=True, null=True)
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='documents')
     case = models.ForeignKey(Case, on_delete=models.CASCADE, related_name='documents')
     name = models.CharField(max_length=255, blank=True, null=True)
     document_id = models.CharField(max_length=255, blank=True, null=True)
+    url = models.URLField(max_length=255, blank=True, null=True)
 
     def __str__(self):
         return self.name

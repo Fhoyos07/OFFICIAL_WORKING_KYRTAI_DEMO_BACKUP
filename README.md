@@ -74,3 +74,7 @@ settings.py
 MAX_COMPANIES = 80
 /
 MAX_COMPANIES = None # crawl all
+
+
+### re-deploy server
+killall gunicorn && cd ~/KYRT && . .venv/bin/activate && nohup gunicorn --workers 3 config.wsgi:application --bind localhost:8000 > gunicorn.log 2>&1 &

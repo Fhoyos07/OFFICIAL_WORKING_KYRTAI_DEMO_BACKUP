@@ -114,6 +114,96 @@ def import_ct_cases():
 
 
 @django_setup_decorator(environment='dev')
+@transaction.atomic()
+def import_ny_documents():
+    from apps.web.models import State, Case, Document, DocumentDetailsNY
+    state_code = 'NY'
+    cases_path = FILES_DIR / state_code / 'documents.csv'
+    cases_by_number = {c.case_number: c for c in Case.objects.all().select_related('company')}
+
+    documents_to_insert: list[Document] = []
+    document_detail_by_id: dict[str, DocumentDetailsNY] = {}
+    for row in tqdm(load_csv(cases_path)):
+        document_id, case_number = row['Document ID'], row['Case Number']
+        case = cases_by_number.get(case_number)
+        if not case:
+            print(f"Case number not found for {repr(case_number)}. Skipping row.")
+            continue
+
+        document = Document(
+            company=case.company,
+            case=case,
+            name=row['Document Name'],
+            document_id=document_id,
+            url=row['Document URL'],
+        )
+        documents_to_insert.append(document)
+
+        document_detail = DocumentDetailsNY(
+            document=document,
+            status_document_url=row['Status Document URL'],
+            status_document_name=row['Status Document Name'],
+        )
+        document_detail_by_id[document_id] = document_detail
+
+    documents = Document.objects.bulk_create(documents_to_insert)
+    print(f'Inserted {len(documents)} documents')
+
+    documents_by_id = {d.document_id: d for d in documents}
+    for document_id, document_detail in document_detail_by_id.items():
+        document_detail.document = documents_by_id[document_id]
+
+    document_details = DocumentDetailsNY.objects.bulk_create(document_detail_by_id.values())
+    print(f'Inserted {len(document_details)} details')
+
+
+@django_setup_decorator(environment='dev')
+@transaction.atomic()
+def import_ct_documents():
+    from apps.web.models import State, Case, Document, DocumentDetailsCT
+    state_code = 'CT'
+    cases_path = FILES_DIR / state_code / 'documents.csv'
+    cases_by_number = {c.case_number: c for c in Case.objects.all().select_related('company')}
+
+    documents_to_insert: list[Document] = []
+    document_detail_by_id: dict[str, DocumentDetailsCT] = {}
+    for row in tqdm(load_csv(cases_path)):
+        document_id, case_number = row['Document ID'], row['Case Number']
+        case = cases_by_number.get(case_number)
+        if not case:
+            print(f"Case number not found for {repr(case_number)}. Skipping row.")
+            continue
+
+        document = Document(
+            company=case.company,
+            case=case,
+            name=row['Document Name'],
+            document_id=document_id,
+            url=row['Document URL'],
+        )
+        documents_to_insert.append(document)
+
+        document_detail = DocumentDetailsCT(
+            document=document,
+            entry_no=row['Entry No'],
+            file_date=row['File Date'],
+            filed_by=row['Filed By'],
+            arguable=row['Arguable'],
+        )
+        document_detail_by_id[document_id] = document_detail
+
+    documents = Document.objects.bulk_create(documents_to_insert)
+    print(f'Inserted {len(documents)} documents')
+
+    documents_by_id = {d.document_id: d for d in documents}
+    for document_id, document_detail in document_detail_by_id.items():
+        document_detail.document = documents_by_id[document_id]
+
+    document_details = DocumentDetailsCT.objects.bulk_create(document_detail_by_id.values())
+    print(f'Inserted {len(document_details)} details')
+
+
+@django_setup_decorator(environment='dev')
 def find_duplicates():
     from apps.web.models import Company
     # Aggregate companies by name, counting the number of occurrences of each name
@@ -127,7 +217,7 @@ def find_duplicates():
 
 
 if __name__ == '__main__':
-    pass
+    import_ct_documents()
     # import_ny_cases()
     # import_ct_cases()
     # find_duplicates()

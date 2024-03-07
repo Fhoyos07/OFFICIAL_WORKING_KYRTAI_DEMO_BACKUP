@@ -3,8 +3,8 @@ from django.contrib import admin
 from django.urls import reverse
 from django.utils.html import format_html
 
-from .models import State, Company, CompanyNameVariation, Case, CaseDetailsNY, CaseDetailsCT
-
+from .models import (State, Company, CompanyNameVariation, Case, CaseDetailsNY, CaseDetailsCT,
+                     Document, DocumentDetailsNY, DocumentDetailsCT)
 
 @admin.register(State)
 class StateAdmin(admin.ModelAdmin):
@@ -52,9 +52,20 @@ class CaseDetailsCTInline(admin.StackedInline):
     can_delete = False
 
 
+class DocumentInline(admin.TabularInline):
+    model = Document
+    fields = ['name', 'url']
+
+
 @admin.register(Case)
 class CaseAdmin(admin.ModelAdmin):
     list_display = ['state_link', 'case_number', 'company_link', 'company_name', 'caption', 'court', 'case_type']
+    list_display_links = ['case_number', 'caption']
+    search_fields = ['case_number', 'caption', 'company__name']
+    # ordering = ['received_date']
+    list_filter = ['state', 'case_type']
+    list_select_related = ['state', 'company']  # Optimize foreign key lookups
+    inlines = [DocumentInline]
 
     def company_link(self, obj):
         link = reverse("admin:web_company_change", args=[obj.company.id])
@@ -66,24 +77,37 @@ class CaseAdmin(admin.ModelAdmin):
         return format_html('<a href="{}"><b>{}</b></a>', link, obj.state.code)
     state_link.short_description = 'State'
 
-    inlines = []
+    def get_inlines(self, request, obj=None):
+        inlines = list(super().get_inlines(request, obj))
+        if obj:
+            # Dynamically adjust inlines based on the state-specific details available
+            if hasattr(obj, 'ny_details'):
+                inlines = [CaseDetailsNyInline] + inlines
+            if hasattr(obj, 'ct_details'):
+                inlines = [CaseDetailsCTInline] + inlines
+        return inlines
 
-    def get_queryset(self, request):
-        queryset = super().get_queryset(request).select_related('state', 'company')
-        return queryset
+
+class DocumentDetailsNyInline(admin.StackedInline):
+    model = DocumentDetailsNY
+    can_delete = False
+
+
+class DocumentDetailsCTInline(admin.StackedInline):
+    model = DocumentDetailsCT
+    can_delete = False
+
+
+@admin.register(Document)
+class DocumentAdmin(admin.ModelAdmin):
+    list_display = ['case', 'name', 'url']
 
     def get_inlines(self, request, obj=None):
         inlines = list(super().get_inlines(request, obj))
         if obj:
             # Dynamically adjust inlines based on the state-specific details available
             if hasattr(obj, 'ny_details'):
-                inlines.append(CaseDetailsNyInline)
+                inlines = [DocumentDetailsNyInline] + inlines
             if hasattr(obj, 'ct_details'):
-                inlines.append(CaseDetailsCTInline)
+                inlines = [DocumentDetailsCTInline] + inlines
         return inlines
-
-    list_display_links = ['case_number', 'caption']
-    search_fields = ['case_number', 'caption', 'company__name']
-    # ordering = ['received_date']
-    list_filter = ['state', 'case_type']
-    # list_select_related = ['state', 'company']  # Optimize foreign key lookups
