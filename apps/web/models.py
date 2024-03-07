@@ -69,3 +69,31 @@ class CaseDetailsCT(models.Model):
     prefix = models.CharField(max_length=255, null=True, blank=True)
     file_date = models.DateField(null=True, blank=True)
     return_date = models.DateField(null=True, blank=True)
+
+    def __str__(self):
+        return f'{self.case.case_number} Details'
+
+
+class Document(models.Model):
+    url = models.URLField(max_length=255, blank=True, null=True)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='documents')
+    case = models.ForeignKey(Case, on_delete=models.CASCADE, related_name='documents')
+    name = models.CharField(max_length=255, blank=True, null=True)
+    document_id = models.CharField(max_length=255, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
+class DocumentDetailsNY(models.Model):
+    document = models.OneToOneField(Document, on_delete=models.CASCADE, related_name='ny_details')
+    status_document_url = models.URLField(max_length=255, blank=True, null=True)
+    status_document_name = models.CharField(max_length=255, blank=True, null=True)
+
+
+class DocumentDetailsCT(models.Model):
+    document = models.OneToOneField(Document, on_delete=models.CASCADE, related_name='ct_details')
+    entry_no = models.CharField(max_length=255, blank=True, null=True)
+    file_date = models.DateField(null=True, blank=True)
+    filed_by = models.CharField(max_length=255, blank=True, null=True)
+    arguable = models.CharField(max_length=255, blank=True, null=True)
