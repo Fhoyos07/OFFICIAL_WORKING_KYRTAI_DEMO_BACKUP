@@ -6,6 +6,7 @@ from django.utils.html import format_html
 from .models import (State, Company, CompanyNameVariation, Case, CaseDetailsNY, CaseDetailsCT,
                      Document, DocumentDetailsNY, DocumentDetailsCT)
 
+
 @admin.register(State)
 class StateAdmin(admin.ModelAdmin):
     list_display = ['code', 'name', 'website']
@@ -18,6 +19,13 @@ class CompanyNameVariationInline(admin.TabularInline):
     extra = 1
 
 
+class CaseInline(admin.TabularInline):
+    model = Case
+    can_delete = False
+
+    fields = ['case_number', 'caption']
+
+
 @admin.register(Company)
 class CompanyAdmin(admin.ModelAdmin):
     list_display = [
@@ -26,7 +34,7 @@ class CompanyAdmin(admin.ModelAdmin):
     ]
     search_fields = ['name']
     ordering = ['name']
-    inlines = [CompanyNameVariationInline]
+    inlines = [CaseInline, CompanyNameVariationInline]
 
     def get_queryset(self, request):
         queryset = super().get_queryset(request).prefetch_related('name_variations')
