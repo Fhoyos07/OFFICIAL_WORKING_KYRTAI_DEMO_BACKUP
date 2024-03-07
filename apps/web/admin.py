@@ -63,6 +63,7 @@ class CaseDetailsCTInline(admin.StackedInline):
 class DocumentInline(admin.TabularInline):
     model = Document
     fields = ['name', 'url']
+    extra = 0
 
 
 @admin.register(Case)
