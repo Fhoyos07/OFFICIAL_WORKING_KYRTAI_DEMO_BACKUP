@@ -54,31 +54,36 @@ class CaseDetailsCTInline(admin.StackedInline):
 
 @admin.register(Case)
 class CaseAdmin(admin.ModelAdmin):
-    list_display = ['state', 'case_number', 'company_link', 'company_name', 'caption', 'court', 'case_type']
+    list_display = ['state_link', 'case_number', 'company_link', 'company_name', 'caption', 'court', 'case_type']
 
     def company_link(self, obj):
         link = reverse("admin:web_company_change", args=[obj.company.id])
         return format_html('<a href="{}"><b>{}</b></a>', link, obj.company.name)
-    company_link.short_description = 'Company'  # Sets the column name
+    company_link.short_description = 'Company'
 
-    inlines = [CaseDetailsNyInline, CaseDetailsCTInline]
+    def state_link(self, obj):
+        link = reverse("admin:web_state_change", args=[obj.company.id])
+        return format_html('<a href="{}"><b>{}</b></a>', link, obj.state.code)
+    state_link.short_description = 'State'
+
+    inlines = []
 
     def get_queryset(self, request):
-        queryset = super().get_queryset(request).select_related('state')
+        queryset = super().get_queryset(request).select_related('state', 'company')
         return queryset
 
     def get_inlines(self, request, obj=None):
-        inlines = super().get_inlines(request, obj)
+        inlines = list(super().get_inlines(request, obj))
         if obj:
             # Dynamically adjust inlines based on the state-specific details available
-            if not hasattr(obj, 'ny_details'):
-                inlines.remove(CaseDetailsNyInline)
-            if not hasattr(obj, 'ct_details'):
-                inlines.remove(CaseDetailsCTInline)
+            if hasattr(obj, 'ny_details'):
+                inlines.append(CaseDetailsNyInline)
+            if hasattr(obj, 'ct_details'):
+                inlines.append(CaseDetailsCTInline)
         return inlines
 
-    list_display_links = ['case_number']
-    search_fields = ['case_number', 'caption']
+    list_display_links = ['case_number', 'caption']
+    search_fields = ['case_number', 'caption', 'company__name']
     # ordering = ['received_date']
     list_filter = ['state', 'case_type']
     # list_select_related = ['state', 'company']  # Optimize foreign key lookups

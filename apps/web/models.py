@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class State(models.Model):
@@ -31,7 +32,6 @@ class CompanyNameVariation(models.Model):
         return self.name
 
 
-from django.core.validators import MaxValueValidator, MinValueValidator
 class Case(models.Model):
     state = models.ForeignKey(State, on_delete=models.CASCADE, related_name='cases')
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='cases')
@@ -47,6 +47,9 @@ class Case(models.Model):
     gbruno_score = models.IntegerField(null=True, blank=True, validators=[
         MinValueValidator(0), MaxValueValidator(100)
     ])
+
+    def __str__(self):
+        return self.case_number
 
 
 class CaseDetailsNY(models.Model):
