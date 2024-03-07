@@ -12,3 +12,4 @@
 /_etc/ai/
 /config/envs/.env.base
 /config/envs/.env.override
+/TODO.md
