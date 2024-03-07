@@ -5,6 +5,7 @@ from scrapy import Spider
 import json
 
 from utils.scrapy.pipelines import CsvWriterWrapper
+from .items import CaseItem, CaseItemCT, DocumentItem, DocumentItemCT
 
 
 class LoggingPipeline:
@@ -60,18 +61,30 @@ class CsvPipeline(BasePipeline):
 
         self.csv_writer_by_type: dict[str, CsvWriterWrapper] = {}
 
-    def process_item(self, item, spider):
+    def process_item(self, item: CaseItem, spider):
+        self.logger.info(f"item: {item}")
         # use item._type to group items, or just spider.name
-        item_type = item.pop('_type', self.spider.name)
+        from dataclasses import asdict
+        self.logger.info(f"item: {item}")
+        if isinstance(item, CaseItem):
+            item_type = 'Cases'
+        elif isinstance(item, DocumentItem):
+            item_type = 'Documents'
+        else:
+            raise TypeError(f'Unrecognized item type: {item}')
+
+        item_dict = asdict(item)
+        self.logger.info(f"item_dict: {item_dict}")
+        csv_row = item_dict | item_dict.pop('state_specific_info')
 
         # get CSV file writer for item type, or start a new one
         csv_writer: CsvWriterWrapper = self.csv_writer_by_type.get(item_type)
         if csv_writer is None:
-            csv_writer = self._open_csv_writer(csv_name=item_type, fieldnames=list(item.keys()), write_header=True)
+            csv_writer = self._open_csv_writer(csv_name=item_type, fieldnames=list(csv_row.keys()), write_header=True)
             self.csv_writer_by_type[item_type] = csv_writer
 
         # write item to CSV
-        csv_writer.writerow(item)
+        csv_writer.writerow(csv_row)
         return item
 
     def close_spider(self, spider):

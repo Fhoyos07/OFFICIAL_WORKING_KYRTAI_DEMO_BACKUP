@@ -14,6 +14,7 @@ from utils.scrapy.url import parse_url_params
 from utils.file import load_json, save_json, load_csv
 from scraping_service.settings import ETC_DIR, FILES_DIR, DAYS_BACK, TWO_CAPTCHA_API_KEY, MAX_CAPTCHA_RETRIES
 from ._base import BaseCaseSearchSpider, BaseDocumentDownloadSpider
+from scraping_service.items import CaseItem, CaseItemNy, DocumentItemNy
 
 
 # Step 1 - search each company
@@ -212,34 +213,33 @@ class KyrtNySearchSpider(BaseCaseSearchSpider):
                 continue
             self.existing_case_ids.add(case_id)
 
-            case_item = {
-                "_type": 'Cases',
-                "Case Id": case_id,
-                "Company": company,
-                "Date": date_obj.isoformat(),
-                "Case Number": case_number,
-                "eFiling Status": tr.xpath('td[2]/text()').get(default='').strip(),
-                "Case Status": tr.xpath('td[2]/span/text()').get(),
-                "Caption": tr.xpath('td[3]/text()').get(),
-                "Court": tr.xpath('td[4]/text()').get(default='').strip(),
-                "Case Type": tr.xpath('td[4]/span/text()').get(),
-                "URL": response.urljoin(case_url)
-            }
+            case = CaseItem(state_specific_info=CaseItemNy())
+            case.case_id = case_id
+            case.company = company
+            case.case_number = case_number
+            case.case_type = tr.xpath('td[4]/span/text()').get(),
+            case.url = response.urljoin(case_url)
+
+            case.state_specific_info.received_date = date_obj
+            case.state_specific_info.efiling_status = tr.xpath('td[2]/text()').get(default='').strip()
+            case.state_specific_info.case_status = tr.xpath('td[2]/span/text()').get()
+            case.state_specific_info.caption = tr.xpath('td[3]/text()').get()
+            case.court = tr.xpath('td[4]/text()').get(default='').strip()
             # return case item to csv
-            case_items.append(case_item)
-            yield case_item
+            case_items.append(case)
+            yield case
 
         # return company item to csv
-        if page == 1:
-            results_count, items_count = len(result_rows), len(case_items)
-            company_item = {
-                "_type": 'Companies',
-                "Company": company,
-                "Cases Total": results_count if results_count < 25 else f'{results_count}+',
-                f"Cases in Last {DAYS_BACK} Days": items_count if items_count < 25 else f'{items_count}+',
-                "Newest Date": newest_date.isoformat() if newest_date else None
-            }
-            yield company_item
+        # if page == 1:
+        #     results_count, items_count = len(result_rows), len(case_items)
+        #     company_item = {
+        #         "_type": 'Companies',
+        #         "Company": company,
+        #         "Cases Total": results_count if results_count < 25 else f'{results_count}+',
+        #         f"Cases in Last {DAYS_BACK} Days": items_count if items_count < 25 else f'{items_count}+',
+        #         "Newest Date": newest_date.isoformat() if newest_date else None
+        #     }
+        #     yield company_item
 
         next_page_url = response.xpath('//span[contains(@class,"pageNumbers")]/a[text()=">>"]/@href').get()
         if next_page_url and not date_before_threshold_found:
@@ -313,14 +313,9 @@ class KyrtNyCaseSpider(Spider):
             # crawl case page to parse documents
             yield Request(case['URL'], callback=self.parse_case, cb_kwargs=dict(case=case))
 
-    def parse_case(self, response, case: dict):
+    def parse_case(self, response, case: CaseItemNy):
         self.progress_bar.update()
         for document_tr in response.css('table.NewSearchResults tbody tr'):
-            document_item = {
-                '_type': 'Documents',
-                'Company': case['Company'],
-                'Case Number': case['Case Number'],
-            }
             document_url = document_tr.xpath('td[2]/a/@href').get()
             if not document_url:
                 self.logger.warning(f'Invalid document_url: {document_url} at {response.url}')
@@ -330,15 +325,18 @@ class KyrtNyCaseSpider(Spider):
             if document_id in self.existing_document_ids:
                 continue
 
-            document_item['Document URL'] = response.urljoin(document_url)
-            document_item['Document Name'] = document_tr.xpath('td[2]/a/text()').get()
-            document_item['Document ID'] = document_id
+            document_item = DocumentItemNy()
+            document_item.company = case.company
+            document_item.case = case.case_number
+            document_item.url = response.urljoin(document_url)
+            document_item.name = document_tr.xpath('td[2]/a/text()').get()
+            document_item.document_id = document_id
             # document_item['File Name'] = f"{document_id}.pdf"
 
             status_document_url = document_tr.xpath('td[4]/a/@href').get()
             if status_document_url:
-                document_item['Status Document URL'] = response.urljoin(status_document_url)
-                document_item['Status Document Name'] = document_tr.xpath('td[4]/a/text()').get()
+                document_item.status_document_url = response.urljoin(status_document_url)
+                document_item.status_document_name = document_tr.xpath('td[4]/a/text()').get()
             yield document_item
 
 
