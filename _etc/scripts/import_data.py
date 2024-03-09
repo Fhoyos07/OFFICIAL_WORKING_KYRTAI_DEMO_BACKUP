@@ -54,7 +54,7 @@ def import_ny_cases():
         case = Case.objects.create(
             state=state,
             company=company,
-            company_name=company_name,
+            company_name_variation=company_name,
 
             case_id=row['Case Id'],
             case_number=row['Case Number'],
@@ -93,7 +93,7 @@ def import_ct_cases():
         case = Case.objects.create(
             state=state,
             company=company,
-            company_name=company_name,
+            company_name_variation=company_name,
 
             case_id=row['Case Id'],
             case_number=row['Case Number'],
