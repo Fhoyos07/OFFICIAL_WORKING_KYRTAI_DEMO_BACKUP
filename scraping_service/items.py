@@ -2,7 +2,6 @@ from datetime import datetime, date
 from dataclasses import dataclass, field
 
 
-
 @dataclass
 class CaseItem:
     case_id: str = field(default=None)

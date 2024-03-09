@@ -33,6 +33,7 @@ def get_companies_by_name():
     # }, indent=2, ensure_ascii=False)}")
     return companies_by_name
 
+
 @django_setup_decorator(environment='dev')
 @transaction.atomic()
 def import_ny_cases():
