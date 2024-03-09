@@ -32,6 +32,7 @@ class CompanyNameVariation(models.Model):
         return self.name
 
 
+# CASE models
 class Case(models.Model):
     state = models.ForeignKey(State, on_delete=models.CASCADE, related_name='cases')
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='cases')
@@ -74,6 +75,7 @@ class CaseDetailsCT(models.Model):
         return f'{self.case.case_number} Details'
 
 
+# DOCUMENT Models
 class Document(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='documents')
     case = models.ForeignKey(Case, on_delete=models.CASCADE, related_name='documents')
