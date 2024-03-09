@@ -5,7 +5,8 @@ from scrapy import Spider
 import json
 
 from utils.scrapy.pipelines import CsvWriterWrapper
-from .items import CaseItem, CaseItemCT, DocumentItem, DocumentItemCT
+from apps.web.models import Case, Document
+from .items import CaseItem, CaseItemCT, CaseItemNY, DocumentItem, DocumentItemCT
 
 
 class LoggingPipeline:
@@ -31,7 +32,6 @@ class BasePipeline:
 class DocumentSavePipeline(BasePipeline):
     def __init__(self, spider: Spider):
         super().__init__(spider)
-
         self.pdf_dir = Path(self.settings['FILES_DIR']) / spider.state_code / 'pdfs'
 
     def process_item(self, item: dict, spider: Spider):
@@ -130,3 +130,57 @@ class CsvOnClosePipeline(CsvPipeline):
                 if field not in fields:
                     fields.append(field)
         return fields
+
+
+class CaseDbPipeline(BasePipeline):
+    def process_item(self, item: CaseItemCT | CaseItemNY, spider: Spider):
+        # convert item to Case model
+        case: Case = item.to_record()
+
+        # save Case
+        case.save()
+        self.logger.info(f"Saved Case: {case.id}")
+
+        # save state-specific CaseDetails
+        if hasattr(case, 'ct_details'):
+            case.ct_details.save()
+            self.logger.info(f"Saved CaseDetailsCT: {case.ct_details.id}")
+
+        elif hasattr(case, 'ny_details'):
+            case.ny_details.save()
+            self.logger.info(f"Saved CaseDetailsNY: {case.ny_details.id}")
+
+
+# - - - - - - - - - - - - - - - - - -
+# RNS DETAIL SPIDER PIPELINES
+class ArticleS3UploadPipeline(BasePipeline):
+    """
+    Pipeline for saving article content to S3 bucket.
+    Processes ArticleTextItem items by saving their content (HTML or PDF) to the specified S3 bucket,
+    organizing it by company directory structure.
+
+    Attributes:
+        s3_bucket_name (str): Name of the S3 bucket to save articles.
+        article_bucket (): boto3 S3 bucket object.
+    """
+    def __init__(self, spider):
+        super().__init__(spider)
+        aws_key_id, aws_secret_key = self.settings.get('AWS_ACCESS_KEY_ID'), self.settings.get('AWS_SECRET_ACCESS_KEY')
+        if not aws_key_id or not aws_secret_key:
+            raise ValueError('AWS credentials are incomplete')
+
+        self.s3_bucket_name = self.settings.get('ARTICLES_S3_BUCKET_NAME')
+        if not self.s3_bucket_name:
+            raise ValueError('AWS S3 bucket name is not defined')
+
+        s3 = boto3.resource('s3', aws_access_key_id=aws_key_id, aws_secret_access_key=aws_secret_key)
+        self.article_bucket = s3.Bucket(self.s3_bucket_name)
+
+    def process_item(self, item, spider):
+        item.relative_path = f"{spider.exchange_key}/{item.symbol}/{item.article_id}.{item.content_type}"
+        try:
+            self.article_bucket.put_object(Key=item.relative_path, Body=item.content)
+            self.logger.info(f"Uploaded to S3 {self.s3_bucket_name} at {item.relative_path}")
+        except Exception as e:
+            self.logger.error(f"Failed to save {item.relative_path} to S3: {e}")
+        return item

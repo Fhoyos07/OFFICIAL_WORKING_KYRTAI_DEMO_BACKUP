@@ -12,3 +12,4 @@ python-dotenv           # get env credentials
 gunicorn
 
 django-debug-toolbar
+boto3

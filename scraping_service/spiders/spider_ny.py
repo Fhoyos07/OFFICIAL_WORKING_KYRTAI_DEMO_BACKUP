@@ -14,7 +14,7 @@ from utils.scrapy.url import parse_url_params
 from utils.file import load_json, save_json, load_csv
 from scraping_service.settings import ETC_DIR, FILES_DIR, DAYS_BACK, TWO_CAPTCHA_API_KEY, MAX_CAPTCHA_RETRIES
 from ._base import BaseCaseSearchSpider, BaseDocumentDownloadSpider
-from scraping_service.items import CaseItem, CaseItemNy, DocumentItemNy
+from scraping_service.items import CaseItem, CaseItemNY, DocumentItemNY
 
 
 # Step 1 - search each company
@@ -213,7 +213,7 @@ class KyrtNySearchSpider(BaseCaseSearchSpider):
                 continue
             self.existing_case_ids.add(case_id)
 
-            case = CaseItem(state_specific_info=CaseItemNy())
+            case = CaseItem(state_specific_info=CaseItemNY())
             case.case_id = case_id
             case.company = company
             case.case_number = case_number
@@ -313,7 +313,7 @@ class KyrtNyCaseSpider(Spider):
             # crawl case page to parse documents
             yield Request(case['URL'], callback=self.parse_case, cb_kwargs=dict(case=case))
 
-    def parse_case(self, response, case: CaseItemNy):
+    def parse_case(self, response, case: CaseItemNY):
         self.progress_bar.update()
         for document_tr in response.css('table.NewSearchResults tbody tr'):
             document_url = document_tr.xpath('td[2]/a/@href').get()
@@ -325,7 +325,7 @@ class KyrtNyCaseSpider(Spider):
             if document_id in self.existing_document_ids:
                 continue
 
-            document_item = DocumentItemNy()
+            document_item = DocumentItemNY()
             document_item.company = case.company
             document_item.case = case.case_number
             document_item.url = response.urljoin(document_url)

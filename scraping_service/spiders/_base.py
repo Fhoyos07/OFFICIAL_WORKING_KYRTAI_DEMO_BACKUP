@@ -5,8 +5,11 @@ from tqdm import tqdm
 from pathlib import Path
 from typing import Iterable
 import sys
+from utils.django import django_setup
 
+django_setup()
 from utils.file import load_csv
+from apps.web.models import State, Company, Case, Document
 from scraping_service.settings import (INPUT_CSV_PATH, FILES_DIR, DAYS_BACK, MAX_COMPANIES)
 
 
@@ -18,38 +21,44 @@ class BaseCaseSearchSpider(ABC, Spider):
     @property
     def input_csv_path(self) -> Path: return INPUT_CSV_PATH
 
+    @classmethod
+    def update_settings(cls, settings):
+        super().update_settings(settings)
+        settings.set("ITEM_PIPELINES", value={
+            "scraping_service.pipelines.CaseDbPipeline": 500
+        })
+
     def __init__(self):
         super().__init__()
+        # get state
+        self.state = State.objects.get(code=self.state_code)
 
-        # parse input CSV
-        companies_to_scrape = []
-        for row in load_csv(self.input_csv_path):
-            company = row['Competitor / Fictitious LLC Name'].strip().upper().replace(', LLC', ' LLC')
-            if company:
-                companies_to_scrape.append(company)
-        self.logger.info(f"Before deduplication: {len(companies_to_scrape)} companies")
-        self.QUERIES = sorted(list(set(companies_to_scrape)))
-        self.logger.info(f"After deduplication: {len(self.QUERIES)} companies")
-
-        # if MAX_COMPANIES in settings - cut companies
+        # get companies
+        companies_to_scrape = Company.objects.all().prefetch_related('name_variations')
         if MAX_COMPANIES:
-            self.QUERIES = companies_to_scrape[:MAX_COMPANIES]
-            self.logger.info(f"Cut companies to only {len(self.QUERIES)} first")
+            companies_to_scrape = companies_to_scrape[:MAX_COMPANIES]
+        self.logger.info(f"Found {companies_to_scrape.count()} companies to scrape")
 
-        # load existing cases ids
-        cases_path: Path = FILES_DIR / self.state_code / f'cases.csv'
-        self.existing_case_ids = {r['Case Id'] for r in load_csv(cases_path)} if cases_path.exists() else set()
+        # add queries to companies
+        self.queries_by_company: dict[Company, set[str]] = {}
+        for company in companies_to_scrape:
+            name_variations = set(name_variation.name for name_variation in company.name_variations.all())
+            self.queries_by_company[company] = {company.name} | set(name_variations)
 
-        # delete companies file
-        companies_path: Path = FILES_DIR / self.state_code / f'companies.csv'
-        if companies_path.exists():
-            companies_path.unlink()
+        # sort by name
+        self.queries_by_company = dict(sorted(self.queries_by_company.items(), key=lambda x: x[0].name))
+
+        # get existing case ids
+        self.existing_case_ids = set(Case.objects.filter(state=self.state).values_list('case_id', flat=True))
+        self.logger.info(f"Found {len(self.existing_case_ids)} existing case ids")
+
+        # set up progress bar
+        total = sum(len(queries) for queries in self.queries_by_company.values())
+        self.logger.info(f"Total {total} queries")
+        self.progress_bar = tqdm(total=total, file=sys.stdout, leave=False)
 
         # min case date to crawl
         self.MIN_DATE = date.today() - timedelta(days=DAYS_BACK)
-
-        # set up progress bar
-        self.progress_bar = tqdm(total=len(self.QUERIES), file=sys.stdout, leave=False)
 
 
 class BaseDocumentDownloadSpider(ABC, Spider):
@@ -59,35 +68,18 @@ class BaseDocumentDownloadSpider(ABC, Spider):
 
     def __init__(self):
         super().__init__()
-
-        # parse input CSV
-        self.document_name_by_url: dict[str, str] = {}
-
-        documents_path: Path = FILES_DIR / self.state_code / f'documents.csv'
-        documents = load_csv(documents_path) if documents_path.exists() else []
-        for url, file_path in self._prepare_documents_to_scrape(csv_rows=documents):
-            self.document_name_by_url[url] = file_path
-        self.progress_bar = tqdm(total=len(self.document_name_by_url), file=sys.stdout, leave=False)
-
-    def _prepare_documents_to_scrape(self, csv_rows: list[dict]) -> Iterable[tuple[str, str]]:
-        for row in csv_rows:
-            file_path = self._generate_file_path(row, fields=['Company', 'Case Number', 'Document ID'])
-            yield row['Document URL'], file_path
+        self.documents_to_scrape = Document.objects.all()
+        self.progress_bar = tqdm(total=len(self.documents_to_scrape.count()), file=sys.stdout, leave=False)
 
     def start_requests(self):
-        for url, relative_file_path in self.document_name_by_url.items():
-            yield Request(url,
+        for document in self.documents_to_scrape:
+            yield Request(document.url,
                           callback=self.parse_document,
-                          cb_kwargs=dict(relative_file_path=relative_file_path),
+                          cb_kwargs=dict(document=document),
                           dont_filter=True)  # there are documents with different links redirecting to the same page
 
-    def parse_document(self, response, relative_file_path: str):
+    def parse_document(self, response, document: Document):
         self.progress_bar.update()
         yield dict(
-            body=response.body,
-            relative_file_path=relative_file_path
+            body=response.body
         )
-
-    @staticmethod
-    def _generate_file_path(row: dict, fields: list[str]):
-        return '/'.join(row[k].replace('/', '_') for k in fields) + '.pdf'
