@@ -84,7 +84,6 @@ class DocumentItem:
 
     def to_record(self) -> Document:
         return Document(
-            company=self.company,
             case=self.case,
             url=self.url,
             name=self.name,

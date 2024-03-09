@@ -168,7 +168,7 @@ class KyrtCtCaseSpider(Spider):
             yield document_item
 
 
-# Step 2 - open and download each document
+# Step 3 - open and download each document
 class KyrtCtDocumentSpider(BaseDocumentDownloadSpider):
     name = 'kyrt_ct_documents'
     @property
