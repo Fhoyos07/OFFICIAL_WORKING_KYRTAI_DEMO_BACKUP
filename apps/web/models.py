@@ -80,7 +80,6 @@ class CaseDetailsCT(models.Model):
 
 # DOCUMENT Models
 class Document(models.Model):
-    company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='documents')
     case = models.ForeignKey(Case, on_delete=models.CASCADE, related_name='documents')
     name = models.CharField(max_length=255, blank=True, null=True)
     document_id = models.CharField(max_length=255, blank=True, null=True)

@@ -68,7 +68,7 @@ class DocumentInline(admin.TabularInline):
 
 @admin.register(Case)
 class CaseAdmin(admin.ModelAdmin):
-    list_display = ['state_link', 'case_number', 'company_link', 'company_name', 'caption', 'court', 'case_type', 'gbruno_score']
+    list_display = ['state_link', 'case_number', 'company_link', 'company_name_variation', 'caption', 'court', 'case_type', 'gbruno_score']
     list_display_links = ['case_number', 'caption']
     search_fields = ['case_number', 'caption', 'company__name']
     # ordering = ['received_date']
