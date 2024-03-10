@@ -8,7 +8,7 @@ set -euo pipefail
 # Change to the directory where the script is located
 cd "$(dirname "$0")"
 
-DEV_DB="stratum_dev"
+DEV_DB="kyrt_dev"
 USER="admin"
 DUMP_FILE="dumps/dev.dump"
 
