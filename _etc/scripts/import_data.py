@@ -56,7 +56,7 @@ def import_ny_cases():
             company=company,
             company_name_variation=company_name,
 
-            case_id=row['Case Id'],
+            docket_id=row['Case Id'],
             case_number=row['Case Number'],
             case_type=row['Case Type'],
             court=row['Court'],
@@ -95,7 +95,7 @@ def import_ct_cases():
             company=company,
             company_name_variation=company_name,
 
-            case_id=row['Case Id'],
+            docket_id=row['Case Id'],
             case_number=row['Case Number'],
             case_type=row['Case Type'],
             court=row['Court'],

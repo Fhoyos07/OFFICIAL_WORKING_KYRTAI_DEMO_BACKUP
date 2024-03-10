@@ -6,13 +6,13 @@ from datetime import date
 def run():
     from scraping_service.items import CaseItem, CaseItemCT, CaseItemNY
     from apps.web.models import State, Company, Case
-    Case.objects.filter(case_id='TEST_VLAD').delete()
+    Case.objects.filter(docket_id='TEST_VLAD').delete()
     item = CaseItemCT(
         state=State.objects.get(code='CT'),
         company=Company.objects.first(),
         company_name='company_name',
 
-        case_id='TEST_VLAD',
+        docket_id='TEST_VLAD',
         case_number='case_number',
         case_type='case_type',
         court='court',
@@ -41,13 +41,13 @@ def run():
 @django_setup_decorator(environment='dev')
 def run_directly():
     from apps.web.models import State, Company, Case, CaseDetailsCT
-    Case.objects.filter(case_id='TEST_VLAD').delete()
+    Case.objects.filter(docket_id='TEST_VLAD').delete()
     case = Case(
         state=State.objects.get(code='CT'),
         company=Company.objects.first(),
         company_name_variation='company_name',
 
-        case_id='TEST_VLAD',
+        docket_id='TEST_VLAD',
         case_number='case_number',
         case_type='case_type',
         court='court',
