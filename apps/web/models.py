@@ -38,7 +38,7 @@ class Case(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='cases')
     company_name_variation = models.CharField(max_length=255, null=True, blank=True)
 
-    case_id = models.CharField(max_length=255, null=True, blank=True)
+    docket_id = models.CharField(max_length=255, null=True, blank=True)
     case_number = models.CharField(max_length=255, null=True, blank=True)
     case_type = models.CharField(max_length=255, null=True, blank=True)
     court = models.CharField(max_length=255, null=True, blank=True)
@@ -56,7 +56,7 @@ class Case(models.Model):
         return self.case_number
 
     class Meta:
-        unique_together = [('state', 'case_id')]
+        unique_together = [('state', 'docket_id')]
 
 
 class CaseDetailsNY(models.Model):
