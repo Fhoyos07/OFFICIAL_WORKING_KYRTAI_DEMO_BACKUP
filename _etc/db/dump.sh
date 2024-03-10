@@ -12,5 +12,8 @@ DEV_DB="stratum_dev"
 USER="admin"
 DUMP_FILE="dumps/dev.dump"
 
+# ensure that dumps directory exists
+mkdir -p $(dirname $DUMP_FILE)
+
 # perform dump
 pg_dump --dbname=$DEV_DB --host=localhost --username=$USER -Fc --no-owner --no-acl --file=$DUMP_FILE
