@@ -49,6 +49,9 @@ class Case(models.Model):
         MinValueValidator(0), MaxValueValidator(100)
     ])
 
+    is_scraped = models.BooleanField(default=False)
+    scraped_date = models.DateTimeField(null=True, blank=True)
+
     def __str__(self):
         return self.case_number
 
@@ -84,6 +87,11 @@ class Document(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True)
     document_id = models.CharField(max_length=255, blank=True, null=True)
     url = models.URLField(max_length=255, blank=True, null=True)
+
+    is_downloaded = models.BooleanField(default=False)
+    download_date = models.DateField(null=True, blank=True)
+
+    relative_path = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
         return self.name
