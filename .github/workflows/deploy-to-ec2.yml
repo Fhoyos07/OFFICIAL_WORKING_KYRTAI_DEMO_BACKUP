@@ -1,9 +1,9 @@
-name: Deploy to EC2 on Master Merge
+name: Deploy to EC2 on Main Merge
 
 on:
   push:
     branches:
-      - KYRT_NY_Cases
+      - main
 
 jobs:
   deploy:
@@ -22,6 +22,6 @@ jobs:
           script: |
             cd /home/ubuntu/KYRT
             git fetch --all                     # Fetch the latest state of the remote
-            git reset --hard origin/master      # Reset the local branch to match the fetched state of the remote master
+            git reset --hard origin/main        # Reset the local branch to match the fetched state of the remote main
             git clean -fd                       # Remove untracked files and directories
             docker compose up --build --detach
