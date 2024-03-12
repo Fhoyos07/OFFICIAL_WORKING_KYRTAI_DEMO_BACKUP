@@ -23,7 +23,7 @@ configurations = {
         KyrtNyProceedingSearchSpider, KyrtNyProceedingCaseSpider, KyrtNyDocumentProceedingSpider
     ]),
     "CT": SpiderConfiguration(spiders=[
-        KyrtCtSearchSpider, KyrtCtDocumentSpider
+        CtCaseSearchSpider, KyrtCtDocumentSpider
     ]),
 }
 

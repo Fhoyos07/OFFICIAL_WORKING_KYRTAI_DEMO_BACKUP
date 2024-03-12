@@ -45,6 +45,11 @@ class Case(models.Model):
     caption = models.CharField(max_length=2000, null=True, blank=True)
     url = models.URLField(null=True, blank=True)
 
+    status = models.CharField(max_length=100, null=True, blank=True)
+
+    filed_date = models.DateField(null=True, blank=True)
+    received_date = models.DateField(null=True, blank=True)
+
     gbruno_score = models.IntegerField(null=True, blank=True, validators=[
         MinValueValidator(0), MaxValueValidator(100)
     ])
