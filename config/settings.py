@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 from dotenv import load_dotenv
 import os
-
+import logging
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -161,23 +161,48 @@ STATIC_ROOT = BASE_DIR / 'config' / 'static'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+LOG_DIR = BASE_DIR / '_etc' / 'logs'
+LOG_DIR.mkdir(exist_ok=True)
 
-LOG_SQL_QUERIES = os.environ['LOG_SQL_QUERIES'].lower().strip() == 'true'
-if LOG_SQL_QUERIES:
-    LOGGING = {
-        'version': 1,
-        'disable_existing_loggers': False,
-        'handlers': {
-            'console': {
-                'level': 'DEBUG',
-                'class': 'logging.StreamHandler',
-            },
+DEBUG_TO_CONSOLE = os.environ['DEBUG_TO_CONSOLE'].lower().strip() == 'true'
+
+LOGGING_CONFIG = None  # disable default django logging configuration
+LOGGING = {
+    "version": 1,
+    "formatters": {
+        "default": {
+            "format": '%(asctime)s [%(name)s] %(levelname)s: %(message)s',
+            "datefmt": '%Y-%m-%d %H:%M:%S',
+        }
+    },
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "level": "DEBUG" if DEBUG_TO_CONSOLE else "INFO",
+            "formatter": "default",
         },
-        'loggers': {
-            'django.db.backends': {
-                'level': 'DEBUG',
-                'handlers': ['console'],
-                'propagate': False,
-            },
+        "file": {
+            "class": "logging.handlers.TimedRotatingFileHandler",
+            "level": "DEBUG",
+            "filename": LOG_DIR / 'debug.log',
+            "when": "midnight",
+            "interval": 1,
+            "backupCount": 7,
+            "encoding": "utf-8",
+            "formatter": "default",
         },
-    }
+    },
+    "loggers": {
+        "": {  # Default logger for any logger name
+            "level": "DEBUG",
+            "handlers": ["console", "file"],
+            "propagate": False,
+        },
+        "scrapy": {  # explicitly set scrapy logs (otherwise scrapy.statscollector not log to file)
+            "level": "DEBUG",
+            "handlers": ["console", "file"],
+            "propagate": False,
+        },
+    },
+}
+logging.config.dictConfig(LOGGING)

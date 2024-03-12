@@ -1,12 +1,16 @@
 from dataclasses import dataclass
 from typing import Type
-from scrapy.spiders import Spider
+from scrapy import Spider
 from utils.scrapy.crawler import crawl_sequential
-# Assuming these imports are correct and the spiders are defined in your scrapy project
+
+from utils.django import django_setup
+django_setup()
+
 from scraping_service.spiders.spider_ct import CtCaseSearchSpider, KyrtCtDocumentSpider
 from scraping_service.spiders.spider_ny import KyrtNySearchSpider, KyrtNyCaseSpider, KyrtNyDocumentSpider
 from scraping_service.spiders.spider_ny_proceedings import KyrtNyProceedingSearchSpider, KyrtNyProceedingCaseSpider, KyrtNyDocumentProceedingSpider
 import argparse
+
 
 
 @dataclass

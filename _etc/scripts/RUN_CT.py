@@ -1,3 +1,9 @@
+from pathlib import Path
+import sys
+PROJECT_DIR = Path(__file__).parent.parent.parent
+sys.path.append(str(PROJECT_DIR))
+
+
 from utils.scrapy.crawler import crawl_sequential
 from utils.django import django_setup_decorator
 
