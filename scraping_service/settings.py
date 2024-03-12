@@ -1,10 +1,8 @@
 # Scrapy settings for CourtUsCrawler project
 # For simplicity, this file contains only settings considered important or commonly used. Documentation:
 #     https://docs.scrapy.org/en/latest/topics/settings.html
-import logging
-from datetime import date
+import os
 from config.settings import BASE_DIR
-from utils.logging import create_console_handler, create_file_handler, DEFAULT_LOG_FORMAT, DATE_FORMAT
 
 # folders
 ETC_DIR = BASE_DIR / '_etc'
@@ -32,8 +30,8 @@ PROXYMESH_ENDPOINT = 'nl.proxymesh.com'
 
 # Smartproxy Settings
 SMARTPROXY_ENABLED = False
-SMARTPROXY_USER = 'spdd59c579'
-SMARTPROXY_PASSWORD = 'password'
+SMARTPROXY_USER = os.environ.get('SMARTPROXY_USER')
+SMARTPROXY_PASSWORD = os.environ.get('SMARTPROXY_PASSWORD')
 SMARTPROXY_ENDPOINT = 'us.smartproxy.com'
 SMARTPROXY_PORT = '10000'
 
