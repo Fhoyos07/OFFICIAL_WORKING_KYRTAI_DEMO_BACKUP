@@ -134,7 +134,7 @@ class CtCaseDetailSpider(BaseCaseDetailSpider):
 
     def start_requests(self):
         for case in self.cases_to_scrape:
-            yield Request(case.url, callback=self.parse_case, cb_kwargs=dict(case=case))
+            yield Request(case.url, callback=self.parse_case, cb_kwargs=dict(case=case), dont_filter=True)
 
     @update_progress
     def parse_case(self, response, case: Case):
