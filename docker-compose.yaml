@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: gunicorn --bind 0.0.0.0:8000 config.wsgi:application
+    ports:
+      - "8000:8000"
+    extra_hosts:            # allows host.docker.internal in .env for postgres
+      - "host.docker.internal:host-gateway"
+    container_name: web_kyrt
+    volumes:
+      - ./_etc/logs:/app/_etc/logs  # Map logs dir
