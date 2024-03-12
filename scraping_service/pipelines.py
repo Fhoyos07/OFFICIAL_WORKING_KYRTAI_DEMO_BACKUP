@@ -4,9 +4,12 @@ from pathlib import Path
 from scrapy import Spider
 import json
 
+from django.db import transaction
+
 from utils.scrapy.pipelines import CsvWriterWrapper
 from apps.web.models import Case, Document
 from .items import CaseItem, CaseItemCT, CaseItemNY, DocumentItem, DocumentItemCT
+from .spiders._base import BaseCaseSearchSpider, BaseCaseDetailSpider
 
 
 class LoggingPipeline:
@@ -133,22 +136,39 @@ class CsvOnClosePipeline(CsvPipeline):
 
 
 class CaseDbPipeline(BasePipeline):
-    def process_item(self, item: CaseItemCT | CaseItemNY, spider: Spider):
+    def process_item(self, item: CaseItem | DocumentItem, spider: BaseCaseSearchSpider | BaseCaseDetailSpider):
         # convert item to Case model
-        case: Case = item.to_record()
+        with transaction.atomic():
+            case: Case = item.to_record()
+            case.save()
+            self.logger.info(f"Saved Case: {case.id}")
 
-        # save Case
-        case.save()
-        self.logger.info(f"Saved Case: {case.id}")
+            # save state-specific CaseDetails
+            case_details = getattr(case, spider.case_detail_relation)
+            case_details.save()
+            self.logger.info(f"Saved CaseDetails: {case_details.id}")
+        return item
 
-        # save state-specific CaseDetails
-        if hasattr(case, 'ct_details'):
-            case.ct_details.save()
-            self.logger.info(f"Saved CaseDetailsCT: {case.ct_details.id}")
 
-        elif hasattr(case, 'ny_details'):
-            case.ny_details.save()
-            self.logger.info(f"Saved CaseDetailsNY: {case.ny_details.id}")
+class CaseDetailDbPipeline(BasePipeline):
+    def process_item(self, item: CaseItem, spider: Spider):
+        self.logger.info(f"item: {item}")
+        return item
+        # # convert item to Case model
+        # case: Case = item.to_record()
+        #
+        # with transaction.atomic():
+        #     # save Case
+        #     case.save()
+        #     self.logger.info(f"Saved Case: {case.id}")
+        #
+        #     # save state-specific CaseDetails
+        #     if hasattr(case, 'ct_details'):
+        #         case.ct_details.save()
+        #         self.logger.info(f"Saved CaseDetailsCT: {case.ct_details.id}")
+        #     elif hasattr(case, 'ny_details'):
+        #         case.ny_details.save()
+        #         self.logger.info(f"Saved CaseDetailsNY: {case.ny_details.id}")
 
 
 # - - - - - - - - - - - - - - - - - -

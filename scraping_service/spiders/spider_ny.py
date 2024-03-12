@@ -206,15 +206,17 @@ class KyrtNySearchSpider(BaseCaseSearchSpider):
             if not case_url:
                 self.logger.error(f'Invalid case_url {case_url} at {response.url}')
                 continue
-            case_id = parse_url_params(case_url)['docketId']
+
+            # id is a built-in function, but we can explicitly ignore it for simplicity
+            id = parse_url_params(case_url)['docketId']
 
             # avoid scraping same case twice
-            if case_id in self.existing_case_ids:
+            if id in self.existing_docket_ids:
                 continue
-            self.existing_case_ids.add(case_id)
+            self.existing_docket_ids.add(id)
 
-            case = CaseItem(state_specific_info=CaseItemNY())
-            case.case_id = case_id
+            case = CaseItem()
+            case.docket_id = id
             case.company = company
             case.case_number = case_number
             case.case_type = tr.xpath('td[4]/span/text()').get(),

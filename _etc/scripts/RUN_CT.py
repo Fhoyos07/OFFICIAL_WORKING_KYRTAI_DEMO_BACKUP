@@ -10,8 +10,8 @@ def run():
     print(f'Deleting {len(ct_cases)} cases')
     ct_cases.delete()
     crawl_sequential(
-        # CtCaseSearchSpider,
-        CtCaseDetailSpider,
+        CtCaseSearchSpider,
+        # CtCaseDetailSpider,
         # KyrtCtDocumentSpider
     )
 

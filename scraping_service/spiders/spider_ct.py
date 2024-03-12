@@ -1,4 +1,3 @@
-from scrapy import Spider
 from scrapy.http import Request, FormRequest, TextResponse
 import re
 
@@ -7,22 +6,24 @@ from utils.scrapy.decorators import log_response
 from utils.scrapy.url import parse_url_params
 from datetime import datetime
 
-from ._base import BaseCaseSearchSpider, BaseDocumentDownloadSpider
+from ._base import BaseCaseDetailSpider, BaseCaseSearchSpider, BaseDocumentDownloadSpider
 from apps.web.models import Company, Case
 from scraping_service.items import CaseItem, CaseItemCT, DocumentItem, DocumentItemCT
 
 
-# Step 1 - search each company
-class KyrtCtSearchSpider(BaseCaseSearchSpider):
-    name = 'kyrt_ct_search'
-
-    @classmethod
-    def update_settings(cls, settings):
-        super().update_settings(settings)
-        settings.set("CONCURRENT_REQUESTS", value=1)
+# Step 1 - search companies for new cases
+class CtCaseSearchSpider(BaseCaseSearchSpider):
+    name = 'ct_case_search'
 
     @property
     def state_code(self) -> str: return 'CT'
+
+    @property
+    def case_detail_relation(self): return 'ct_details'
+
+    @classmethod
+    def update_settings(cls, settings):
+        settings.set("CONCURRENT_REQUESTS",  value=10, priority='spider')
 
     def __init__(self):
         super().__init__()
@@ -34,8 +35,10 @@ class KyrtCtSearchSpider(BaseCaseSearchSpider):
 
     @log_response
     def parse_search_form(self, response: TextResponse):
+        i = 0
         for company, name_variations in self.queries_by_company.items():
             for name_variation in name_variations:
+                i += 1
                 yield FormRequest.from_response(
                     response=response,
                     formxpath='//form[@name="aspnetForm"]',
@@ -46,6 +49,7 @@ class KyrtCtSearchSpider(BaseCaseSearchSpider):
                     callback=self.parse_cases,
                     cb_kwargs=dict(company=company, name_variation=name_variation),
                     dont_filter=True,
+                    priority=i
                 )
 
     # @log_response
@@ -66,20 +70,21 @@ class KyrtCtSearchSpider(BaseCaseSearchSpider):
             if not case_url:
                 self.logger.info(f'{name_variation} ({company.id}): Skipping as no case_url')
                 continue
-            case_id = parse_url_params(case_url)['DocketNo']
+
+            # id is a built-in function, but we can explicitly ignore it for simplicity
+            docket_id = parse_url_params(case_url)['DocketNo']
 
             # avoid scraping same case twice
-            if case_id in self.existing_case_ids:
-                self.logger.info(f'{name_variation} ({company.id}): Skipping existing case {case_id}')
+            if docket_id in self.existing_docket_ids:
+                self.logger.debug(f'{name_variation} ({company.id}): Skipping existing case {docket_id}')
                 continue
-            self.existing_case_ids.add(case_id)
+            self.existing_docket_ids.add(docket_id)
 
-            case_item = CaseItemCT()
-            case_item.state = self.state
-            case_item.company = company
-            case_item.company_name_variation = name_variation
+            case_item = CaseItemCT(state=self.state,
+                                   company=company,
+                                   company_name_variation=name_variation)
 
-            case_item.case_id = case_id
+            case_item.docket_id = docket_id
             case_item.case_number = extract_text_from_el(tr.xpath('td[3]'))
             case_item.case_type = None  # populated in the next spider
             case_item.court = extract_text_from_el(tr.xpath('td[4]'))
@@ -89,9 +94,10 @@ class KyrtCtSearchSpider(BaseCaseSearchSpider):
             case_item.party_name = extract_text_from_el(tr.xpath('td[1]'))
             case_item.pty_number = extract_text_from_el(tr.xpath('td[5]'))
             case_item.self_rep = extract_text_from_el(tr.xpath('td[6]')).lower() == 'y'
-            yield Request(url=case_item.url,
-                          callback=self.parse_case,
-                          cb_kwargs=dict(case_item=case_item))
+            yield case_item
+            # yield Request(url=case_item.url,
+            #               callback=self.parse_case,
+            #               cb_kwargs=dict(case_item=case_item))
 
         pagination_table = response.css('.grdBorder tr:nth-child(1) table tr')
         next_page_url = pagination_table.xpath('td[span]/following-sibling::td[1]/a/@href').get()
@@ -108,8 +114,23 @@ class KyrtCtSearchSpider(BaseCaseSearchSpider):
         else:
             self.progress_bar.update()
 
-    @log_response
-    def parse_case(self, response, case_item: CaseItem):
+
+# Step2 - Open each case and save document urls
+class CtCaseDetailSpider(BaseCaseDetailSpider):
+    name = 'ct_case_detail'
+
+    @property
+    def state_code(self): return 'CT'
+
+    @property
+    def case_detail_relation(self): return 'ct_details'
+
+    def start_requests(self):
+        for case in self.cases_to_scrape:
+            yield Request(case.url, callback=self.parse_case, cb_kwargs=dict(case=case))
+
+    def parse_case(self, response, case: Case):
+        case_item = CaseItem(case=case)
         case_item.prefix = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblPrefixSuffix')
         case_item.case_type = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblCaseType')
 
@@ -121,24 +142,6 @@ class KyrtCtSearchSpider(BaseCaseSearchSpider):
         case_item.return_date = datetime.strptime(return_date, "%m/%d/%Y").date()
         yield case_item
 
-    @staticmethod
-    def extract_header(response, attr_id: str) -> str | None:
-        value = response.xpath(f'//*[@id="{attr_id}"]/text()').get()
-        if value:
-            return value.strip()
-
-
-# Step2 - Open each case and save document urls
-class KyrtCtCaseSpider(Spider):
-    def start_requests(self):
-        pass
-
-    def parse_case(self, response, case: Case):
-        # skip documents extraction for old cases
-        if file_date < self.MIN_DATE:
-            return
-
-        # extract documents
         document_rows = response.xpath(
             '//*[@id="ctl00_ContentPlaceHolder1_CaseDetailDocuments1_pnlMotionData"]'
             '//table'
@@ -151,11 +154,8 @@ class KyrtCtCaseSpider(Spider):
                 self.logger.debug(f'Invalid document_url: {document_url} at {response.url}')
                 continue
 
-            document_item = DocumentItemCT()
-            document_item.state = self.state
+            document_item = DocumentItemCT(case=case)
             document_item.url = response.urljoin(document_url)
-            document_item.company = case_item.company
-            document_item.case = case_item.case_number
             document_item.name = tr.xpath('td[4]/a/text()').get()
             document_item.document_id = parse_url_params(document_url)['DocumentNo']
             document_item.entry_no = extract_text_from_el(tr.xpath('td[1]'))
@@ -166,6 +166,12 @@ class KyrtCtCaseSpider(Spider):
             document_item.filed_by = extract_text_from_el(tr.xpath('td[3]'))
             document_item.arguable = extract_text_from_el(tr.xpath('td[5]'))
             yield document_item
+
+    @staticmethod
+    def extract_header(response, attr_id: str) -> str | None:
+        value = response.xpath(f'//*[@id="{attr_id}"]/text()').get()
+        if value:
+            return value.strip()
 
 
 # Step 3 - open and download each document

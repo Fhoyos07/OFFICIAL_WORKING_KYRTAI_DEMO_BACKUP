@@ -5,34 +5,42 @@ from tqdm import tqdm
 from pathlib import Path
 from typing import Iterable
 import sys
-from utils.django import django_setup
 
-django_setup()
 from utils.file import load_csv
 from apps.web.models import State, Company, Case, Document
-from scraping_service.settings import (INPUT_CSV_PATH, FILES_DIR, DAYS_BACK, MAX_COMPANIES)
+from scraping_service.settings import (DAYS_BACK, MAX_COMPANIES)
 
 
-class BaseCaseSearchSpider(ABC, Spider):
+class BaseSpider(ABC, Spider):
     @property
     @abstractmethod
     def state_code(self) -> str: raise NotImplementedError
 
-    @property
-    def input_csv_path(self) -> Path: return INPUT_CSV_PATH
+    def __init__(self):
+        super().__init__()
+        self.state = State.objects.get(code=self.state_code)
 
+
+class BaseCaseSearchSpider(BaseSpider, ABC):
     @classmethod
     def update_settings(cls, settings):
         super().update_settings(settings)
         settings.set("ITEM_PIPELINES", value={
             "scraping_service.pipelines.CaseDbPipeline": 500
         })
+        settings.set("CONCURRENT_REQUESTS",  value=1)
+
+    @property
+    @abstractmethod
+    def case_detail_relation(self) -> str:
+        """
+        Name of 1-to-1 relation from apps.web.models for CaseDetail state models
+        i.e., ny_details or ct_details
+        """
+        raise NotImplementedError
 
     def __init__(self):
         super().__init__()
-        # get state
-        self.state = State.objects.get(code=self.state_code)
-
         # get companies
         companies_to_scrape = Company.objects.all().prefetch_related('name_variations')
         if MAX_COMPANIES:
@@ -40,25 +48,53 @@ class BaseCaseSearchSpider(ABC, Spider):
         self.logger.info(f"Found {companies_to_scrape.count()} companies to scrape")
 
         # add queries to companies
-        self.queries_by_company: dict[Company, set[str]] = {}
+        self.queries_by_company: dict[Company, list] = {}
         for company in companies_to_scrape:
-            name_variations = set(name_variation.name for name_variation in company.name_variations.all())
-            self.queries_by_company[company] = {company.name} | set(name_variations)
+            name_variations_set = {company.name} | set(n.name for n in company.name_variations.all())
+            self.queries_by_company[company] = sorted(list(name_variations_set), key=len, reverse=True)
 
         # sort by name
         self.queries_by_company = dict(sorted(self.queries_by_company.items(), key=lambda x: x[0].name))
 
-        # get existing case ids
-        self.existing_case_ids = set(Case.objects.filter(state=self.state).values_list('case_id', flat=True))
-        self.logger.info(f"Found {len(self.existing_case_ids)} existing case ids")
-
         # set up progress bar
         total = sum(len(queries) for queries in self.queries_by_company.values())
         self.logger.info(f"Total {total} queries")
-        self.progress_bar = tqdm(total=total, file=sys.stdout, leave=False)
+        self.progress_bar = tqdm(total=total)
+
+        # get existing case ids
+        self.existing_docket_ids = set(Case.objects.filter(state=self.state).values_list('docket_id', flat=True))
+        self.logger.info(f"Found {len(self.existing_docket_ids)} existing case ids")
 
         # min case date to crawl
         self.MIN_DATE = date.today() - timedelta(days=DAYS_BACK)
+
+
+class BaseCaseDetailSpider(BaseSpider, ABC):
+    @classmethod
+    def update_settings(cls, settings):
+        super().update_settings(settings)
+        settings.set("ITEM_PIPELINES", value={
+            "scraping_service.pipelines.CaseDbPipeline": 500
+        })
+        settings.set("CONCURRENT_REQUESTS", value=1)
+
+    @property
+    @abstractmethod
+    def case_detail_relation(self) -> str:
+        """
+        Name of 1-to-1 relation from apps.web.models for CaseDetail state models
+        i.e., ny_details or ct_details
+        """
+        raise NotImplementedError
+
+    def __init__(self):
+        super().__init__()
+        self.cases_to_scrape = Case.objects.filter(
+            is_scraped=False
+        ).select_related(
+            self.case_detail_relation
+        )
+        self.logger.info(f"Found {self.cases_to_scrape.count()} cases to scrape")
 
 
 class BaseDocumentDownloadSpider(ABC, Spider):

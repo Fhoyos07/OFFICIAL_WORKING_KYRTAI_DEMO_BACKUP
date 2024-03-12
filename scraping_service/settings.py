@@ -1,6 +1,10 @@
 # Scrapy settings for CourtUsCrawler project
 # For simplicity, this file contains only settings considered important or commonly used. Documentation:
 #     https://docs.scrapy.org/en/latest/topics/settings.html
+# todo: move from here
+from utils.django import django_setup
+django_setup()
+
 import logging
 from datetime import date
 from config.settings import BASE_DIR
