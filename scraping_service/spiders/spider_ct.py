@@ -5,10 +5,14 @@ from utils.scrapy.response import extract_text_from_el
 from utils.scrapy.decorators import log_response
 from utils.scrapy.url import parse_url_params
 from datetime import datetime
+from django.utils import timezone
+from django.db import models
+
+from utils.scrapy.decorators import update_progress
 
 from ._base import BaseCaseDetailSpider, BaseCaseSearchSpider, BaseDocumentDownloadSpider
-from apps.web.models import Company, Case
-from scraping_service.items import CaseItem, CaseItemCT, DocumentItem, DocumentItemCT
+from apps.web.models import Company, Case, CaseDetailsCT, Document, DocumentDetailsCT
+from scraping_service.items import DbItem
 
 
 # Step 1 - search companies for new cases
@@ -23,6 +27,7 @@ class CtCaseSearchSpider(BaseCaseSearchSpider):
 
     @classmethod
     def update_settings(cls, settings):
+        super().update_settings(settings)
         settings.set("CONCURRENT_REQUESTS",  value=10, priority='spider')
 
     def __init__(self):
@@ -80,24 +85,25 @@ class CtCaseSearchSpider(BaseCaseSearchSpider):
                 continue
             self.existing_docket_ids.add(docket_id)
 
-            case_item = CaseItemCT(state=self.state,
-                                   company=company,
-                                   company_name_variation=name_variation)
+            case = Case()
+            case.ct_details = CaseDetailsCT()
 
-            case_item.docket_id = docket_id
-            case_item.case_number = extract_text_from_el(tr.xpath('td[3]'))
-            case_item.case_type = None  # populated in the next spider
-            case_item.court = extract_text_from_el(tr.xpath('td[4]'))
-            case_item.url = response.urljoin(case_url)
+            case.state = self.state
+            case.company = company
+            case.company_name_variation = name_variation
 
-            case_item.caption = extract_text_from_el(tr.xpath('td[2]'))
-            case_item.party_name = extract_text_from_el(tr.xpath('td[1]'))
-            case_item.pty_number = extract_text_from_el(tr.xpath('td[5]'))
-            case_item.self_rep = extract_text_from_el(tr.xpath('td[6]')).lower() == 'y'
-            yield case_item
-            # yield Request(url=case_item.url,
-            #               callback=self.parse_case,
-            #               cb_kwargs=dict(case_item=case_item))
+            case.docket_id = docket_id
+            case.case_number = extract_text_from_el(tr.xpath('td[3]'))
+            case.case_type = None  # populated in the next spider
+            case.court = extract_text_from_el(tr.xpath('td[4]'))
+            case.url = response.urljoin(case_url)
+
+            case.caption = extract_text_from_el(tr.xpath('td[2]'))
+            case.ct_details.party_name = extract_text_from_el(tr.xpath('td[1]'))
+            case.ct_details.pty_number = extract_text_from_el(tr.xpath('td[5]'))
+            case.ct_details.self_rep = extract_text_from_el(tr.xpath('td[6]')).lower() == 'y'
+            case.scraped_date = timezone.now()
+            yield DbItem(record=case)
 
         pagination_table = response.css('.grdBorder tr:nth-child(1) table tr')
         next_page_url = pagination_table.xpath('td[span]/following-sibling::td[1]/a/@href').get()
@@ -125,22 +131,24 @@ class CtCaseDetailSpider(BaseCaseDetailSpider):
     @property
     def case_detail_relation(self): return 'ct_details'
 
+    @property
+    def document_detail_relation(self): return 'ct_details'
+
     def start_requests(self):
         for case in self.cases_to_scrape:
             yield Request(case.url, callback=self.parse_case, cb_kwargs=dict(case=case))
 
+    @update_progress
     def parse_case(self, response, case: Case):
-        case_item = CaseItem(case=case)
-        case_item.prefix = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblPrefixSuffix')
-        case_item.case_type = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblCaseType')
+        case.case_type = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblCaseType')
+        case.ct_details.prefix = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblPrefixSuffix')
 
-        case_file_date_str = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblFileDate')
-        file_date = datetime.strptime(case_file_date_str, "%m/%d/%Y").date()
-        case_item.file_date = file_date.isoformat()
+        file_date_str = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblFileDate')
+        case.filed_date = datetime.strptime(file_date_str, "%m/%d/%Y").date()
 
-        return_date = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblReturnDate')
-        case_item.return_date = datetime.strptime(return_date, "%m/%d/%Y").date()
-        yield case_item
+        return_date_str = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblReturnDate')
+        case.ct_details.return_date = datetime.strptime(return_date_str, "%m/%d/%Y").date()
+        yield DbItem(record=case)
 
         document_rows = response.xpath(
             '//*[@id="ctl00_ContentPlaceHolder1_CaseDetailDocuments1_pnlMotionData"]'
@@ -154,18 +162,23 @@ class CtCaseDetailSpider(BaseCaseDetailSpider):
                 self.logger.debug(f'Invalid document_url: {document_url} at {response.url}')
                 continue
 
-            document_item = DocumentItemCT(case=case)
-            document_item.url = response.urljoin(document_url)
-            document_item.name = tr.xpath('td[4]/a/text()').get()
-            document_item.document_id = parse_url_params(document_url)['DocumentNo']
-            document_item.entry_no = extract_text_from_el(tr.xpath('td[1]'))
+            document = Document(case=case)
+            document.ct_details = DocumentDetailsCT()
+
+            # common fields
+            document.url = response.urljoin(document_url)
+            document.name = tr.xpath('td[4]/a/text()').get()
+            document.document_id = parse_url_params(document_url)['DocumentNo']
+
+            # CT-specific fields
+            document.ct_details.entry_no = extract_text_from_el(tr.xpath('td[1]'))
 
             file_date = extract_text_from_el(tr.xpath('td[2]'))
-            document_item.file_date = datetime.strptime(file_date, "%m/%d/%Y").date()
+            document.ct_details.filed_date = datetime.strptime(file_date, "%m/%d/%Y").date()
 
-            document_item.filed_by = extract_text_from_el(tr.xpath('td[3]'))
-            document_item.arguable = extract_text_from_el(tr.xpath('td[5]'))
-            yield document_item
+            document.ct_details.filed_by = extract_text_from_el(tr.xpath('td[3]'))
+            document.ct_details.arguable = extract_text_from_el(tr.xpath('td[5]'))
+            yield DbItem(record=document)
 
     @staticmethod
     def extract_header(response, attr_id: str) -> str | None:

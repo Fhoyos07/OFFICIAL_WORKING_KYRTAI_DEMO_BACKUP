@@ -111,6 +111,6 @@ class DocumentDetailsNY(models.Model):
 class DocumentDetailsCT(models.Model):
     document = models.OneToOneField(Document, on_delete=models.CASCADE, related_name='ct_details')
     entry_no = models.CharField(max_length=255, blank=True, null=True)
-    file_date = models.DateField(null=True, blank=True)
+    filed_date = models.DateField(null=True, blank=True)
     filed_by = models.CharField(max_length=255, blank=True, null=True)
     arguable = models.CharField(max_length=255, blank=True, null=True)

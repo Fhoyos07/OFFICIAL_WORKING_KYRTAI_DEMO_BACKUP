@@ -13,7 +13,7 @@ def deduplicate_companies():
             case.status = case.ny_details.case_status
             case.received_date = case.ny_details.received_date
         elif hasattr(case, 'ct_details'):
-            case.filed_date = case.ct_details.file_date
+            case.filed_date = case.ct_details.filed_date
         cases_to_update.append(case)
     Case.objects.bulk_update(cases_to_update, fields=[
         'status', 'received_date', 'filed_date'

@@ -4,10 +4,14 @@ from datetime import date, timedelta
 from tqdm import tqdm
 from pathlib import Path
 from typing import Iterable
+from django.db import models
 import sys
 
-from utils.file import load_csv
 from apps.web.models import State, Company, Case, Document
+
+from utils.scrapy.decorators import update_progress
+
+from scraping_service.items import DocumentBodyItem
 from scraping_service.settings import (DAYS_BACK, MAX_COMPANIES)
 
 
@@ -26,17 +30,14 @@ class BaseCaseSearchSpider(BaseSpider, ABC):
     def update_settings(cls, settings):
         super().update_settings(settings)
         settings.set("ITEM_PIPELINES", value={
-            "scraping_service.pipelines.CaseDbPipeline": 500
+            "scraping_service.pipelines.CaseSearchDbPipeline": 500
         })
         settings.set("CONCURRENT_REQUESTS",  value=1)
 
     @property
     @abstractmethod
     def case_detail_relation(self) -> str:
-        """
-        Name of 1-to-1 relation from apps.web.models for CaseDetail state models
-        i.e., ny_details or ct_details
-        """
+        """Name of 1-to-1 relation from apps.web.models for CaseDetail state models. i.e., ny_details"""
         raise NotImplementedError
 
     def __init__(self):
@@ -74,48 +75,54 @@ class BaseCaseDetailSpider(BaseSpider, ABC):
     def update_settings(cls, settings):
         super().update_settings(settings)
         settings.set("ITEM_PIPELINES", value={
-            "scraping_service.pipelines.CaseDbPipeline": 500
+            "scraping_service.pipelines.CaseDetailDbPipeline": 500
         })
         settings.set("CONCURRENT_REQUESTS", value=1)
 
     @property
     @abstractmethod
     def case_detail_relation(self) -> str:
-        """
-        Name of 1-to-1 relation from apps.web.models for CaseDetail state models
-        i.e., ny_details or ct_details
-        """
+        """Name of 1-to-1 relation from apps.web.models for CaseDetail state models. i.e., ny_details"""
+        raise NotImplementedError
+
+    @property
+    @abstractmethod
+    def document_detail_relation(self) -> str:
+        """Name of 1-to-1 relation from apps.web.models for DocumentDetail state models. i.e., ny_details"""
         raise NotImplementedError
 
     def __init__(self):
         super().__init__()
         self.cases_to_scrape = Case.objects.filter(
-            is_scraped=False
+            is_scraped=False, state=self.state
         ).select_related(
             self.case_detail_relation
         )
         self.logger.info(f"Found {self.cases_to_scrape.count()} cases to scrape")
+        self.progress_bar = tqdm(total=self.cases_to_scrape.count())
 
 
-class BaseDocumentDownloadSpider(ABC, Spider):
+# there are documents with different links redirecting to the same page
+class BaseDocumentDownloadSpider(BaseSpider, ABC):
     @property
     @abstractmethod
     def state_code(self) -> str: raise NotImplementedError
 
     def __init__(self):
         super().__init__()
-        self.documents_to_scrape = Document.objects.all()
-        self.progress_bar = tqdm(total=len(self.documents_to_scrape.count()), file=sys.stdout, leave=False)
+        self.documents_to_scrape = Document.objects.filter(case__state=self.state)
+        self.progress_bar = tqdm(total=self.documents_to_scrape.count())
 
     def start_requests(self):
         for document in self.documents_to_scrape:
-            yield Request(document.url,
-                          callback=self.parse_document,
-                          cb_kwargs=dict(document=document),
-                          dont_filter=True)  # there are documents with different links redirecting to the same page
+            yield Request(
+                document.url,
+                callback=self.parse_document,
+                cb_kwargs=dict(document=document),
+                dont_filter=True  # there are documents with different links redirecting to the same page
+            )
 
+    @update_progress
     def parse_document(self, response, document: Document):
         self.progress_bar.update()
-        yield dict(
-            body=response.body
-        )
+        yield DocumentBodyItem(document_id=document.id, body=response.body)
