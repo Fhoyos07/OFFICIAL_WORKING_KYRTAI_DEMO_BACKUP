@@ -38,8 +38,8 @@ SMARTPROXY_ENDPOINT = 'us.smartproxy.com'
 SMARTPROXY_PORT = '10000'
 
 DOWNLOADER_MIDDLEWARES = {
-    # 'scraping_service.proxies.proxymesh.ProxyMeshMiddleware': 110,    # set PROXYMESH_ENABLED to True to activate
-    # 'scraping_service.proxies.smartproxy.SmartProxyMiddleware': 110,  # set SMARTPROXY_ENABLED to True to activate
+    'scraping_service.proxies.proxymesh.ProxyMeshMiddleware': 110,    # set PROXYMESH_ENABLED to True to activate
+    'scraping_service.proxies.smartproxy.SmartProxyMiddleware': 110,  # set SMARTPROXY_ENABLED to True to activate
 }
 
 
