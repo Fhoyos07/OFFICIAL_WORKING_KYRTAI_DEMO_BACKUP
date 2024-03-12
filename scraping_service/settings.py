@@ -53,24 +53,24 @@ BOT_NAME = "CourtUsCrawler"
 SPIDER_MODULES = ["scraping_service.spiders"]
 
 
-# logging settings
-def setup_logging():
-    if hasattr(setup_logging, "has_been_called"): return
-
-    logging.basicConfig(
-        handlers=[
-            create_console_handler(level=logging.INFO),
-            create_file_handler(level=logging.DEBUG, file_name=f'log_{date.today().isoformat()}.log', dir_name=LOG_DIR, file_mode='w')
-        ],
-        format=DEFAULT_LOG_FORMAT,
-        datefmt=DATE_FORMAT,
-        level=logging.DEBUG  # not used, overriden in handlers
-    )
-    logging.debug('Init logging')
-    setup_logging.has_been_called = True
-
-# Initialize Logging (only once)
-setup_logging()
+# # logging settings
+# def setup_logging():
+#     if hasattr(setup_logging, "has_been_called"): return
+#
+#     logging.basicConfig(
+#         handlers=[
+#             create_console_handler(level=logging.INFO),
+#             create_file_handler(level=logging.DEBUG, file_name=f'log_{date.today().isoformat()}.log', dir_name=LOG_DIR, file_mode='w')
+#         ],
+#         format=DEFAULT_LOG_FORMAT,
+#         datefmt=DATE_FORMAT,
+#         level=logging.DEBUG  # not used, overriden in handlers
+#     )
+#     logging.debug('Init logging')
+#     setup_logging.has_been_called = True
+#
+# # Initialize Logging (only once)
+# setup_logging()
 
 # Set settings whose default value is deprecated to a future-proof value
 REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
