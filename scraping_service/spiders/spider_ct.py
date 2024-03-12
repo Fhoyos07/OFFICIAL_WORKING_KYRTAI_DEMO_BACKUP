@@ -6,7 +6,6 @@ from utils.scrapy.decorators import log_response
 from utils.scrapy.url import parse_url_params
 from datetime import datetime
 from django.utils import timezone
-from django.db import models
 
 from utils.scrapy.decorators import update_progress
 
@@ -192,7 +191,7 @@ class CtCaseDetailSpider(BaseCaseDetailSpider):
 
 
 # Step 3 - open and download each document
-class KyrtCtDocumentSpider(BaseDocumentDownloadSpider):
+class CtDocumentSpider(BaseDocumentDownloadSpider):
     name = 'kyrt_ct_documents'
     @property
     def state_code(self) -> str: return 'CT'
