@@ -12,8 +12,8 @@ from utils.django import django_setup_decorator
 def run():
     from scraping_service.spiders.spider_ct import CtCaseSearchSpider, CtCaseDetailSpider, KyrtCtDocumentSpider
     from apps.web.models import Case, Document
-    Document.objects.filter(case__state__code='CT').delete()
-    Case.objects.filter(state__code='CT').delete()
+    # Document.objects.filter(case__state__code='CT').delete()
+    # Case.objects.filter(state__code='CT').delete()
 
     crawl_sequential(
         CtCaseSearchSpider,
