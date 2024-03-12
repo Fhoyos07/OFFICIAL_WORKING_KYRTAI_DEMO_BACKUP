@@ -17,4 +17,3 @@ mkdir -p $(dirname $DUMP_FILE)
 
 # perform dump
 pg_dump --dbname=$DEV_DB --host=localhost --username=$USER -Fc --no-owner --no-acl --file=$DUMP_FILE
-pg_restore --dbname=$DEV_DB --host=localhost --username=$USER --no-owner --no-acl --clean --if-exists --verbose $DUMP_FILE
