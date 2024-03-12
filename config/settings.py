@@ -163,7 +163,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOG_DIR = BASE_DIR / '_etc' / 'logs'
 LOG_DIR.mkdir(exist_ok=True)
-
 DEBUG_TO_CONSOLE = os.environ['DEBUG_TO_CONSOLE'].lower().strip() == 'true'
 
 LOGGING_CONFIG = None  # disable default django logging configuration
@@ -181,26 +180,26 @@ LOGGING = {
             "level": "DEBUG" if DEBUG_TO_CONSOLE else "INFO",
             "formatter": "default",
         },
-        "file": {
-            "class": "logging.handlers.TimedRotatingFileHandler",
-            "level": "DEBUG",
-            "filename": LOG_DIR / 'debug.log',
-            "when": "midnight",
-            "interval": 1,
-            "backupCount": 7,
-            "encoding": "utf-8",
-            "formatter": "default",
-        },
+        # "file": {
+        #     "class": "logging.handlers.TimedRotatingFileHandler",
+        #     "level": "DEBUG",
+        #     "filename": LOG_DIR / 'debug.log',
+        #     "when": "midnight",
+        #     "interval": 1,
+        #     "backupCount": 7,
+        #     "encoding": "utf-8",
+        #     "formatter": "default",
+        # },
     },
     "loggers": {
         "": {  # Default logger for any logger name
             "level": "DEBUG",
-            "handlers": ["console", "file"],
+            "handlers": ["console"], # "file"],
             "propagate": False,
         },
         "scrapy": {  # explicitly set scrapy logs (otherwise scrapy.statscollector not log to file)
             "level": "DEBUG",
-            "handlers": ["console", "file"],
+            "handlers": ["console"], # "file"],
             "propagate": False,
         },
     },
