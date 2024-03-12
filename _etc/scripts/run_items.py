@@ -10,7 +10,7 @@ def run():
     item = CaseItemCT(
         state=State.objects.get(code='CT'),
         company=Company.objects.first(),
-        company_name='company_name',
+        company_name_variation='company_name',
 
         docket_id='TEST_VLAD',
         case_number='case_number',

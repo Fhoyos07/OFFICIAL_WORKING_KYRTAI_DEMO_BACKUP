@@ -5,18 +5,19 @@ import re
 
 @django_setup_decorator(environment='dev')
 def deduplicate_companies():
-    from apps.web.models import Company, CompanyNameVariation
-    main_company = Company.objects.get(name='J.G. WENTWORTH')
-    companies = Company.objects.filter(name__contains='AKA JG').exclude(id=main_company.id).prefetch_related('name_variations')
-
-    for company in companies:
-        if company.name_variations.count() > 0:
-            print(f'{company.name} contains {company.name_variations.count()} variations! Skipping!')
-            continue
-        CompanyNameVariation.objects.create(company=main_company, name=company.name)
-        company.delete()
-        print(f'Removed {company.name}')
-
+    from apps.web.models import Case
+    cases = Case.objects.all().select_related('ny_details', 'ct_details')
+    cases_to_update = []
+    for case in cases:
+        if hasattr(case, 'ny_details'):
+            case.status = case.ny_details.case_status
+            case.received_date = case.ny_details.received_date
+        elif hasattr(case, 'ct_details'):
+            case.filed_date = case.ct_details.file_date
+        cases_to_update.append(case)
+    Case.objects.bulk_update(cases_to_update, fields=[
+        'status', 'received_date', 'filed_date'
+    ])
 
 if __name__ == '__main__':
     deduplicate_companies()
