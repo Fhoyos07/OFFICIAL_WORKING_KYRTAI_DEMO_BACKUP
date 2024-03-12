@@ -138,6 +138,10 @@ class CtCaseDetailSpider(BaseCaseDetailSpider):
 
     @update_progress
     def parse_case(self, response, case: Case):
+        if '/ErrorPage.aspx' in response.url:
+            self.logger.warning(f'Invalid url for case {case.id}: {response.url} (expected {response.request.url})')
+            return
+
         case.case_type = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblCaseType')
         case.ct_details.prefix = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblPrefixSuffix')
 
