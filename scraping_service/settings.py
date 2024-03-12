@@ -16,8 +16,8 @@ INPUT_CSV_PATH = FILES_DIR / 'input.csv'
 
 # crawling settings
 DAYS_BACK = 14
-# MAX_COMPANIES = None    # crawl all input.csv
-MAX_COMPANIES = 10    # crawl first X rows from input.csv
+MAX_COMPANIES = None    # crawl all input.csv
+# MAX_COMPANIES = 10    # crawl first X rows from input.csv
 
 
 # captcha settings
