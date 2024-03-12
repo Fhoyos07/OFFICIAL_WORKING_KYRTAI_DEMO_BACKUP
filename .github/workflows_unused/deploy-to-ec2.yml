@@ -1,3 +1,6 @@
+# disabled for now
+# rename parent dir to workflows/ whenever ready
+
 name: Deploy to EC2 on Main Merge
 
 on:
