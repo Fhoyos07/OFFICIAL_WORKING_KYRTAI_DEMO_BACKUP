@@ -127,7 +127,7 @@ class CtCaseDetailSpider(BaseCaseDetailSpider):
     def update_settings(cls, settings):
         super().update_settings(settings)
         settings.set("CONCURRENT_REQUESTS",  value=1, priority='spider')
-        settings.set("SMARTPROXY_ENABLED",  value=True, priority='spider')
+        # settings.set("SMARTPROXY_ENABLED",  value=True, priority='spider')
 
     @property
     def state_code(self): return 'CT'
