@@ -24,6 +24,9 @@ class BaseSpider(ABC, Spider):
         super().__init__()
         self.state = State.objects.get(code=self.state_code)
 
+        # min case date to crawl
+        self.MIN_DATE = date.today() - timedelta(days=DAYS_BACK)
+
 
 class BaseCaseSearchSpider(BaseSpider, ABC):
     @classmethod
@@ -65,9 +68,6 @@ class BaseCaseSearchSpider(BaseSpider, ABC):
         # get existing case ids
         self.existing_docket_ids = set(Case.objects.filter(state=self.state).values_list('docket_id', flat=True))
         self.logger.info(f"Found {len(self.existing_docket_ids)} existing case ids")
-
-        # min case date to crawl
-        self.MIN_DATE = date.today() - timedelta(days=DAYS_BACK)
 
 
 class BaseCaseDetailSpider(BaseSpider, ABC):

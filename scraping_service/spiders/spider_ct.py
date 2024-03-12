@@ -102,7 +102,6 @@ class CtCaseSearchSpider(BaseCaseSearchSpider):
             case.ct_details.party_name = extract_text_from_el(tr.xpath('td[1]'))
             case.ct_details.pty_number = extract_text_from_el(tr.xpath('td[5]'))
             case.ct_details.self_rep = extract_text_from_el(tr.xpath('td[6]')).lower() == 'y'
-            case.scraped_date = timezone.now()
             yield DbItem(record=case)
 
         pagination_table = response.css('.grdBorder tr:nth-child(1) table tr')
@@ -148,7 +147,12 @@ class CtCaseDetailSpider(BaseCaseDetailSpider):
 
         return_date_str = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblReturnDate')
         case.ct_details.return_date = datetime.strptime(return_date_str, "%m/%d/%Y").date()
+
+        case.is_scraped = True
+        case.scraped_date = timezone.now()
         yield DbItem(record=case)
+
+        if case.filed_date < self.MIN_DATE: return  # don't save cases for all records
 
         document_rows = response.xpath(
             '//*[@id="ctl00_ContentPlaceHolder1_CaseDetailDocuments1_pnlMotionData"]'
