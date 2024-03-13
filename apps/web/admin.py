@@ -62,7 +62,7 @@ class CaseDetailsCTInline(admin.StackedInline):
 
 class DocumentInline(admin.TabularInline):
     model = Document
-    fields = ['name', 'url']
+    fields = ['name', 'url', 'is_downloaded']
     extra = 0
 
 

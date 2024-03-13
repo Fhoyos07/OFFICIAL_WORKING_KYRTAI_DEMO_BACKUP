@@ -67,9 +67,9 @@ class Case(models.Model):
 class CaseDetailsNY(models.Model):
     case = models.OneToOneField(Case, on_delete=models.CASCADE, related_name='ny_details')
 
-    received_date = models.DateField(null=True, blank=True)
+    # received_date = models.DateField(null=True, blank=True)
     efiling_status = models.CharField(max_length=255, null=True, blank=True)
-    case_status = models.CharField(max_length=255, null=True, blank=True)
+    # case_status = models.CharField(max_length=255, null=True, blank=True)
 
 
 class CaseDetailsCT(models.Model):
@@ -79,7 +79,7 @@ class CaseDetailsCT(models.Model):
     pty_no = models.CharField(max_length=255, null=True, blank=True)
     self_rep = models.BooleanField(default=False)
     prefix = models.CharField(max_length=255, null=True, blank=True)
-    file_date = models.DateField(null=True, blank=True)
+    # file_date = models.DateField(null=True, blank=True)
     return_date = models.DateField(null=True, blank=True)
 
     def __str__(self):
