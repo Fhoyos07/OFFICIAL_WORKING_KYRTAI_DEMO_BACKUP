@@ -17,8 +17,8 @@ def run():
 
     crawl_sequential(
         # CtCaseSearchSpider,
-        CtCaseDetailSpider,
-        # CtDocumentSpider
+        # CtCaseDetailSpider,
+        CtDocumentSpider
     )
 
 

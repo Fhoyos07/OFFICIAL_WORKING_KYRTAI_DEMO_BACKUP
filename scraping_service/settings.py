@@ -22,11 +22,18 @@ TWO_CAPTCHA_API_KEY = '3408dd86d795e88a4c8e8e2860b25e94'
 MAX_CAPTCHA_RETRIES = 20
 
 
+# Amazon S3 settings
+AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY']
+AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+AWS_S3_BUCKET_NAME = os.environ['AWS_S3_BUCKET_NAME']
+
+
 # Proxymesh Settings
 PROXYMESH_ENABLED = False
 PROXYMESH_USER = 'madfatcat'
 PROXYMESH_PASSWORD = 'password'
 PROXYMESH_ENDPOINT = 'nl.proxymesh.com'
+
 
 # Smartproxy Settings
 SMARTPROXY_ENABLED = False

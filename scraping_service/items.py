@@ -14,8 +14,10 @@ class DbItem:
 
 @dataclass
 class DocumentBodyItem:
-    document_id: int
+    record: Document
     body: bytes
+    relative_path: str = field(default=None)
+
 
 # @dataclass
 # class CaseItem(ABC):

@@ -5,11 +5,12 @@ from scrapy import Spider
 import json
 
 from django.db import models, transaction, connection
+from django.utils import timezone
 
 from utils.scrapy.pipelines import CsvWriterWrapper
 from apps.web.models import Case, Document
-from .items import DbItem
-from .spiders._base import BaseCaseSearchSpider, BaseCaseDetailSpider
+from .items import DbItem, DocumentBodyItem
+from .spiders._base import BaseCaseSearchSpider, BaseCaseDetailSpider, BaseDocumentDownloadSpider
 
 
 class BasePipeline:
@@ -23,7 +24,6 @@ class BasePipeline:
     @classmethod
     def from_crawler(cls, crawler: Crawler):
         return cls(spider=crawler.spider)
-
 
 
 class CaseSearchDbPipeline(BasePipeline):
@@ -108,7 +108,7 @@ class CaseDetailDbPipeline(BasePipeline):
         self.documents_to_create = []
 
 
-class ArticleS3UploadPipeline(BasePipeline):
+class DocumentS3UploadPipeline(BasePipeline):
     """
     Pipeline for saving article content to S3 bucket.
     Processes ArticleTextItem items by saving their content (HTML or PDF) to the specified S3 bucket,
@@ -118,31 +118,57 @@ class ArticleS3UploadPipeline(BasePipeline):
         s3_bucket_name (str): Name of the S3 bucket to save articles.
         article_bucket (): boto3 S3 bucket object.
     """
-    def __init__(self, spider):
+    def __init__(self, spider: BaseDocumentDownloadSpider):
         super().__init__(spider)
         import boto3
         aws_key_id, aws_secret_key = self.settings.get('AWS_ACCESS_KEY_ID'), self.settings.get('AWS_SECRET_ACCESS_KEY')
         if not aws_key_id or not aws_secret_key:
             raise ValueError('AWS credentials are incomplete')
 
-        self.s3_bucket_name = self.settings.get('ARTICLES_S3_BUCKET_NAME')
+        self.s3_bucket_name = self.settings.get('AWS_S3_BUCKET_NAME')
         if not self.s3_bucket_name:
             raise ValueError('AWS S3 bucket name is not defined')
 
         s3 = boto3.resource('s3', aws_access_key_id=aws_key_id, aws_secret_access_key=aws_secret_key)
         self.article_bucket = s3.Bucket(self.s3_bucket_name)
 
-    def process_item(self, item, spider):
-        item.relative_path = f"{spider.exchange_key}/{item.symbol}/{item.article_id}.{item.content_type}"
+    def process_item(self, item: DocumentBodyItem, spider: BaseDocumentDownloadSpider):
+        document: Document = item.record
+        relative_path = f"{spider.state_code}/{document.case.docket_id}/{document.document_id}.pdf"
         try:
-            self.article_bucket.put_object(Key=item.relative_path, Body=item.content)
-            self.logger.info(f"Uploaded to S3 {self.s3_bucket_name} at {item.relative_path}")
+            self.article_bucket.put_object(Key=relative_path, Body=item.body)
+            self.logger.info(f"Uploaded to S3 {self.s3_bucket_name} at {relative_path}")
+            item.relative_path = relative_path
         except Exception as e:
-            self.logger.error(f"Failed to save {item.relative_path} to S3: {e}")
+            self.logger.error(f"Failed to save {relative_path} to S3: {e}")
         return item
 
 
+class DocumentDbPipeline(BasePipeline):
+    def __init__(self, spider: BaseDocumentDownloadSpider):
+        super().__init__(spider)
+        self.documents_to_update: list[Document] = []
+        self.chunk_size = 200
 
+    def process_item(self, item: DocumentBodyItem, spider: BaseDocumentDownloadSpider):
+        if item.relative_path:
+            document: Document = item.record
+            document.is_downloaded = True
+            document.download_date = timezone.now()
+            document.relative_path = item.relative_path
+            self.documents_to_update.append(document)
+
+        if len(self.documents_to_update) >= self.chunk_size:
+            self.update_documents()
+        return item
+
+    def close_spider(self, spider: BaseCaseSearchSpider):
+        self.update_documents()
+
+    def update_documents(self):
+        if not self.documents_to_update: return
+        Document.objects.bulk_update(self.documents_to_update, fields=['is_downloaded', 'relative_path'])
+        self.logger.info(f'Updated {len(self.documents_to_update)} Documents')
 
 
 # class LoggingPipeline:

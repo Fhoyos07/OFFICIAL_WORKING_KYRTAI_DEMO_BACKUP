@@ -94,7 +94,7 @@ class Document(models.Model):
     url = models.URLField(max_length=255, blank=True, null=True)
 
     is_downloaded = models.BooleanField(default=False)
-    download_date = models.DateField(null=True, blank=True)
+    download_date = models.DateTimeField(null=True, blank=True)
 
     relative_path = models.CharField(max_length=255, null=True, blank=True)
 

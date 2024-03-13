@@ -104,13 +104,22 @@ class BaseCaseDetailSpider(BaseSpider, ABC):
 
 # there are documents with different links redirecting to the same page
 class BaseDocumentDownloadSpider(BaseSpider, ABC):
-    @property
-    @abstractmethod
-    def state_code(self) -> str: raise NotImplementedError
+    @classmethod
+    def update_settings(cls, settings):
+        super().update_settings(settings)
+        settings.set("ITEM_PIPELINES", value={
+            "scraping_service.pipelines.DocumentS3UploadPipeline": 300,
+            "scraping_service.pipelines.DocumentDbPipeline": 500
+        })
+        settings.set("CONCURRENT_REQUESTS", value=1)
 
     def __init__(self):
         super().__init__()
-        self.documents_to_scrape = Document.objects.filter(case__state=self.state)
+        self.documents_to_scrape = Document.objects.filter(
+            case__state=self.state, is_downloaded=False
+        ).select_related(
+            'case'
+        )
         self.progress_bar = tqdm(total=self.documents_to_scrape.count())
 
     def start_requests(self):
@@ -124,5 +133,4 @@ class BaseDocumentDownloadSpider(BaseSpider, ABC):
 
     @update_progress
     def parse_document(self, response, document: Document):
-        self.progress_bar.update()
-        yield DocumentBodyItem(document_id=document.id, body=response.body)
+        yield DocumentBodyItem(record=document, body=response.body)

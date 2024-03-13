@@ -205,8 +205,3 @@ class CtDocumentSpider(BaseDocumentDownloadSpider):
     name = 'kyrt_ct_documents'
     @property
     def state_code(self) -> str: return 'CT'
-
-    custom_settings = dict(
-        CONCURRENT_REQUESTS=10,
-        ITEM_PIPELINES={"scraping_service.pipelines.DocumentSavePipeline": 300}  # download PDFs
-    )
