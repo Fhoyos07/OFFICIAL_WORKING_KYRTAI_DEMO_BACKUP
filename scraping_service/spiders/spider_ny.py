@@ -18,7 +18,7 @@ from ._base import BaseCaseSearchSpider, BaseDocumentDownloadSpider
 
 
 # Step 1 - search each company
-class KyrtNySearchSpider(BaseCaseSearchSpider):
+class NyCaseSearchSpider(BaseCaseSearchSpider):
     name = 'kyrt_ny_search'
     custom_settings = dict(
         CONCURRENT_REQUESTS=1,  # only 1 parallel request! don't change this
@@ -289,7 +289,7 @@ class KyrtNySearchSpider(BaseCaseSearchSpider):
 
 
 # Step2 - Open each case and save document urls
-class KyrtNyCaseSpider(Spider):
+class NyCaseDetailSpider(Spider):
     name = 'kyrt_ny_cases'
     custom_settings = dict(
         CONCURRENT_REQUESTS=1,
@@ -343,7 +343,7 @@ class KyrtNyCaseSpider(Spider):
 
 
 # Step 3 - open and download each document
-class KyrtNyDocumentSpider(BaseDocumentDownloadSpider):
+class NyDocumentSpider(BaseDocumentDownloadSpider):
     name = 'kyrt_ny_documents'
     custom_settings = dict(
         CONCURRENT_REQUESTS=1,

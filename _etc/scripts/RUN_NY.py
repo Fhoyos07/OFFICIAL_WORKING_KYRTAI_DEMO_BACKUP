@@ -1,12 +1,12 @@
 from utils.scrapy.crawler import crawl_sequential
-from scraping_service.spiders.spider_ny import KyrtNySearchSpider, KyrtNyCaseSpider, KyrtNyDocumentSpider
+from scraping_service.spiders.spider_ny import NyCaseSearchSpider, NyCaseDetailSpider, NyDocumentSpider
 
 
 def run():
     crawl_sequential(
-        KyrtNySearchSpider,
-        KyrtNyCaseSpider,
-        KyrtNyDocumentSpider
+        NyCaseSearchSpider,
+        NyCaseDetailSpider,
+        NyDocumentSpider
     )
 
 

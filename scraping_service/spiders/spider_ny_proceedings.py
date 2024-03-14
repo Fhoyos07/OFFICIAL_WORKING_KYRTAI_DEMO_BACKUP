@@ -1,11 +1,11 @@
 from pathlib import Path
 
-from .spider_ny import KyrtNySearchSpider, KyrtNyCaseSpider, KyrtNyDocumentSpider
+from .spider_ny import NyCaseSearchSpider, NyCaseDetailSpider, NyDocumentSpider
 from ..settings import FILES_DIR
 
 
 # Step 1 - search each company
-class KyrtNyProceedingSearchSpider(KyrtNySearchSpider):
+class NyProceedingCaseSearchSpider(NyCaseSearchSpider):
     name = 'kyrt_ny_proceeding_search'
 
     @property
@@ -31,14 +31,14 @@ class KyrtNyProceedingSearchSpider(KyrtNySearchSpider):
         }
 
 
-class KyrtNyProceedingCaseSpider(KyrtNyCaseSpider):
+class NyProceedingCaseDetailSpider(NyCaseDetailSpider):
     name = 'kyrt_ny_proceeding_cases'
 
     @property
     def state_code(self) -> str: return 'NY_proceedings'
 
 
-class KyrtNyDocumentProceedingSpider(KyrtNyDocumentSpider):
+class NyDocumentProceedingSpider(NyDocumentSpider):
     name = 'kyrt_ny_proceeding_documents'
 
     @property

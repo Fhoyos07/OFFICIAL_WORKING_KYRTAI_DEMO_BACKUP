@@ -6,9 +6,9 @@ from utils.scrapy.crawler import crawl_sequential
 from utils.django import django_setup
 django_setup()
 
-from scraping_service.spiders.spider_ct import CtCaseSearchSpider, CtDocumentSpider
-from scraping_service.spiders.spider_ny import KyrtNySearchSpider, KyrtNyCaseSpider, KyrtNyDocumentSpider
-from scraping_service.spiders.spider_ny_proceedings import KyrtNyProceedingSearchSpider, KyrtNyProceedingCaseSpider, KyrtNyDocumentProceedingSpider
+from scraping_service.spiders.spider_ct import CtCaseSearchSpider, CtCaseDetailSpider, CtDocumentSpider
+from scraping_service.spiders.spider_ny import NyCaseSearchSpider, NyCaseDetailSpider, NyDocumentSpider
+from scraping_service.spiders.spider_ny_proceedings import NyProceedingCaseSearchSpider, NyProceedingCaseDetailSpider, NyDocumentProceedingSpider
 import argparse
 
 
@@ -20,13 +20,13 @@ class SpiderConfiguration:
 # Define the spider configurations
 CONFIGURATIONS = {
     "NY": SpiderConfiguration(spiders=[
-        KyrtNySearchSpider, KyrtNyCaseSpider, KyrtNyDocumentSpider
+        NyCaseSearchSpider, NyCaseDetailSpider, NyDocumentSpider
     ]),
     "NY_proceedings": SpiderConfiguration(spiders=[
-        KyrtNyProceedingSearchSpider, KyrtNyProceedingCaseSpider, KyrtNyDocumentProceedingSpider
+        NyProceedingCaseSearchSpider, NyProceedingCaseDetailSpider, NyDocumentProceedingSpider
     ]),
     "CT": SpiderConfiguration(spiders=[
-        CtCaseSearchSpider, CtDocumentSpider
+        CtCaseSearchSpider, CtCaseDetailSpider, CtDocumentSpider
     ]),
 }
 
