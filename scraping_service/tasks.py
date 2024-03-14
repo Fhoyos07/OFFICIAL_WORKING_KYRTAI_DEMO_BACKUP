@@ -31,10 +31,6 @@ def run_spider(spider_name: str, *args, **kwargs) -> bool:
 
 @shared_task
 def run_example_chain() -> bool:
-    # chain(
-    #     run_spider.si('prototype'),
-    #     run_spider.si('prototype')
-    # )()
     crawl_with_crochet(spider='prototype')
     crawl_with_crochet(spider='prototype')
     return True
