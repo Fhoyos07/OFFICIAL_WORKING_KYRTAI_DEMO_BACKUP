@@ -126,7 +126,6 @@ DATABASES['default'] = DATABASES[f'postgres_{ENVIRONMENT}']
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -142,17 +141,25 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/New_York'
 
 USE_I18N = True
 
 USE_TZ = True
+
+
+# Celery settings
+REDIS_URL = os.environ['REDIS_URL']
+CELERY_BROKER_URL = REDIS_URL
+CELERY_RESULT_BACKEND = REDIS_URL
+CELERY_TIMEZONE = TIME_ZONE
+CELERY_INCLUDE = ['scraping_service.tasks']
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
 
 
 # Static files (CSS, JavaScript, Images)
@@ -185,26 +192,26 @@ LOGGING = {
             "level": "DEBUG" if DEBUG_TO_CONSOLE else "INFO",
             "formatter": "default",
         },
-        # "file": {
-        #     "class": "logging.handlers.TimedRotatingFileHandler",
-        #     "level": "DEBUG",
-        #     "filename": LOG_DIR / 'debug.log',
-        #     "when": "midnight",
-        #     "interval": 1,
-        #     "backupCount": 7,
-        #     "encoding": "utf-8",
-        #     "formatter": "default",
-        # },
+        "file": {
+            "class": "logging.handlers.TimedRotatingFileHandler",
+            "level": "DEBUG",
+            "filename": LOG_DIR / 'debug.log',
+            "when": "midnight",
+            "interval": 1,
+            "backupCount": 7,
+            "encoding": "utf-8",
+            "formatter": "default",
+        },
     },
     "loggers": {
         "": {  # Default logger for any logger name
             "level": "DEBUG",
-            "handlers": ["console"], # "file"],
+            "handlers": ["console", "file"],
             "propagate": False,
         },
         "scrapy": {  # explicitly set scrapy logs (otherwise scrapy.statscollector not log to file)
             "level": "DEBUG",
-            "handlers": ["console"], # "file"],
+            "handlers": ["console", "file"],
             "propagate": False,
         },
     },
