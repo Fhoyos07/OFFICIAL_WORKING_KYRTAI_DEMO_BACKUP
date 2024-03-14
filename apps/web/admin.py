@@ -77,6 +77,7 @@ class CaseAdmin(admin.ModelAdmin):
     list_filter = ['state', 'case_type']
     list_select_related = ['state', 'company']  # Optimize foreign key lookups
     inlines = [DocumentInline]
+    ordering = ['-scraped_date']
 
     def company_link(self, obj):
         link = reverse("admin:web_company_change", args=[obj.company.id])
