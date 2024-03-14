@@ -15,6 +15,9 @@ from dotenv import load_dotenv
 import os
 import logging
 import logging.config
+import sentry_sdk
+from sentry_sdk.integrations.logging import LoggingIntegration
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -57,7 +60,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "apps.web.apps.WebConfig",
+    'apps.web.apps.WebConfig',
+    'django_celery_beat',       # scheduling
     'debug_toolbar',
 ]
 
@@ -206,3 +210,30 @@ LOGGING = {
     },
 }
 logging.config.dictConfig(LOGGING)
+
+
+# configure sentry
+def setup_sentry():
+    if hasattr(setup_sentry, "has_been_called"): return
+    setup_sentry.has_been_called = True
+
+    if not DEBUG:
+        dsn = os.environ['SENTRY_DSN']
+        sentry_sdk.init(
+            dsn=dsn,
+            traces_sample_rate=1.0,  # capture 100% of transactions for performance monitoring
+            profiles_sample_rate=1.0,  # profile 100% of sampled transactions
+            integrations=[LoggingIntegration(
+                level=logging.INFO,  # Capture info and above as breadcrumbs
+                event_level=logging.WARNING  # Send warnings+ as events
+            )]
+        )
+        logging.info(f'Init Sentry')
+
+
+# Initialize Logging (only once)
+setup_sentry()  # should be called after Django init
+
+
+logging.info(f'Init django with environment "{ENVIRONMENT}"')
+logging.info(f'Database: {DATABASES["default"]["NAME"]}')
