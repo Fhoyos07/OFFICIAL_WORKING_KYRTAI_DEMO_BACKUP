@@ -13,3 +13,10 @@ gunicorn
 
 django-debug-toolbar
 boto3
+sentry-sdk[django]
+
+redis                   # caching
+celery[redis]           # caching
+django-celery-beat
+
+crochet

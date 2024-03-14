@@ -12,4 +12,35 @@ services:
       - "host.docker.internal:host-gateway"
     container_name: web_kyrt
     volumes:
-      - ./_etc/logs:/app/_etc/logs  # Map logs dir
+      - ./_etc/logs:/app/_etc/logs
+
+  celery-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    extra_hosts:  # allows host.docker.internal in .env for postgres
+      - "host.docker.internal:host-gateway"
+    command: celery -A config worker --loglevel=info
+    volumes:
+      - ./_etc/logs:/app/_etc/logs
+    container_name: celery-worker
+    depends_on:
+      - redis  # Ensure the worker can communicate with Redis
+
+  celery-beat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    extra_hosts:  # allows host.docker.internal in .env.base for postgres
+      - "host.docker.internal:host-gateway"
+    command: celery -A config beat --loglevel=info --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    volumes:
+      - ./_etc/logs:/app/_etc/logs
+    container_name: celery-beat
+    depends_on:
+      - celery-worker
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
