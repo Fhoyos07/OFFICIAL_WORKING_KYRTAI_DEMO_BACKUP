@@ -12,14 +12,13 @@ from scraping_service.spiders.spider_ny_proceedings import KyrtNyProceedingSearc
 import argparse
 
 
-
 @dataclass
 class SpiderConfiguration:
     spiders: list[Type[Spider]]
 
 
 # Define the spider configurations
-configurations = {
+CONFIGURATIONS = {
     "NY": SpiderConfiguration(spiders=[
         KyrtNySearchSpider, KyrtNyCaseSpider, KyrtNyDocumentSpider
     ]),
@@ -38,14 +37,14 @@ def run_spiders(spiders):
 
 def get_all_spiders():
     all_spiders = []
-    for config in configurations.values():
+    for config in CONFIGURATIONS.values():
         all_spiders.extend(config.spiders)
     return all_spiders
 
 
 def main():
     parser = argparse.ArgumentParser(description="Run Scrapy spiders for different states.")
-    parser.add_argument('name', nargs='?', choices=[*configurations.keys(), 'ALL'], help='The name of the script to run')
+    parser.add_argument('name', nargs='?', choices=[*CONFIGURATIONS.keys(), 'ALL'], help='The name of the script to run')
     args = parser.parse_args()
 
     # Dynamically generate choices and matching cases
@@ -53,19 +52,19 @@ def main():
     if args.name:
         selected_key = args.name
     else:
-        choices = [f"Press {index + 1} for {name}" for index, name in enumerate(['ALL', *configurations.keys()])]
+        choices = [f"Press {index + 1} for {name}" for index, name in enumerate(['ALL', *CONFIGURATIONS.keys()])]
         choices_text = "\n".join(choices)
         choice_input = int(input(f"{choices_text}\nYour choice:\n"))
         if choice_input == 1:
             selected_key = 'ALL'
-        elif 2 <= choice_input < len(configurations) + 2:
-            selected_key = list(configurations.keys())[choice_input - 2]
+        elif 2 <= choice_input < len(CONFIGURATIONS) + 2:
+            selected_key = list(CONFIGURATIONS.keys())[choice_input - 2]
 
     # run
     if selected_key == 'ALL':
         run_spiders(get_all_spiders())
-    elif selected_key in configurations:
-        run_spiders(configurations[selected_key].spiders)
+    elif selected_key in CONFIGURATIONS:
+        run_spiders(CONFIGURATIONS[selected_key].spiders)
     else:
         print("Invalid choice. Exiting.")
 

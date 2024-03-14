@@ -15,6 +15,15 @@ def configure_infrastructure(**kwargs):
 
 
 @shared_task
+def scrape_court(state_code: str, *args, **kwargs) -> bool:
+    from RUN import CONFIGURATIONS
+    state_config = CONFIGURATIONS[state_code]
+    for spider in state_config.spiders:
+        crawl_with_crochet(spider)
+    return True
+
+
+@shared_task
 def run_spider(spider_name: str, *args, **kwargs) -> bool:
     crawl_with_crochet(spider_name, *args, **kwargs)
     return True
