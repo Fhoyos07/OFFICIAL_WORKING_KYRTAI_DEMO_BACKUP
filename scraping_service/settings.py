@@ -2,9 +2,11 @@
 # For simplicity, this file contains only settings considered important or commonly used. Documentation:
 #     https://docs.scrapy.org/en/latest/topics/settings.html
 import os
-from config.settings import BASE_DIR
+from django.conf import settings
+
 
 # folders
+BASE_DIR = settings.BASE_DIR
 ETC_DIR = BASE_DIR / '_etc'
 LOG_DIR = ETC_DIR / 'logs'
 HTML_DEBUG_DIR = ETC_DIR / 'html'
@@ -23,9 +25,9 @@ MAX_CAPTCHA_RETRIES = 20
 
 
 # Amazon S3 settings
-AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY']
-AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-AWS_S3_BUCKET_NAME = os.environ['AWS_S3_BUCKET_NAME']
+AWS_ACCESS_KEY_ID = settings.AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY = settings.AWS_SECRET_ACCESS_KEY
+AWS_S3_BUCKET_NAME = settings.AWS_S3_BUCKET_NAME
 
 
 # Proxymesh Settings

@@ -162,6 +162,11 @@ CELERY_INCLUDE = ['scraping_service.tasks']
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
 
 
+AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY']
+AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+AWS_S3_BUCKET_NAME = os.environ['AWS_S3_BUCKET_NAME']
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 

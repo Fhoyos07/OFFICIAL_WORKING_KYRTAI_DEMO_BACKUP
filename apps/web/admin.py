@@ -59,10 +59,35 @@ class CaseDetailsCTInline(admin.StackedInline):
     can_delete = False
 
 
+from django.contrib import admin
+from django.conf import settings
+from django.utils.safestring import mark_safe
+from django import forms
+from django.utils.html import format_html
+
+
 class DocumentInline(admin.TabularInline):
     model = Document
-    fields = ['name', 'url', 'is_downloaded']
+    fields = readonly_fields = ['name', 's3_url', 'original_url']
     extra = 0
+
+    def s3_url(self, instance: Document):
+        if instance.relative_path:
+            url = f'https://s3.us-east-2.amazonaws.com/{settings.AWS_S3_BUCKET_NAME}/{instance.relative_path}'
+            return mark_safe(f'<a href="{url}">{url}</a>')
+        return "-"
+    s3_url.short_description = "S3 URL"
+
+    def original_url(self, instance: Document):
+        if instance.url:
+            return mark_safe(f'<a href="{instance.url}">{instance.url}</a>')
+        return "-"
+    original_url.short_description = "URL"
+
+# class DocumentInline(admin.TabularInline):
+#     model = Document
+#     fields = ['name', 'url', 'is_downloaded']
+#     extra = 0
 
 
 @admin.register(Case)

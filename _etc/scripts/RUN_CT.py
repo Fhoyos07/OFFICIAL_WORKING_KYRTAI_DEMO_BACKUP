@@ -16,8 +16,8 @@ def run():
     # Case.objects.filter(state__code='CT').delete()
 
     crawl_sequential(
-        # CtCaseSearchSpider,
-        # CtCaseDetailSpider,
+        CtCaseSearchSpider,
+        CtCaseDetailSpider,
         CtDocumentSpider
     )
 
