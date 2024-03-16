@@ -1,3 +1,5 @@
+from datetime import datetime, timezone
+
 from utils.django import django_setup, django_setup_decorator
 from django.db import transaction
 import re
@@ -19,5 +21,16 @@ def deduplicate_companies():
         'status', 'received_date', 'filed_date'
     ])
 
+
+@django_setup_decorator(environment='dev')
+def update_scraped_date():
+    from apps.web.models import Case
+    Case.objects.filter(
+        state__code='NY', scraped_date__isnull=True
+    ).update(
+        scraped_date=datetime(2024, 2, 1, tzinfo=timezone.utc)
+    )
+
+
 if __name__ == '__main__':
-    deduplicate_companies()
+    update_scraped_date()
