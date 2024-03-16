@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 
@@ -100,6 +101,11 @@ class Document(models.Model):
 
     def __str__(self):
         return self.name
+
+    @property
+    def s3_url(self) -> str:
+        if self.relative_path:
+            return f'https://s3.us-east-2.amazonaws.com/{settings.AWS_S3_BUCKET_NAME}/{self.relative_path}'
 
 
 class DocumentDetailsNY(models.Model):

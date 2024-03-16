@@ -72,9 +72,8 @@ class DocumentInline(admin.TabularInline):
     extra = 0
 
     def s3_url(self, instance: Document):
-        if instance.relative_path:
-            url = f'https://s3.us-east-2.amazonaws.com/{settings.AWS_S3_BUCKET_NAME}/{instance.relative_path}'
-            return mark_safe(f'<a href="{url}">{url}</a>')
+        if instance.s3_url:
+            return mark_safe(f'<a href="{instance.s3_url}">{instance.s3_url}</a>')
         return "-"
     s3_url.short_description = "S3 URL"
 
