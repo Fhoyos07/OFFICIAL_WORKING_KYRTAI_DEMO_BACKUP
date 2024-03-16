@@ -8,8 +8,8 @@ TODO:
 
 
 ### Spiders for:  
-- iapps.courts.state.ny.us
-- civilinquiry.jud.ct.gov (CT)
+- NY: [iapps.courts.state.ny.us(https://iapps.courts.state.ny.us/nyscef/CaseSearch?TAB=name)]
+- CT: civilinquiry.jud.ct.gov
 
 ## Summary:
 Python/Scrapy scripts with input from CSV and output to CSV and download PDF files.

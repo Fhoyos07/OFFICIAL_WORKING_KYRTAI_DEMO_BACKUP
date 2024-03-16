@@ -20,3 +20,4 @@ celery[redis]           # caching
 django-celery-beat
 
 crochet
+openai
