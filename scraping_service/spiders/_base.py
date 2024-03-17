@@ -35,7 +35,6 @@ class BaseCaseSearchSpider(BaseSpider, ABC):
         settings.set("ITEM_PIPELINES", value={
             "scraping_service.pipelines.CaseSearchDbPipeline": 500
         })
-        settings.set("CONCURRENT_REQUESTS",  value=1)
 
     @property
     @abstractmethod
@@ -77,7 +76,6 @@ class BaseCaseDetailSpider(BaseSpider, ABC):
         settings.set("ITEM_PIPELINES", value={
             "scraping_service.pipelines.CaseDetailDbPipeline": 500
         })
-        settings.set("CONCURRENT_REQUESTS", value=1)
 
     @property
     @abstractmethod
@@ -111,7 +109,6 @@ class BaseDocumentDownloadSpider(BaseSpider, ABC):
             "scraping_service.pipelines.DocumentS3UploadPipeline": 300,
             "scraping_service.pipelines.DocumentDbPipeline": 500
         })
-        settings.set("CONCURRENT_REQUESTS", value=1)
 
     def __init__(self):
         super().__init__()

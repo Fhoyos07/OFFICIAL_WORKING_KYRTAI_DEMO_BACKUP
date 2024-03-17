@@ -14,8 +14,8 @@ from apps.web.models import Company, Case, CaseDetailsCT, Document, DocumentDeta
 from scraping_service.items import DbItem
 
 
-# Step 1 - search companies for new cases
 class CtCaseSearchSpider(BaseCaseSearchSpider):
+    """Step 1 - search companies for new cases"""
     name = 'ct_case_search'
 
     @property
@@ -112,13 +112,8 @@ class CtCaseSearchSpider(BaseCaseSearchSpider):
 
 # Step2 - Open each case and save document urls
 class CtCaseDetailSpider(BaseCaseDetailSpider):
+    """Step2 - Open each case and save document urls"""
     name = 'ct_case_detail'
-
-    @classmethod
-    def update_settings(cls, settings):
-        super().update_settings(settings)
-        settings.set("CONCURRENT_REQUESTS",  value=1, priority='spider')
-        # settings.set("SMARTPROXY_ENABLED",  value=True, priority='spider')
 
     @property
     def state_code(self): return 'CT'
@@ -191,8 +186,9 @@ class CtCaseDetailSpider(BaseCaseDetailSpider):
             return value.strip()
 
 
-# Step 3 - open and download each document
+
 class CtDocumentSpider(BaseDocumentDownloadSpider):
+    """Step 3 - download each document"""
     name = 'kyrt_ct_documents'
 
     @property
