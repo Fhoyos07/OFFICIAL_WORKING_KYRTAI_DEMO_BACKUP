@@ -51,14 +51,14 @@ class Case(models.Model):
     filed_date = models.DateField(null=True, blank=True)
     received_date = models.DateField(null=True, blank=True)
 
-    gbruno_score = models.IntegerField(null=True, blank=True, validators=[
-        MinValueValidator(0), MaxValueValidator(100)
-    ])
-
     found_date = models.DateTimeField(null=True, blank=True)
 
     is_scraped = models.BooleanField(default=False)
     scraped_date = models.DateTimeField(null=True, blank=True)
+
+    gbruno_score = models.IntegerField(null=True, blank=True, validators=[
+        MinValueValidator(0), MaxValueValidator(100)
+    ])
 
     def __str__(self):
         return self.case_number
@@ -87,6 +87,10 @@ class CaseDetailsCT(models.Model):
 
     def __str__(self):
         return f'{self.case.case_number} Details'
+
+
+class CaseDetailsMN(models.Model):
+    case = models.OneToOneField(Case, on_delete=models.CASCADE, related_name='mn_details')
 
 
 # DOCUMENT Models
@@ -123,3 +127,7 @@ class DocumentDetailsCT(models.Model):
     filed_date = models.DateField(null=True, blank=True)
     filed_by = models.CharField(max_length=255, blank=True, null=True)
     arguable = models.CharField(max_length=255, blank=True, null=True)
+
+
+class DocumentDetailsMN(models.Model):
+    document = models.OneToOneField(Document, on_delete=models.CASCADE, related_name='mn_details')
