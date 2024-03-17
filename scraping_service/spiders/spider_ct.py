@@ -74,12 +74,12 @@ class CtCaseSearchSpider(BaseCaseSearchSpider):
                 continue
             self.existing_docket_ids.add(docket_id)
 
-            case = Case()
+            case = Case(
+                state=self.state,
+                company=company,
+                company_name_variation=name_variation,
+            )
             case.ct_details = CaseDetailsCT()
-
-            case.state = self.state
-            case.company = company
-            case.company_name_variation = name_variation
 
             case.docket_id = docket_id
             case.case_number = extract_text_from_el(tr.xpath('td[3]'))
@@ -110,7 +110,6 @@ class CtCaseSearchSpider(BaseCaseSearchSpider):
             self.progress_bar.update()
 
 
-# Step2 - Open each case and save document urls
 class CtCaseDetailSpider(BaseCaseDetailSpider):
     """Step2 - Open each case and save document urls"""
     name = 'ct_case_detail'
@@ -133,21 +132,6 @@ class CtCaseDetailSpider(BaseCaseDetailSpider):
         if '/ErrorPage.aspx' in response.url:
             self.logger.warning(f'Invalid url for case {case.id}: {response.url} (expected {response.request.url})')
             return
-
-        case.case_type = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblCaseType')
-        case.ct_details.prefix = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblPrefixSuffix')
-
-        file_date_str = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblFileDate')
-        case.filed_date = datetime.strptime(file_date_str, "%m/%d/%Y").date()
-
-        return_date_str = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblReturnDate')
-        case.ct_details.return_date = datetime.strptime(return_date_str, "%m/%d/%Y").date()
-
-        case.is_scraped = True
-        case.scraped_date = timezone.now()
-        yield DbItem(record=case)
-
-        if case.filed_date < self.MIN_DATE: return  # don't save cases for all records
 
         document_rows = response.xpath(
             '//*[@id="ctl00_ContentPlaceHolder1_CaseDetailDocuments1_pnlMotionData"]'
@@ -183,6 +167,17 @@ class CtCaseDetailSpider(BaseCaseDetailSpider):
             document.ct_details.filed_by = extract_text_from_el(tr.xpath('td[3]'))
             document.ct_details.arguable = extract_text_from_el(tr.xpath('td[5]'))
             yield DbItem(record=document)
+
+        # update case (scraped_date and is_scraped are updated in pipeline)
+        case.case_type = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblCaseType')
+        case.ct_details.prefix = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblPrefixSuffix')
+
+        file_date_str = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblFileDate')
+        case.filed_date = datetime.strptime(file_date_str, "%m/%d/%Y").date()
+
+        return_date_str = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblReturnDate')
+        case.ct_details.return_date = datetime.strptime(return_date_str, "%m/%d/%Y").date()
+        yield DbItem(record=case)
 
     @staticmethod
     def extract_header(response, attr_id: str) -> str | None:
