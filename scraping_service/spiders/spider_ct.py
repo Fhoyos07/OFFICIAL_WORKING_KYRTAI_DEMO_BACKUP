@@ -186,10 +186,9 @@ class CtCaseDetailSpider(BaseCaseDetailSpider):
             return value.strip()
 
 
-
 class CtDocumentSpider(BaseDocumentDownloadSpider):
     """Step 3 - download each document"""
-    name = 'kyrt_ct_documents'
+    name = 'ct_documents'
 
     @property
     def state_code(self) -> str: return 'CT'

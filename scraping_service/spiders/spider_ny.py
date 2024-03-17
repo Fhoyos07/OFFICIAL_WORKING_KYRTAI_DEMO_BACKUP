@@ -14,7 +14,7 @@ from scraping_service.settings import NY_USERNAME, NY_PASSWORD
 
 class NyCaseSearchSpider(BaseCaseSearchSpider):
     """Step 1 - search companies for new cases"""
-    name = 'kyrt_ny_search'
+    name = 'ny_case_search'
 
     @classmethod
     def update_settings(cls, settings):
@@ -210,7 +210,7 @@ class NyCaseDetailSpider(BaseCaseDetailSpider):
 
 class NyDocumentSpider(BaseDocumentDownloadSpider):
     """Step 3 - download each document"""
-    name = 'kyrt_ny_documents'
+    name = 'ny_documents'
 
     @property
     def state_code(self) -> str: return 'NY'
