@@ -58,14 +58,6 @@ class CtCaseSearchSpider(BaseCaseSearchSpider):
 
     # @log_response
     def parse_cases(self, response: TextResponse, company: Company, name_variation: str, page: int = 1):
-        # if page == 1:
-        #     count_of_records = response.xpath('//*[@id="ctl00_ContentPlaceHolder1_lblRecords"]/text()').get()
-        #     company_item = {
-        #         "_type": 'Companies',
-        #         "Company": company,
-        #         "Cases Total": count_of_records.split(' of ')[-1] if count_of_records else 0
-        #     }
-        #     yield company_item
         result_rows = response.css('table.grdBorder .grdRow, table.grdBorder .grdRowAlt')
         self.logger.info(f'{name_variation} ({company.id}): Found {len(result_rows)} cases')
 
@@ -75,10 +67,8 @@ class CtCaseSearchSpider(BaseCaseSearchSpider):
                 self.logger.info(f'{name_variation} ({company.id}): Skipping as no case_url')
                 continue
 
-            # id is a built-in function, but we can explicitly ignore it for simplicity
-            docket_id = parse_url_params(case_url)['DocketNo']
-
             # avoid scraping same case twice
+            docket_id = parse_url_params(case_url)['DocketNo']
             if docket_id in self.existing_docket_ids:
                 self.logger.debug(f'{name_variation} ({company.id}): Skipping existing case {docket_id}')
                 continue
@@ -95,9 +85,10 @@ class CtCaseSearchSpider(BaseCaseSearchSpider):
             case.case_number = extract_text_from_el(tr.xpath('td[3]'))
             case.case_type = None  # populated in the next spider
             case.court = extract_text_from_el(tr.xpath('td[4]'))
+            case.caption = extract_text_from_el(tr.xpath('td[2]'))
+
             case.url = response.urljoin(case_url)
 
-            case.caption = extract_text_from_el(tr.xpath('td[2]'))
             case.ct_details.party_name = extract_text_from_el(tr.xpath('td[1]'))
             case.ct_details.pty_number = extract_text_from_el(tr.xpath('td[5]'))
             case.ct_details.self_rep = extract_text_from_el(tr.xpath('td[6]')).lower() == 'y'
@@ -203,5 +194,6 @@ class CtCaseDetailSpider(BaseCaseDetailSpider):
 # Step 3 - open and download each document
 class CtDocumentSpider(BaseDocumentDownloadSpider):
     name = 'kyrt_ct_documents'
+
     @property
     def state_code(self) -> str: return 'CT'
