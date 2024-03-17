@@ -43,6 +43,11 @@ PROXYMESH_PASSWORD = 'password'
 PROXYMESH_ENDPOINT = 'nl.proxymesh.com'
 
 
+# NY credentials
+NY_USERNAME = 'unihunko'
+NY_PASSWORD = 'tugce0-dykzyz-fuvxoM'
+
+
 # Smartproxy Settings
 SMARTPROXY_ENABLED = False
 SMARTPROXY_USER = os.environ.get('SMARTPROXY_USER')

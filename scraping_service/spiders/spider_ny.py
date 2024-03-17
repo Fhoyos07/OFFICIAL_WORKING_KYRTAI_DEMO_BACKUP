@@ -9,9 +9,7 @@ from typing import Iterable
 
 from ._base import BaseCaseSearchSpider, BaseCaseDetailSpider, BaseDocumentDownloadSpider
 from scraping_service.items import DbItem
-
-NY_USERNAME = 'unihunko'
-NY_PASSWORD = 'tugce0-dykzyz-fuvxoM'
+from scraping_service.settings import NY_USERNAME, NY_PASSWORD
 
 
 class NyCaseSearchSpider(BaseCaseSearchSpider):
@@ -153,6 +151,7 @@ class NyCaseSearchSpider(BaseCaseSearchSpider):
             yield self.start_company_request()
 
     def _validate_response(self, response):
+        # todo: check also for My Cases in the left menu
         if response.xpath('//form[@name="captcha_form"]'):
             self.logger.error('Captcha found! Existing')
             raise CloseSpider('Captcha found')
