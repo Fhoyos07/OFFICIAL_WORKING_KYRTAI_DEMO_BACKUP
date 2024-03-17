@@ -1,11 +1,10 @@
 from scrapy.http import Request, FormRequest, TextResponse
-import re
 
 from utils.scrapy.response import extract_text_from_el
 from utils.scrapy.decorators import log_response
 from utils.scrapy.url import parse_url_params
 from datetime import datetime
-from django.utils import timezone
+import re
 
 from utils.scrapy.decorators import update_progress
 
