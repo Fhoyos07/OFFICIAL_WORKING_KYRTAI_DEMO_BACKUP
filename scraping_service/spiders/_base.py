@@ -2,17 +2,12 @@ from abc import ABC, abstractmethod
 from scrapy import Spider, Request
 from datetime import date, timedelta
 from tqdm import tqdm
-from pathlib import Path
-from typing import Iterable
-from django.db import models
-import sys
-
-from apps.web.models import State, Company, Case, Document
+from django.db.models import Q
 
 from utils.scrapy.decorators import update_progress
-
+from apps.web.models import State, Company, Case, Document
 from scraping_service.items import DocumentBodyItem
-from scraping_service.settings import (DAYS_BACK, MAX_COMPANIES)
+from scraping_service.settings import DAYS_BACK, MAX_COMPANIES
 
 
 class BaseSpider(ABC, Spider):
@@ -65,7 +60,9 @@ class BaseCaseSearchSpider(BaseSpider, ABC):
         self.progress_bar = tqdm(total=total)
 
         # get existing case ids
-        self.existing_docket_ids = set(Case.objects.filter(state=self.state).values_list('docket_id', flat=True))
+        self.existing_docket_ids: set[int] = set(
+            Case.objects.filter(state=self.state).values_list('docket_id', flat=True)
+        )
         self.logger.info(f"Found {len(self.existing_docket_ids)} existing case ids")
 
 
@@ -92,12 +89,20 @@ class BaseCaseDetailSpider(BaseSpider, ABC):
     def __init__(self):
         super().__init__()
         self.cases_to_scrape = Case.objects.filter(
-            is_scraped=False, state=self.state
+            Q(received_date__gte=self.MIN_DATE) | Q(filed_date__gte=self.MIN_DATE),
+            is_scraped=False,
+            state=self.state,
         ).select_related(
             self.case_detail_relation
         )
         self.logger.info(f"Found {self.cases_to_scrape.count()} cases to scrape")
         self.progress_bar = tqdm(total=self.cases_to_scrape.count())
+
+        # get existing document ids
+        self.existing_document_ids: set[int] = set(
+            Document.objects.filter(case__state=self.state).values_list('document_id', flat=True)
+        )
+        self.logger.info(f"Found {len(self.existing_document_ids)} existing document ids")
 
 
 # there are documents with different links redirecting to the same page

@@ -161,13 +161,18 @@ class CtCaseDetailSpider(BaseCaseDetailSpider):
                 self.logger.debug(f'Invalid document_url: {document_url} at {response.url}')
                 continue
 
+            # avoid scraping same document twice
+            document_id = parse_url_params(document_url)['DocumentNo']
+            if document_id in self.existing_document_ids:
+                self.logger.debug(f'Case #{case.docket_id}: Skipping existing document {document_id}')
+                continue
+
             document = Document(case=case)
             document.ct_details = DocumentDetailsCT()
 
-            # common fields
-            document.url = response.urljoin(document_url)
+            document.document_id = document_id
             document.name = tr.xpath('td[4]/a/text()').get()
-            document.document_id = parse_url_params(document_url)['DocumentNo']
+            document.url = response.urljoin(document_url)
 
             # CT-specific fields
             document.ct_details.entry_no = extract_text_from_el(tr.xpath('td[1]'))
