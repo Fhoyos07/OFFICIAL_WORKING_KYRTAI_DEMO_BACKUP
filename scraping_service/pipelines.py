@@ -36,38 +36,24 @@ class CaseSearchDbPipeline(BasePipeline):
         self.case_detail_relation: str = spider.case_detail_relation
 
     def process_item(self, item: DbItem, spider: BaseCaseSearchSpider):
-        # convert item to Case model and append to list for bulk processing
-        case: Case = item.record
-        case.found_date = timezone.now()
+        record: Case = item.record
 
-        self.cases_to_create.append(case)
-
-        if len(self.cases_to_create) >= self.chunk_size:
-            self.insert_cases()
+        self.insert_case(case=record)
         return item
 
-    def close_spider(self, spider: BaseCaseSearchSpider):
-        self.insert_cases()
+    def insert_case(self, case: Case):
+        case.found_date = timezone.now()
+        case.save()
 
-    # @transaction.atomic()
-    def insert_cases(self):
-        if not self.cases_to_create: return
-
-        Case.objects.bulk_create(self.cases_to_create)
-
-        case_details_to_create = [getattr(case, self.case_detail_relation) for case in self.cases_to_create]
-        case_detail_model = type(case_details_to_create[0])
-        case_detail_model.objects.bulk_create(case_details_to_create)
-
-        self.logger.info(f'Saved {len(self.cases_to_create)} Cases and {len(case_details_to_create)} Details')
-        self.cases_to_create = []
+        case_detail = getattr(case, self.case_detail_relation)
+        case_detail.save()
 
 
 class CaseDetailDbPipeline(BasePipeline):
     def __init__(self, spider: BaseCaseSearchSpider):
         super().__init__(spider)
         self.documents_to_create: list[Document] = []
-        self.chunk_size = 200
+        self.chunk_size = 50
 
         # relation from Case to CaseDetail state object (i.e., ny_details)
         self.case_detail_relation: str = spider.case_detail_relation
