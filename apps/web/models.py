@@ -64,7 +64,7 @@ class Case(models.Model):
         return self.case_number
 
     class Meta:
-        unique_together = [('state', 'docket_id')]
+        unique_together = ('state', 'docket_id')
 
 
 class CaseDetailsNY(models.Model):
@@ -100,6 +100,9 @@ class Document(models.Model):
     download_date = models.DateTimeField(null=True, blank=True)
 
     relative_path = models.CharField(max_length=255, null=True, blank=True)
+
+    class Meta:
+        unique_together = ('case', 'document_id')
 
     def __str__(self):
         return self.name
