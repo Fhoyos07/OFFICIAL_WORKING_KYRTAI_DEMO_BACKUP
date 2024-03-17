@@ -93,7 +93,7 @@ class DocumentInline(admin.TabularInline):
 class CaseAdmin(admin.ModelAdmin):
     list_display = [
         'found_date', 'case_number', 'state_link', 'company_link', 'company_name_variation',
-        'caption', 'court', 'case_type', 'gbruno_score'
+        'caption', 'case_type', 'filed_date', 'received_date', 'gbruno_score'
     ]
     list_display_links = ['case_number', 'caption']
     search_fields = ['case_number', 'caption', 'company__name']

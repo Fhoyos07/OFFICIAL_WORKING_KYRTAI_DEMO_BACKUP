@@ -13,7 +13,10 @@ HTML_DEBUG_DIR = ETC_DIR / 'html'
 FILES_DIR = BASE_DIR / 'files'       # root dir for csvs, input and pdfs
 INPUT_CSV_PATH = FILES_DIR / 'input.csv'
 
+
+# only 1 concurrent request an no pipelines by default (override on spider level if needed)
 CONCURRENT_REQUESTS = 1
+ITEM_PIPELINES = {}
 
 
 # crawling settings
