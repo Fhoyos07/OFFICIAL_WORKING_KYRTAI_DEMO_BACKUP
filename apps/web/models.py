@@ -55,6 +55,8 @@ class Case(models.Model):
         MinValueValidator(0), MaxValueValidator(100)
     ])
 
+    found_date = models.DateTimeField(null=True, blank=True)
+
     is_scraped = models.BooleanField(default=False)
     scraped_date = models.DateTimeField(null=True, blank=True)
 
@@ -68,9 +70,9 @@ class Case(models.Model):
 class CaseDetailsNY(models.Model):
     case = models.OneToOneField(Case, on_delete=models.CASCADE, related_name='ny_details')
 
-    # received_date = models.DateField(null=True, blank=True)
     efiling_status = models.CharField(max_length=255, null=True, blank=True)
-    # case_status = models.CharField(max_length=255, null=True, blank=True)
+    status_document_url = models.URLField(max_length=255, blank=True, null=True)
+    status_document_name = models.CharField(max_length=255, blank=True, null=True)
 
 
 class CaseDetailsCT(models.Model):
@@ -110,8 +112,6 @@ class Document(models.Model):
 
 class DocumentDetailsNY(models.Model):
     document = models.OneToOneField(Document, on_delete=models.CASCADE, related_name='ny_details')
-    status_document_url = models.URLField(max_length=255, blank=True, null=True)
-    status_document_name = models.CharField(max_length=255, blank=True, null=True)
 
 
 class DocumentDetailsCT(models.Model):
