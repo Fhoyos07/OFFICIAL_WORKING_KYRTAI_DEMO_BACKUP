@@ -19,33 +19,35 @@ class SolverPOC:
         options.add_argument("--window-size=1920x1080")
         options.add_argument("--verbose")
         # options.add_argument("--headless")
-        user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36"
-        options.add_argument(f"user-agent={user_agent}")
-        options.add_experimental_option("excludeSwitches", ["enable-automation"])
-        options.add_experimental_option("useAutomationExtension", False)
-        options.add_argument("--disable-notifications")
-        options.add_argument("--disable-popup-blocking")
-        options.add_argument("--enable-javascript")
+        # user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36"
+        # options.add_argument(f"user-agent={user_agent}")
+        # options.add_experimental_option("excludeSwitches", ["enable-automation"])
+        # options.add_experimental_option("useAutomationExtension", False)
+        # options.add_argument("--disable-notifications")
+        # options.add_argument("--disable-popup-blocking")
+        # options.add_argument("--enable-javascript")
 
         self.driver = webdriver.Chrome(options=options)
 
     def run(self, query: str):
         # open search page
         self.driver.get(f'https://iapps.courts.state.ny.us/nyscef/CaseSearch?TAB=name')
-
         cookie = {
             'name': 'JSESSIONID',
-            'value': 'E7BC76B10545C8887056E28FE2222A84.server2068',
-            # Specify additional properties as needed, for example:
+            'value': 'B1A8CEB1EFF22EE2B5EF0DAE3ECB3EF3.server2068',
             'path': '/nyscef',
-            # 'domain': 'iapps.courts.state.ny.us',  # Uncomment and replace with the domain if needed
-            # 'secure': True,  # Uncomment if the cookie should be sent over HTTPS only
+            'domain': 'iapps.courts.state.ny.us',  # Uncomment and replace with the domain if needed
+            'secure': False,  # Uncomment if the cookie should be sent over HTTPS only
             'httpOnly': True,  # Uncomment if the cookie is HTTP onlym
-            'priority': 'High'
+            'priority': 'high'
         }
+        self.driver.delete_all_cookies()
 
         # Adding the cookie to the current session
         self.driver.add_cookie(cookie)
+        self.driver.refresh()
+        # self.driver.get(f'https://iapps.courts.state.ny.us/nyscef/CaseSearch?TAB=name')
+
 
         input('Continue?')
         #
@@ -98,6 +100,23 @@ class SolverPOC:
         self.current_captcha_retries = 0
         return result['code']
 
+def open_browser_and_wait():
+    from playwright.sync_api import sync_playwright
+    # Launch Playwright in sync mode and start a browser instance (non-headless mode)
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=False)  # Use headless=False to see the browser UI
+        page = browser.new_page()
+
+        # Navigate to the specified URL
+        page.goto('https://iapps.courts.state.ny.us/nyscef/CaseSearch?TAB=name')
+
+        # Wait for user input in the console before proceeding
+        input("Press Enter in the console to continue...")
+
+        # After user input, you can add more automation tasks or simply close the browser
+        browser.close()
+
 
 if __name__ == '__main__':
     SolverPOC().run(query='J.G. Wentworth Originations, LLC')
+    # open_browser_and_wait()
