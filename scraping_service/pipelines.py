@@ -173,3 +173,5 @@ class DocumentDbPipeline(BasePipeline):
         if not self.documents_to_update: return
         Document.objects.bulk_update(self.documents_to_update, fields=['is_downloaded', 'relative_path'])
         self.logger.info(f'Updated {len(self.documents_to_update)} Documents')
+        self.documents_to_update = []
+
