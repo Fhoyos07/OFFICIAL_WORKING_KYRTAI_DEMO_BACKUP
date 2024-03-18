@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.db.models import Prefetch, Count
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.utils.html import format_html
@@ -123,7 +124,6 @@ class CaseAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         """Performance optimization"""
-        from django.db.models import Prefetch, Count
         queryset = super().get_queryset(request)
         queryset = queryset.select_related(
             'state',
@@ -141,8 +141,13 @@ class DocumentDetailsNyInline(admin.StackedInline):
     can_delete = False
 
 
-class DocumentDetailsCTInline(admin.StackedInline):
+class DocumentDetailsCtInline(admin.StackedInline):
     model = DocumentDetailsCT
+    can_delete = False
+
+
+class DocumentDetailsMnInline(admin.StackedInline):
+    model = DocumentDetailsMN
     can_delete = False
 
 
@@ -157,5 +162,7 @@ class DocumentAdmin(admin.ModelAdmin):
             if hasattr(obj, 'ny_details'):
                 inlines = [DocumentDetailsNyInline] + inlines
             if hasattr(obj, 'ct_details'):
-                inlines = [DocumentDetailsCTInline] + inlines
+                inlines = [DocumentDetailsCtInline] + inlines
+            if hasattr(obj, 'mn_details'):
+                inlines = [DocumentDetailsMnInline] + inlines
         return inlines
