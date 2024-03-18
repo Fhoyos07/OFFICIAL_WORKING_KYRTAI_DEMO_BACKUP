@@ -24,6 +24,7 @@ class MnCaseSearchSpider(BaseCaseSearchSpider):
     def case_detail_relation(self): return 'mn_details'
 
     def start_requests(self):
+        # todo: https://publicaccess.courts.state.mn.us/CaseSearch
         yield Request('https://civilinquiry.jud.ct.gov/PartySearch.aspx',
                       callback=self.parse_search_form)
 

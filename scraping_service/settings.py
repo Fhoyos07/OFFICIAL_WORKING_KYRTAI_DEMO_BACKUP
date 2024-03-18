@@ -8,7 +8,6 @@ from django.conf import settings
 # folders
 BASE_DIR = settings.BASE_DIR
 ETC_DIR = BASE_DIR / '_etc'
-LOG_DIR = ETC_DIR / 'logs'
 HTML_DEBUG_DIR = ETC_DIR / 'html'
 FILES_DIR = BASE_DIR / 'files'       # root dir for csvs, input and pdfs
 INPUT_CSV_PATH = FILES_DIR / 'input.csv'

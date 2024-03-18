@@ -199,7 +199,7 @@ LOGGING = {
         },
         "file": {
             "class": "logging.handlers.TimedRotatingFileHandler",
-            "level": "DEBUG",
+            "level": "DEBUG" if DEBUG_TO_CONSOLE else "INFO",
             "filename": LOG_DIR / 'debug.log',
             "when": "midnight",
             "interval": 1,
