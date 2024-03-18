@@ -1,9 +1,9 @@
 from django.contrib import admin
 from django.urls import reverse
+from django.utils.safestring import mark_safe
 from django.utils.html import format_html
-
-from .models import (State, Company, CompanyNameVariation, Case, CaseDetailsNY, CaseDetailsCT,
-                     Document, DocumentDetailsNY, DocumentDetailsCT)
+from .models import (State, Company, CompanyNameVariation, Case, CaseDetailsNY, CaseDetailsCT, CaseDetailsMN,
+                     Document, DocumentDetailsNY, DocumentDetailsCT, DocumentDetailsMN)
 
 
 @admin.register(State)
@@ -54,16 +54,13 @@ class CaseDetailsNyInline(admin.StackedInline):
     can_delete = False
 
 
-class CaseDetailsCTInline(admin.StackedInline):
+class CaseDetailsCtInline(admin.StackedInline):
     model = CaseDetailsCT
     can_delete = False
 
-
-from django.contrib import admin
-from django.conf import settings
-from django.utils.safestring import mark_safe
-from django import forms
-from django.utils.html import format_html
+class CaseDetailsMnInline(admin.StackedInline):
+    model = CaseDetailsMN
+    can_delete = False
 
 
 class DocumentInline(admin.TabularInline):
@@ -83,16 +80,11 @@ class DocumentInline(admin.TabularInline):
         return "-"
     original_url.short_description = "URL"
 
-# class DocumentInline(admin.TabularInline):
-#     model = Document
-#     fields = ['name', 'url', 'is_downloaded']
-#     extra = 0
-
 
 @admin.register(Case)
 class CaseAdmin(admin.ModelAdmin):
     list_display = [
-        'found_date', 'case_number', 'state_link', 'company_link', 'company_name_variation',
+        'found_date', 'case_number', 'state_link', 'company_link', 'company_name_variation', 'documents_count',
         'caption', 'case_type', 'filed_date', 'received_date', 'gbruno_score'
     ]
     list_display_links = ['case_number', 'caption']
@@ -120,8 +112,28 @@ class CaseAdmin(admin.ModelAdmin):
             if hasattr(obj, 'ny_details'):
                 inlines = [CaseDetailsNyInline] + inlines
             if hasattr(obj, 'ct_details'):
-                inlines = [CaseDetailsCTInline] + inlines
+                inlines = [CaseDetailsCtInline] + inlines
+            if hasattr(obj, 'mn_details'):
+                inlines = [CaseDetailsMnInline] + inlines
         return inlines
+
+    def documents_count(self, obj):
+        return format_html(f'{obj.documents_count} Documents')
+    documents_count.short_description = 'Documents'
+
+    def get_queryset(self, request):
+        """Performance optimization"""
+        from django.db.models import Prefetch, Count
+        queryset = super().get_queryset(request)
+        queryset = queryset.select_related(
+            'state',
+            'company'
+        ).prefetch_related(
+            Prefetch('documents'),
+        ).annotate(
+            documents_count=Count('documents')
+        )
+        return queryset
 
 
 class DocumentDetailsNyInline(admin.StackedInline):
