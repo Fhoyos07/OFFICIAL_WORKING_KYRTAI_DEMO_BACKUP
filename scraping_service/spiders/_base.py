@@ -89,7 +89,6 @@ class BaseCaseDetailSpider(BaseSpider, ABC):
     def __init__(self):
         super().__init__()
         self.cases_to_scrape = Case.objects.filter(
-            Q(received_date__gte=self.MIN_DATE) | Q(filed_date__gte=self.MIN_DATE),
             is_scraped=False,
             state=self.state,
         ).select_related(
