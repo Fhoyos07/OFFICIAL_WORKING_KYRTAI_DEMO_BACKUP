@@ -24,10 +24,11 @@ class Company(models.Model):
 
 class CompanyNameVariation(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='name_variations')
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
 
     class Meta:
         unique_together = ['company', 'name']
+        ordering = ['name']
 
     def __str__(self):
         return self.name

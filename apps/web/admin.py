@@ -41,15 +41,24 @@ class CompanyAdmin(admin.ModelAdmin):
         queryset = super().get_queryset(request).prefetch_related('name_variations')
         return queryset
 
-    def name_variations_list(self, obj):
+    def name_variations_list(self, obj: Company):
         variations = [variation.name for variation in obj.name_variations.all()]
-        variations_str = ' | '.join(variations)
-        if len(variations_str) > 2000:
-            return format_html('{}...', variations_str[:2000])
-        return variations_str
+        variations_str = '<br/>'.join(variations)
+        if len(variations_str) > 3000:
+            variations_str = f'{variations_str[:3000]}...'
+        return format_html(variations_str)
+
     name_variations_list.short_description = 'Name Variations'
 
 
+@admin.register(CompanyNameVariation)
+class CompanyNameVariationAdmin(admin.ModelAdmin):
+    list_display = ['name', 'company']
+    ordering = ['name']
+    search_fields = ['name']
+
+
+# CASE INLINES
 class CaseDetailsNyInline(admin.StackedInline):
     model = CaseDetailsNY
     can_delete = False
