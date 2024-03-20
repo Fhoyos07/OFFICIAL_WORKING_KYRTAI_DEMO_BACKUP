@@ -117,7 +117,9 @@ class BaseDocumentDownloadSpider(BaseSpider, ABC):
     def __init__(self):
         super().__init__()
         self.documents_to_scrape = Document.objects.filter(
-            case__state=self.state, is_downloaded=False
+            Q(case__received_date__gte=self.MIN_DATE) | Q(case__filed_date__gte=self.MIN_DATE),
+            case__state=self.state,
+            is_downloaded=False
         ).select_related(
             'case'
         )
