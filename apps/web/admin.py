@@ -119,7 +119,7 @@ class CaseAdmin(admin.ModelAdmin):
         return inlines
 
     def documents_count(self, obj):
-        return format_html(f'{obj.documents_count} Documents')
+        return format_html(f'{obj.documents_count}')
     documents_count.short_description = 'Documents'
 
     def get_queryset(self, request):
