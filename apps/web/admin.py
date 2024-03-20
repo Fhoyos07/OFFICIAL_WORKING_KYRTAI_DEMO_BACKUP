@@ -21,10 +21,10 @@ class CompanyNameVariationInline(admin.TabularInline):
 
 class CaseInline(admin.TabularInline):
     model = Case
-    can_delete = False
     extra = 0
 
-    fields = ['case_number', 'caption']
+    can_delete = False
+    fields = readonly_fields = ['case_number', 'caption']
 
 
 @admin.register(Company)

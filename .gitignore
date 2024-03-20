@@ -9,6 +9,7 @@
 /_etc/html/
 /_etc/ny_session_cache.json
 /_etc/input_backup.csv
+/_etc/notes.txt
 /_etc/credentials/
 /_etc/ai/
 /config/envs/.env.base
