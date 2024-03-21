@@ -32,5 +32,26 @@ def update_scraped_date():
     )
 
 
+@django_setup_decorator(environment='dev')
+def cleanup_company_variations():
+    from apps.web.models import Company, CompanyNameVariation
+    companies = list(Company.objects.prefetch_related('name_variations').all())
+    companies_to_update: list[Company] = []
+    variation_ids_to_delete: list[int] = []
+    for company in companies:
+        company_variations = list(company.name_variations.all())
+        for variation in company_variations:
+            if variation.name == f'{company.name}, LLC' and len(company_variations) == 1:
+                company.name = f'{company.name} LLC'
+                companies_to_update.append(company)
+                variation_ids_to_delete.append(variation.id)
+
+    with transaction.atomic():
+        CompanyNameVariation.objects.filter(id__in=variation_ids_to_delete).delete()
+        print(f'Deleted {len(variation_ids_to_delete)} variations')
+
+        Company.objects.bulk_update(companies_to_update, fields=['name'])
+        print(f'Updated {len(companies_to_update)} companies')
+
 if __name__ == '__main__':
-    update_scraped_date()
+    cleanup_company_variations()

@@ -35,7 +35,10 @@ class CompanyAdmin(admin.ModelAdmin):
     ]
     search_fields = ['name']
     ordering = ['name']
-    inlines = [CaseInline, CompanyNameVariationInline]
+    inlines = [
+        # CaseInline,
+        CompanyNameVariationInline
+    ]
 
     def get_queryset(self, request):
         queryset = super().get_queryset(request).prefetch_related('name_variations')
