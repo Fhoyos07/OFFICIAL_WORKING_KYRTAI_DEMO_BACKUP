@@ -132,6 +132,23 @@ class CtCaseDetailSpider(BaseCaseDetailSpider):
             self.logger.warning(f'Invalid url for case {case.id}: {response.url} (expected {response.request.url})')
             return
 
+        # update case (scraped_date and is_scraped are updated in pipeline)
+        file_date_str = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblFileDate')
+        case.filed_date = datetime.strptime(file_date_str, "%m/%d/%Y").date()
+        if not case.case_date:
+            self.logger.warning(f'Filed date is invalid at {response.url}')
+            return
+
+        case.case_type = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblCaseType')
+        case.ct_details.prefix = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblPrefixSuffix')
+
+        case.case_date = case.filed_date
+
+        return_date_str = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblReturnDate')
+        case.ct_details.return_date = datetime.strptime(return_date_str, "%m/%d/%Y").date()
+        yield DbItem(record=case)
+
+        # crea
         document_rows = response.xpath(
             '//*[@id="ctl00_ContentPlaceHolder1_CaseDetailDocuments1_pnlMotionData"]'
             '//table'
@@ -167,16 +184,6 @@ class CtCaseDetailSpider(BaseCaseDetailSpider):
             document.ct_details.arguable = extract_text_from_el(tr.xpath('td[5]'))
             yield DbItem(record=document)
 
-        # update case (scraped_date and is_scraped are updated in pipeline)
-        case.case_type = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblCaseType')
-        case.ct_details.prefix = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblPrefixSuffix')
-
-        file_date_str = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblFileDate')
-        case.filed_date = datetime.strptime(file_date_str, "%m/%d/%Y").date()
-
-        return_date_str = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblReturnDate')
-        case.ct_details.return_date = datetime.strptime(return_date_str, "%m/%d/%Y").date()
-        yield DbItem(record=case)
 
     @staticmethod
     def extract_header(response, attr_id: str) -> str | None:

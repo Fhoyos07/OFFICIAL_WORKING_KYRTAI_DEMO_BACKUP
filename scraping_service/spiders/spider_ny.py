@@ -135,6 +135,8 @@ class NyCaseSearchSpider(BaseCaseSearchSpider):
             case.url = response.urljoin(case_url)
 
             case.received_date = received_date
+            case.case_date = case.received_date
+
             case.status = tr.xpath('td[2]/span/text()').get()
 
             case.ny_details.efiling_status = tr.xpath('td[2]/text()').get(default='').strip()

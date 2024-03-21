@@ -98,7 +98,7 @@ class DocumentInline(admin.TabularInline):
 class CaseAdmin(admin.ModelAdmin):
     list_display = [
         'found_date', 'case_number', 'state_link', 'company_link', 'company_name_variation', 'documents_count',
-        'caption', 'case_type', 'filed_date', 'received_date', 'gbruno_score'
+        'caption', 'case_type', 'case_date', 'gbruno_score'
     ]
     list_display_links = ['case_number', 'caption']
     search_fields = ['case_number', 'caption', 'company__name']
@@ -106,7 +106,7 @@ class CaseAdmin(admin.ModelAdmin):
     list_filter = ['state', 'case_type']
     list_select_related = ['state', 'company']  # Optimize foreign key lookups
     inlines = [DocumentInline]
-    ordering = ['-found_date']
+    ordering = ['-case_date']
 
     def company_link(self, obj):
         link = reverse("admin:web_company_change", args=[obj.company.id])

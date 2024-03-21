@@ -60,6 +60,7 @@ class Case(models.Model):
     gbruno_score = models.IntegerField(null=True, blank=True, validators=[
         MinValueValidator(0), MaxValueValidator(100)
     ])
+    case_date = models.DateField()
 
     def __str__(self):
         return self.case_number

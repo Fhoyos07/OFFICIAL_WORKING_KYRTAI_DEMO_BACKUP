@@ -2,6 +2,8 @@ from datetime import datetime, timezone
 
 from utils.django import django_setup, django_setup_decorator
 from django.db import transaction
+from tqdm import tqdm
+from utils.types.array import chunked_list
 import re
 
 
@@ -53,5 +55,23 @@ def cleanup_company_variations():
         Company.objects.bulk_update(companies_to_update, fields=['name'])
         print(f'Updated {len(companies_to_update)} companies')
 
+
+@django_setup_decorator(environment='dev')
+def update_dates():
+    from apps.web.models import Case
+    cases = Case.objects.prefetch_related('state').all()
+    for case in cases:
+        if case.state.code == 'CT':
+            case.case_date = case.filed_date
+        elif case.state.code == 'NY':
+            case.case_date = case.received_date
+
+    progress_bar = tqdm(total=len(cases))
+    with transaction.atomic():
+        for chunk in chunked_list(cases, chunk_size=100):
+            Case.objects.bulk_update(chunk, fields=['case_date'])
+            progress_bar.update(len(chunk))
+
+
 if __name__ == '__main__':
-    cleanup_company_variations()
+    update_dates()
