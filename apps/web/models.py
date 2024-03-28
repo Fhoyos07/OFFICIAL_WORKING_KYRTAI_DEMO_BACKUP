@@ -60,7 +60,7 @@ class Case(models.Model):
     gbruno_score = models.IntegerField(null=True, blank=True, validators=[
         MinValueValidator(0), MaxValueValidator(100)
     ])
-    case_date = models.DateField()
+    case_date = models.DateField(blank=True, null=True)  # null=True because CT doesn't have file_date at list page
 
     def __str__(self):
         return self.case_number
