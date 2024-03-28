@@ -77,4 +77,4 @@ MAX_COMPANIES = None # crawl all
 
 
 ### re-deploy server
-docker compose up -- build
+git pull && docker compose up --build --detach
