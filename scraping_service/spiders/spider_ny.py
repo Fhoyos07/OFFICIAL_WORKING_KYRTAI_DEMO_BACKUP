@@ -179,6 +179,9 @@ class NyCaseDetailSpider(BaseCaseDetailSpider):
 
     @update_progress
     def parse_case(self, response, case: Case):
+        # update case (scraped_date and is_scraped are updated in pipeline)
+        yield DbItem(record=case)
+
         document_rows = response.css('table.NewSearchResults tbody tr')
         for tr in document_rows:
             document_url = tr.xpath('td[2]/a/@href').get()
@@ -202,12 +205,10 @@ class NyCaseDetailSpider(BaseCaseDetailSpider):
             # NY-specific fields
             status_document_url = tr.xpath('td[4]/a/@href').get()
             if status_document_url:
-                case.ny_details.status_document_url = response.urljoin(status_document_url)
-                case.ny_details.status_document_name = tr.xpath('td[4]/a/text()').get()
+                document.ny_details.status_document_url = response.urljoin(status_document_url)
+                document.ny_details.status_document_name = tr.xpath('td[4]/a/text()').get()
             yield DbItem(record=document)
 
-        # update case (scraped_date and is_scraped are updated in pipeline)
-        yield DbItem(record=case)
 
 
 class NyDocumentSpider(BaseDocumentDownloadSpider):
