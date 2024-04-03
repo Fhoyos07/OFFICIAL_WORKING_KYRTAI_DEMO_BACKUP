@@ -121,6 +121,11 @@ class Document(models.Model):
 
 class DocumentDetailsNY(models.Model):
     document = models.OneToOneField(Document, on_delete=models.CASCADE, related_name='ny_details')
+    description = models.TextField(max_length=255, blank=True, null=True)
+    filed_by = models.TextField(max_length=255, blank=True, null=True)
+    filed_date = models.DateField(null=True, blank=True)
+    received_date = models.DateField(null=True, blank=True)
+
     status_document_url = models.URLField(max_length=255, blank=True, null=True)
     status_document_name = models.CharField(max_length=255, blank=True, null=True)
 

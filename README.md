@@ -78,3 +78,6 @@ MAX_COMPANIES = None # crawl all
 
 ### re-deploy server
 git pull && docker compose up --build --detach
+
+### check job logs
+docker logs -f --tail 10000 celery-worker

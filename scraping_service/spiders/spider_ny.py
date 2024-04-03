@@ -4,6 +4,7 @@ from datetime import datetime
 
 from apps.web.models import Company, Case, CaseDetailsNY, Document, DocumentDetailsNY
 from utils.scrapy.decorators import log_response, save_response, update_progress
+from utils.types.str import trim_spaces
 from utils.scrapy.url import parse_url_params
 from typing import Iterable
 
@@ -199,16 +200,32 @@ class NyCaseDetailSpider(BaseCaseDetailSpider):
             document.ny_details = DocumentDetailsNY()
 
             document.document_id = document_id
-            document.name = tr.xpath('td[2]/a/text()').get()
             document.url = response.urljoin(document_url)
 
+            name_parts = tr.xpath('td[2]/a/text()[normalize-space()] | td[2]/text()[normalize-space()]').getall()
+            document.name = ' '.join(trim_spaces(p) for p in name_parts)
+
             # NY-specific fields
+            description_parts = tr.xpath('td[2]/span/text()[normalize-space()]').getall()
+            if description_parts:
+                document.ny_details.description = ' '.join(trim_spaces(p) for p in description_parts)
+
+            filed_parts = [trim_spaces(s) for s in tr.xpath('td[3]//text()[normalize-space()]').getall()]
+            if any('Filed:' in p for p in filed_parts):
+                document.ny_details.filed_by = filed_parts[0]
+                for p in filed_parts[1:]:
+                    if p.startswith('Filed:'):
+                        filed_date_str = p.replace('Filed: ', '')
+                        document.ny_details.filed_date = datetime.strptime(filed_date_str, '%m/%d/%Y').date()
+                    if p.startswith('Received:'):
+                        received_date_str = p.replace('Received: ', '')
+                        document.ny_details.filed_date = datetime.strptime(received_date_str, '%m/%d/%Y').date()
+
             status_document_url = tr.xpath('td[4]/a/@href').get()
             if status_document_url:
                 document.ny_details.status_document_url = response.urljoin(status_document_url)
                 document.ny_details.status_document_name = tr.xpath('td[4]/a/text()').get()
             yield DbItem(record=document)
-
 
 
 class NyDocumentSpider(BaseDocumentDownloadSpider):
