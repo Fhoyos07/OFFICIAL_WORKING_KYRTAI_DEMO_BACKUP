@@ -34,7 +34,6 @@ class CompanyAdmin(admin.ModelAdmin):
         'name_variations_list'
     ]
     search_fields = ['name']
-    ordering = ['name']
     inlines = [
         # CaseInline,
         CompanyNameVariationInline
@@ -71,6 +70,7 @@ class CaseDetailsCtInline(admin.StackedInline):
     model = CaseDetailsCT
     can_delete = False
 
+
 class CaseDetailsMnInline(admin.StackedInline):
     model = CaseDetailsMN
     can_delete = False
@@ -106,7 +106,6 @@ class CaseAdmin(admin.ModelAdmin):
     list_filter = ['state', 'case_type']
     list_select_related = ['state', 'company']  # Optimize foreign key lookups
     inlines = [DocumentInline]
-    ordering = [F('case_date').desc(nulls_last=True)]
 
     def company_link(self, obj):
         link = reverse("admin:web_company_change", args=[obj.company.id])

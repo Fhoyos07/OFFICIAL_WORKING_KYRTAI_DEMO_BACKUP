@@ -16,6 +16,7 @@ class Company(models.Model):
     name = models.CharField(max_length=255, unique=True)
 
     class Meta:
+        ordering = ['name']
         verbose_name_plural = "Companies"
 
     def __str__(self):
@@ -66,6 +67,7 @@ class Case(models.Model):
         return self.case_number
 
     class Meta:
+        ordering = [models.F('case_date').desc(nulls_last=True)]
         unique_together = ('state', 'docket_id')
 
 
