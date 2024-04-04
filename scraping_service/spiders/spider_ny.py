@@ -20,7 +20,7 @@ class NyCaseSearchSpider(BaseCaseSearchSpider):
     @classmethod
     def update_settings(cls, settings):
         super().update_settings(settings)
-        settings.set("DOWNLOAD_DELAY",  value=1, priority='spider')
+        # settings.set("DOWNLOAD_DELAY",  value=0.5, priority='spider')
 
     @property
     def state_code(self) -> str: return 'NY'
