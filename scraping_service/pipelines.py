@@ -1,7 +1,7 @@
 from scrapy.crawler import Crawler
 from scrapy import Spider
 
-from django.db import IntegrityError
+from django.db import transaction, IntegrityError
 from django.utils import timezone
 
 from apps.web.models import Case, Document
@@ -40,6 +40,7 @@ class CaseSearchDbPipeline(BasePipeline):
             raise
         return item
 
+    @transaction.atomic()
     def insert_case(self, case: Case):
         case.found_date = timezone.now()
         case.save()
@@ -75,6 +76,7 @@ class CaseDetailDbPipeline(BasePipeline):
     def close_spider(self, spider: BaseCaseDetailSpider):
         self.create_documents()
 
+    @transaction.atomic()
     def update_case(self, case: Case):
         case.is_scraped = True
         case.scraped_date = timezone.now()
