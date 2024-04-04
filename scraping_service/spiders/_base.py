@@ -7,7 +7,7 @@ from django.db.models import Q
 from utils.scrapy.decorators import update_progress
 from apps.web.models import State, Company, Case, Document
 from scraping_service.items import DocumentBodyItem
-from scraping_service.settings import DAYS_BACK, MAX_COMPANIES
+from scraping_service.settings import DAYS_BACK
 
 
 class BaseSpider(ABC, Spider):
@@ -41,8 +41,6 @@ class BaseCaseSearchSpider(BaseSpider, ABC):
         super().__init__()
         # get companies
         companies_to_scrape = Company.objects.all().prefetch_related('name_variations')
-        if MAX_COMPANIES:
-            companies_to_scrape = companies_to_scrape[:MAX_COMPANIES]
         self.logger.info(f"Found {companies_to_scrape.count()} companies to scrape")
 
         # add queries to companies
