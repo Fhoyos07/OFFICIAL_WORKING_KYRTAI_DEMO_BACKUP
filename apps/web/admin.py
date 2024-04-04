@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.db.models import Prefetch, Count
+from django.db.models import Prefetch, Count, F
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.utils.html import format_html
@@ -106,7 +106,7 @@ class CaseAdmin(admin.ModelAdmin):
     list_filter = ['state', 'case_type']
     list_select_related = ['state', 'company']  # Optimize foreign key lookups
     inlines = [DocumentInline]
-    ordering = ['-case_date']
+    ordering = [F('case_date').desc(nulls_last=True)]
 
     def company_link(self, obj):
         link = reverse("admin:web_company_change", args=[obj.company.id])
