@@ -109,7 +109,7 @@ class NyCaseSearchSpider(BaseCaseSearchSpider):
             # avoid scraping same case twice
             docket_id = parse_url_params(case_url)['docketId']
             if docket_id in self.existing_docket_ids:
-                self.logger.info(f'Case #{docket_id} exists. Skipping.')
+                self.logger.debug(f'Case #{docket_id} exists. Skipping.')
                 continue
             self.existing_docket_ids.add(docket_id)
 

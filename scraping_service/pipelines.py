@@ -1,13 +1,9 @@
-from itemadapter import ItemAdapter
 from scrapy.crawler import Crawler
-from pathlib import Path
 from scrapy import Spider
-import json
 
-from django.db import models, transaction, connection
+from django.db import IntegrityError
 from django.utils import timezone
 
-from utils.scrapy.pipelines import CsvWriterWrapper
 from apps.web.models import Case, Document
 from .items import DbItem, DocumentBodyItem
 from .spiders._base import BaseCaseSearchSpider, BaseCaseDetailSpider, BaseDocumentDownloadSpider
@@ -37,8 +33,11 @@ class CaseSearchDbPipeline(BasePipeline):
 
     def process_item(self, item: DbItem, spider: BaseCaseSearchSpider):
         record: Case = item.record
-
-        self.insert_case(case=record)
+        try:
+            self.insert_case(case=record)
+        except IntegrityError as e:
+            self.logger.error(f"Failed to save case ({e}): {item}")
+            raise
         return item
 
     def insert_case(self, case: Case):
@@ -50,7 +49,7 @@ class CaseSearchDbPipeline(BasePipeline):
 
 
 class CaseDetailDbPipeline(BasePipeline):
-    def __init__(self, spider: BaseCaseSearchSpider):
+    def __init__(self, spider: BaseCaseDetailSpider):
         super().__init__(spider)
         self.documents_to_create: list[Document] = []
         self.chunk_size = 50
@@ -59,7 +58,7 @@ class CaseDetailDbPipeline(BasePipeline):
         self.case_detail_relation: str = spider.case_detail_relation
         self.document_detail_relation: str = spider.document_detail_relation
 
-    def process_item(self, item: DbItem, spider: BaseCaseSearchSpider):
+    def process_item(self, item: DbItem, spider: BaseCaseDetailSpider):
         # convert item to Case model and append to list for bulk processing
         record: Case | Document = item.record
         if isinstance(record, Case):
@@ -73,7 +72,7 @@ class CaseDetailDbPipeline(BasePipeline):
             self.create_documents()
         return item
 
-    def close_spider(self, spider: BaseCaseSearchSpider):
+    def close_spider(self, spider: BaseCaseDetailSpider):
         self.create_documents()
 
     def update_case(self, case: Case):
