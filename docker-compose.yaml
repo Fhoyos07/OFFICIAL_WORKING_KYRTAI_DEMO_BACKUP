@@ -20,7 +20,7 @@ services:
       dockerfile: Dockerfile
     extra_hosts:  # allows host.docker.internal in .env for postgres
       - "host.docker.internal:host-gateway"
-    command: celery -A config worker --loglevel=info --concurrency=3
+    command: celery -A config worker --loglevel=debug --concurrency=3
     volumes:
       - ./_etc/logs:/app/_etc/logs
     container_name: celery-worker
