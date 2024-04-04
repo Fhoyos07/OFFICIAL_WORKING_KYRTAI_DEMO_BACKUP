@@ -124,7 +124,11 @@ class DocumentS3UploadPipeline(BasePipeline):
 
     def process_item(self, item: DocumentBodyItem, spider: BaseDocumentDownloadSpider):
         document: Document = item.record
-        relative_path = f"{spider.state_code}/{document.case.docket_id}/{document.document_id}.pdf"
+        relative_path = '/'.join([
+            spider.state_code,
+            document.case.docket_id.replace('/', '_'),
+            f"{document.document_id}.pdf"
+        ])
         try:
             self.article_bucket.put_object(
                 Key=relative_path,
