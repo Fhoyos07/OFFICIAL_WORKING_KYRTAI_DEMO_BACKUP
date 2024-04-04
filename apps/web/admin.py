@@ -102,7 +102,6 @@ class CaseAdmin(admin.ModelAdmin):
     ]
     list_display_links = ['case_number', 'caption']
     search_fields = ['case_number', 'caption', 'company__name']
-    # ordering = ['received_date']
     list_filter = ['state', 'case_type']
     list_select_related = ['state', 'company']  # Optimize foreign key lookups
     inlines = [DocumentInline]

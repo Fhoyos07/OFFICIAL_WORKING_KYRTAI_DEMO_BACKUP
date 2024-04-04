@@ -115,8 +115,7 @@ class NyCaseSearchSpider(BaseCaseSearchSpider):
 
             # parse case number and date
             first_cell_texts: list[str] = tr.xpath('td[1]//text()[normalize-space()]').getall()
-            case_number, received_date_str = first_cell_texts
-            received_date = datetime.strptime(received_date_str.strip(), '%m/%d/%Y').date()
+            case_number, received_date_str = [s.strip() for s in first_cell_texts]
 
             # set flag to true to make scraping next page
             new_cases_found = True
@@ -135,8 +134,7 @@ class NyCaseSearchSpider(BaseCaseSearchSpider):
             case.caption = tr.xpath('td[3]/text()').get()
             case.url = response.urljoin(case_url)
 
-            case.received_date = received_date
-            case.case_date = case.received_date
+            case.case_date = case.received_date = datetime.strptime(received_date_str, '%m/%d/%Y').date()
 
             case.status = tr.xpath('td[2]/span/text()').get()
 

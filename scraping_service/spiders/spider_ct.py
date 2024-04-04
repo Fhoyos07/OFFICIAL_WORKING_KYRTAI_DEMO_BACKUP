@@ -134,15 +134,14 @@ class CtCaseDetailSpider(BaseCaseDetailSpider):
 
         # update case (scraped_date and is_scraped are updated in pipeline)
         file_date_str = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblFileDate')
-        case.filed_date = datetime.strptime(file_date_str, "%m/%d/%Y").date()
-        if not case.filed_date:
+
+        case.case_date = case.filed_date = datetime.strptime(file_date_str, "%m/%d/%Y").date()
+        if not case.case_date:
             self.logger.warning(f'Filed date is invalid at {response.url}')
             return
 
         case.case_type = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblCaseType')
         case.ct_details.prefix = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblPrefixSuffix')
-
-        case.case_date = case.filed_date
 
         return_date_str = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblReturnDate')
         case.ct_details.return_date = datetime.strptime(return_date_str, "%m/%d/%Y").date()
