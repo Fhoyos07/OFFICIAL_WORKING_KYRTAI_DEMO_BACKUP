@@ -69,15 +69,13 @@ Installation of requirements:
 ### Debug logs:
 - `/_etc/logs/debug.log`
 
-### 
-settings.py
-MAX_COMPANIES = 80
-/
-MAX_COMPANIES = None # crawl all
 
+## Docker commands:
+### Deploy latest version
+`git pull && docker compose up --build --detach`
 
-### re-deploy server
-git pull && docker compose up --build --detach
+### Check app status
+`docker ps -a` (all images should have "Up ... days", not "Exited...")
 
-### check job logs
-docker logs -f --tail 10000 celery-worker
+### Check scraping jobs logs
+`docker logs -f --tail 10000 celery-worker`
