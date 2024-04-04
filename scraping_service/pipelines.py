@@ -133,7 +133,7 @@ class DocumentS3UploadPipeline(BasePipeline):
             self.article_bucket.put_object(
                 Key=relative_path,
                 Body=item.body,
-                StorageClass='DEEP_ARCHIVE'  # Glacier Deep Archive
+                StorageClass='GLACIER_IR'  # Glacier Instant Retrieval
             )
             self.logger.debug(f"Uploaded to S3 {self.s3_bucket_name} at {relative_path}")
             item.relative_path = relative_path
