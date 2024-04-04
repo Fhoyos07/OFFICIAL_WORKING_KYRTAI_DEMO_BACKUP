@@ -20,11 +20,11 @@ class CompanyViewSet(viewsets.ReadOnlyModelViewSet):  # Use ReadOnlyModelViewSet
 
 
 class CaseFilter(django_filters.FilterSet):
-    stateCode = django_filters.CharFilter(field_name='state__code', lookup_expr='iexact')
-    dateFrom = django_filters.DateFilter(field_name='case_date', lookup_expr='gte')
-    dateTo = django_filters.DateFilter(field_name='case_date', lookup_expr='lte')
+    state_code = django_filters.CharFilter(field_name='state__code', lookup_expr='iexact')
+    date_from = django_filters.DateFilter(field_name='case_date', lookup_expr='gte')
+    date_to = django_filters.DateFilter(field_name='case_date', lookup_expr='lte')
     court = django_filters.CharFilter(field_name='court', lookup_expr='icontains')
-    caseType = django_filters.CharFilter(field_name='case_type', lookup_expr='iexact')
+    case_type = django_filters.CharFilter(field_name='case_type', lookup_expr='iexact')
     caption = django_filters.CharFilter(field_name='caption', lookup_expr='icontains')
 
     class Meta:
