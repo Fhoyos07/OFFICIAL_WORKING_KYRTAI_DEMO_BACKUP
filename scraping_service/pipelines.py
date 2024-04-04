@@ -126,7 +126,11 @@ class DocumentS3UploadPipeline(BasePipeline):
         document: Document = item.record
         relative_path = f"{spider.state_code}/{document.case.docket_id}/{document.document_id}.pdf"
         try:
-            self.article_bucket.put_object(Key=relative_path, Body=item.body)
+            self.article_bucket.put_object(
+                Key=relative_path,
+                Body=item.body,
+                StorageClass='DEEP_ARCHIVE'  # Glacier Deep Archive
+            )
             self.logger.debug(f"Uploaded to S3 {self.s3_bucket_name} at {relative_path}")
             item.relative_path = relative_path
         except Exception as e:
