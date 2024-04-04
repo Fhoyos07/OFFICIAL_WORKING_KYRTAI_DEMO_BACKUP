@@ -3,26 +3,24 @@ from rest_framework.test import APIRequestFactory
 from rest_framework_api_key.models import APIKey
 from apps.web.models import Case, State, Company
 
-pytestmark = [pytest.mark.django_db]
-
 
 @pytest.fixture
-def state_ny():
+def state_ny(db):
     return State.objects.create(code='NY', name='New York')
 
 
 @pytest.fixture
-def state_ct():
+def state_ct(db):
     return State.objects.create(code='CT', name='Connecticut')
 
 
 @pytest.fixture
-def company():
+def company(db):
     return Company.objects.create(name='Company')
 
 
 @pytest.fixture
-def case_ny(state_ny, company):
+def case_ny(db, state_ny, company):
     return Case.objects.create(
         state=state_ny,
         company=company,
@@ -34,7 +32,7 @@ def case_ny(state_ny, company):
 
 
 @pytest.fixture
-def case_ct(state_ct, company):
+def case_ct(db, state_ct, company):
     return Case.objects.create(
         state=state_ct,
         company=company,
@@ -54,7 +52,7 @@ def cases(case_ny, case_ct) -> dict[str, Case]:
 
 
 @pytest.fixture
-def api_key():
+def api_key(db):
     _, key = APIKey.objects.create_key(name="test")
     return key
 

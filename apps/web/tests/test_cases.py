@@ -1,8 +1,8 @@
 import pytest
-from rest_framework.test import APIRequestFactory
-from apps.web.views import CompanyViewSet, CaseViewSet
-from .fixtures import *
+from apps.web.views import CaseViewSet
+from apps.web.models import Case
 
+from rest_framework.test import APIRequestFactory
 
 
 def _assert_cases_list(response, expected_case_states: set[str]):
