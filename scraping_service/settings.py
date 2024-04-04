@@ -19,7 +19,7 @@ ITEM_PIPELINES = {}
 
 
 # crawling settings
-DAYS_BACK = 14
+DAYS_BACK = 90
 
 
 # captcha settings
