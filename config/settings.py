@@ -63,6 +63,9 @@ INSTALLED_APPS = [
     'apps.web.apps.WebConfig',
     'django_celery_beat',       # scheduling
     'debug_toolbar',
+    'rest_framework',
+    'django_filters',
+    'rest_framework_api_key',
 ]
 
 MIDDLEWARE = [
@@ -177,7 +180,19 @@ STATIC_ROOT = BASE_DIR / 'config' / 'static'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework_api_key.permissions.HasAPIKey",
+    ]
+}
+APPEND_SLASH = False  # return 404 instead of 301 if request without slash
+API_KEY_CUSTOM_HEADER = "HTTP_X_API_KEY"
 
+
+# logging settings
 LOG_DIR = BASE_DIR / '_etc' / 'logs'
 LOG_DIR.mkdir(exist_ok=True)
 DEBUG_TO_CONSOLE = os.environ['DEBUG_TO_CONSOLE'].lower().strip() == 'true'

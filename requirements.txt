@@ -21,3 +21,9 @@ django-celery-beat
 
 crochet
 openai
+djangorestframework
+django-filter
+djangorestframework-api-key==3.*
+
+pytest
+pytest-django

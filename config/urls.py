@@ -17,12 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.conf import settings
 from django.urls import include, path
+from apps.web.urls import router
 
 admin.site.site_title = 'KYRT Admin'
 admin.site.site_header = 'KYRT Admin'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include(router.urls)),
 ]
 
 if settings.DEBUG:
