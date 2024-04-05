@@ -101,9 +101,12 @@ class CaseAdmin(admin.ModelAdmin):
         'caption', 'case_type', 'case_date', 'gbruno_score'
     ]
     list_display_links = ['case_number', 'caption']
-    search_fields = ['case_number', 'caption', 'company__name']
+    search_fields = ['case_number', 'caption', 'company__name', 'docket_id']
     list_filter = ['state', 'case_type']
     list_select_related = ['state', 'company']  # Optimize foreign key lookups
+
+    readonly_fields = ['url']
+
     inlines = [DocumentInline]
 
     def company_link(self, obj):
