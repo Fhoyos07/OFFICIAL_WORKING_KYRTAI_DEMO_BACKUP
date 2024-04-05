@@ -179,6 +179,14 @@ class NyCaseDetailSpider(BaseCaseDetailSpider):
     @update_progress
     def parse_case(self, response, case: Case):
         # update case (scraped_date and is_scraped are updated in pipeline)
+        new_case_number = response.css('h1 a#content::text').get()
+        if new_case_number != case.case_number and new_case_number.lower() != 'index not assigned':
+            case.case_number = new_case_number
+            self.logger.warning(f"Updated {case.docket_id} case number to {case.case_number}")
+        case.caption = response.css('.CaseSummary .captionText::text').get()
+
+        case.case_type = response.xpath('//span[contains(text(),"Case Type:")]/strong//text()[normalize-space()]').get()
+        case.ny_details.efiling_status = response.xpath('//span[contains(text(),"eFiling Status:")]/strong//text()[normalize-space()]').get()
         yield DbItem(record=case)
 
         document_rows = response.css('table.NewSearchResults tbody tr')

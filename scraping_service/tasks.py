@@ -7,6 +7,25 @@ import logging
 
 from utils.scrapy.crawler import crawl_with_crochet
 
+from scraping_service.spiders._base import BaseSpider
+from scraping_service.spiders.spider_ct import CtCaseSearchSpider, CtCaseDetailSpider, CtDocumentSpider
+from scraping_service.spiders.spider_ny import NyCaseSearchSpider, NyCaseDetailSpider, NyDocumentSpider
+
+
+def get_spiders() -> dict[str, dict[str, type(BaseSpider)]]:
+    return {
+        "NY": {
+            "case_search": NyCaseSearchSpider,
+            "case_detail": NyCaseDetailSpider,
+            "document": NyDocumentSpider,
+        },
+        "CT": {
+            "case_search": CtCaseSearchSpider,
+            "case_detail": CtCaseDetailSpider,
+            "document": CtDocumentSpider,
+        }
+    }
+
 
 @signals.worker_process_init.connect
 def configure_infrastructure(**kwargs):
@@ -14,15 +33,33 @@ def configure_infrastructure(**kwargs):
     crochet.setup()
 
 
+# main tasks
 @shared_task
-def scrape_court(state_code: str, *args, **kwargs) -> bool:
-    from RUN import CONFIGURATIONS
-    state_config = CONFIGURATIONS[state_code]
-    for spider in state_config.spiders:
-        crawl_with_crochet(spider, *args, **kwargs)
+def scrape_new_cases(state_code: str, *args, **kwargs) -> bool:
+    state_spiders: dict[str, type(BaseSpider)] = get_spiders()[state_code]
+    crawl_with_crochet(state_spiders['case_search'])
+    crawl_with_crochet(state_spiders['case_detail'], mode='new')
+    crawl_with_crochet(state_spiders['document'])
     return True
 
 
+@shared_task
+def scrape_existing_cases(state_code: str, *args, **kwargs) -> bool:
+    state_spiders: dict[str, type(BaseSpider)] = get_spiders()[state_code]
+    crawl_with_crochet(state_spiders['case_detail'], mode='existing')
+    crawl_with_crochet(state_spiders['document'])
+    return True
+
+
+@shared_task
+def scrape_not_assigned_cases(state_code: str, *args, **kwargs) -> bool:
+    state_spiders: dict[str, type(BaseSpider)] = get_spiders()[state_code]
+    crawl_with_crochet(state_spiders['case_detail'], mode='not_assigned')
+    crawl_with_crochet(state_spiders['document'])
+    return True
+
+
+# debug tasks
 @shared_task
 def run_spider(spider_name: str, *args, **kwargs) -> bool:
     crawl_with_crochet(spider_name, *args, **kwargs)

@@ -3,6 +3,7 @@ from scrapy import Spider, Request
 from datetime import date, timedelta
 from tqdm import tqdm
 from django.db.models import Q
+from typing import Literal
 
 from utils.scrapy.decorators import update_progress
 from apps.web.models import State, Company, Case, Document
@@ -18,6 +19,9 @@ class BaseSpider(ABC, Spider):
     def __init__(self):
         super().__init__()
         self.state = State.objects.get(code=self.state_code)
+
+        # min date to download documents and to rescrape existing cases
+        self.MIN_DATE = date.today() - timedelta(days=DAYS_BACK)
 
 
 class BaseCaseSearchSpider(BaseSpider, ABC):
@@ -86,7 +90,7 @@ class BaseCaseDetailSpider(BaseSpider, ABC):
         """Name of 1-to-1 relation from apps.web.models for DocumentDetail state models. i.e., ny_details"""
         raise NotImplementedError
 
-    def __init__(self, company_ids: list[int] = None, scrape_all: bool = False):
+    def __init__(self, company_ids: list[int] = None, mode: Literal['new', 'existing', 'not_assigned'] = 'new'):
         super().__init__()
         self.cases_to_scrape = Case.objects.filter(
             state=self.state,
@@ -95,8 +99,19 @@ class BaseCaseDetailSpider(BaseSpider, ABC):
         )
 
         # by default, scrape only records with is_scraped = False
-        if not scrape_all:
-            self.cases_to_scrape = self.cases_to_scrape.filter(is_scraped=False)
+        if mode == 'new':
+            self.cases_to_scrape = self.cases_to_scrape.filter(
+                is_scraped=False
+            )
+        elif mode == 'existing':
+            self.cases_to_scrape = self.cases_to_scrape.filter(
+                Q(case_date__gte=self.MIN_DATE) | Q(case_date__isnull=True)
+            )
+        elif mode == 'not_assigned':
+            self.cases_to_scrape = self.cases_to_scrape.filter(
+                case_number__icontains='not assigned',
+                case_date__gte=self.MIN_DATE
+            )
 
         # allow scrape specific companies (for debug purpose)
         if company_ids:
@@ -126,9 +141,8 @@ class BaseDocumentDownloadSpider(BaseSpider, ABC):
         super().__init__()
 
         # min case date to crawl
-        min_date = date.today() - timedelta(days=DAYS_BACK)
         self.documents_to_scrape = Document.objects.filter(
-            case__case_date__gte=min_date,
+            case__case_date__gte=self.MIN_DATE,
             case__state=self.state,
             is_downloaded=False
         ).select_related(
