@@ -86,8 +86,16 @@ class CaseDetailsCT(models.Model):
     pty_no = models.CharField(max_length=255, null=True, blank=True)
     self_rep = models.BooleanField(default=False)
     prefix = models.CharField(max_length=255, null=True, blank=True)
-    # file_date = models.DateField(null=True, blank=True)
     return_date = models.DateField(null=True, blank=True)
+
+    last_action_date = models.DateField(null=True, blank=True)
+
+    list_type = models.CharField(max_length=255, null=True, blank=True)
+    list_claim_date = models.DateField(null=True, blank=True)
+
+    judge = models.CharField(max_length=255, null=True, blank=True)
+    disposition = models.CharField(max_length=255, null=True, blank=True)
+    disposition_date = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return f'{self.case.case_number} Details'

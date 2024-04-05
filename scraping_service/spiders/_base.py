@@ -86,19 +86,27 @@ class BaseCaseDetailSpider(BaseSpider, ABC):
         """Name of 1-to-1 relation from apps.web.models for DocumentDetail state models. i.e., ny_details"""
         raise NotImplementedError
 
-    def __init__(self):
+    def __init__(self, company_ids: list[int] = None, scrape_all: bool = False):
         super().__init__()
         self.cases_to_scrape = Case.objects.filter(
-            is_scraped=False,
             state=self.state,
         ).select_related(
             self.case_detail_relation
         )
+
+        # by default, scrape only records with is_scraped = False
+        if not scrape_all:
+            self.cases_to_scrape = self.cases_to_scrape.filter(is_scraped=False)
+
+        # allow scrape specific companies (for debug purpose)
+        if company_ids:
+            self.cases_to_scrape = self.cases_to_scrape.filter(company_id__in=company_ids)
+
         self.logger.info(f"Found {self.cases_to_scrape.count()} cases to scrape")
         self.progress_bar = tqdm(total=self.cases_to_scrape.count())
 
         # get existing document ids
-        self.existing_document_ids: set[int] = set(
+        self.existing_document_ids: set[int] = set(  # todo: use prefetch_related
             Document.objects.filter(case__state=self.state).values_list('document_id', flat=True)
         )
         self.logger.info(f"Found {len(self.existing_document_ids)} existing document ids")

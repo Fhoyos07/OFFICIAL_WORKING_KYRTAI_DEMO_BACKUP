@@ -3,7 +3,7 @@ from scrapy.http import Request, FormRequest, TextResponse
 from utils.scrapy.response import extract_text_from_el
 from utils.scrapy.decorators import log_response
 from utils.scrapy.url import parse_url_params
-from datetime import datetime
+from datetime import datetime, date
 import re
 
 from utils.scrapy.decorators import update_progress
@@ -67,7 +67,7 @@ class CtCaseSearchSpider(BaseCaseSearchSpider):
                 continue
 
             # avoid scraping same case twice
-            docket_id = parse_url_params(case_url)['DocketNo']
+            docket_id = parse_url_params(case_url)['DocketNo'].replace('-', '')
             if docket_id in self.existing_docket_ids:
                 self.logger.debug(f'{name_variation} ({company.id}): Skipping existing case {docket_id}')
                 continue
@@ -82,7 +82,6 @@ class CtCaseSearchSpider(BaseCaseSearchSpider):
 
             case.docket_id = docket_id
             case.case_number = extract_text_from_el(tr.xpath('td[3]'))
-            case.case_type = None  # populated in the next spider
             case.court = extract_text_from_el(tr.xpath('td[4]'))
             case.caption = extract_text_from_el(tr.xpath('td[2]'))
 
@@ -133,21 +132,29 @@ class CtCaseDetailSpider(BaseCaseDetailSpider):
             return
 
         # update case (scraped_date and is_scraped are updated in pipeline)
-        file_date_str = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblFileDate')
-
-        case.case_date = case.filed_date = datetime.strptime(file_date_str, "%m/%d/%Y").date()
-        if not case.case_date:
+        case.filed_date = self.get_date_by_id(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblFileDate')
+        if not case.filed_date:
             self.logger.warning(f'Filed date is invalid at {response.url}')
             return
 
-        case.case_type = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblCaseType')
-        case.ct_details.prefix = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblPrefixSuffix')
+        case.case_date = case.filed_date
+        case.caption = self.get_text_by_id(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblCaseCaption')
+        case.court = self.get_text_by_id(response, 'ctl00_ContentPlaceHolder1_CaseDetailBasicInfo1_lblBasicLocation')
+        case.case_type = self.get_text_by_id(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblCaseType')
 
-        return_date_str = self.extract_header(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblReturnDate')
-        case.ct_details.return_date = datetime.strptime(return_date_str, "%m/%d/%Y").date()
+        case.ct_details.prefix = self.get_text_by_id(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblPrefixSuffix')
+        case.ct_details.return_date = self.get_date_by_id(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblReturnDate')
+        case.ct_details.last_action_date = self.get_date_by_id(response, 'ctl00_ContentPlaceHolder1_CaseDetailHeader1_lblReturnDate')
+
+        case.ct_details.list_type = self.get_text_by_id(response, 'ctl00_ContentPlaceHolder1_CaseDetailBasicInfo1_lblBasicListType')
+        case.ct_details.list_claim_date = self.get_date_by_id(response, 'ctl00_ContentPlaceHolder1_CaseDetailBasicInfo1_lblKeyTrialList')
+
+        case.ct_details.judge = self.get_text_by_id(response, 'ctl00_ContentPlaceHolder1_CaseDetailBasicInfo1_lblBasicDispJudge')
+        case.ct_details.disposition = self.get_text_by_id(response, 'ctl00_ContentPlaceHolder1_CaseDetailBasicInfo1_lblBasicDisposition')
+        case.ct_details.disposition_date = self.get_date_by_id(response, 'ctl00_ContentPlaceHolder1_CaseDetailBasicInfo1_lblBasicDispositionDate')
         yield DbItem(record=case)
 
-        # crea
+        # find documents
         document_rows = response.xpath(
             '//*[@id="ctl00_ContentPlaceHolder1_CaseDetailDocuments1_pnlMotionData"]'
             '//table'
@@ -183,12 +190,16 @@ class CtCaseDetailSpider(BaseCaseDetailSpider):
             document.ct_details.arguable = extract_text_from_el(tr.xpath('td[5]'))
             yield DbItem(record=document)
 
-
     @staticmethod
-    def extract_header(response, attr_id: str) -> str | None:
-        value = response.xpath(f'//*[@id="{attr_id}"]/text()').get()
+    def get_text_by_id(response, el_id: str) -> str | None:
+        value = response.xpath(f'//*[@id="{el_id}"]/text()[normalize-space()]').get()
         if value:
             return value.strip()
+
+    def get_date_by_id(self, response, el_id: str) -> date | None:
+        date_str = self.get_text_by_id(response, el_id)
+        if date_str:
+            return datetime.strptime(date_str, "%m/%d/%Y").date()
 
 
 class CtDocumentSpider(BaseDocumentDownloadSpider):
