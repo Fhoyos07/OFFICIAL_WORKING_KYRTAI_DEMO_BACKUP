@@ -35,7 +35,7 @@ class CaseSearchDbPipeline(BasePipeline):
         record: Case = item.record
         try:
             self.insert_case(case=record)
-        except (IntegrityError, DataError) as e:
+        except Exception as e:
             self.logger.error(f"Failed to save case ({e}): {item}")
             raise
         return item
