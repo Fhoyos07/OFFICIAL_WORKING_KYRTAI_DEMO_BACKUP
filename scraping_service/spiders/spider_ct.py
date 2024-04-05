@@ -28,8 +28,8 @@ class CtCaseSearchSpider(BaseCaseSearchSpider):
         super().update_settings(settings)
         settings.set("CONCURRENT_REQUESTS",  value=10, priority='spider')
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.search_mode = 'Starts With'  # or 'Contains'
 
     def start_requests(self):

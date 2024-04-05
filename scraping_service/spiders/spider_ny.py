@@ -28,8 +28,8 @@ class NyCaseSearchSpider(BaseCaseSearchSpider):
     @property
     def case_detail_relation(self): return 'ny_details'
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         # flatten input list of company and variations to allow pop
         self.queries: list[tuple[str, Company]] = []
         for company, name_variations in self.queries_by_company.items():
