@@ -1,7 +1,7 @@
 from scrapy.crawler import Crawler
 from scrapy import Spider
 
-from django.db import transaction, IntegrityError
+from django.db import transaction, IntegrityError, DataError
 from django.utils import timezone
 
 from apps.web.models import Case, Document
@@ -35,7 +35,7 @@ class CaseSearchDbPipeline(BasePipeline):
         record: Case = item.record
         try:
             self.insert_case(case=record)
-        except IntegrityError as e:
+        except (IntegrityError, DataError) as e:
             self.logger.error(f"Failed to save case ({e}): {item}")
             raise
         return item
