@@ -42,16 +42,14 @@ class CaseSearchDbPipeline(BasePipeline):
         case.found_date = timezone.now()
         try:
             case.save()
-        except Exception as e:
-            self.logger.error(f"Failed to save case ({e}): {case.__dict__}")
-            raise DropItem()
+        except (IntegrityError, DataError) as e:
+            raise DropItem(f"Failed to save case ({e}): {case.__dict__}")
 
         case_detail = getattr(case, self.case_detail_relation)
         try:
             case_detail.save()
-        except Exception as e:
-            self.logger.error(f"Failed to save case_detail ({e}): {case_detail.__dict__}")
-            raise DropItem()
+        except (IntegrityError, DataError) as e:
+            raise DropItem(f"Failed to save case_detail ({e}): {case_detail.__dict__}")
 
 
 class CaseDetailDbPipeline(BasePipeline):
