@@ -82,7 +82,7 @@ class CaseDetailsNY(models.Model):
 class CaseDetailsCT(models.Model):
     case = models.OneToOneField(Case, on_delete=models.CASCADE, related_name='ct_details')
 
-    party_name = models.CharField(max_length=255, null=True, blank=True)
+    party_name = models.CharField(max_length=1000, null=True, blank=True)
     pty_no = models.CharField(max_length=255, null=True, blank=True)
     self_rep = models.BooleanField(default=False)
     prefix = models.CharField(max_length=255, null=True, blank=True)
