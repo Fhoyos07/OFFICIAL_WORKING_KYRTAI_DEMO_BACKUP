@@ -33,20 +33,25 @@ class CaseSearchDbPipeline(BasePipeline):
 
     def process_item(self, item: DbItem, spider: BaseCaseSearchSpider):
         record: Case = item.record
-        try:
-            self.insert_case(case=record)
-        except Exception as e:
-            self.logger.error(f"Failed to save case ({e}): {item}")
-            raise
+        self.insert_case(case=record)
         return item
 
     @transaction.atomic()
     def insert_case(self, case: Case):
+        from scrapy.exceptions import DropItem
         case.found_date = timezone.now()
-        case.save()
+        try:
+            case.save()
+        except Exception as e:
+            self.logger.error(f"Failed to save case ({e}): {case.__dict__}")
+            raise DropItem()
 
         case_detail = getattr(case, self.case_detail_relation)
-        case_detail.save()
+        try:
+            case_detail.save()
+        except Exception as e:
+            self.logger.error(f"Failed to save case_detail ({e}): {case_detail.__dict__}")
+            raise DropItem()
 
 
 class CaseDetailDbPipeline(BasePipeline):
