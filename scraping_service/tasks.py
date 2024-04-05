@@ -19,7 +19,7 @@ def scrape_court(state_code: str, *args, **kwargs) -> bool:
     from RUN import CONFIGURATIONS
     state_config = CONFIGURATIONS[state_code]
     for spider in state_config.spiders:
-        crawl_with_crochet(spider)
+        crawl_with_crochet(spider, *args, **kwargs)
     return True
 
 
