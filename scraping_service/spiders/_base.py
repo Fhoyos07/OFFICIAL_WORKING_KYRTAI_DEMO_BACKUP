@@ -19,9 +19,6 @@ class BaseSpider(ABC, Spider):
         super().__init__()
         self.state = State.objects.get(code=self.state_code)
 
-        # min case date to crawl
-        self.MIN_DATE = date.today() - timedelta(days=DAYS_BACK)
-
 
 class BaseCaseSearchSpider(BaseSpider, ABC):
     @classmethod
@@ -119,8 +116,11 @@ class BaseDocumentDownloadSpider(BaseSpider, ABC):
 
     def __init__(self):
         super().__init__()
+
+        # min case date to crawl
+        min_date = date.today() - timedelta(days=DAYS_BACK)
         self.documents_to_scrape = Document.objects.filter(
-            case__case_date__gte=self.MIN_DATE,
+            case__case_date__gte=min_date,
             case__state=self.state,
             is_downloaded=False
         ).select_related(
