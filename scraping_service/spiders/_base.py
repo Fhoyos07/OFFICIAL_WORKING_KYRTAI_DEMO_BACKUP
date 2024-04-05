@@ -37,10 +37,15 @@ class BaseCaseSearchSpider(BaseSpider, ABC):
         """Name of 1-to-1 relation from apps.web.models for CaseDetail state models. i.e., ny_details"""
         raise NotImplementedError
 
-    def __init__(self):
+    def __init__(self, company_ids: list[int] = None):
         super().__init__()
         # get companies
         companies_to_scrape = Company.objects.all().prefetch_related('name_variations')
+
+        # allow scrape specific companies (for debug purpose)
+        if company_ids:
+            companies_to_scrape = companies_to_scrape.filter(id__in=company_ids)
+
         self.logger.info(f"Found {companies_to_scrape.count()} companies to scrape")
 
         # add queries to companies
