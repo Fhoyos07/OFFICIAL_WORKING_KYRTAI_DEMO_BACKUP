@@ -131,7 +131,7 @@ class DocumentS3UploadPipeline(BasePipeline):
         relative_path = '/'.join([
             spider.state_code,
             document.case.docket_id.replace('/', '_'),
-            f"{document.document_id}.pdf"
+            f"{document.unique_id}.pdf"
         ])
         try:
             self.article_bucket.put_object(

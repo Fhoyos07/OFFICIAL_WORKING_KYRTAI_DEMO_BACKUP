@@ -205,7 +205,7 @@ class NyCaseDetailSpider(BaseCaseDetailSpider):
             document = Document(case=case)
             document.ny_details = DocumentDetailsNY()
 
-            document.document_id = document_id
+            document.unique_id = document_id
             document.url = response.urljoin(document_url)
 
             name_parts = tr.xpath('td[2]/a/text()[normalize-space()] | td[2]/text()[normalize-space()]').getall()

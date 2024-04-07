@@ -122,7 +122,7 @@ class BaseCaseDetailSpider(BaseSpider, ABC):
 
         # get existing document ids
         self.existing_document_ids: set[int] = set(  # todo: use prefetch_related
-            Document.objects.filter(case__state=self.state).values_list('document_id', flat=True)
+            Document.objects.filter(case__state=self.state).values_list('unique_id', flat=True)
         )
         self.logger.info(f"Found {len(self.existing_document_ids)} existing document ids")
 

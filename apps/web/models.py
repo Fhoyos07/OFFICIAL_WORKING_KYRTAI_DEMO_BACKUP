@@ -109,7 +109,7 @@ class CaseDetailsMN(models.Model):
 class Document(models.Model):
     case = models.ForeignKey(Case, on_delete=models.CASCADE, related_name='documents')
     name = models.CharField(max_length=255)
-    document_id = models.CharField(max_length=255)
+    unique_id = models.CharField(max_length=255)
     url = models.URLField(max_length=255, verbose_name='URL')
 
     is_downloaded = models.BooleanField(default=False)
@@ -118,7 +118,7 @@ class Document(models.Model):
     relative_path = models.CharField(max_length=255, null=True, blank=True)
 
     class Meta:
-        unique_together = ('case', 'document_id')
+        unique_together = ('case', 'unique_id')
 
     def __str__(self):
         return self.name

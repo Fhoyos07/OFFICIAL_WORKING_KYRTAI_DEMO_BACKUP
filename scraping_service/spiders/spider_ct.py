@@ -176,7 +176,7 @@ class CtCaseDetailSpider(BaseCaseDetailSpider):
             document = Document(case=case)
             document.ct_details = DocumentDetailsCT()
 
-            document.document_id = document_id
+            document.unique_id = document_id
             document.name = tr.xpath('td[4]/a/text()').get()
             document.url = response.urljoin(document_url)
 

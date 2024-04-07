@@ -135,7 +135,7 @@ def import_ny_documents():
             company=case.company,
             case=case,
             name=row['Document Name'],
-            document_id=document_id,
+            unique_id=document_id,
             url=row['Document URL'],
         )
         documents_to_insert.append(document)
@@ -150,7 +150,7 @@ def import_ny_documents():
     documents = Document.objects.bulk_create(documents_to_insert)
     print(f'Inserted {len(documents)} documents')
 
-    documents_by_id = {d.document_id: d for d in documents}
+    documents_by_id = {d.unique_id: d for d in documents}
     for document_id, document_detail in document_detail_by_id.items():
         document_detail.document = documents_by_id[document_id]
 
@@ -196,7 +196,7 @@ def import_ct_documents():
     documents = Document.objects.bulk_create(documents_to_insert)
     print(f'Inserted {len(documents)} documents')
 
-    documents_by_id = {d.document_id: d for d in documents}
+    documents_by_id = {d.unique_id: d for d in documents}
     for document_id, document_detail in document_detail_by_id.items():
         document_detail.document = documents_by_id[document_id]
 

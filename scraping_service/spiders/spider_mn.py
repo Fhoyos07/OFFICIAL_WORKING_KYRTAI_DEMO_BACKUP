@@ -142,7 +142,7 @@ class MnCaseDetailSpider(BaseCaseDetailSpider):
             document = Document(case=case)
             document.ct_details = DocumentDetailsMN()
 
-            document.document_id = document_id
+            document.unique_id = document_id
             document.name = tr.xpath('td[4]/a/text()').get()
             document.url = response.urljoin(document_url)
 
