@@ -108,8 +108,8 @@ class CaseDetailsMN(models.Model):
 # DOCUMENT Models
 class Document(models.Model):
     case = models.ForeignKey(Case, on_delete=models.CASCADE, related_name='documents')
-    name = models.CharField(max_length=255, blank=True, null=True)
-    document_id = models.CharField(max_length=255, blank=True, null=True)
+    name = models.CharField(max_length=255)
+    document_id = models.CharField(max_length=255)
     url = models.URLField(max_length=255, verbose_name='URL')
 
     is_downloaded = models.BooleanField(default=False)
