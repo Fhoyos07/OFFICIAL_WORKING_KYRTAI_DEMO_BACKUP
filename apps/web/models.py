@@ -46,7 +46,7 @@ class Case(models.Model):
     case_type = models.CharField(max_length=255, null=True, blank=True)
     court = models.CharField(max_length=255, null=True, blank=True)
     caption = models.CharField(max_length=2000, null=True, blank=True)
-    url = models.URLField(null=True, blank=True)
+    url = models.URLField(null=True, blank=True, verbose_name='URL')
 
     status = models.CharField(max_length=100, null=True, blank=True)
 
@@ -110,7 +110,7 @@ class Document(models.Model):
     case = models.ForeignKey(Case, on_delete=models.CASCADE, related_name='documents')
     name = models.CharField(max_length=255, blank=True, null=True)
     document_id = models.CharField(max_length=255, blank=True, null=True)
-    url = models.URLField(max_length=255, blank=True, null=True)
+    url = models.URLField(max_length=255, verbose_name='URL')
 
     is_downloaded = models.BooleanField(default=False)
     download_date = models.DateTimeField(null=True, blank=True)
