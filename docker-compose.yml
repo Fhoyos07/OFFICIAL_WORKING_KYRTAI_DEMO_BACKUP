@@ -1,0 +1,55 @@
+version: '3.8'  # Use a more recent version if necessary
+
+services:
+  db:
+    image: postgres:14
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file:
+      - .env
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - .:/app  # Ensure this matches your WORKDIR in Dockerfile
+    env_file:
+      - .env
+    environment:
+      - DEBUG=True  # Ensure DEBUG is set for development
+      - ENVIRONMENT=dev
+      - SECRET_KEY=${SECRET_KEY}
+      - ALLOWED_HOSTS=${ALLOWED_HOSTS}
+      - CELERY_BROKER_URL=${CELERY_BROKER_URL}
+      - CELERY_RESULT_BACKEND=${CELERY_RESULT_BACKEND}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  celery-worker:
+    build: .
+    command: celery -A config worker --loglevel=info
+    volumes:
+      - .:/app  # Ensure this matches your WORKDIR in Dockerfile
+    depends_on:
+      - db
+      - redis
+
+  celery-beat:
+    build: .
+    command: celery -A config beat --loglevel=info
+    depends_on:
+      - redis
+      - db
+
+volumes:
+  postgres_data:  # Define the volume for PostgreSQL data
