@@ -1,0 +1,889 @@
+2024-10-19 10:50:39 [root] INFO: Init Sentry
+2024-10-19 10:50:39 [root] INFO: Init django with environment "prod"
+2024-10-19 10:50:39 [root] INFO: Database: kyrt_dev
+2024-10-19 11:02:34 [root] INFO: Init Sentry
+2024-10-19 11:02:34 [root] INFO: Init django with environment "prod"
+2024-10-19 11:02:34 [root] INFO: Database: kyrt_dev
+2024-10-19 11:03:01 [root] INFO: Init Sentry
+2024-10-19 11:03:01 [root] INFO: Init django with environment "prod"
+2024-10-19 11:03:01 [root] INFO: Database: kyrt_dev
+2024-10-19 11:03:17 [root] INFO: Init Sentry
+2024-10-19 11:03:17 [root] INFO: Init django with environment "prod"
+2024-10-19 11:03:17 [root] INFO: Database: kyrt_dev
+2024-10-19 11:03:45 [root] INFO: Init Sentry
+2024-10-19 11:03:45 [root] INFO: Init django with environment "prod"
+2024-10-19 11:03:45 [root] INFO: Database: kyrt_dev
+2024-10-19 11:06:10 [root] INFO: Init Sentry
+2024-10-19 11:06:10 [root] INFO: Init django with environment "prod"
+2024-10-19 11:06:10 [root] INFO: Database: kyrt_dev
+2024-10-19 07:06:11 [root] INFO: Init Sentry
+2024-10-19 07:06:11 [root] INFO: Init django with environment "prod"
+2024-10-19 07:06:11 [root] INFO: Database: kyrt_dev
+2024-10-19 07:06:19 [django.security.SuspiciousSession] WARNING: Session data corrupted
+2024-10-19 07:06:19 [django.security.SuspiciousSession] WARNING: Session data corrupted
+2024-10-19 07:06:19 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4147
+2024-10-19 07:06:20 [django.request] WARNING: Not Found: /static/admin/css/base.css
+2024-10-19 07:06:20 [django.request] WARNING: Not Found: /static/admin/css/dark_mode.css
+2024-10-19 07:06:20 [django.server] WARNING: "GET /static/admin/css/base.css HTTP/1.1" 404 179
+2024-10-19 07:06:20 [django.server] WARNING: "GET /static/admin/css/dark_mode.css HTTP/1.1" 404 179
+2024-10-19 07:06:20 [django.request] WARNING: Not Found: /static/admin/css/login.css
+2024-10-19 07:06:20 [django.request] WARNING: Not Found: /static/admin/css/nav_sidebar.css
+2024-10-19 07:06:20 [django.server] WARNING: "GET /static/admin/css/login.css HTTP/1.1" 404 179
+2024-10-19 07:06:20 [django.request] WARNING: Not Found: /static/admin/js/theme.js
+2024-10-19 07:06:20 [django.request] WARNING: Not Found: /static/admin/css/responsive.css
+2024-10-19 07:06:20 [django.server] WARNING: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 404 179
+2024-10-19 07:06:20 [django.server] WARNING: "GET /static/admin/js/theme.js HTTP/1.1" 404 179
+2024-10-19 07:06:20 [django.server] WARNING: "GET /static/admin/css/responsive.css HTTP/1.1" 404 179
+2024-10-19 07:06:20 [django.request] WARNING: Not Found: /static/admin/css/login.css
+2024-10-19 07:06:20 [django.request] WARNING: Not Found: /static/admin/css/responsive.css
+2024-10-19 07:06:20 [django.request] WARNING: Not Found: /static/admin/js/nav_sidebar.js
+2024-10-19 07:06:20 [django.server] WARNING: "GET /static/admin/css/login.css HTTP/1.1" 404 179
+2024-10-19 07:06:20 [django.server] WARNING: "GET /static/admin/css/responsive.css HTTP/1.1" 404 179
+2024-10-19 07:06:20 [django.request] WARNING: Not Found: /static/admin/css/nav_sidebar.css
+2024-10-19 07:06:20 [django.server] WARNING: "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 404 179
+2024-10-19 07:06:20 [django.server] WARNING: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 404 179
+2024-10-19 07:06:32 [django.security.SuspiciousSession] WARNING: Session data corrupted
+2024-10-19 07:06:32 [django.security.SuspiciousSession] WARNING: Session data corrupted
+2024-10-19 07:06:32 [django.server] INFO: "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+2024-10-19 07:06:33 [django.server] INFO: "GET /admin/ HTTP/1.1" 200 13873
+2024-10-19 07:06:33 [django.request] WARNING: Not Found: /static/admin/css/base.css
+2024-10-19 07:06:33 [django.request] WARNING: Not Found: /static/admin/js/theme.js
+2024-10-19 07:06:33 [django.request] WARNING: Not Found: /static/admin/css/nav_sidebar.css
+2024-10-19 07:06:33 [django.request] WARNING: Not Found: /static/admin/css/dashboard.css
+2024-10-19 07:06:33 [django.request] WARNING: Not Found: /static/admin/css/dark_mode.css
+2024-10-19 07:06:33 [django.server] WARNING: "GET /static/admin/css/base.css HTTP/1.1" 404 179
+2024-10-19 07:06:33 [django.server] WARNING: "GET /static/admin/js/theme.js HTTP/1.1" 404 179
+2024-10-19 07:06:33 [django.request] WARNING: Not Found: /static/admin/css/responsive.css
+2024-10-19 07:06:33 [django.server] WARNING: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 404 179
+2024-10-19 07:06:33 [django.server] WARNING: "GET /static/admin/css/dashboard.css HTTP/1.1" 404 179
+2024-10-19 07:06:33 [django.server] WARNING: "GET /static/admin/css/dark_mode.css HTTP/1.1" 404 179
+2024-10-19 07:06:33 [django.server] WARNING: "GET /static/admin/css/responsive.css HTTP/1.1" 404 179
+2024-10-19 07:06:33 [django.request] WARNING: Not Found: /static/admin/css/nav_sidebar.css
+2024-10-19 07:06:33 [django.request] WARNING: Not Found: /static/admin/js/nav_sidebar.js
+2024-10-19 07:06:33 [django.request] WARNING: Not Found: /static/admin/css/dashboard.css
+2024-10-19 07:06:33 [django.server] WARNING: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 404 179
+2024-10-19 07:06:33 [django.server] WARNING: "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 404 179
+2024-10-19 07:06:33 [django.server] WARNING: "GET /static/admin/css/dashboard.css HTTP/1.1" 404 179
+2024-10-19 07:09:56 [django.server] INFO: "GET /admin/auth/user/ HTTP/1.1" 200 17925
+2024-10-19 07:09:56 [django.request] WARNING: Not Found: /static/admin/css/base.css
+2024-10-19 07:09:56 [django.server] WARNING: "GET /static/admin/css/base.css HTTP/1.1" 404 179
+2024-10-19 07:09:56 [django.request] WARNING: Not Found: /static/admin/css/dark_mode.css
+2024-10-19 07:09:56 [django.request] WARNING: Not Found: /static/admin/js/theme.js
+2024-10-19 07:09:56 [django.request] WARNING: Not Found: /static/admin/css/changelists.css
+2024-10-19 07:09:56 [django.request] WARNING: Not Found: /static/admin/css/nav_sidebar.css
+2024-10-19 07:09:56 [django.server] WARNING: "GET /static/admin/css/dark_mode.css HTTP/1.1" 404 179
+2024-10-19 07:09:56 [django.server] WARNING: "GET /static/admin/js/theme.js HTTP/1.1" 404 179
+2024-10-19 07:09:56 [django.server] WARNING: "GET /static/admin/css/changelists.css HTTP/1.1" 404 179
+2024-10-19 07:09:56 [django.server] WARNING: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 404 179
+2024-10-19 07:09:56 [django.request] WARNING: Not Found: /static/admin/css/responsive.css
+2024-10-19 07:09:56 [django.server] WARNING: "GET /static/admin/css/responsive.css HTTP/1.1" 404 179
+2024-10-19 07:09:57 [django.request] WARNING: Not Found: /static/admin/js/vendor/jquery/jquery.min.js
+2024-10-19 07:09:57 [django.server] WARNING: "GET /static/admin/js/vendor/jquery/jquery.min.js HTTP/1.1" 404 179
+2024-10-19 07:09:57 [django.request] WARNING: Not Found: /static/admin/js/core.js
+2024-10-19 07:09:57 [django.request] WARNING: Not Found: /static/admin/js/jquery.init.js
+2024-10-19 07:09:57 [django.server] WARNING: "GET /static/admin/js/core.js HTTP/1.1" 404 179
+2024-10-19 07:09:57 [django.server] WARNING: "GET /static/admin/js/jquery.init.js HTTP/1.1" 404 179
+2024-10-19 07:09:57 [django.request] WARNING: Not Found: /static/admin/js/admin/RelatedObjectLookups.js
+2024-10-19 07:09:57 [django.server] WARNING: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 404 179
+2024-10-19 07:09:57 [django.request] WARNING: Not Found: /static/admin/js/actions.js
+2024-10-19 07:09:57 [django.server] WARNING: "GET /static/admin/js/actions.js HTTP/1.1" 404 179
+2024-10-19 07:09:57 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 07:09:57 [django.request] WARNING: Not Found: /static/admin/js/urlify.js
+2024-10-19 07:09:57 [django.server] WARNING: "GET /static/admin/js/urlify.js HTTP/1.1" 404 179
+2024-10-19 07:09:57 [django.request] WARNING: Not Found: /static/admin/js/prepopulate.js
+2024-10-19 07:09:57 [django.server] WARNING: "GET /static/admin/js/prepopulate.js HTTP/1.1" 404 179
+2024-10-19 07:09:57 [django.request] WARNING: Not Found: /static/admin/js/vendor/xregexp/xregexp.min.js
+2024-10-19 07:09:57 [django.request] WARNING: Not Found: /static/admin/img/search.svg
+2024-10-19 07:09:57 [django.server] WARNING: "GET /static/admin/js/vendor/xregexp/xregexp.min.js HTTP/1.1" 404 179
+2024-10-19 07:09:57 [django.server] WARNING: "GET /static/admin/img/search.svg HTTP/1.1" 404 179
+2024-10-19 07:09:57 [django.request] WARNING: Not Found: /static/admin/img/icon-yes.svg
+2024-10-19 07:09:57 [django.server] WARNING: "GET /static/admin/img/icon-yes.svg HTTP/1.1" 404 179
+2024-10-19 07:09:57 [django.request] WARNING: Not Found: /static/admin/css/responsive.css
+2024-10-19 07:09:57 [django.server] WARNING: "GET /static/admin/css/responsive.css HTTP/1.1" 404 179
+2024-10-19 07:09:57 [django.request] WARNING: Not Found: /static/admin/js/nav_sidebar.js
+2024-10-19 07:09:57 [django.request] WARNING: Not Found: /static/admin/js/filters.js
+2024-10-19 07:09:57 [django.server] WARNING: "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 404 179
+2024-10-19 07:09:57 [django.server] WARNING: "GET /static/admin/js/filters.js HTTP/1.1" 404 179
+2024-10-19 07:10:19 [django.server] INFO: "GET /admin/web/case/ HTTP/1.1" 200 124376
+2024-10-19 07:10:20 [django.request] WARNING: Not Found: /static/admin/css/base.css
+2024-10-19 07:10:20 [django.server] WARNING: "GET /static/admin/css/base.css HTTP/1.1" 404 179
+2024-10-19 07:10:20 [django.request] WARNING: Not Found: /static/admin/js/theme.js
+2024-10-19 07:10:20 [django.server] WARNING: "GET /static/admin/js/theme.js HTTP/1.1" 404 179
+2024-10-19 07:10:20 [django.request] WARNING: Not Found: /static/admin/css/changelists.css
+2024-10-19 07:10:20 [django.request] WARNING: Not Found: /static/admin/css/nav_sidebar.css
+2024-10-19 07:10:20 [django.server] WARNING: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 404 179
+2024-10-19 07:10:20 [django.server] WARNING: "GET /static/admin/css/changelists.css HTTP/1.1" 404 179
+2024-10-19 07:10:20 [django.request] WARNING: Not Found: /static/admin/css/responsive.css
+2024-10-19 07:10:20 [django.server] WARNING: "GET /static/admin/css/responsive.css HTTP/1.1" 404 179
+2024-10-19 07:10:20 [django.request] WARNING: Not Found: /static/admin/js/vendor/jquery/jquery.min.js
+2024-10-19 07:10:20 [django.server] WARNING: "GET /static/admin/js/vendor/jquery/jquery.min.js HTTP/1.1" 404 179
+2024-10-19 07:10:20 [django.request] WARNING: Not Found: /static/admin/js/core.js
+2024-10-19 07:10:20 [django.request] WARNING: Not Found: /static/admin/js/jquery.init.js
+2024-10-19 07:10:20 [django.server] WARNING: "GET /static/admin/js/core.js HTTP/1.1" 404 179
+2024-10-19 07:10:20 [django.request] WARNING: Not Found: /static/admin/css/dark_mode.css
+2024-10-19 07:10:20 [django.server] WARNING: "GET /static/admin/js/jquery.init.js HTTP/1.1" 404 179
+2024-10-19 07:10:20 [django.server] WARNING: "GET /static/admin/css/dark_mode.css HTTP/1.1" 404 179
+2024-10-19 07:10:20 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 07:10:20 [django.request] WARNING: Not Found: /static/admin/js/admin/RelatedObjectLookups.js
+2024-10-19 07:10:20 [django.server] WARNING: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 404 179
+2024-10-19 07:10:20 [django.request] WARNING: Not Found: /static/admin/js/actions.js
+2024-10-19 07:10:20 [django.server] WARNING: "GET /static/admin/js/actions.js HTTP/1.1" 404 179
+2024-10-19 07:10:20 [django.request] WARNING: Not Found: /static/admin/js/prepopulate.js
+2024-10-19 07:10:20 [django.request] WARNING: Not Found: /static/admin/js/vendor/xregexp/xregexp.min.js
+2024-10-19 07:10:20 [django.request] WARNING: Not Found: /static/admin/css/nav_sidebar.css
+2024-10-19 07:10:20 [django.server] WARNING: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 404 179
+2024-10-19 07:10:20 [django.server] WARNING: "GET /static/admin/js/vendor/xregexp/xregexp.min.js HTTP/1.1" 404 179
+2024-10-19 07:10:20 [django.request] WARNING: Not Found: /static/admin/js/urlify.js
+2024-10-19 07:10:20 [django.server] WARNING: "GET /static/admin/js/prepopulate.js HTTP/1.1" 404 179
+2024-10-19 07:10:20 [django.server] WARNING: "GET /static/admin/js/urlify.js HTTP/1.1" 404 179
+2024-10-19 07:10:20 [django.request] WARNING: Not Found: /static/admin/css/changelists.css
+2024-10-19 07:10:20 [django.server] WARNING: "GET /static/admin/css/changelists.css HTTP/1.1" 404 179
+2024-10-19 07:10:20 [django.request] WARNING: Not Found: /static/admin/img/search.svg
+2024-10-19 07:10:20 [django.server] WARNING: "GET /static/admin/img/search.svg HTTP/1.1" 404 179
+2024-10-19 07:10:20 [django.request] WARNING: Not Found: /static/admin/js/nav_sidebar.js
+2024-10-19 07:10:20 [django.request] WARNING: Not Found: /static/admin/js/filters.js
+2024-10-19 07:10:20 [django.request] WARNING: Not Found: /static/admin/css/responsive.css
+2024-10-19 07:10:20 [django.server] WARNING: "GET /static/admin/css/responsive.css HTTP/1.1" 404 179
+2024-10-19 07:10:20 [django.server] WARNING: "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 404 179
+2024-10-19 07:10:20 [django.server] WARNING: "GET /static/admin/js/filters.js HTTP/1.1" 404 179
+2024-10-19 07:17:02 [django.server] INFO: "GET /admin/web/case/62332/change/ HTTP/1.1" 200 58225
+2024-10-19 07:17:02 [django.request] WARNING: Not Found: /static/admin/css/base.css
+2024-10-19 07:17:02 [django.server] WARNING: "GET /static/admin/css/base.css HTTP/1.1" 404 179
+2024-10-19 07:17:02 [django.request] WARNING: Not Found: /static/admin/css/dark_mode.css
+2024-10-19 07:17:02 [django.request] WARNING: Not Found: /static/admin/css/nav_sidebar.css
+2024-10-19 07:17:02 [django.server] WARNING: "GET /static/admin/css/dark_mode.css HTTP/1.1" 404 179
+2024-10-19 07:17:02 [django.request] WARNING: Not Found: /static/admin/css/forms.css
+2024-10-19 07:17:02 [django.server] WARNING: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 404 179
+2024-10-19 07:17:02 [django.request] WARNING: Not Found: /static/admin/css/responsive.css
+2024-10-19 07:17:02 [django.server] WARNING: "GET /static/admin/css/forms.css HTTP/1.1" 404 179
+2024-10-19 07:17:02 [django.server] WARNING: "GET /static/admin/css/responsive.css HTTP/1.1" 404 179
+2024-10-19 07:17:02 [django.request] WARNING: Not Found: /static/admin/js/theme.js
+2024-10-19 07:17:02 [django.server] WARNING: "GET /static/admin/js/theme.js HTTP/1.1" 404 179
+2024-10-19 07:17:03 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 07:17:03 [django.request] WARNING: Not Found: /static/admin/js/admin/DateTimeShortcuts.js
+2024-10-19 07:17:03 [django.request] WARNING: Not Found: /static/admin/css/nav_sidebar.css
+2024-10-19 07:17:03 [django.server] WARNING: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 404 179
+2024-10-19 07:17:03 [django.request] WARNING: Not Found: /static/admin/js/vendor/jquery/jquery.min.js
+2024-10-19 07:17:03 [django.request] WARNING: Not Found: /static/admin/js/jquery.init.js
+2024-10-19 07:17:03 [django.request] WARNING: Not Found: /static/admin/js/calendar.js
+2024-10-19 07:17:03 [django.server] WARNING: "GET /static/admin/js/admin/DateTimeShortcuts.js HTTP/1.1" 404 179
+2024-10-19 07:17:03 [django.server] WARNING: "GET /static/admin/js/vendor/jquery/jquery.min.js HTTP/1.1" 404 179
+2024-10-19 07:17:03 [django.server] WARNING: "GET /static/admin/js/jquery.init.js HTTP/1.1" 404 179
+2024-10-19 07:17:03 [django.server] WARNING: "GET /static/admin/js/calendar.js HTTP/1.1" 404 179
+2024-10-19 07:17:03 [django.request] WARNING: Not Found: /static/admin/css/forms.css
+2024-10-19 07:17:03 [django.server] WARNING: "GET /static/admin/css/forms.css HTTP/1.1" 404 179
+2024-10-19 07:17:03 [django.request] WARNING: Not Found: /static/admin/js/core.js
+2024-10-19 07:17:03 [django.request] WARNING: Not Found: /static/admin/js/inlines.js
+2024-10-19 07:17:03 [django.server] WARNING: "GET /static/admin/js/inlines.js HTTP/1.1" 404 179
+2024-10-19 07:17:03 [django.server] WARNING: "GET /static/admin/js/core.js HTTP/1.1" 404 179
+2024-10-19 07:17:03 [django.request] WARNING: Not Found: /static/admin/js/actions.js
+2024-10-19 07:17:03 [django.request] WARNING: Not Found: /static/admin/js/urlify.js
+2024-10-19 07:17:03 [django.request] WARNING: Not Found: /static/admin/js/admin/RelatedObjectLookups.js
+2024-10-19 07:17:03 [django.server] WARNING: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 404 179
+2024-10-19 07:17:03 [django.server] WARNING: "GET /static/admin/js/actions.js HTTP/1.1" 404 179
+2024-10-19 07:17:03 [django.server] WARNING: "GET /static/admin/js/urlify.js HTTP/1.1" 404 179
+2024-10-19 07:17:03 [django.request] WARNING: Not Found: /static/admin/js/prepopulate.js
+2024-10-19 07:17:03 [django.server] WARNING: "GET /static/admin/js/prepopulate.js HTTP/1.1" 404 179
+2024-10-19 07:17:03 [django.request] WARNING: Not Found: /static/admin/js/prepopulate_init.js
+2024-10-19 07:17:03 [django.request] WARNING: Not Found: /static/admin/js/vendor/xregexp/xregexp.min.js
+2024-10-19 07:17:03 [django.server] WARNING: "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 404 179
+2024-10-19 07:17:03 [django.server] WARNING: "GET /static/admin/js/vendor/xregexp/xregexp.min.js HTTP/1.1" 404 179
+2024-10-19 07:17:03 [django.request] WARNING: Not Found: /static/admin/js/nav_sidebar.js
+2024-10-19 07:17:03 [django.request] WARNING: Not Found: /static/admin/img/icon-changelink.svg
+2024-10-19 07:17:03 [django.request] WARNING: Not Found: /static/admin/img/icon-addlink.svg
+2024-10-19 07:17:03 [django.request] WARNING: Not Found: /static/admin/img/icon-viewlink.svg
+2024-10-19 07:17:03 [django.request] WARNING: Not Found: /static/admin/js/change_form.js
+2024-10-19 07:17:03 [django.request] WARNING: Not Found: /static/admin/css/responsive.css
+2024-10-19 07:17:03 [django.server] WARNING: "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 404 179
+2024-10-19 07:17:03 [django.server] WARNING: "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 404 179
+2024-10-19 07:17:03 [django.server] WARNING: "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 404 179
+2024-10-19 07:17:03 [django.server] WARNING: "GET /static/admin/js/change_form.js HTTP/1.1" 404 179
+2024-10-19 07:17:03 [django.server] WARNING: "GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 404 179
+2024-10-19 07:17:03 [django.server] WARNING: "GET /static/admin/css/responsive.css HTTP/1.1" 404 179
+2024-10-19 07:17:57 [django.server] INFO: "GET /admin/rest_framework_api_key/ HTTP/1.1" 200 5405
+2024-10-19 07:17:57 [django.request] WARNING: Not Found: /static/admin/css/base.css
+2024-10-19 07:17:57 [django.request] WARNING: Not Found: /static/admin/css/dark_mode.css
+2024-10-19 07:17:57 [django.server] WARNING: "GET /static/admin/css/base.css HTTP/1.1" 404 179
+2024-10-19 07:17:57 [django.request] WARNING: Not Found: /static/admin/js/theme.js
+2024-10-19 07:17:58 [django.request] WARNING: Not Found: /static/admin/css/nav_sidebar.css
+2024-10-19 07:17:58 [django.server] WARNING: "GET /static/admin/css/dark_mode.css HTTP/1.1" 404 179
+2024-10-19 07:17:58 [django.request] WARNING: Not Found: /static/admin/css/dashboard.css
+2024-10-19 07:17:58 [django.request] WARNING: Not Found: /static/admin/css/responsive.css
+2024-10-19 07:17:58 [django.server] WARNING: "GET /static/admin/js/theme.js HTTP/1.1" 404 179
+2024-10-19 07:17:58 [django.server] WARNING: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 404 179
+2024-10-19 07:17:58 [django.server] WARNING: "GET /static/admin/css/dashboard.css HTTP/1.1" 404 179
+2024-10-19 07:17:58 [django.server] WARNING: "GET /static/admin/css/responsive.css HTTP/1.1" 404 179
+2024-10-19 07:17:58 [django.request] WARNING: Not Found: /static/admin/js/nav_sidebar.js
+2024-10-19 07:17:58 [django.server] WARNING: "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 404 179
+2024-10-19 07:18:00 [django.server] INFO: "GET /admin/ HTTP/1.1" 200 13873
+2024-10-19 07:18:00 [django.request] WARNING: Not Found: /static/admin/css/base.css
+2024-10-19 07:18:00 [django.server] WARNING: "GET /static/admin/css/base.css HTTP/1.1" 404 179
+2024-10-19 07:18:00 [django.request] WARNING: Not Found: /static/admin/js/theme.js
+2024-10-19 07:18:00 [django.request] WARNING: Not Found: /static/admin/css/nav_sidebar.css
+2024-10-19 07:18:00 [django.request] WARNING: Not Found: /static/admin/css/dark_mode.css
+2024-10-19 07:18:00 [django.request] WARNING: Not Found: /static/admin/css/dashboard.css
+2024-10-19 07:18:00 [django.server] WARNING: "GET /static/admin/js/theme.js HTTP/1.1" 404 179
+2024-10-19 07:18:00 [django.server] WARNING: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 404 179
+2024-10-19 07:18:00 [django.server] WARNING: "GET /static/admin/css/dark_mode.css HTTP/1.1" 404 179
+2024-10-19 07:18:00 [django.request] WARNING: Not Found: /static/admin/css/responsive.css
+2024-10-19 07:18:00 [django.server] WARNING: "GET /static/admin/css/dashboard.css HTTP/1.1" 404 179
+2024-10-19 07:18:00 [django.server] WARNING: "GET /static/admin/css/responsive.css HTTP/1.1" 404 179
+2024-10-19 07:18:00 [django.request] WARNING: Not Found: /static/admin/js/nav_sidebar.js
+2024-10-19 07:18:00 [django.server] WARNING: "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 404 179
+2024-10-19 07:18:06 [django.server] INFO: "GET /admin/rest_framework_api_key/ HTTP/1.1" 200 5405
+2024-10-19 07:18:06 [django.request] WARNING: Not Found: /static/admin/css/base.css
+2024-10-19 07:18:06 [django.request] WARNING: Not Found: /static/admin/css/nav_sidebar.css
+2024-10-19 07:18:06 [django.request] WARNING: Not Found: /static/admin/js/theme.js
+2024-10-19 07:18:06 [django.request] WARNING: Not Found: /static/admin/css/dashboard.css
+2024-10-19 07:18:06 [django.request] WARNING: Not Found: /static/admin/css/dark_mode.css
+2024-10-19 07:18:06 [django.server] WARNING: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 404 179
+2024-10-19 07:18:06 [django.server] WARNING: "GET /static/admin/css/base.css HTTP/1.1" 404 179
+2024-10-19 07:18:06 [django.server] WARNING: "GET /static/admin/js/theme.js HTTP/1.1" 404 179
+2024-10-19 07:18:06 [django.server] WARNING: "GET /static/admin/css/dashboard.css HTTP/1.1" 404 179
+2024-10-19 07:18:06 [django.server] WARNING: "GET /static/admin/css/dark_mode.css HTTP/1.1" 404 179
+2024-10-19 07:18:06 [django.request] WARNING: Not Found: /static/admin/css/responsive.css
+2024-10-19 07:18:06 [django.server] WARNING: "GET /static/admin/css/responsive.css HTTP/1.1" 404 179
+2024-10-19 07:18:06 [django.request] WARNING: Not Found: /static/admin/js/nav_sidebar.js
+2024-10-19 07:18:06 [django.request] WARNING: Not Found: /static/admin/css/nav_sidebar.css
+2024-10-19 07:18:06 [django.server] WARNING: "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 404 179
+2024-10-19 07:18:06 [django.server] WARNING: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 404 179
+2024-10-19 07:18:10 [django.server] INFO: "GET /admin/ HTTP/1.1" 200 13873
+2024-10-19 07:18:10 [django.request] WARNING: Not Found: /static/admin/css/base.css
+2024-10-19 07:18:10 [django.server] WARNING: "GET /static/admin/css/base.css HTTP/1.1" 404 179
+2024-10-19 07:18:10 [django.request] WARNING: Not Found: /static/admin/css/dark_mode.css
+2024-10-19 07:18:10 [django.server] WARNING: "GET /static/admin/css/dark_mode.css HTTP/1.1" 404 179
+2024-10-19 07:18:10 [django.request] WARNING: Not Found: /static/admin/css/nav_sidebar.css
+2024-10-19 07:18:10 [django.request] WARNING: Not Found: /static/admin/js/theme.js
+2024-10-19 07:18:10 [django.request] WARNING: Not Found: /static/admin/css/responsive.css
+2024-10-19 07:18:10 [django.request] WARNING: Not Found: /static/admin/css/dashboard.css
+2024-10-19 07:18:10 [django.server] WARNING: "GET /static/admin/js/theme.js HTTP/1.1" 404 179
+2024-10-19 07:18:10 [django.server] WARNING: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 404 179
+2024-10-19 07:18:10 [django.server] WARNING: "GET /static/admin/css/responsive.css HTTP/1.1" 404 179
+2024-10-19 07:18:10 [django.server] WARNING: "GET /static/admin/css/dashboard.css HTTP/1.1" 404 179
+2024-10-19 07:18:10 [django.request] WARNING: Not Found: /static/admin/css/responsive.css
+2024-10-19 07:18:10 [django.request] WARNING: Not Found: /static/admin/css/nav_sidebar.css
+2024-10-19 07:18:10 [django.request] WARNING: Not Found: /static/admin/js/nav_sidebar.js
+2024-10-19 07:18:10 [django.server] WARNING: "GET /static/admin/css/responsive.css HTTP/1.1" 404 179
+2024-10-19 07:18:10 [django.server] WARNING: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 404 179
+2024-10-19 07:18:10 [django.server] WARNING: "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 404 179
+2024-10-19 07:18:14 [django.server] INFO: "GET /admin/auth/user/ HTTP/1.1" 200 17925
+2024-10-19 07:18:14 [django.request] WARNING: Not Found: /static/admin/css/base.css
+2024-10-19 07:18:14 [django.request] WARNING: Not Found: /static/admin/js/theme.js
+2024-10-19 07:18:14 [django.request] WARNING: Not Found: /static/admin/css/nav_sidebar.css
+2024-10-19 07:18:14 [django.server] WARNING: "GET /static/admin/js/theme.js HTTP/1.1" 404 179
+2024-10-19 07:18:14 [django.request] WARNING: Not Found: /static/admin/css/changelists.css
+2024-10-19 07:18:14 [django.server] WARNING: "GET /static/admin/css/base.css HTTP/1.1" 404 179
+2024-10-19 07:18:14 [django.request] WARNING: Not Found: /static/admin/css/dark_mode.css
+2024-10-19 07:18:14 [django.server] WARNING: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 404 179
+2024-10-19 07:18:14 [django.server] WARNING: "GET /static/admin/css/changelists.css HTTP/1.1" 404 179
+2024-10-19 07:18:14 [django.request] WARNING: Not Found: /static/admin/css/responsive.css
+2024-10-19 07:18:14 [django.server] WARNING: "GET /static/admin/css/dark_mode.css HTTP/1.1" 404 179
+2024-10-19 07:18:14 [django.server] WARNING: "GET /static/admin/css/responsive.css HTTP/1.1" 404 179
+2024-10-19 07:18:14 [django.request] WARNING: Not Found: /static/admin/js/vendor/jquery/jquery.min.js
+2024-10-19 07:18:14 [django.server] WARNING: "GET /static/admin/js/vendor/jquery/jquery.min.js HTTP/1.1" 404 179
+2024-10-19 07:18:14 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 07:18:14 [django.request] WARNING: Not Found: /static/admin/js/jquery.init.js
+2024-10-19 07:18:14 [django.request] WARNING: Not Found: /static/admin/js/core.js
+2024-10-19 07:18:14 [django.server] WARNING: "GET /static/admin/js/core.js HTTP/1.1" 404 179
+2024-10-19 07:18:14 [django.server] WARNING: "GET /static/admin/js/jquery.init.js HTTP/1.1" 404 179
+2024-10-19 07:18:14 [django.request] WARNING: Not Found: /static/admin/css/nav_sidebar.css
+2024-10-19 07:18:14 [django.request] WARNING: Not Found: /static/admin/js/admin/RelatedObjectLookups.js
+2024-10-19 07:18:14 [django.server] WARNING: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 404 179
+2024-10-19 07:18:14 [django.server] WARNING: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 404 179
+2024-10-19 07:18:14 [django.request] WARNING: Not Found: /static/admin/css/changelists.css
+2024-10-19 07:18:14 [django.server] WARNING: "GET /static/admin/css/changelists.css HTTP/1.1" 404 179
+2024-10-19 07:18:14 [django.request] WARNING: Not Found: /static/admin/js/actions.js
+2024-10-19 07:18:14 [django.server] WARNING: "GET /static/admin/js/actions.js HTTP/1.1" 404 179
+2024-10-19 07:18:14 [django.request] WARNING: Not Found: /static/admin/js/urlify.js
+2024-10-19 07:18:14 [django.server] WARNING: "GET /static/admin/js/urlify.js HTTP/1.1" 404 179
+2024-10-19 07:18:14 [django.request] WARNING: Not Found: /static/admin/js/prepopulate.js
+2024-10-19 07:18:14 [django.server] WARNING: "GET /static/admin/js/prepopulate.js HTTP/1.1" 404 179
+2024-10-19 07:18:14 [django.request] WARNING: Not Found: /static/admin/js/vendor/xregexp/xregexp.min.js
+2024-10-19 07:18:14 [django.request] WARNING: Not Found: /static/admin/img/search.svg
+2024-10-19 07:18:14 [django.server] WARNING: "GET /static/admin/js/vendor/xregexp/xregexp.min.js HTTP/1.1" 404 179
+2024-10-19 07:18:14 [django.server] WARNING: "GET /static/admin/img/search.svg HTTP/1.1" 404 179
+2024-10-19 07:18:14 [django.request] WARNING: Not Found: /static/admin/img/icon-yes.svg
+2024-10-19 07:18:14 [django.server] WARNING: "GET /static/admin/img/icon-yes.svg HTTP/1.1" 404 179
+2024-10-19 07:18:14 [django.request] WARNING: Not Found: /static/admin/css/responsive.css
+2024-10-19 07:18:14 [django.server] WARNING: "GET /static/admin/css/responsive.css HTTP/1.1" 404 179
+2024-10-19 07:18:14 [django.request] WARNING: Not Found: /static/admin/js/nav_sidebar.js
+2024-10-19 07:18:14 [django.request] WARNING: Not Found: /static/admin/js/filters.js
+2024-10-19 07:18:14 [django.server] WARNING: "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 404 179
+2024-10-19 07:18:14 [django.server] WARNING: "GET /static/admin/js/filters.js HTTP/1.1" 404 179
+2024-10-19 07:18:34 [django.server] INFO: "GET /admin/auth/user/3/change/ HTTP/1.1" 200 33267
+2024-10-19 07:18:35 [django.request] WARNING: Not Found: /static/admin/css/dark_mode.css
+2024-10-19 07:18:35 [django.request] WARNING: Not Found: /static/admin/css/base.css
+2024-10-19 07:18:35 [django.server] WARNING: "GET /static/admin/css/dark_mode.css HTTP/1.1" 404 179
+2024-10-19 07:18:35 [django.request] WARNING: Not Found: /static/admin/js/theme.js
+2024-10-19 07:18:35 [django.request] WARNING: Not Found: /static/admin/css/nav_sidebar.css
+2024-10-19 07:18:35 [django.server] WARNING: "GET /static/admin/css/base.css HTTP/1.1" 404 179
+2024-10-19 07:18:35 [django.request] WARNING: Not Found: /static/admin/css/forms.css
+2024-10-19 07:18:35 [django.request] WARNING: Not Found: /static/admin/css/responsive.css
+2024-10-19 07:18:35 [django.server] WARNING: "GET /static/admin/js/theme.js HTTP/1.1" 404 179
+2024-10-19 07:18:35 [django.server] WARNING: "GET /static/admin/css/forms.css HTTP/1.1" 404 179
+2024-10-19 07:18:35 [django.server] WARNING: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 404 179
+2024-10-19 07:18:35 [django.server] WARNING: "GET /static/admin/css/responsive.css HTTP/1.1" 404 179
+2024-10-19 07:18:35 [django.request] WARNING: Not Found: /static/admin/js/vendor/jquery/jquery.min.js
+2024-10-19 07:18:35 [django.server] WARNING: "GET /static/admin/js/vendor/jquery/jquery.min.js HTTP/1.1" 404 179
+2024-10-19 07:18:35 [django.request] WARNING: Not Found: /static/admin/js/calendar.js
+2024-10-19 07:18:35 [django.server] WARNING: "GET /static/admin/js/calendar.js HTTP/1.1" 404 179
+2024-10-19 07:18:35 [django.request] WARNING: Not Found: /static/admin/js/admin/DateTimeShortcuts.js
+2024-10-19 07:18:35 [django.server] WARNING: "GET /static/admin/js/admin/DateTimeShortcuts.js HTTP/1.1" 404 179
+2024-10-19 07:18:35 [django.request] WARNING: Not Found: /static/admin/js/core.js
+2024-10-19 07:18:35 [django.request] WARNING: Not Found: /static/admin/js/jquery.init.js
+2024-10-19 07:18:35 [django.server] WARNING: "GET /static/admin/js/core.js HTTP/1.1" 404 179
+2024-10-19 07:18:35 [django.server] WARNING: "GET /static/admin/js/jquery.init.js HTTP/1.1" 404 179
+2024-10-19 07:18:35 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 07:18:35 [django.request] WARNING: Not Found: /static/admin/js/admin/RelatedObjectLookups.js
+2024-10-19 07:18:35 [django.server] WARNING: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 404 179
+2024-10-19 07:18:35 [django.request] WARNING: Not Found: /static/admin/js/SelectBox.js
+2024-10-19 07:18:35 [django.server] WARNING: "GET /static/admin/js/SelectBox.js HTTP/1.1" 404 179
+2024-10-19 07:18:35 [django.request] WARNING: Not Found: /static/admin/js/actions.js
+2024-10-19 07:18:35 [django.server] WARNING: "GET /static/admin/js/actions.js HTTP/1.1" 404 179
+2024-10-19 07:18:35 [django.request] WARNING: Not Found: /static/admin/js/urlify.js
+2024-10-19 07:18:35 [django.request] WARNING: Not Found: /static/admin/js/SelectFilter2.js
+2024-10-19 07:18:35 [django.server] WARNING: "GET /static/admin/js/urlify.js HTTP/1.1" 404 179
+2024-10-19 07:18:35 [django.request] WARNING: Not Found: /static/admin/js/prepopulate.js
+2024-10-19 07:18:35 [django.server] WARNING: "GET /static/admin/js/SelectFilter2.js HTTP/1.1" 404 179
+2024-10-19 07:18:35 [django.server] WARNING: "GET /static/admin/js/prepopulate.js HTTP/1.1" 404 179
+2024-10-19 07:18:35 [django.request] WARNING: Not Found: /static/admin/js/vendor/xregexp/xregexp.min.js
+2024-10-19 07:18:35 [django.server] WARNING: "GET /static/admin/js/vendor/xregexp/xregexp.min.js HTTP/1.1" 404 179
+2024-10-19 07:18:35 [django.request] WARNING: Not Found: /static/admin/js/prepopulate_init.js
+2024-10-19 07:18:35 [django.server] WARNING: "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 404 179
+2024-10-19 07:18:35 [django.request] WARNING: Not Found: /static/admin/js/nav_sidebar.js
+2024-10-19 07:18:35 [django.server] WARNING: "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 404 179
+2024-10-19 07:18:35 [django.request] WARNING: Not Found: /static/admin/css/responsive.css
+2024-10-19 07:18:35 [django.request] WARNING: Not Found: /static/admin/js/change_form.js
+2024-10-19 07:18:35 [django.request] WARNING: Not Found: /static/admin/img/icon-addlink.svg
+2024-10-19 07:18:35 [django.server] WARNING: "GET /static/admin/css/responsive.css HTTP/1.1" 404 179
+2024-10-19 07:18:35 [django.server] WARNING: "GET /static/admin/js/change_form.js HTTP/1.1" 404 179
+2024-10-19 07:18:35 [django.server] WARNING: "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 404 179
+2024-10-19 07:18:56 [django.server] INFO: "GET /admin/auth/user/ HTTP/1.1" 200 17925
+2024-10-19 07:18:56 [django.request] WARNING: Not Found: /static/admin/css/base.css
+2024-10-19 07:18:56 [django.request] WARNING: Not Found: /static/admin/js/theme.js
+2024-10-19 07:18:56 [django.request] WARNING: Not Found: /static/admin/css/nav_sidebar.css
+2024-10-19 07:18:56 [django.request] WARNING: Not Found: /static/admin/css/dark_mode.css
+2024-10-19 07:18:56 [django.server] WARNING: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 404 179
+2024-10-19 07:18:56 [django.server] WARNING: "GET /static/admin/js/theme.js HTTP/1.1" 404 179
+2024-10-19 07:18:56 [django.request] WARNING: Not Found: /static/admin/css/responsive.css
+2024-10-19 07:18:56 [django.server] WARNING: "GET /static/admin/css/base.css HTTP/1.1" 404 179
+2024-10-19 07:18:56 [django.request] WARNING: Not Found: /static/admin/css/changelists.css
+2024-10-19 07:18:56 [django.server] WARNING: "GET /static/admin/css/responsive.css HTTP/1.1" 404 179
+2024-10-19 07:18:56 [django.server] WARNING: "GET /static/admin/css/dark_mode.css HTTP/1.1" 404 179
+2024-10-19 07:18:56 [django.server] WARNING: "GET /static/admin/css/changelists.css HTTP/1.1" 404 179
+2024-10-19 07:18:56 [django.request] WARNING: Not Found: /static/admin/js/vendor/jquery/jquery.min.js
+2024-10-19 07:18:56 [django.server] WARNING: "GET /static/admin/js/vendor/jquery/jquery.min.js HTTP/1.1" 404 179
+2024-10-19 07:18:56 [django.request] WARNING: Not Found: /static/admin/js/jquery.init.js
+2024-10-19 07:18:56 [django.server] WARNING: "GET /static/admin/js/jquery.init.js HTTP/1.1" 404 179
+2024-10-19 07:18:56 [django.request] WARNING: Not Found: /static/admin/js/core.js
+2024-10-19 07:18:56 [django.request] WARNING: Not Found: /static/admin/js/admin/RelatedObjectLookups.js
+2024-10-19 07:18:56 [django.server] WARNING: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 404 179
+2024-10-19 07:18:56 [django.server] WARNING: "GET /static/admin/js/core.js HTTP/1.1" 404 179
+2024-10-19 07:18:56 [django.request] WARNING: Not Found: /static/admin/css/nav_sidebar.css
+2024-10-19 07:18:56 [django.server] WARNING: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 404 179
+2024-10-19 07:18:56 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 07:18:56 [django.request] WARNING: Not Found: /static/admin/js/actions.js
+2024-10-19 07:18:56 [django.server] WARNING: "GET /static/admin/js/actions.js HTTP/1.1" 404 179
+2024-10-19 07:18:56 [django.request] WARNING: Not Found: /static/admin/js/urlify.js
+2024-10-19 07:18:57 [django.server] WARNING: "GET /static/admin/js/urlify.js HTTP/1.1" 404 179
+2024-10-19 07:18:57 [django.request] WARNING: Not Found: /static/admin/js/prepopulate.js
+2024-10-19 07:18:57 [django.server] WARNING: "GET /static/admin/js/prepopulate.js HTTP/1.1" 404 179
+2024-10-19 07:18:57 [django.request] WARNING: Not Found: /static/admin/js/vendor/xregexp/xregexp.min.js
+2024-10-19 07:18:57 [django.server] WARNING: "GET /static/admin/js/vendor/xregexp/xregexp.min.js HTTP/1.1" 404 179
+2024-10-19 07:18:57 [django.request] WARNING: Not Found: /static/admin/img/icon-yes.svg
+2024-10-19 07:18:57 [django.server] WARNING: "GET /static/admin/img/icon-yes.svg HTTP/1.1" 404 179
+2024-10-19 07:18:57 [django.request] WARNING: Not Found: /static/admin/img/search.svg
+2024-10-19 07:18:57 [django.server] WARNING: "GET /static/admin/img/search.svg HTTP/1.1" 404 179
+2024-10-19 07:18:57 [django.request] WARNING: Not Found: /static/admin/js/nav_sidebar.js
+2024-10-19 07:18:57 [django.request] WARNING: Not Found: /static/admin/css/responsive.css
+2024-10-19 07:18:57 [django.server] WARNING: "GET /static/admin/css/responsive.css HTTP/1.1" 404 179
+2024-10-19 07:18:57 [django.server] WARNING: "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 404 179
+2024-10-19 07:18:57 [django.request] WARNING: Not Found: /static/admin/js/filters.js
+2024-10-19 07:18:57 [django.server] WARNING: "GET /static/admin/js/filters.js HTTP/1.1" 404 179
+2024-10-19 07:19:01 [django.server] INFO: "GET /admin/auth/user/1/change/ HTTP/1.1" 200 33279
+2024-10-19 07:19:01 [django.request] WARNING: Not Found: /static/admin/css/base.css
+2024-10-19 07:19:01 [django.server] WARNING: "GET /static/admin/css/base.css HTTP/1.1" 404 179
+2024-10-19 07:19:01 [django.request] WARNING: Not Found: /static/admin/js/theme.js
+2024-10-19 07:19:01 [django.server] WARNING: "GET /static/admin/js/theme.js HTTP/1.1" 404 179
+2024-10-19 07:19:01 [django.request] WARNING: Not Found: /static/admin/css/nav_sidebar.css
+2024-10-19 07:19:01 [django.request] WARNING: Not Found: /static/admin/css/dark_mode.css
+2024-10-19 07:19:01 [django.request] WARNING: Not Found: /static/admin/css/forms.css
+2024-10-19 07:19:01 [django.server] WARNING: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 404 179
+2024-10-19 07:19:01 [django.request] WARNING: Not Found: /static/admin/css/responsive.css
+2024-10-19 07:19:01 [django.server] WARNING: "GET /static/admin/css/dark_mode.css HTTP/1.1" 404 179
+2024-10-19 07:19:01 [django.server] WARNING: "GET /static/admin/css/forms.css HTTP/1.1" 404 179
+2024-10-19 07:19:01 [django.server] WARNING: "GET /static/admin/css/responsive.css HTTP/1.1" 404 179
+2024-10-19 07:19:01 [django.request] WARNING: Not Found: /static/admin/js/vendor/jquery/jquery.min.js
+2024-10-19 07:19:01 [django.request] WARNING: Not Found: /static/admin/js/calendar.js
+2024-10-19 07:19:01 [django.server] WARNING: "GET /static/admin/js/vendor/jquery/jquery.min.js HTTP/1.1" 404 179
+2024-10-19 07:19:01 [django.request] WARNING: Not Found: /static/admin/css/nav_sidebar.css
+2024-10-19 07:19:01 [django.request] WARNING: Not Found: /static/admin/js/admin/DateTimeShortcuts.js
+2024-10-19 07:19:01 [django.server] WARNING: "GET /static/admin/js/calendar.js HTTP/1.1" 404 179
+2024-10-19 07:19:01 [django.request] WARNING: Not Found: /static/admin/js/jquery.init.js
+2024-10-19 07:19:01 [django.server] WARNING: "GET /static/admin/js/jquery.init.js HTTP/1.1" 404 179
+2024-10-19 07:19:01 [django.server] WARNING: "GET /static/admin/js/admin/DateTimeShortcuts.js HTTP/1.1" 404 179
+2024-10-19 07:19:01 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 07:19:01 [django.server] WARNING: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 404 179
+2024-10-19 07:19:01 [django.request] WARNING: Not Found: /static/admin/js/core.js
+2024-10-19 07:19:01 [django.server] WARNING: "GET /static/admin/js/core.js HTTP/1.1" 404 179
+2024-10-19 07:19:01 [django.request] WARNING: Not Found: /static/admin/js/admin/RelatedObjectLookups.js
+2024-10-19 07:19:01 [django.request] WARNING: Not Found: /static/admin/js/SelectBox.js
+2024-10-19 07:19:01 [django.server] WARNING: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 404 179
+2024-10-19 07:19:02 [django.server] WARNING: "GET /static/admin/js/SelectBox.js HTTP/1.1" 404 179
+2024-10-19 07:19:02 [django.request] WARNING: Not Found: /static/admin/js/actions.js
+2024-10-19 07:19:02 [django.server] WARNING: "GET /static/admin/js/actions.js HTTP/1.1" 404 179
+2024-10-19 07:19:02 [django.request] WARNING: Not Found: /static/admin/js/SelectFilter2.js
+2024-10-19 07:19:02 [django.request] WARNING: Not Found: /static/admin/js/urlify.js
+2024-10-19 07:19:02 [django.server] WARNING: "GET /static/admin/js/SelectFilter2.js HTTP/1.1" 404 179
+2024-10-19 07:19:02 [django.server] WARNING: "GET /static/admin/js/urlify.js HTTP/1.1" 404 179
+2024-10-19 07:19:02 [django.request] WARNING: Not Found: /static/admin/js/prepopulate.js
+2024-10-19 07:19:02 [django.server] WARNING: "GET /static/admin/js/prepopulate.js HTTP/1.1" 404 179
+2024-10-19 07:19:02 [django.request] WARNING: Not Found: /static/admin/js/vendor/xregexp/xregexp.min.js
+2024-10-19 07:19:02 [django.server] WARNING: "GET /static/admin/js/vendor/xregexp/xregexp.min.js HTTP/1.1" 404 179
+2024-10-19 07:19:02 [django.request] WARNING: Not Found: /static/admin/js/prepopulate_init.js
+2024-10-19 07:19:02 [django.server] WARNING: "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 404 179
+2024-10-19 07:19:02 [django.request] WARNING: Not Found: /static/admin/js/change_form.js
+2024-10-19 07:19:02 [django.server] WARNING: "GET /static/admin/js/change_form.js HTTP/1.1" 404 179
+2024-10-19 07:19:02 [django.request] WARNING: Not Found: /static/admin/js/nav_sidebar.js
+2024-10-19 07:19:02 [django.request] WARNING: Not Found: /static/admin/css/responsive.css
+2024-10-19 07:19:02 [django.request] WARNING: Not Found: /static/admin/img/icon-addlink.svg
+2024-10-19 07:19:02 [django.server] WARNING: "GET /static/admin/css/responsive.css HTTP/1.1" 404 179
+2024-10-19 07:19:02 [django.server] WARNING: "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 404 179
+2024-10-19 07:19:02 [django.server] WARNING: "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 404 179
+2024-10-19 07:19:35 [django.server] INFO: "POST /admin/auth/user/1/change/ HTTP/1.1" 302 0
+2024-10-19 07:19:35 [django.server] INFO: "GET /admin/auth/user/ HTTP/1.1" 200 18118
+2024-10-19 07:19:35 [django.request] WARNING: Not Found: /static/admin/css/base.css
+2024-10-19 07:19:35 [django.request] WARNING: Not Found: /static/admin/css/dark_mode.css
+2024-10-19 07:19:35 [django.server] WARNING: "GET /static/admin/css/base.css HTTP/1.1" 404 179
+2024-10-19 07:19:35 [django.server] WARNING: "GET /static/admin/css/dark_mode.css HTTP/1.1" 404 179
+2024-10-19 07:19:35 [django.request] WARNING: Not Found: /static/admin/js/theme.js
+2024-10-19 07:19:36 [django.request] WARNING: Not Found: /static/admin/css/responsive.css
+2024-10-19 07:19:36 [django.request] WARNING: Not Found: /static/admin/css/nav_sidebar.css
+2024-10-19 07:19:36 [django.request] WARNING: Not Found: /static/admin/css/changelists.css
+2024-10-19 07:19:36 [django.server] WARNING: "GET /static/admin/js/theme.js HTTP/1.1" 404 179
+2024-10-19 07:19:36 [django.server] WARNING: "GET /static/admin/css/responsive.css HTTP/1.1" 404 179
+2024-10-19 07:19:36 [django.server] WARNING: "GET /static/admin/css/changelists.css HTTP/1.1" 404 179
+2024-10-19 07:19:36 [django.server] WARNING: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 404 179
+2024-10-19 07:19:36 [django.request] WARNING: Not Found: /static/admin/js/vendor/jquery/jquery.min.js
+2024-10-19 07:19:36 [django.server] WARNING: "GET /static/admin/js/vendor/jquery/jquery.min.js HTTP/1.1" 404 179
+2024-10-19 07:19:36 [django.request] WARNING: Not Found: /static/admin/js/jquery.init.js
+2024-10-19 07:19:36 [django.request] WARNING: Not Found: /static/admin/js/admin/RelatedObjectLookups.js
+2024-10-19 07:19:36 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 07:19:36 [django.server] WARNING: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 404 179
+2024-10-19 07:19:36 [django.server] WARNING: "GET /static/admin/js/jquery.init.js HTTP/1.1" 404 179
+2024-10-19 07:19:36 [django.request] WARNING: Not Found: /static/admin/js/core.js
+2024-10-19 07:19:36 [django.request] WARNING: Not Found: /static/admin/js/actions.js
+2024-10-19 07:19:36 [django.server] WARNING: "GET /static/admin/js/core.js HTTP/1.1" 404 179
+2024-10-19 07:19:36 [django.server] WARNING: "GET /static/admin/js/actions.js HTTP/1.1" 404 179
+2024-10-19 07:19:36 [django.request] WARNING: Not Found: /static/admin/js/urlify.js
+2024-10-19 07:19:36 [django.server] WARNING: "GET /static/admin/js/urlify.js HTTP/1.1" 404 179
+2024-10-19 07:19:36 [django.request] WARNING: Not Found: /static/admin/js/prepopulate.js
+2024-10-19 07:19:36 [django.server] WARNING: "GET /static/admin/js/prepopulate.js HTTP/1.1" 404 179
+2024-10-19 07:19:36 [django.request] WARNING: Not Found: /static/admin/js/vendor/xregexp/xregexp.min.js
+2024-10-19 07:19:36 [django.server] WARNING: "GET /static/admin/js/vendor/xregexp/xregexp.min.js HTTP/1.1" 404 179
+2024-10-19 07:19:36 [django.request] WARNING: Not Found: /static/admin/img/search.svg
+2024-10-19 07:19:36 [django.server] WARNING: "GET /static/admin/img/search.svg HTTP/1.1" 404 179
+2024-10-19 07:19:36 [django.request] WARNING: Not Found: /static/admin/img/icon-no.svg
+2024-10-19 07:19:36 [django.server] WARNING: "GET /static/admin/img/icon-no.svg HTTP/1.1" 404 179
+2024-10-19 07:19:36 [django.request] WARNING: Not Found: /static/admin/js/nav_sidebar.js
+2024-10-19 07:19:36 [django.server] WARNING: "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 404 179
+2024-10-19 07:19:36 [django.request] WARNING: Not Found: /static/admin/img/icon-yes.svg
+2024-10-19 07:19:36 [django.request] WARNING: Not Found: /static/admin/css/responsive.css
+2024-10-19 07:19:36 [django.server] WARNING: "GET /static/admin/img/icon-yes.svg HTTP/1.1" 404 179
+2024-10-19 07:19:36 [django.request] WARNING: Not Found: /static/admin/js/filters.js
+2024-10-19 07:19:36 [django.server] WARNING: "GET /static/admin/css/responsive.css HTTP/1.1" 404 179
+2024-10-19 07:19:36 [django.server] WARNING: "GET /static/admin/js/filters.js HTTP/1.1" 404 179
+2024-10-19 07:19:39 [django.server] INFO: "GET /admin/auth/user/ HTTP/1.1" 200 17925
+2024-10-19 07:19:39 [django.request] WARNING: Not Found: /static/admin/css/base.css
+2024-10-19 07:19:39 [django.server] WARNING: "GET /static/admin/css/base.css HTTP/1.1" 404 179
+2024-10-19 07:19:39 [django.request] WARNING: Not Found: /static/admin/js/theme.js
+2024-10-19 07:19:39 [django.request] WARNING: Not Found: /static/admin/css/changelists.css
+2024-10-19 07:19:39 [django.request] WARNING: Not Found: /static/admin/css/dark_mode.css
+2024-10-19 07:19:39 [django.server] WARNING: "GET /static/admin/js/theme.js HTTP/1.1" 404 179
+2024-10-19 07:19:39 [django.server] WARNING: "GET /static/admin/css/changelists.css HTTP/1.1" 404 179
+2024-10-19 07:19:39 [django.request] WARNING: Not Found: /static/admin/css/nav_sidebar.css
+2024-10-19 07:19:39 [django.server] WARNING: "GET /static/admin/css/dark_mode.css HTTP/1.1" 404 179
+2024-10-19 07:19:39 [django.request] WARNING: Not Found: /static/admin/css/responsive.css
+2024-10-19 07:19:39 [django.server] WARNING: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 404 179
+2024-10-19 07:19:39 [django.server] WARNING: "GET /static/admin/css/responsive.css HTTP/1.1" 404 179
+2024-10-19 07:19:39 [django.request] WARNING: Not Found: /static/admin/js/vendor/jquery/jquery.min.js
+2024-10-19 07:19:39 [django.server] WARNING: "GET /static/admin/js/vendor/jquery/jquery.min.js HTTP/1.1" 404 179
+2024-10-19 07:19:39 [django.request] WARNING: Not Found: /static/admin/js/core.js
+2024-10-19 07:19:39 [django.server] WARNING: "GET /static/admin/js/core.js HTTP/1.1" 404 179
+2024-10-19 07:19:39 [django.request] WARNING: Not Found: /static/admin/js/jquery.init.js
+2024-10-19 07:19:39 [django.request] WARNING: Not Found: /static/admin/css/changelists.css
+2024-10-19 07:19:39 [django.server] WARNING: "GET /static/admin/js/jquery.init.js HTTP/1.1" 404 179
+2024-10-19 07:19:39 [django.server] WARNING: "GET /static/admin/css/changelists.css HTTP/1.1" 404 179
+2024-10-19 07:19:39 [django.request] WARNING: Not Found: /static/admin/js/admin/RelatedObjectLookups.js
+2024-10-19 07:19:39 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 07:19:39 [django.server] WARNING: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 404 179
+2024-10-19 07:19:39 [django.request] WARNING: Not Found: /static/admin/js/actions.js
+2024-10-19 07:19:39 [django.server] WARNING: "GET /static/admin/js/actions.js HTTP/1.1" 404 179
+2024-10-19 07:19:39 [django.request] WARNING: Not Found: /static/admin/js/urlify.js
+2024-10-19 07:19:39 [django.server] WARNING: "GET /static/admin/js/urlify.js HTTP/1.1" 404 179
+2024-10-19 07:19:39 [django.request] WARNING: Not Found: /static/admin/js/prepopulate.js
+2024-10-19 07:19:39 [django.server] WARNING: "GET /static/admin/js/prepopulate.js HTTP/1.1" 404 179
+2024-10-19 07:19:39 [django.request] WARNING: Not Found: /static/admin/js/vendor/xregexp/xregexp.min.js
+2024-10-19 07:19:39 [django.server] WARNING: "GET /static/admin/js/vendor/xregexp/xregexp.min.js HTTP/1.1" 404 179
+2024-10-19 07:19:39 [django.request] WARNING: Not Found: /static/admin/img/search.svg
+2024-10-19 07:19:39 [django.request] WARNING: Not Found: /static/admin/img/icon-no.svg
+2024-10-19 07:19:39 [django.server] WARNING: "GET /static/admin/img/icon-no.svg HTTP/1.1" 404 179
+2024-10-19 07:19:39 [django.server] WARNING: "GET /static/admin/img/search.svg HTTP/1.1" 404 179
+2024-10-19 07:19:39 [django.request] WARNING: Not Found: /static/admin/img/icon-yes.svg
+2024-10-19 07:19:39 [django.request] WARNING: Not Found: /static/admin/css/responsive.css
+2024-10-19 07:19:39 [django.request] WARNING: Not Found: /static/admin/js/nav_sidebar.js
+2024-10-19 07:19:39 [django.request] WARNING: Not Found: /static/admin/js/filters.js
+2024-10-19 07:19:39 [django.server] WARNING: "GET /static/admin/img/icon-yes.svg HTTP/1.1" 404 179
+2024-10-19 07:19:39 [django.server] WARNING: "GET /static/admin/css/responsive.css HTTP/1.1" 404 179
+2024-10-19 07:19:39 [django.server] WARNING: "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 404 179
+2024-10-19 07:19:39 [django.server] WARNING: "GET /static/admin/js/filters.js HTTP/1.1" 404 179
+2024-10-19 07:19:43 [django.server] INFO: "GET /admin/auth/user/ HTTP/1.1" 200 17925
+2024-10-19 07:19:43 [django.request] WARNING: Not Found: /static/admin/css/base.css
+2024-10-19 07:19:43 [django.request] WARNING: Not Found: /static/admin/css/dark_mode.css
+2024-10-19 07:19:43 [django.server] WARNING: "GET /static/admin/css/dark_mode.css HTTP/1.1" 404 179
+2024-10-19 07:19:43 [django.request] WARNING: Not Found: /static/admin/css/changelists.css
+2024-10-19 07:19:43 [django.request] WARNING: Not Found: /static/admin/js/theme.js
+2024-10-19 07:19:43 [django.request] WARNING: Not Found: /static/admin/css/nav_sidebar.css
+2024-10-19 07:19:43 [django.server] WARNING: "GET /static/admin/css/base.css HTTP/1.1" 404 179
+2024-10-19 07:19:43 [django.server] WARNING: "GET /static/admin/css/changelists.css HTTP/1.1" 404 179
+2024-10-19 07:19:43 [django.request] WARNING: Not Found: /static/admin/css/responsive.css
+2024-10-19 07:19:43 [django.server] WARNING: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 404 179
+2024-10-19 07:19:43 [django.server] WARNING: "GET /static/admin/js/theme.js HTTP/1.1" 404 179
+2024-10-19 07:19:43 [django.server] WARNING: "GET /static/admin/css/responsive.css HTTP/1.1" 404 179
+2024-10-19 07:19:43 [django.request] WARNING: Not Found: /static/admin/js/vendor/jquery/jquery.min.js
+2024-10-19 07:19:43 [django.server] WARNING: "GET /static/admin/js/vendor/jquery/jquery.min.js HTTP/1.1" 404 179
+2024-10-19 07:19:43 [django.request] WARNING: Not Found: /static/admin/js/jquery.init.js
+2024-10-19 07:19:43 [django.request] WARNING: Not Found: /static/admin/js/core.js
+2024-10-19 07:19:43 [django.request] WARNING: Not Found: /static/admin/css/nav_sidebar.css
+2024-10-19 07:19:43 [django.request] WARNING: Not Found: /static/admin/js/admin/RelatedObjectLookups.js
+2024-10-19 07:19:43 [django.server] WARNING: "GET /static/admin/js/jquery.init.js HTTP/1.1" 404 179
+2024-10-19 07:19:43 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 07:19:43 [django.server] WARNING: "GET /static/admin/js/core.js HTTP/1.1" 404 179
+2024-10-19 07:19:43 [django.server] WARNING: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 404 179
+2024-10-19 07:19:43 [django.server] WARNING: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 404 179
+2024-10-19 07:19:43 [django.request] WARNING: Not Found: /static/admin/css/changelists.css
+2024-10-19 07:19:43 [django.server] WARNING: "GET /static/admin/css/changelists.css HTTP/1.1" 404 179
+2024-10-19 07:19:43 [django.request] WARNING: Not Found: /static/admin/js/actions.js
+2024-10-19 07:19:43 [django.server] WARNING: "GET /static/admin/js/actions.js HTTP/1.1" 404 179
+2024-10-19 07:19:43 [django.request] WARNING: Not Found: /static/admin/js/urlify.js
+2024-10-19 07:19:43 [django.request] WARNING: Not Found: /static/admin/js/prepopulate.js
+2024-10-19 07:19:43 [django.server] WARNING: "GET /static/admin/js/urlify.js HTTP/1.1" 404 179
+2024-10-19 07:19:43 [django.server] WARNING: "GET /static/admin/js/prepopulate.js HTTP/1.1" 404 179
+2024-10-19 07:19:43 [django.request] WARNING: Not Found: /static/admin/js/vendor/xregexp/xregexp.min.js
+2024-10-19 07:19:43 [django.server] WARNING: "GET /static/admin/js/vendor/xregexp/xregexp.min.js HTTP/1.1" 404 179
+2024-10-19 07:19:43 [django.request] WARNING: Not Found: /static/admin/img/search.svg
+2024-10-19 07:19:43 [django.server] WARNING: "GET /static/admin/img/search.svg HTTP/1.1" 404 179
+2024-10-19 07:19:43 [django.request] WARNING: Not Found: /static/admin/img/icon-no.svg
+2024-10-19 07:19:43 [django.server] WARNING: "GET /static/admin/img/icon-no.svg HTTP/1.1" 404 179
+2024-10-19 07:19:43 [django.request] WARNING: Not Found: /static/admin/css/responsive.css
+2024-10-19 07:19:43 [django.server] WARNING: "GET /static/admin/css/responsive.css HTTP/1.1" 404 179
+2024-10-19 07:19:43 [django.request] WARNING: Not Found: /static/admin/js/filters.js
+2024-10-19 07:19:43 [django.server] WARNING: "GET /static/admin/js/filters.js HTTP/1.1" 404 179
+2024-10-19 07:19:44 [django.request] WARNING: Not Found: /static/admin/img/icon-yes.svg
+2024-10-19 07:19:44 [django.request] WARNING: Not Found: /static/admin/js/nav_sidebar.js
+2024-10-19 07:19:44 [django.server] WARNING: "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 404 179
+2024-10-19 07:19:44 [django.server] WARNING: "GET /static/admin/img/icon-yes.svg HTTP/1.1" 404 179
+2024-10-19 07:19:51 [django.server] INFO: "GET /admin/auth/user/2/change/ HTTP/1.1" 200 34142
+2024-10-19 07:19:51 [django.request] WARNING: Not Found: /static/admin/css/base.css
+2024-10-19 07:19:51 [django.request] WARNING: Not Found: /static/admin/css/dark_mode.css
+2024-10-19 07:19:51 [django.server] WARNING: "GET /static/admin/css/base.css HTTP/1.1" 404 179
+2024-10-19 07:19:51 [django.request] WARNING: Not Found: /static/admin/css/nav_sidebar.css
+2024-10-19 07:19:51 [django.request] WARNING: Not Found: /static/admin/css/forms.css
+2024-10-19 07:19:51 [django.request] WARNING: Not Found: /static/admin/js/theme.js
+2024-10-19 07:19:51 [django.request] WARNING: Not Found: /static/admin/css/responsive.css
+2024-10-19 07:19:51 [django.server] WARNING: "GET /static/admin/css/dark_mode.css HTTP/1.1" 404 179
+2024-10-19 07:19:51 [django.server] WARNING: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 404 179
+2024-10-19 07:19:51 [django.server] WARNING: "GET /static/admin/css/forms.css HTTP/1.1" 404 179
+2024-10-19 07:19:51 [django.server] WARNING: "GET /static/admin/js/theme.js HTTP/1.1" 404 179
+2024-10-19 07:19:51 [django.server] WARNING: "GET /static/admin/css/responsive.css HTTP/1.1" 404 179
+2024-10-19 07:19:51 [django.request] WARNING: Not Found: /static/admin/js/vendor/jquery/jquery.min.js
+2024-10-19 07:19:51 [django.request] WARNING: Not Found: /static/admin/js/admin/DateTimeShortcuts.js
+2024-10-19 07:19:51 [django.request] WARNING: Not Found: /static/admin/js/jquery.init.js
+2024-10-19 07:19:51 [django.request] WARNING: Not Found: /static/admin/js/calendar.js
+2024-10-19 07:19:51 [django.request] WARNING: Not Found: /static/admin/js/core.js
+2024-10-19 07:19:51 [django.server] WARNING: "GET /static/admin/js/vendor/jquery/jquery.min.js HTTP/1.1" 404 179
+2024-10-19 07:19:51 [django.server] WARNING: "GET /static/admin/js/admin/DateTimeShortcuts.js HTTP/1.1" 404 179
+2024-10-19 07:19:51 [django.server] WARNING: "GET /static/admin/js/jquery.init.js HTTP/1.1" 404 179
+2024-10-19 07:19:51 [django.server] WARNING: "GET /static/admin/js/calendar.js HTTP/1.1" 404 179
+2024-10-19 07:19:51 [django.server] WARNING: "GET /static/admin/js/core.js HTTP/1.1" 404 179
+2024-10-19 07:19:51 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 07:19:51 [django.request] WARNING: Not Found: /static/admin/js/admin/RelatedObjectLookups.js
+2024-10-19 07:19:51 [django.request] WARNING: Not Found: /static/admin/css/nav_sidebar.css
+2024-10-19 07:19:51 [django.server] WARNING: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 404 179
+2024-10-19 07:19:51 [django.request] WARNING: Not Found: /static/admin/js/SelectFilter2.js
+2024-10-19 07:19:51 [django.server] WARNING: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 404 179
+2024-10-19 07:19:51 [django.server] WARNING: "GET /static/admin/js/SelectFilter2.js HTTP/1.1" 404 179
+2024-10-19 07:19:51 [django.request] WARNING: Not Found: /static/admin/js/urlify.js
+2024-10-19 07:19:51 [django.request] WARNING: Not Found: /static/admin/js/actions.js
+2024-10-19 07:19:51 [django.server] WARNING: "GET /static/admin/js/urlify.js HTTP/1.1" 404 179
+2024-10-19 07:19:51 [django.request] WARNING: Not Found: /static/admin/js/SelectBox.js
+2024-10-19 07:19:51 [django.server] WARNING: "GET /static/admin/js/SelectBox.js HTTP/1.1" 404 179
+2024-10-19 07:19:51 [django.server] WARNING: "GET /static/admin/js/actions.js HTTP/1.1" 404 179
+2024-10-19 07:19:52 [django.request] WARNING: Not Found: /static/admin/js/prepopulate.js
+2024-10-19 07:19:52 [django.request] WARNING: Not Found: /static/admin/js/vendor/xregexp/xregexp.min.js
+2024-10-19 07:19:52 [django.request] WARNING: Not Found: /static/admin/js/prepopulate_init.js
+2024-10-19 07:19:52 [django.server] WARNING: "GET /static/admin/js/vendor/xregexp/xregexp.min.js HTTP/1.1" 404 179
+2024-10-19 07:19:52 [django.server] WARNING: "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 404 179
+2024-10-19 07:19:52 [django.server] WARNING: "GET /static/admin/js/prepopulate.js HTTP/1.1" 404 179
+2024-10-19 07:19:52 [django.request] WARNING: Not Found: /static/admin/css/responsive.css
+2024-10-19 07:19:52 [django.request] WARNING: Not Found: /static/admin/img/icon-addlink.svg
+2024-10-19 07:19:52 [django.request] WARNING: Not Found: /static/admin/js/nav_sidebar.js
+2024-10-19 07:19:52 [django.request] WARNING: Not Found: /static/admin/js/change_form.js
+2024-10-19 07:19:52 [django.server] WARNING: "GET /static/admin/css/responsive.css HTTP/1.1" 404 179
+2024-10-19 07:19:52 [django.server] WARNING: "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 404 179
+2024-10-19 07:19:52 [django.server] WARNING: "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 404 179
+2024-10-19 07:19:52 [django.server] WARNING: "GET /static/admin/js/change_form.js HTTP/1.1" 404 179
+2024-10-19 07:20:01 [django.server] INFO: "POST /admin/auth/user/2/change/ HTTP/1.1" 302 0
+2024-10-19 07:20:02 [django.server] INFO: "GET /admin/auth/user/ HTTP/1.1" 200 18117
+2024-10-19 07:20:02 [django.request] WARNING: Not Found: /static/admin/css/base.css
+2024-10-19 07:20:02 [django.request] WARNING: Not Found: /static/admin/js/theme.js
+2024-10-19 07:20:02 [django.request] WARNING: Not Found: /static/admin/css/dark_mode.css
+2024-10-19 07:20:02 [django.server] WARNING: "GET /static/admin/css/base.css HTTP/1.1" 404 179
+2024-10-19 07:20:02 [django.request] WARNING: Not Found: /static/admin/css/changelists.css
+2024-10-19 07:20:02 [django.server] WARNING: "GET /static/admin/js/theme.js HTTP/1.1" 404 179
+2024-10-19 07:20:02 [django.request] WARNING: Not Found: /static/admin/css/responsive.css
+2024-10-19 07:20:02 [django.request] WARNING: Not Found: /static/admin/css/nav_sidebar.css
+2024-10-19 07:20:02 [django.server] WARNING: "GET /static/admin/css/dark_mode.css HTTP/1.1" 404 179
+2024-10-19 07:20:02 [django.server] WARNING: "GET /static/admin/css/changelists.css HTTP/1.1" 404 179
+2024-10-19 07:20:02 [django.server] WARNING: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 404 179
+2024-10-19 07:20:02 [django.server] WARNING: "GET /static/admin/css/responsive.css HTTP/1.1" 404 179
+2024-10-19 07:20:02 [django.request] WARNING: Not Found: /static/admin/js/vendor/jquery/jquery.min.js
+2024-10-19 07:20:02 [django.server] WARNING: "GET /static/admin/js/vendor/jquery/jquery.min.js HTTP/1.1" 404 179
+2024-10-19 07:20:02 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 07:20:02 [django.request] WARNING: Not Found: /static/admin/js/jquery.init.js
+2024-10-19 07:20:02 [django.request] WARNING: Not Found: /static/admin/js/core.js
+2024-10-19 07:20:02 [django.server] WARNING: "GET /static/admin/js/core.js HTTP/1.1" 404 179
+2024-10-19 07:20:02 [django.request] WARNING: Not Found: /static/admin/js/admin/RelatedObjectLookups.js
+2024-10-19 07:20:02 [django.server] WARNING: "GET /static/admin/js/jquery.init.js HTTP/1.1" 404 179
+2024-10-19 07:20:02 [django.server] WARNING: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 404 179
+2024-10-19 07:20:02 [django.request] WARNING: Not Found: /static/admin/js/actions.js
+2024-10-19 07:20:02 [django.server] WARNING: "GET /static/admin/js/actions.js HTTP/1.1" 404 179
+2024-10-19 07:20:02 [django.request] WARNING: Not Found: /static/admin/js/urlify.js
+2024-10-19 07:20:02 [django.server] WARNING: "GET /static/admin/js/urlify.js HTTP/1.1" 404 179
+2024-10-19 07:20:02 [django.request] WARNING: Not Found: /static/admin/js/prepopulate.js
+2024-10-19 07:20:02 [django.request] WARNING: Not Found: /static/admin/img/search.svg
+2024-10-19 07:20:02 [django.request] WARNING: Not Found: /static/admin/img/icon-no.svg
+2024-10-19 07:20:02 [django.server] WARNING: "GET /static/admin/img/search.svg HTTP/1.1" 404 179
+2024-10-19 07:20:02 [django.server] WARNING: "GET /static/admin/img/icon-no.svg HTTP/1.1" 404 179
+2024-10-19 07:20:02 [django.server] WARNING: "GET /static/admin/js/prepopulate.js HTTP/1.1" 404 179
+2024-10-19 07:20:02 [django.request] WARNING: Not Found: /static/admin/js/vendor/xregexp/xregexp.min.js
+2024-10-19 07:20:02 [django.server] WARNING: "GET /static/admin/js/vendor/xregexp/xregexp.min.js HTTP/1.1" 404 179
+2024-10-19 07:20:02 [django.request] WARNING: Not Found: /static/admin/img/icon-yes.svg
+2024-10-19 07:20:02 [django.server] WARNING: "GET /static/admin/img/icon-yes.svg HTTP/1.1" 404 179
+2024-10-19 07:20:02 [django.request] WARNING: Not Found: /static/admin/js/nav_sidebar.js
+2024-10-19 07:20:02 [django.server] WARNING: "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 404 179
+2024-10-19 07:20:02 [django.request] WARNING: Not Found: /static/admin/js/filters.js
+2024-10-19 07:20:02 [django.request] WARNING: Not Found: /static/admin/css/responsive.css
+2024-10-19 07:20:02 [django.request] WARNING: Not Found: /static/admin/img/icon-no.svg
+2024-10-19 07:20:02 [django.server] WARNING: "GET /static/admin/css/responsive.css HTTP/1.1" 404 179
+2024-10-19 07:20:02 [django.server] WARNING: "GET /static/admin/js/filters.js HTTP/1.1" 404 179
+2024-10-19 07:20:02 [django.server] WARNING: "GET /static/admin/img/icon-no.svg HTTP/1.1" 404 179
+2024-10-19 11:34:20 [root] INFO: Init Sentry
+2024-10-19 11:34:20 [root] INFO: Init django with environment "prod"
+2024-10-19 11:34:20 [root] INFO: Database: kyrt_dev
+2024-10-19 11:53:51 [root] INFO: Init django with environment "dev"
+2024-10-19 11:53:51 [root] INFO: Database: kyrt_dev
+2024-10-19 07:53:52 [root] INFO: Init django with environment "dev"
+2024-10-19 07:53:52 [root] INFO: Database: kyrt_dev
+2024-10-19 11:54:58 [root] INFO: Init django with environment "dev"
+2024-10-19 11:54:58 [root] INFO: Database: kyrt_dev
+2024-10-19 07:54:59 [root] INFO: Init django with environment "dev"
+2024-10-19 07:54:59 [root] INFO: Database: kyrt_dev
+2024-10-19 07:55:03 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 302 0
+2024-10-19 07:55:03 [django.server] INFO: "GET /admin/ HTTP/1.1" 200 14589
+2024-10-19 07:55:04 [django.server] INFO: "GET /static/admin/css/base.css HTTP/1.1" 200 22092
+2024-10-19 07:55:04 [django.server] INFO: "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2804
+2024-10-19 07:55:04 [django.server] INFO: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2810
+2024-10-19 07:55:04 [django.server] INFO: "GET /static/admin/css/dashboard.css HTTP/1.1" 200 441
+2024-10-19 07:55:04 [django.server] INFO: "GET /static/admin/js/theme.js HTTP/1.1" 200 1653
+2024-10-19 07:55:04 [django.server] INFO: "GET /static/admin/css/responsive.css HTTP/1.1" 200 17972
+2024-10-19 07:55:04 [django.server] INFO: "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063
+2024-10-19 07:55:04 [django.server] INFO: "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+2024-10-19 07:55:04 [django.server] INFO: "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+2024-10-19 07:55:47 [django.server] INFO: "GET /admin/auth/user/ HTTP/1.1" 200 17917
+2024-10-19 07:55:47 [django.server] INFO: "GET /static/admin/css/changelists.css HTTP/1.1" 200 6878
+2024-10-19 07:55:47 [django.server] INFO: "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+2024-10-19 07:55:47 [django.server] INFO: "GET /static/admin/js/core.js HTTP/1.1" 200 6208
+2024-10-19 07:55:47 [django.server] INFO: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 9097
+2024-10-19 07:55:47 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 07:55:47 [django.server] INFO: "GET /static/admin/js/actions.js HTTP/1.1" 200 8076
+2024-10-19 07:55:47 [django.server] INFO: "GET /static/admin/js/urlify.js HTTP/1.1" 200 7887
+2024-10-19 07:55:47 [django.server] INFO: "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531
+2024-10-19 07:55:47 [django.server] INFO: "GET /static/admin/img/search.svg HTTP/1.1" 200 458
+2024-10-19 07:55:47 [django.server] INFO: "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 285314
+2024-10-19 07:55:47 [django.server] INFO: "GET /static/admin/img/icon-no.svg HTTP/1.1" 200 560
+2024-10-19 07:55:47 [django.server] INFO: "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 325171
+2024-10-19 07:55:47 [django.server] INFO: "GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 436
+2024-10-19 07:55:47 [django.server] INFO: "GET /static/admin/js/filters.js HTTP/1.1" 200 978
+2024-10-19 07:55:47 [django.server] INFO: "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+2024-10-19 07:55:47 [django.server] INFO: "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 200 1097
+2024-10-19 07:55:47 [django.server] INFO: "GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 200 581
+2024-10-19 07:55:51 [django.server] INFO: "GET /admin/auth/user/3/change/ HTTP/1.1" 200 33259
+2024-10-19 07:55:51 [django.server] INFO: "GET /static/admin/css/forms.css HTTP/1.1" 200 8794
+2024-10-19 07:55:51 [django.server] INFO: "GET /static/admin/js/calendar.js HTTP/1.1" 200 9141
+2024-10-19 07:55:51 [django.server] INFO: "GET /static/admin/js/admin/DateTimeShortcuts.js HTTP/1.1" 200 19319
+2024-10-19 07:55:51 [django.server] INFO: "GET /static/admin/js/SelectBox.js HTTP/1.1" 200 4530
+2024-10-19 07:55:51 [django.server] INFO: "GET /static/admin/js/SelectFilter2.js HTTP/1.1" 200 15502
+2024-10-19 07:55:51 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 07:55:51 [django.server] INFO: "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 586
+2024-10-19 07:55:51 [django.server] INFO: "GET /static/admin/css/widgets.css HTTP/1.1" 200 11564
+2024-10-19 07:55:51 [django.server] INFO: "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+2024-10-19 07:55:52 [django.server] INFO: "GET /static/admin/img/icon-unknown.svg HTTP/1.1" 200 655
+2024-10-19 07:55:52 [django.server] INFO: "GET /static/admin/img/icon-clock.svg HTTP/1.1" 200 677
+2024-10-19 07:55:52 [django.server] INFO: "GET /static/admin/img/icon-calendar.svg HTTP/1.1" 200 1086
+2024-10-19 07:55:52 [django.server] INFO: "GET /static/admin/img/icon-unknown-alt.svg HTTP/1.1" 200 655
+2024-10-19 07:55:52 [django.server] INFO: "GET /static/admin/img/selector-icons.svg HTTP/1.1" 200 3291
+2024-10-19 07:56:05 [django.server] INFO: "GET /admin/auth/user/3/password/ HTTP/1.1" 200 14546
+2024-10-19 07:56:05 [django.server] INFO: "GET /static/admin/css/unusable_password_field.css HTTP/1.1" 200 663
+2024-10-19 07:56:05 [django.server] INFO: "GET /static/admin/js/unusable_password_field.js HTTP/1.1" 200 1480
+2024-10-19 07:56:58 [django.server] INFO: "POST /admin/auth/user/3/password/ HTTP/1.1" 302 0
+2024-10-19 07:56:58 [django.server] INFO: "GET /admin/auth/user/3/change/ HTTP/1.1" 200 33395
+2024-10-19 07:56:58 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 07:57:01 [django.server] INFO: "POST /admin/logout/ HTTP/1.1" 200 3542
+2024-10-19 07:57:03 [django.server] INFO: "GET /admin/ HTTP/1.1" 302 0
+2024-10-19 07:57:03 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4147
+2024-10-19 07:57:04 [django.server] INFO: "GET /static/admin/css/login.css HTTP/1.1" 200 951
+2024-10-19 07:57:08 [django.server] INFO: "POST /admin/login/?next=/admin/ HTTP/1.1" 200 4309
+2024-10-19 07:57:14 [django.server] INFO: "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+2024-10-19 07:57:14 [django.server] INFO: "GET /admin/ HTTP/1.1" 200 14932
+2024-10-19 07:57:21 [django.server] INFO: "POST /admin/logout/ HTTP/1.1" 200 3542
+2024-10-19 07:57:23 [django.server] INFO: "GET /admin/ HTTP/1.1" 302 0
+2024-10-19 07:57:23 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4147
+2024-10-19 07:57:31 [django.server] INFO: "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+2024-10-19 07:57:32 [django.server] INFO: "GET /admin/ HTTP/1.1" 200 14932
+2024-10-19 07:57:34 [django.server] INFO: "GET /admin/web/case/ HTTP/1.1" 200 124368
+2024-10-19 07:57:35 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 07:57:44 [django.server] INFO: "GET /admin/web/company/ HTTP/1.1" 200 49354
+2024-10-19 07:57:44 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 07:57:47 [django.server] INFO: "GET /admin/web/companynamevariation/ HTTP/1.1" 200 50145
+2024-10-19 07:57:47 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 07:57:50 [django.server] INFO: "GET /admin/web/document/ HTTP/1.1" 200 61608
+2024-10-19 07:57:50 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 07:58:04 [django.server] INFO: "GET /admin/web/state/ HTTP/1.1" 200 15636
+2024-10-19 07:58:04 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 07:58:11 [django.server] INFO: "GET /admin/auth/user/ HTTP/1.1" 200 17917
+2024-10-19 07:58:11 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 07:58:18 [django.server] INFO: "GET /admin/auth/group/ HTTP/1.1" 200 13394
+2024-10-19 07:58:18 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 07:58:19 [django.server] INFO: "GET /admin/rest_framework_api_key/apikey/ HTTP/1.1" 200 17406
+2024-10-19 07:58:20 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 07:58:27 [django.server] INFO: "GET /admin/web/case/ HTTP/1.1" 200 124368
+2024-10-19 07:58:27 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 07:59:40 [django.server] INFO: "GET /admin/web/document/ HTTP/1.1" 200 61608
+2024-10-19 07:59:40 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 08:35:37 [django.server] INFO: "GET /admin/web/company/ HTTP/1.1" 200 49354
+2024-10-19 08:35:37 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 08:35:54 [django.server] INFO: "GET /admin/web/company/76/change/ HTTP/1.1" 200 20757
+2024-10-19 08:35:54 [django.server] INFO: "GET /static/admin/js/inlines.js HTTP/1.1" 200 15526
+2024-10-19 08:35:54 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 08:35:54 [django.server] INFO: "GET /static/admin/img/inline-delete.svg HTTP/1.1" 200 560
+2024-10-19 08:36:26 [django.server] INFO: "POST /admin/web/company/76/change/ HTTP/1.1" 302 0
+2024-10-19 08:36:26 [django.server] INFO: "GET /admin/web/company/ HTTP/1.1" 200 49589
+2024-10-19 08:36:26 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 08:36:43 [django.server] INFO: "GET /admin/auth/user/ HTTP/1.1" 200 17917
+2024-10-19 08:36:43 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 08:36:59 [django.server] INFO: "GET /admin/web/case/ HTTP/1.1" 200 125292
+2024-10-19 08:37:00 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 08:37:14 [django.server] INFO: "GET /admin/web/case/?o=1.-9 HTTP/1.1" 200 135565
+2024-10-19 08:37:14 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 08:37:18 [django.server] INFO: "GET /admin/web/case/?o=-1.-9 HTTP/1.1" 200 133893
+2024-10-19 08:37:18 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 13:37:48 [root] INFO: Init django with environment "dev"
+2024-10-19 13:37:48 [root] INFO: Database: kyrt_dev
+2024-10-19 09:37:49 [root] INFO: Init django with environment "dev"
+2024-10-19 09:37:49 [root] INFO: Database: kyrt_dev
+2024-10-19 09:37:58 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 302 0
+2024-10-19 09:37:58 [django.server] INFO: "GET /admin/ HTTP/1.1" 200 15294
+2024-10-19 09:38:04 [django.server] INFO: "GET /admin/web/case/ HTTP/1.1" 200 125292
+2024-10-19 09:38:04 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 09:38:33 [django.server] INFO: "GET /admin/web/case/?case_type=Special+Proceedings+-+Other+%28Petition+to+transfer+stru%29 HTTP/1.1" 200 36464
+2024-10-19 09:38:33 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 09:38:45 [django.server] INFO: "GET /admin/web/case/?case_type=Special+Proceedings+-+Other+%28Structured+Settlement+Tra%29 HTTP/1.1" 200 43696
+2024-10-19 09:38:46 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 09:39:06 [django.server] INFO: "GET /admin/web/case/?case_type=Special+Proceedings+-+Other+%28transfer-+structured+sett%29 HTTP/1.1" 200 70641
+2024-10-19 09:39:06 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 09:39:15 [django.server] INFO: "GET /admin/web/case/62273/change/?_changelist_filters=case_type%3DSpecial%2BProceedings%2B-%2BOther%2B%2528transfer-%2Bstructured%2Bsett%2529 HTTP/1.1" 200 72265
+2024-10-19 09:39:15 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 09:39:33 [django.server] INFO: "GET /admin/web/case/62273/change/?_changelist_filters=case_type%3DSpecial%2BProceedings%2B-%2BOther%2B%2528transfer-%2Bstructured%2Bsett%2529 HTTP/1.1" 200 72265
+2024-10-19 09:40:43 [django.server] INFO: "GET /admin/web/case/?case_type=Special+Proceedings+-+Other+%28transfer-+structured+sett%29 HTTP/1.1" 200 70641
+2024-10-19 09:40:47 [django.server] INFO: "GET /admin/web/company/706/change/ HTTP/1.1" 200 23525
+2024-10-19 09:40:47 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 09:40:52 [django.server] INFO: "GET /admin/web/case/?case_type=Special+Proceedings+-+Other+%28transfer-+structured+sett%29 HTTP/1.1" 200 70641
+2024-10-19 09:40:56 [django.server] INFO: "GET /admin/web/case/59613/change/?_changelist_filters=case_type%3DSpecial%2BProceedings%2B-%2BOther%2B%2528transfer-%2Bstructured%2Bsett%2529 HTTP/1.1" 200 70625
+2024-10-19 09:40:56 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 09:41:08 [django.server] INFO: "GET /admin/web/case/?case_type=Special+Proceedings+-+Other+%28transfer-+structured+sett%29 HTTP/1.1" 200 70641
+2024-10-19 09:41:15 [django.server] INFO: "GET /admin/web/case/?case_type=Special+Proceedings+-+Other+%28transfer-+structured+sett%29&state__id__exact=2 HTTP/1.1" 200 36660
+2024-10-19 09:41:15 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 09:41:19 [django.server] INFO: "GET /admin/web/case/? HTTP/1.1" 200 125292
+2024-10-19 09:41:20 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 09:41:22 [django.server] INFO: "GET /admin/web/case/?state__id__exact=2 HTTP/1.1" 200 137551
+2024-10-19 09:41:22 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 09:41:34 [django.server] INFO: "GET /admin/web/case/?state__id__exact=1 HTTP/1.1" 200 137984
+2024-10-19 09:41:34 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 09:48:33 [django.server] INFO: "POST /admin/logout/ HTTP/1.1" 200 3542
+2024-10-19 09:48:35 [django.server] INFO: "GET /admin/ HTTP/1.1" 302 0
+2024-10-19 09:48:36 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4147
+2024-10-19 10:10:32 [django.request] WARNING: Not Found: /favicon.ico
+2024-10-19 10:10:32 [django.server] WARNING: "GET /favicon.ico HTTP/1.1" 404 2667
+2024-10-19 10:10:38 [django.server] INFO: "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+2024-10-19 10:10:38 [django.server] INFO: "GET /admin/ HTTP/1.1" 200 15294
+2024-10-19 10:10:45 [django.server] INFO: "GET /admin/web/case/ HTTP/1.1" 200 125292
+2024-10-19 10:10:45 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 10:11:30 [django.server] INFO: "GET /admin/web/company/ HTTP/1.1" 200 49376
+2024-10-19 10:11:30 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 10:12:01 [django.server] INFO: "GET /admin/web/companynamevariation/ HTTP/1.1" 200 50189
+2024-10-19 10:12:01 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 10:12:15 [django.server] INFO: "GET /admin/web/document/ HTTP/1.1" 200 61608
+2024-10-19 10:12:15 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 10:12:29 [django.server] INFO: "GET /admin/web/case/ HTTP/1.1" 200 125292
+2024-10-19 10:12:29 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 10:12:31 [django.server] INFO: "GET /admin/web/company/472/change/ HTTP/1.1" 200 89724
+2024-10-19 10:12:31 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 10:12:43 [django.server] INFO: "GET /admin/web/case/ HTTP/1.1" 200 125292
+2024-10-19 10:12:43 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 10:12:46 [django.server] INFO: "GET /admin/web/case/62336/change/ HTTP/1.1" 200 73458
+2024-10-19 10:12:47 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 10:14:06 [django.server] INFO: "GET /admin/web/company/ HTTP/1.1" 200 49376
+2024-10-19 10:14:06 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 10:14:14 [django.server] INFO: "GET /admin/web/company/1065/change/ HTTP/1.1" 200 39640
+2024-10-19 10:14:14 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 10:14:23 [django.server] INFO: "GET /admin/web/document/ HTTP/1.1" 200 61608
+2024-10-19 10:14:23 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 10:14:29 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 10:14:29 [django.server] INFO: "GET /admin/web/document/672733/change/ HTTP/1.1" 200 744709
+2024-10-19 10:14:58 [django.server] INFO: "GET /admin/web/document/ HTTP/1.1" 200 61608
+2024-10-19 10:15:09 [django.server] INFO: "GET /admin/web/document/672638/change/ HTTP/1.1" 200 744565
+2024-10-19 10:15:09 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 10:15:39 [django.request] WARNING: Not Found: /favicon.ico
+2024-10-19 10:15:39 [django.server] WARNING: "GET /favicon.ico HTTP/1.1" 404 2667
+2024-10-19 10:16:34 [django.server] INFO: "GET /admin/ HTTP/1.1" 200 15294
+2024-10-19 10:18:17 [django.server] INFO: "GET /admin/django_celery_beat/clockedschedule/ HTTP/1.1" 200 13121
+2024-10-19 10:18:17 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 10:18:19 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-19 10:18:19 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-19 10:18:19 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-19 10:18:19 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-19 10:18:19 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-19 10:18:19 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-19 10:18:19 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-19 10:18:19 [django.server] INFO: "GET /admin/django_celery_beat/crontabschedule/ HTTP/1.1" 200 17823
+2024-10-19 10:18:20 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 10:18:22 [django.server] INFO: "GET /admin/django_celery_beat/intervalschedule/ HTTP/1.1" 200 15024
+2024-10-19 10:18:22 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 10:18:24 [django.server] INFO: "GET /admin/django_celery_beat/periodictask/ HTTP/1.1" 200 25167
+2024-10-19 10:18:24 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 10:18:36 [django.server] INFO: "GET /admin/django_celery_beat/solarschedule/ HTTP/1.1" 200 13139
+2024-10-19 10:18:36 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 10:18:42 [django.server] INFO: "GET /admin/rest_framework_api_key/apikey/ HTTP/1.1" 200 17406
+2024-10-19 10:18:42 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 10:18:47 [django.server] INFO: "GET /admin/web/case/ HTTP/1.1" 200 125292
+2024-10-19 10:18:47 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-19 10:23:45 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-19 10:23:45 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-19 10:23:45 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-19 10:23:45 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-19 10:23:45 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-19 10:23:45 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-19 10:23:45 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-19 10:23:45 [django.server] INFO: "GET /admin/django_celery_beat/crontabschedule/ HTTP/1.1" 200 17823
+2024-10-19 10:23:45 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342

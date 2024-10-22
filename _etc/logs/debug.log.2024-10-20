@@ -1,0 +1,499 @@
+2024-10-20 13:44:12 [root] INFO: Init django with environment "dev"
+2024-10-20 13:44:12 [root] INFO: Database: kyrt_dev
+2024-10-20 09:44:13 [root] INFO: Init django with environment "dev"
+2024-10-20 09:44:13 [root] INFO: Database: kyrt_dev
+2024-10-20 13:46:53 [root] INFO: Init django with environment "dev"
+2024-10-20 13:46:53 [root] INFO: Database: kyrt_dev
+2024-10-20 09:46:54 [root] INFO: Init django with environment "dev"
+2024-10-20 09:46:54 [root] INFO: Database: kyrt_dev
+2024-10-20 13:47:08 [root] INFO: Init django with environment "dev"
+2024-10-20 13:47:08 [root] INFO: Database: kyrt_dev
+2024-10-20 09:47:08 [root] INFO: Init django with environment "dev"
+2024-10-20 09:47:08 [root] INFO: Database: kyrt_dev
+2024-10-20 13:53:03 [root] INFO: Init django with environment "dev"
+2024-10-20 13:53:03 [root] INFO: Database: kyrt_dev
+2024-10-20 09:53:03 [root] INFO: Init django with environment "dev"
+2024-10-20 09:53:03 [root] INFO: Database: kyrt_dev
+2024-10-20 14:03:42 [root] INFO: Init django with environment "dev"
+2024-10-20 14:03:42 [root] INFO: Database: kyrt_dev
+2024-10-20 10:03:43 [root] INFO: Init django with environment "dev"
+2024-10-20 10:03:43 [root] INFO: Database: kyrt_dev
+2024-10-20 10:03:47 [django.server] INFO: code 400, message Bad request version ('JJ\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06sÊÊ\x00\x00\x00\x1b\x00\x03\x02\x00\x02\x00+\x00\x07\x06')
+2024-10-20 10:03:47 [django.server] ERROR: You're accessing the development server over HTTPS, but it only supports HTTP.
+2024-10-20 10:03:47 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4147
+2024-10-20 10:03:47 [django.server] INFO: code 400, message Bad request version ('\x88\x92,j\x7f\x89\x82ó\x91\x05©ù6¬º\x8c\x8ed;°')
+2024-10-20 10:03:47 [django.server] ERROR: You're accessing the development server over HTTPS, but it only supports HTTP.
+2024-10-20 10:03:47 [django.server] INFO: "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2804
+2024-10-20 10:03:47 [django.server] INFO: "GET /static/admin/css/base.css HTTP/1.1" 200 22092
+2024-10-20 10:03:47 [django.server] INFO: "GET /static/admin/css/login.css HTTP/1.1" 200 951
+2024-10-20 10:03:47 [django.server] INFO: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2810
+2024-10-20 10:03:47 [django.server] INFO: "GET /static/admin/css/responsive.css HTTP/1.1" 200 17972
+2024-10-20 10:03:47 [django.server] INFO: "GET /static/admin/js/theme.js HTTP/1.1" 200 1653
+2024-10-20 10:03:48 [django.server] INFO: "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063
+2024-10-20 10:03:48 [django.request] WARNING: Not Found: /favicon.ico
+2024-10-20 10:03:48 [django.server] WARNING: "GET /favicon.ico HTTP/1.1" 404 2666
+2024-10-20 10:07:41 [django.server] INFO: "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+2024-10-20 10:07:42 [django.server] INFO: "GET /admin/ HTTP/1.1" 200 15294
+2024-10-20 10:07:42 [django.server] INFO: "GET /static/admin/css/dashboard.css HTTP/1.1" 200 441
+2024-10-20 10:07:42 [django.server] INFO: "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+2024-10-20 10:07:42 [django.server] INFO: "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+2024-10-20 14:30:08 [root] INFO: Init django with environment "dev"
+2024-10-20 14:30:08 [root] INFO: Database: kyrt_dev
+2024-10-20 10:30:09 [root] INFO: Init django with environment "dev"
+2024-10-20 10:30:09 [root] INFO: Database: kyrt_dev
+2024-10-20 10:30:13 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 302 0
+2024-10-20 10:30:13 [django.server] INFO: "GET /admin/ HTTP/1.1" 200 15294
+2024-10-20 15:03:01 [root] INFO: Init django with environment "dev"
+2024-10-20 15:03:01 [root] INFO: Database: kyrt_dev
+2024-10-20 11:03:02 [root] INFO: Init django with environment "dev"
+2024-10-20 11:03:02 [root] INFO: Database: kyrt_dev
+2024-10-20 15:03:29 [root] INFO: Init django with environment "dev"
+2024-10-20 15:03:29 [root] INFO: Database: kyrt_dev
+2024-10-20 11:03:29 [root] INFO: Init django with environment "dev"
+2024-10-20 11:03:29 [root] INFO: Database: kyrt_dev
+2024-10-20 11:03:33 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 302 0
+2024-10-20 11:03:33 [django.server] INFO: "GET /admin/ HTTP/1.1" 200 15294
+2024-10-20 11:03:35 [django.server] INFO: "POST /admin/logout/ HTTP/1.1" 200 3542
+2024-10-20 11:03:37 [django.server] INFO: "GET /admin/ HTTP/1.1" 302 0
+2024-10-20 11:03:37 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4147
+2024-10-20 15:05:59 [root] INFO: Init django with environment "dev"
+2024-10-20 15:05:59 [root] INFO: Database: kyrt_dev
+2024-10-20 15:06:57 [root] INFO: Init django with environment "dev"
+2024-10-20 15:06:57 [root] INFO: Database: kyrt_dev
+2024-10-20 15:07:03 [root] INFO: Init django with environment "dev"
+2024-10-20 15:07:03 [root] INFO: Database: kyrt_dev
+2024-10-20 15:07:14 [root] INFO: Init django with environment "dev"
+2024-10-20 15:07:14 [root] INFO: Database: kyrt_dev
+2024-10-20 11:07:14 [root] INFO: Init django with environment "dev"
+2024-10-20 11:07:14 [root] INFO: Database: kyrt_dev
+2024-10-20 11:07:18 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4147
+2024-10-20 11:07:25 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4147
+2024-10-20 15:12:04 [root] INFO: Init django with environment "dev"
+2024-10-20 15:12:04 [root] INFO: Database: kyrt_dev
+2024-10-20 15:12:11 [root] INFO: Init django with environment "dev"
+2024-10-20 15:12:11 [root] INFO: Database: kyrt_dev
+2024-10-20 11:12:12 [root] INFO: Init django with environment "dev"
+2024-10-20 11:12:12 [root] INFO: Database: kyrt_dev
+2024-10-20 11:12:15 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4147
+2024-10-20 15:19:00 [root] INFO: Init django with environment "dev"
+2024-10-20 15:19:00 [root] INFO: Database: kyrt_dev
+2024-10-20 15:21:53 [root] INFO: Init django with environment "dev"
+2024-10-20 15:21:53 [root] INFO: Database: kyrt_dev
+2024-10-20 15:22:05 [root] INFO: Init django with environment "dev"
+2024-10-20 15:22:05 [root] INFO: Database: kyrt_dev
+2024-10-20 11:22:05 [root] INFO: Init django with environment "dev"
+2024-10-20 11:22:05 [root] INFO: Database: kyrt_dev
+2024-10-20 11:22:10 [django.request] ERROR: Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/template/base.py", line 510, in parse
+    compile_func = self.tags[command]
+KeyError: 'static'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/test/utils.py", line 114, in instrumented_test_render
+    return self.nodelist.render(context)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/template/base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/template/base.py", line 1008, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/template/base.py", line 969, in render_annotated
+    return self.render(context)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 134, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 131, in get_parent
+    return self.find_template(parent, context)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 109, in find_template
+    template, origin = context.template.engine.find_template(
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/template/base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 295, in do_extends
+    nodelist = parser.parse()
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/template/base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/template/base.py", line 563, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 9: 'static', expected 'endblock'. Did you forget to register or load this tag?
+2024-10-20 11:22:10 [django.server] ERROR: "GET /admin/login/?next=/admin/ HTTP/1.1" 500 212948
+2024-10-20 15:23:37 [root] INFO: Init django with environment "dev"
+2024-10-20 15:23:37 [root] INFO: Database: kyrt_dev
+2024-10-20 11:23:38 [root] INFO: Init django with environment "dev"
+2024-10-20 11:23:38 [root] INFO: Database: kyrt_dev
+2024-10-20 11:23:43 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4461
+2024-10-20 11:23:43 [django.server] INFO: "GET /static/css/custom_admin.css HTTP/1.1" 200 1422
+2024-10-20 15:28:39 [root] INFO: Init django with environment "dev"
+2024-10-20 15:28:39 [root] INFO: Database: kyrt_dev
+2024-10-20 11:28:40 [root] INFO: Init django with environment "dev"
+2024-10-20 11:28:40 [root] INFO: Database: kyrt_dev
+2024-10-20 11:28:44 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4461
+2024-10-20 11:28:44 [django.server] INFO: "GET /static/css/custom_admin.css HTTP/1.1" 200 1925
+2024-10-20 15:31:24 [root] INFO: Init django with environment "dev"
+2024-10-20 15:31:24 [root] INFO: Database: kyrt_dev
+2024-10-20 11:31:25 [root] INFO: Init django with environment "dev"
+2024-10-20 11:31:25 [root] INFO: Database: kyrt_dev
+2024-10-20 11:31:28 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4461
+2024-10-20 11:31:28 [django.server] INFO: "GET /static/css/custom_admin.css HTTP/1.1" 200 2073
+2024-10-20 11:31:31 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4461
+2024-10-20 11:31:31 [django.server] INFO: "GET /static/css/custom_admin.css HTTP/1.1" 304 0
+2024-10-20 15:35:15 [root] INFO: Init django with environment "dev"
+2024-10-20 15:35:15 [root] INFO: Database: kyrt_dev
+2024-10-20 11:35:16 [root] INFO: Init django with environment "dev"
+2024-10-20 11:35:16 [root] INFO: Database: kyrt_dev
+2024-10-20 11:35:20 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4461
+2024-10-20 11:35:20 [django.server] INFO: "GET /static/css/custom_admin.css HTTP/1.1" 200 2217
+2024-10-20 15:39:00 [root] INFO: Init django with environment "dev"
+2024-10-20 15:39:00 [root] INFO: Database: kyrt_dev
+2024-10-20 11:39:01 [root] INFO: Init django with environment "dev"
+2024-10-20 11:39:01 [root] INFO: Database: kyrt_dev
+2024-10-20 11:39:04 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4461
+2024-10-20 11:39:04 [django.server] INFO: "GET /static/css/custom_admin.css HTTP/1.1" 200 2313
+2024-10-20 15:43:08 [root] INFO: Init django with environment "dev"
+2024-10-20 15:43:08 [root] INFO: Database: kyrt_dev
+2024-10-20 11:43:09 [root] INFO: Init django with environment "dev"
+2024-10-20 11:43:09 [root] INFO: Database: kyrt_dev
+2024-10-20 11:43:12 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4461
+2024-10-20 11:43:13 [django.server] INFO: "GET /static/css/custom_admin.css HTTP/1.1" 200 2596
+2024-10-20 15:52:19 [root] INFO: Init django with environment "dev"
+2024-10-20 15:52:19 [root] INFO: Database: kyrt_dev
+2024-10-20 11:52:20 [root] INFO: Init django with environment "dev"
+2024-10-20 11:52:20 [root] INFO: Database: kyrt_dev
+2024-10-20 11:52:22 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4461
+2024-10-20 11:52:23 [django.server] INFO: "GET /static/css/custom_admin.css HTTP/1.1" 200 2400
+2024-10-20 11:52:24 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4461
+2024-10-20 11:52:24 [django.server] INFO: "GET /static/css/custom_admin.css HTTP/1.1" 304 0
+2024-10-20 11:52:43 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4461
+2024-10-20 11:52:43 [django.server] INFO: "GET /static/admin/css/base.css HTTP/1.1" 200 22092
+2024-10-20 11:52:43 [django.server] INFO: "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2804
+2024-10-20 11:52:43 [django.server] INFO: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2810
+2024-10-20 11:52:43 [django.server] INFO: "GET /static/css/custom_admin.css HTTP/1.1" 200 2400
+2024-10-20 11:52:43 [django.server] INFO: "GET /static/admin/css/responsive.css HTTP/1.1" 200 17972
+2024-10-20 11:52:43 [django.server] INFO: "GET /static/admin/js/theme.js HTTP/1.1" 200 1653
+2024-10-20 11:52:44 [django.server] INFO: "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063
+2024-10-20 11:52:50 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4461
+2024-10-20 11:52:50 [django.server] INFO: "GET /static/css/custom_admin.css HTTP/1.1" 304 0
+2024-10-20 15:54:20 [root] INFO: Init django with environment "dev"
+2024-10-20 15:54:20 [root] INFO: Database: kyrt_dev
+2024-10-20 11:54:21 [root] INFO: Init django with environment "dev"
+2024-10-20 11:54:21 [root] INFO: Database: kyrt_dev
+2024-10-20 11:54:26 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4461
+2024-10-20 11:54:27 [django.server] INFO: "GET /static/css/custom_admin.css HTTP/1.1" 200 2450
+2024-10-20 11:54:58 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4461
+2024-10-20 11:54:58 [django.server] INFO: "GET /static/admin/css/base.css HTTP/1.1" 200 22092
+2024-10-20 11:54:58 [django.server] INFO: "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2804
+2024-10-20 11:54:58 [django.server] INFO: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2810
+2024-10-20 11:54:58 [django.server] INFO: "GET /static/css/custom_admin.css HTTP/1.1" 200 2450
+2024-10-20 11:54:58 [django.server] INFO: "GET /static/admin/js/theme.js HTTP/1.1" 200 1653
+2024-10-20 11:54:58 [django.server] INFO: "GET /static/admin/css/responsive.css HTTP/1.1" 200 17972
+2024-10-20 11:54:58 [django.server] INFO: "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063
+2024-10-20 16:01:24 [root] INFO: Init django with environment "dev"
+2024-10-20 16:01:24 [root] INFO: Database: kyrt_dev
+2024-10-20 12:01:25 [root] INFO: Init django with environment "dev"
+2024-10-20 12:01:25 [root] INFO: Database: kyrt_dev
+2024-10-20 12:01:29 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4461
+2024-10-20 12:01:29 [django.server] INFO: "GET /static/admin/css/base.css HTTP/1.1" 304 0
+2024-10-20 12:01:29 [django.server] INFO: "GET /static/admin/css/dark_mode.css HTTP/1.1" 304 0
+2024-10-20 12:01:29 [django.server] INFO: "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+2024-10-20 12:01:29 [django.server] INFO: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+2024-10-20 12:01:29 [django.server] INFO: "GET /static/admin/js/theme.js HTTP/1.1" 304 0
+2024-10-20 12:01:29 [django.server] INFO: "GET /static/css/custom_admin.css HTTP/1.1" 200 2364
+2024-10-20 12:01:29 [django.server] INFO: "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+2024-10-20 16:54:46 [root] INFO: Init django with environment "dev"
+2024-10-20 16:54:46 [root] INFO: Database: kyrt_dev
+2024-10-20 12:54:47 [root] INFO: Init django with environment "dev"
+2024-10-20 12:54:47 [root] INFO: Database: kyrt_dev
+2024-10-20 12:54:50 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4461
+2024-10-20 12:54:50 [django.server] INFO: "GET /static/admin/css/base.css HTTP/1.1" 304 0
+2024-10-20 12:54:50 [django.server] INFO: "GET /static/admin/css/dark_mode.css HTTP/1.1" 304 0
+2024-10-20 12:54:50 [django.server] INFO: "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+2024-10-20 12:54:50 [django.server] INFO: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+2024-10-20 12:54:50 [django.server] INFO: "GET /static/css/custom_admin.css HTTP/1.1" 200 2684
+2024-10-20 12:54:50 [django.server] INFO: "GET /static/admin/js/theme.js HTTP/1.1" 304 0
+2024-10-20 12:54:51 [django.server] INFO: "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+2024-10-20 17:11:35 [root] INFO: Init django with environment "dev"
+2024-10-20 17:11:35 [root] INFO: Database: kyrt_dev
+2024-10-20 13:11:36 [root] INFO: Init django with environment "dev"
+2024-10-20 13:11:36 [root] INFO: Database: kyrt_dev
+2024-10-20 13:11:41 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4461
+2024-10-20 13:11:41 [django.server] INFO: "GET /static/admin/css/base.css HTTP/1.1" 304 0
+2024-10-20 13:11:41 [django.server] INFO: "GET /static/admin/css/dark_mode.css HTTP/1.1" 304 0
+2024-10-20 13:11:41 [django.server] INFO: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+2024-10-20 13:11:41 [django.server] INFO: "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+2024-10-20 13:11:41 [django.server] INFO: "GET /static/css/custom_admin.css HTTP/1.1" 200 2744
+2024-10-20 13:11:41 [django.server] INFO: "GET /static/admin/js/theme.js HTTP/1.1" 304 0
+2024-10-20 13:11:41 [django.server] INFO: "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+2024-10-20 13:12:14 [django.server] INFO: "POST /admin/login/?next=/admin/ HTTP/1.1" 200 4633
+2024-10-20 13:12:14 [django.server] INFO: "GET /static/css/custom_admin.css HTTP/1.1" 304 0
+2024-10-20 13:12:19 [django.server] INFO: "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+2024-10-20 13:12:19 [django.server] INFO: "GET /admin/ HTTP/1.1" 200 15386
+2024-10-20 13:12:19 [django.server] INFO: "GET /static/admin/css/dashboard.css HTTP/1.1" 200 441
+2024-10-20 13:12:19 [django.server] INFO: "GET /static/css/custom_admin.css HTTP/1.1" 304 0
+2024-10-20 13:12:19 [django.server] INFO: "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+2024-10-20 13:12:19 [django.server] INFO: "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+2024-10-20 13:12:30 [django.server] INFO: "POST /admin/logout/ HTTP/1.1" 200 3634
+2024-10-20 13:12:30 [django.server] INFO: "GET /static/css/custom_admin.css HTTP/1.1" 304 0
+2024-10-20 13:12:33 [django.server] INFO: "GET /admin/ HTTP/1.1" 302 0
+2024-10-20 13:12:33 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4461
+2024-10-20 13:12:40 [django.server] INFO: "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+2024-10-20 13:12:41 [django.server] INFO: "GET /admin/ HTTP/1.1" 200 15386
+2024-10-20 13:12:41 [django.server] INFO: "GET /static/css/custom_admin.css HTTP/1.1" 304 0
+2024-10-20 13:12:47 [django.server] INFO: "GET /admin/web/case/ HTTP/1.1" 200 125384
+2024-10-20 13:12:47 [django.server] INFO: "GET /static/admin/css/changelists.css HTTP/1.1" 200 6878
+2024-10-20 13:12:47 [django.server] INFO: "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+2024-10-20 13:12:47 [django.server] INFO: "GET /static/admin/js/core.js HTTP/1.1" 200 6208
+2024-10-20 13:12:47 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-20 13:12:47 [django.server] INFO: "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 285314
+2024-10-20 13:12:47 [django.server] INFO: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 9097
+2024-10-20 13:12:47 [django.server] INFO: "GET /static/admin/js/actions.js HTTP/1.1" 200 8076
+2024-10-20 13:12:47 [django.server] INFO: "GET /static/admin/js/urlify.js HTTP/1.1" 200 7887
+2024-10-20 13:12:47 [django.server] INFO: "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531
+2024-10-20 13:12:47 [django.server] INFO: "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 325171
+2024-10-20 13:12:47 [django.server] INFO: "GET /static/admin/img/search.svg HTTP/1.1" 200 458
+2024-10-20 13:12:48 [django.server] INFO: "GET /static/admin/js/filters.js HTTP/1.1" 200 978
+2024-10-20 13:12:48 [django.server] INFO: "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+2024-10-20 13:12:48 [django.server] INFO: "GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 200 581
+2024-10-20 13:12:48 [django.server] INFO: "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 200 1097
+2024-10-20 13:12:53 [django.server] INFO: "GET /admin/ HTTP/1.1" 200 15386
+2024-10-20 13:12:56 [django.server] INFO: "GET /admin/web/case/ HTTP/1.1" 200 125384
+2024-10-20 13:12:56 [django.server] INFO: "GET /static/css/custom_admin.css HTTP/1.1" 304 0
+2024-10-20 13:12:56 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-20 17:42:55 [root] INFO: Init django with environment "dev"
+2024-10-20 17:42:55 [root] INFO: Database: kyrt_dev
+2024-10-20 13:42:56 [root] INFO: Init django with environment "dev"
+2024-10-20 13:42:56 [root] INFO: Database: kyrt_dev
+2024-10-20 13:43:01 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 302 0
+2024-10-20 13:43:01 [django.server] INFO: "GET /admin/ HTTP/1.1" 200 15294
+2024-10-20 13:43:01 [django.server] INFO: "GET /static/admin/css/base.css HTTP/1.1" 200 22092
+2024-10-20 13:43:01 [django.server] INFO: "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2804
+2024-10-20 13:43:01 [django.server] INFO: "GET /static/admin/css/dashboard.css HTTP/1.1" 200 441
+2024-10-20 13:43:01 [django.server] INFO: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2810
+2024-10-20 13:43:01 [django.server] INFO: "GET /static/admin/js/theme.js HTTP/1.1" 200 1653
+2024-10-20 13:43:01 [django.server] INFO: "GET /static/admin/css/responsive.css HTTP/1.1" 200 17972
+2024-10-20 13:43:01 [django.server] INFO: "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063
+2024-10-20 13:43:01 [django.server] INFO: "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+2024-10-20 13:43:01 [django.server] INFO: "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+2024-10-20 13:43:06 [django.server] INFO: "GET /admin/web/case/ HTTP/1.1" 200 125292
+2024-10-20 13:43:06 [django.server] INFO: "GET /static/admin/css/changelists.css HTTP/1.1" 200 6878
+2024-10-20 13:43:06 [django.server] INFO: "GET /static/admin/js/core.js HTTP/1.1" 200 6208
+2024-10-20 13:43:06 [django.server] INFO: "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+2024-10-20 13:43:06 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-20 13:43:06 [django.server] INFO: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 9097
+2024-10-20 13:43:06 [django.server] INFO: "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 285314
+2024-10-20 13:43:06 [django.server] INFO: "GET /static/admin/js/actions.js HTTP/1.1" 200 8076
+2024-10-20 13:43:06 [django.server] INFO: "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531
+2024-10-20 13:43:06 [django.server] INFO: "GET /static/admin/js/urlify.js HTTP/1.1" 200 7887
+2024-10-20 13:43:06 [django.server] INFO: "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 325171
+2024-10-20 13:43:06 [django.server] INFO: "GET /static/admin/img/search.svg HTTP/1.1" 200 458
+2024-10-20 13:43:06 [django.server] INFO: "GET /static/admin/js/filters.js HTTP/1.1" 200 978
+2024-10-20 13:43:06 [django.server] INFO: "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+2024-10-20 13:43:06 [django.server] INFO: "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 200 1097
+2024-10-20 13:43:06 [django.server] INFO: "GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 200 581
+2024-10-20 13:43:09 [django.server] INFO: "POST /admin/logout/ HTTP/1.1" 200 3542
+2024-10-20 13:43:11 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4369
+2024-10-20 13:43:11 [django.server] INFO: "GET /static/css/custom_admin.css HTTP/1.1" 200 2744
+2024-10-20 17:45:42 [root] INFO: Init django with environment "dev"
+2024-10-20 17:45:42 [root] INFO: Database: kyrt_dev
+2024-10-20 13:45:43 [root] INFO: Init django with environment "dev"
+2024-10-20 13:45:43 [root] INFO: Database: kyrt_dev
+2024-10-20 13:45:47 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4369
+2024-10-20 19:34:03 [root] INFO: Init django with environment "dev"
+2024-10-20 19:34:03 [root] INFO: Database: kyrt_dev
+2024-10-20 15:34:04 [root] INFO: Init django with environment "dev"
+2024-10-20 15:34:04 [root] INFO: Database: kyrt_dev
+2024-10-20 15:34:07 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4369
+2024-10-20 15:34:08 [django.server] INFO: "GET /static/admin/css/base.css HTTP/1.1" 304 0
+2024-10-20 15:34:08 [django.server] INFO: "GET /static/admin/css/dark_mode.css HTTP/1.1" 304 0
+2024-10-20 15:34:08 [django.server] INFO: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+2024-10-20 15:34:08 [django.server] INFO: "GET /static/css/custom_admin.css HTTP/1.1" 200 2177
+2024-10-20 15:34:08 [django.server] INFO: "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+2024-10-20 15:34:08 [django.server] INFO: "GET /static/admin/js/theme.js HTTP/1.1" 304 0
+2024-10-20 15:34:08 [django.server] INFO: "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+2024-10-20 19:46:34 [root] INFO: Init django with environment "dev"
+2024-10-20 19:46:34 [root] INFO: Database: kyrt_dev
+2024-10-20 15:46:34 [root] INFO: Init django with environment "dev"
+2024-10-20 15:46:34 [root] INFO: Database: kyrt_dev
+2024-10-20 15:46:40 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4369
+2024-10-20 15:46:40 [django.server] INFO: "GET /static/css/custom_admin.css HTTP/1.1" 200 2346
+2024-10-20 19:53:29 [root] INFO: Init django with environment "dev"
+2024-10-20 19:53:29 [root] INFO: Database: kyrt_dev
+2024-10-20 15:53:30 [root] INFO: Init django with environment "dev"
+2024-10-20 15:53:30 [root] INFO: Database: kyrt_dev
+2024-10-20 15:53:33 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4369
+2024-10-20 15:53:34 [django.server] INFO: "GET /static/css/custom_admin.css HTTP/1.1" 200 1797
+2024-10-20 15:55:03 [django.server] INFO: "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+2024-10-20 15:55:03 [django.server] INFO: "GET /admin/ HTTP/1.1" 200 15294
+2024-10-20 15:55:03 [django.server] INFO: "GET /static/admin/css/dashboard.css HTTP/1.1" 304 0
+2024-10-20 15:55:03 [django.server] INFO: "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+2024-10-20 15:55:03 [django.server] INFO: "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 304 0
+2024-10-20 15:55:10 [django.server] INFO: "POST /admin/logout/ HTTP/1.1" 200 3542
+2024-10-20 15:55:20 [django.server] INFO: "GET /admin/ HTTP/1.1" 302 0
+2024-10-20 15:55:20 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4369
+2024-10-20 15:55:20 [django.server] INFO: "GET /static/css/custom_admin.css HTTP/1.1" 304 0
+2024-10-20 16:18:00 [django.server] INFO: "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+2024-10-20 16:18:00 [django.server] INFO: "GET /admin/ HTTP/1.1" 200 15294
+2024-10-20 16:18:00 [django.server] INFO: "GET /static/admin/css/base.css HTTP/1.1" 304 0
+2024-10-20 16:18:00 [django.server] INFO: "GET /static/admin/css/dark_mode.css HTTP/1.1" 304 0
+2024-10-20 16:18:00 [django.server] INFO: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+2024-10-20 16:18:00 [django.server] INFO: "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+2024-10-20 16:18:00 [django.server] INFO: "GET /static/admin/js/theme.js HTTP/1.1" 304 0
+2024-10-20 16:18:00 [django.server] INFO: "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+2024-10-20 16:18:03 [django.server] INFO: "GET /admin/web/case/ HTTP/1.1" 200 125292
+2024-10-20 16:18:03 [django.server] INFO: "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+2024-10-20 16:18:03 [django.server] INFO: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+2024-10-20 16:18:03 [django.server] INFO: "GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+2024-10-20 16:18:03 [django.server] INFO: "GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+2024-10-20 16:18:03 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-20 16:18:03 [django.server] INFO: "GET /static/admin/js/core.js HTTP/1.1" 304 0
+2024-10-20 16:18:03 [django.server] INFO: "GET /static/admin/js/actions.js HTTP/1.1" 304 0
+2024-10-20 16:18:03 [django.server] INFO: "GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+2024-10-20 16:18:03 [django.server] INFO: "GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+2024-10-20 16:18:03 [django.server] INFO: "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+2024-10-20 16:18:03 [django.server] INFO: "GET /static/admin/img/search.svg HTTP/1.1" 304 0
+2024-10-20 16:18:04 [django.server] INFO: "GET /static/admin/js/filters.js HTTP/1.1" 304 0
+2024-10-20 16:18:04 [django.server] INFO: "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 304 0
+2024-10-20 16:18:04 [django.server] INFO: "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 304 0
+2024-10-20 16:18:04 [django.server] INFO: "GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 304 0
+2024-10-20 16:18:06 [django.server] INFO: "GET /admin/web/case/62336/change/ HTTP/1.1" 200 73458
+2024-10-20 16:18:07 [django.server] INFO: "GET /static/admin/js/admin/DateTimeShortcuts.js HTTP/1.1" 200 19319
+2024-10-20 16:18:07 [django.server] INFO: "GET /static/admin/js/calendar.js HTTP/1.1" 200 9141
+2024-10-20 16:18:07 [django.server] INFO: "GET /static/admin/css/forms.css HTTP/1.1" 200 8794
+2024-10-20 16:18:07 [django.server] INFO: "GET /static/admin/js/inlines.js HTTP/1.1" 200 15526
+2024-10-20 16:18:07 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-20 16:18:07 [django.server] INFO: "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 586
+2024-10-20 16:18:07 [django.server] INFO: "GET /static/admin/css/widgets.css HTTP/1.1" 200 11564
+2024-10-20 16:18:07 [django.server] INFO: "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+2024-10-20 16:18:07 [django.server] INFO: "GET /static/admin/img/icon-clock.svg HTTP/1.1" 200 677
+2024-10-20 16:18:07 [django.server] INFO: "GET /static/admin/img/icon-calendar.svg HTTP/1.1" 200 1086
+2024-10-20 16:18:44 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 302 0
+2024-10-20 16:18:44 [django.server] INFO: "GET /admin/ HTTP/1.1" 200 15294
+2024-10-20 16:18:47 [django.server] INFO: "GET /admin/web/case/ HTTP/1.1" 200 125292
+2024-10-20 16:18:48 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-20 16:18:53 [django.server] INFO: "GET /admin/web/case/62336/change/ HTTP/1.1" 200 73458
+2024-10-20 16:18:53 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-20 16:20:40 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 302 0
+2024-10-20 16:20:41 [django.server] INFO: "GET /admin/ HTTP/1.1" 200 15294
+2024-10-20 16:20:44 [django.server] INFO: "POST /admin/logout/ HTTP/1.1" 200 3542
+2024-10-20 16:20:47 [django.server] INFO: "GET /admin/ HTTP/1.1" 302 0
+2024-10-20 16:20:47 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4369
+2024-10-20 16:20:47 [django.server] INFO: "GET /static/css/custom_admin.css HTTP/1.1" 304 0
+2024-10-20 16:55:32 [django.server] INFO: "GET /admin/web/case/ HTTP/1.1" 302 0
+2024-10-20 16:55:32 [django.server] INFO: "GET /admin/login/?next=/admin/web/case/ HTTP/1.1" 200 4387
+2024-10-20 16:55:32 [django.server] INFO: "GET /static/admin/css/base.css HTTP/1.1" 304 0
+2024-10-20 16:55:32 [django.server] INFO: "GET /static/admin/css/dark_mode.css HTTP/1.1" 304 0
+2024-10-20 16:55:32 [django.server] INFO: "GET /static/css/custom_admin.css HTTP/1.1" 304 0
+2024-10-20 16:55:32 [django.server] INFO: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+2024-10-20 16:55:32 [django.server] INFO: "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+2024-10-20 16:55:32 [django.server] INFO: "GET /static/admin/js/theme.js HTTP/1.1" 304 0
+2024-10-20 16:55:33 [django.server] INFO: "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+2024-10-20 16:55:38 [django.server] INFO: "POST /admin/login/?next=/admin/web/case/ HTTP/1.1" 302 0
+2024-10-20 16:55:39 [django.server] INFO: "GET /admin/web/case/ HTTP/1.1" 200 125292
+2024-10-20 16:55:39 [django.server] INFO: "GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+2024-10-20 16:55:39 [django.server] INFO: "GET /static/admin/js/core.js HTTP/1.1" 304 0
+2024-10-20 16:55:39 [django.server] INFO: "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+2024-10-20 16:55:39 [django.server] INFO: "GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+2024-10-20 16:55:39 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-20 16:55:39 [django.server] INFO: "GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+2024-10-20 16:55:39 [django.server] INFO: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+2024-10-20 16:55:39 [django.server] INFO: "GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+2024-10-20 16:55:39 [django.server] INFO: "GET /static/admin/js/actions.js HTTP/1.1" 304 0
+2024-10-20 16:55:39 [django.server] INFO: "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+2024-10-20 16:55:39 [django.server] INFO: "GET /static/admin/img/search.svg HTTP/1.1" 304 0
+2024-10-20 16:55:39 [django.server] INFO: "GET /static/admin/js/filters.js HTTP/1.1" 304 0
+2024-10-20 16:55:39 [django.server] INFO: "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 304 0
+2024-10-20 16:55:39 [django.server] INFO: "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+2024-10-20 16:55:39 [django.server] INFO: "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 304 0
+2024-10-20 16:55:39 [django.server] INFO: "GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 304 0
+2024-10-20 16:55:49 [django.server] INFO: "GET /admin/web/company/ HTTP/1.1" 200 49376
+2024-10-20 16:55:49 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-20 16:55:53 [django.server] INFO: "GET /admin/web/case/ HTTP/1.1" 200 125292
+2024-10-20 16:55:53 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-20 16:56:02 [django.server] INFO: "GET /admin/web/case/62334/change/ HTTP/1.1" 200 59774
+2024-10-20 16:56:02 [django.server] INFO: "GET /static/admin/css/forms.css HTTP/1.1" 304 0
+2024-10-20 16:56:02 [django.server] INFO: "GET /static/admin/js/admin/DateTimeShortcuts.js HTTP/1.1" 304 0
+2024-10-20 16:56:02 [django.server] INFO: "GET /static/admin/js/inlines.js HTTP/1.1" 304 0
+2024-10-20 16:56:02 [django.server] INFO: "GET /static/admin/js/calendar.js HTTP/1.1" 304 0
+2024-10-20 16:56:02 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-20 16:56:02 [django.server] INFO: "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 304 0
+2024-10-20 16:56:02 [django.server] INFO: "GET /static/admin/css/widgets.css HTTP/1.1" 304 0
+2024-10-20 16:56:02 [django.server] INFO: "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 304 0
+2024-10-20 16:56:03 [django.server] INFO: "GET /static/admin/js/change_form.js HTTP/1.1" 304 0
+2024-10-20 16:56:03 [django.server] INFO: "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+2024-10-20 16:56:03 [django.server] INFO: "GET /static/admin/img/icon-calendar.svg HTTP/1.1" 304 0
+2024-10-20 16:56:03 [django.server] INFO: "GET /static/admin/img/icon-clock.svg HTTP/1.1" 304 0
+2024-10-20 16:56:52 [django.server] INFO: "GET /admin/web/case/ HTTP/1.1" 200 125292
+2024-10-20 16:56:52 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-20 16:56:57 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-20 16:56:57 [django.server] INFO: "GET /admin/web/case/?o=2.-9 HTTP/1.1" 200 140145
+2024-10-20 16:56:59 [django.server] INFO: "GET /admin/web/case/?o=-2.-9 HTTP/1.1" 200 132969
+2024-10-20 16:56:59 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-20 16:57:02 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-20 16:57:02 [django.server] INFO: "GET /admin/web/case/?o=2.-9 HTTP/1.1" 200 140145
+2024-10-20 16:59:00 [django.server] INFO: "GET /admin/web/case/?q=Citrine+Capital+LLC&o=2.-9 HTTP/1.1" 200 38647
+2024-10-20 16:59:00 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-20 16:59:14 [django.server] INFO: "GET /admin/web/case/?q=Citrine+Capital&o=2.-9 HTTP/1.1" 200 37933
+2024-10-20 16:59:14 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-20 16:59:37 [django.server] INFO: "GET /admin/web/case/ HTTP/1.1" 200 125292
+2024-10-20 16:59:38 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-20 16:59:56 [django.server] INFO: "GET /admin/web/case/62337/change/ HTTP/1.1" 200 56677
+2024-10-20 16:59:56 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-20 17:07:17 [django.server] INFO: "POST /admin/logout/ HTTP/1.1" 200 3542
+2024-10-20 17:07:19 [django.server] INFO: "GET /admin/ HTTP/1.1" 302 0
+2024-10-20 17:07:19 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4369
+2024-10-20 17:07:19 [django.server] INFO: "GET /static/css/custom_admin.css HTTP/1.1" 304 0
+2024-10-20 17:08:31 [django.request] WARNING: Not Found: /favicon.ico
+2024-10-20 17:08:31 [django.server] WARNING: "GET /favicon.ico HTTP/1.1" 404 2666
+2024-10-20 17:08:37 [django.server] INFO: "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+2024-10-20 17:08:38 [django.server] INFO: "GET /admin/ HTTP/1.1" 200 15294
+2024-10-20 17:08:38 [django.server] INFO: "GET /static/admin/css/dashboard.css HTTP/1.1" 304 0
+2024-10-20 17:08:43 [django.server] INFO: "GET /admin/web/case/ HTTP/1.1" 200 125292
+2024-10-20 17:08:43 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-20 17:09:21 [django.server] INFO: "GET /admin/web/company/ HTTP/1.1" 200 49376
+2024-10-20 17:09:21 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-20 17:09:54 [django.server] INFO: "GET /admin/web/company/?q=drb HTTP/1.1" 200 15350
+2024-10-20 17:09:54 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-20 17:10:00 [django.server] INFO: "GET /admin/web/companynamevariation/ HTTP/1.1" 200 50189
+2024-10-20 17:10:00 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-20 17:10:10 [django.server] INFO: "GET /admin/web/document/ HTTP/1.1" 200 61608
+2024-10-20 17:10:10 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-20 17:10:22 [django.server] INFO: "GET /admin/web/case/ HTTP/1.1" 200 125292
+2024-10-20 17:10:23 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-20 17:10:25 [django.server] INFO: "GET /admin/web/case/62336/change/ HTTP/1.1" 200 73458
+2024-10-20 17:10:25 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-20 17:11:21 [django.server] INFO: "GET /admin/web/state/ HTTP/1.1" 200 15636
+2024-10-20 17:11:22 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-20 17:11:28 [django.server] INFO: "GET /admin/web/case/ HTTP/1.1" 200 125292
+2024-10-20 17:11:29 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-20 17:11:36 [django.request] WARNING: Not Found: /favicon.ico
+2024-10-20 17:11:36 [django.server] WARNING: "GET /favicon.ico HTTP/1.1" 404 2666
+2024-10-20 17:23:39 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 302 0
+2024-10-20 17:23:39 [django.server] INFO: "GET /admin/ HTTP/1.1" 200 15294

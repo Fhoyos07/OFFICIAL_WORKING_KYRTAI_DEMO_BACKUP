@@ -1,0 +1,634 @@
+2024-10-21 03:19:31 [django.request] WARNING: Not Found: /stub_status
+2024-10-21 03:19:31 [django.server] WARNING: "GET /stub_status HTTP/1.0" 404 16150
+2024-10-21 03:19:31 [django.request] WARNING: Not Found: /basic_status
+2024-10-21 03:19:31 [django.server] WARNING: "GET /basic_status HTTP/1.0" 404 16154
+2024-10-21 03:19:31 [django.request] WARNING: Not Found: /nginx_status
+2024-10-21 03:19:31 [django.server] WARNING: "GET /nginx_status HTTP/1.0" 404 16154
+2024-10-21 03:19:31 [django.request] WARNING: Not Found: /status
+2024-10-21 03:19:31 [django.server] WARNING: "GET /status HTTP/1.0" 404 16130
+2024-10-21 07:34:06 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4369
+2024-10-21 07:34:07 [django.server] INFO: "GET /static/admin/css/base.css HTTP/1.1" 200 22092
+2024-10-21 07:34:07 [django.server] INFO: "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2804
+2024-10-21 07:34:07 [django.server] INFO: "GET /static/css/custom_admin.css HTTP/1.1" 200 1797
+2024-10-21 07:34:07 [django.server] INFO: "GET /static/admin/js/theme.js HTTP/1.1" 200 1653
+2024-10-21 07:34:07 [django.server] INFO: "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063
+2024-10-21 07:34:07 [django.server] INFO: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2810
+2024-10-21 07:34:07 [django.server] INFO: "GET /static/admin/css/responsive.css HTTP/1.1" 200 17972
+2024-10-21 07:34:07 [django.request] WARNING: Not Found: /favicon.ico
+2024-10-21 07:34:07 [django.server] WARNING: "GET /favicon.ico HTTP/1.1" 404 2666
+2024-10-21 07:34:26 [django.server] INFO: "POST /admin/login/?next=/admin/ HTTP/1.1" 200 4540
+2024-10-21 12:32:23 [django.server] INFO: "POST /admin/logout/ HTTP/1.1" 200 3542
+2024-10-21 12:32:24 [django.server] INFO: "GET /static/admin/css/base.css HTTP/1.1" 304 0
+2024-10-21 12:32:24 [django.server] INFO: "GET /static/admin/js/theme.js HTTP/1.1" 304 0
+2024-10-21 12:32:24 [django.server] INFO: "GET /static/admin/css/dark_mode.css HTTP/1.1" 304 0
+2024-10-21 12:32:24 [django.server] INFO: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+2024-10-21 12:32:24 [django.server] INFO: "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+2024-10-21 12:32:24 [django.server] INFO: "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+2024-10-21 12:32:26 [django.server] INFO: "GET /admin/ HTTP/1.1" 302 0
+2024-10-21 12:32:26 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4369
+2024-10-21 12:32:26 [django.server] INFO: "GET /static/css/custom_admin.css HTTP/1.1" 304 0
+2024-10-21 13:00:22 [django.server] INFO: "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+2024-10-21 13:00:23 [django.server] INFO: "GET /admin/ HTTP/1.1" 200 15294
+2024-10-21 13:00:23 [django.server] INFO: "GET /static/admin/css/dashboard.css HTTP/1.1" 304 0
+2024-10-21 13:00:23 [django.server] INFO: "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+2024-10-21 13:00:23 [django.server] INFO: "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 304 0
+2024-10-21 13:00:35 [django.server] INFO: "GET /admin/rest_framework_api_key/apikey/ HTTP/1.1" 200 17406
+2024-10-21 13:00:35 [django.server] INFO: "GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+2024-10-21 13:00:35 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 13:00:35 [django.server] INFO: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+2024-10-21 13:00:35 [django.server] INFO: "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+2024-10-21 13:00:35 [django.server] INFO: "GET /static/admin/js/core.js HTTP/1.1" 304 0
+2024-10-21 13:00:35 [django.server] INFO: "GET /static/admin/js/actions.js HTTP/1.1" 304 0
+2024-10-21 13:00:35 [django.server] INFO: "GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+2024-10-21 13:00:35 [django.server] INFO: "GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+2024-10-21 13:00:36 [django.server] INFO: "GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+2024-10-21 13:00:36 [django.server] INFO: "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+2024-10-21 13:00:36 [django.server] INFO: "GET /static/admin/img/search.svg HTTP/1.1" 304 0
+2024-10-21 13:00:36 [django.server] INFO: "GET /static/admin/img/icon-no.svg HTTP/1.1" 200 560
+2024-10-21 13:00:36 [django.server] INFO: "GET /static/admin/js/filters.js HTTP/1.1" 304 0
+2024-10-21 13:00:36 [django.server] INFO: "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 304 0
+2024-10-21 13:00:36 [django.server] INFO: "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 304 0
+2024-10-21 13:00:36 [django.server] INFO: "GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 304 0
+2024-10-21 13:00:49 [django.server] INFO: "GET /admin/auth/user/ HTTP/1.1" 200 17917
+2024-10-21 13:00:49 [django.server] INFO: "GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 436
+2024-10-21 13:00:49 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 13:01:06 [django.server] INFO: "GET /admin/django_celery_beat/clockedschedule/ HTTP/1.1" 200 13121
+2024-10-21 13:01:06 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 13:01:08 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 13:01:08 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 13:01:08 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 13:01:08 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 13:01:08 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 13:01:08 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 13:01:08 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 13:01:08 [django.server] INFO: "GET /admin/django_celery_beat/crontabschedule/ HTTP/1.1" 200 17823
+2024-10-21 13:01:09 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 13:01:43 [django.server] INFO: "GET /admin/django_celery_beat/intervalschedule/ HTTP/1.1" 200 15024
+2024-10-21 13:01:43 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 13:01:47 [django.server] INFO: "GET /admin/django_celery_beat/periodictask/ HTTP/1.1" 200 25167
+2024-10-21 13:01:47 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 13:02:04 [django.server] INFO: "GET /admin/web/case/ HTTP/1.1" 200 125292
+2024-10-21 13:02:04 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 13:02:17 [django.server] INFO: "GET /admin/web/case/62336/change/ HTTP/1.1" 200 73458
+2024-10-21 13:02:17 [django.server] INFO: "GET /static/admin/js/calendar.js HTTP/1.1" 304 0
+2024-10-21 13:02:17 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 13:02:17 [django.server] INFO: "GET /static/admin/js/inlines.js HTTP/1.1" 304 0
+2024-10-21 13:02:17 [django.server] INFO: "GET /static/admin/js/admin/DateTimeShortcuts.js HTTP/1.1" 304 0
+2024-10-21 13:02:17 [django.server] INFO: "GET /static/admin/css/forms.css HTTP/1.1" 304 0
+2024-10-21 13:02:17 [django.server] INFO: "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 304 0
+2024-10-21 13:02:17 [django.server] INFO: "GET /static/admin/css/widgets.css HTTP/1.1" 304 0
+2024-10-21 13:02:17 [django.server] INFO: "GET /static/admin/js/change_form.js HTTP/1.1" 304 0
+2024-10-21 13:02:17 [django.server] INFO: "GET /static/admin/img/icon-clock.svg HTTP/1.1" 304 0
+2024-10-21 13:02:18 [django.server] INFO: "GET /static/admin/img/icon-calendar.svg HTTP/1.1" 304 0
+2024-10-21 17:14:40 [root] INFO: Init django with environment "dev"
+2024-10-21 17:14:40 [root] INFO: Database: kyrt_dev
+2024-10-21 13:14:40 [root] INFO: Init django with environment "dev"
+2024-10-21 13:14:40 [root] INFO: Database: kyrt_dev
+2024-10-21 13:15:05 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 302 0
+2024-10-21 13:15:06 [django.server] INFO: "GET /admin/ HTTP/1.1" 200 15294
+2024-10-21 13:15:10 [django.server] INFO: "GET /admin/web/company/ HTTP/1.1" 200 49376
+2024-10-21 13:15:10 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 13:34:02 [django.server] INFO: "GET /admin/web/company/?p=2 HTTP/1.1" 200 52221
+2024-10-21 13:34:03 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 13:34:08 [django.server] INFO: "GET /admin/web/company/?p=3 HTTP/1.1" 200 53717
+2024-10-21 13:34:08 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 13:35:20 [django.server] INFO: "GET /admin/ HTTP/1.1" 200 15294
+2024-10-21 13:35:24 [django.server] INFO: "GET /admin/web/case/ HTTP/1.1" 200 125292
+2024-10-21 13:35:24 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 13:38:52 [django.server] INFO: "POST /admin/logout/ HTTP/1.1" 200 3542
+2024-10-21 13:38:54 [django.server] INFO: "GET /admin/ HTTP/1.1" 302 0
+2024-10-21 13:38:55 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4369
+2024-10-21 13:43:21 [django.server] INFO: "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+2024-10-21 13:43:21 [django.server] INFO: "GET /admin/ HTTP/1.1" 200 15294
+2024-10-21 13:43:30 [django.server] INFO: "GET /admin/auth/user/ HTTP/1.1" 200 17917
+2024-10-21 13:43:30 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 13:43:49 [django.server] INFO: "GET /admin/web/case/ HTTP/1.1" 200 125292
+2024-10-21 13:43:49 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 13:44:54 [django.server] INFO: "GET /admin/web/case/?case_type=Tort HTTP/1.1" 200 91212
+2024-10-21 13:44:54 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 13:45:02 [django.server] INFO: "GET /admin/web/company/ HTTP/1.1" 200 49376
+2024-10-21 13:45:02 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 13:45:28 [django.server] INFO: "GET /admin/web/company/?p=4 HTTP/1.1" 200 51861
+2024-10-21 13:45:28 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 13:45:36 [django.server] INFO: "GET /admin/web/company/?q=jg HTTP/1.1" 200 16802
+2024-10-21 13:45:36 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 13:45:46 [django.server] INFO: "GET /admin/web/document/ HTTP/1.1" 200 61608
+2024-10-21 13:45:46 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 13:46:18 [django.server] INFO: "GET /admin/web/companynamevariation/ HTTP/1.1" 200 50189
+2024-10-21 13:46:18 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 13:46:27 [django.server] INFO: "GET /admin/web/company/ HTTP/1.1" 200 49376
+2024-10-21 13:46:27 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 13:46:30 [django.server] INFO: "GET /admin/web/company/?q=blt HTTP/1.1" 200 14027
+2024-10-21 13:46:31 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 13:46:35 [django.server] INFO: "GET /admin/web/company/?q=amrak HTTP/1.1" 200 14031
+2024-10-21 13:46:35 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 13:46:41 [django.server] INFO: "GET /admin/web/company/?q=liberty HTTP/1.1" 200 15923
+2024-10-21 13:46:42 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 13:47:43 [django.server] INFO: "GET /admin/web/document/ HTTP/1.1" 200 61608
+2024-10-21 13:47:43 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 13:47:58 [django.server] INFO: "GET /admin/web/case/ HTTP/1.1" 200 125292
+2024-10-21 13:47:59 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 13:48:02 [django.server] INFO: "GET /admin/web/case/62336/change/ HTTP/1.1" 200 73458
+2024-10-21 13:48:02 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 13:53:52 [django.server] INFO: "GET /admin/web/case/ HTTP/1.1" 200 125292
+2024-10-21 13:53:52 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 15:42:55 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 302 0
+2024-10-21 15:42:56 [django.server] INFO: "GET /admin/ HTTP/1.1" 200 15294
+2024-10-21 15:42:56 [django.server] INFO: "GET /static/admin/css/base.css HTTP/1.1" 304 0
+2024-10-21 15:42:56 [django.server] INFO: "GET /static/admin/css/dark_mode.css HTTP/1.1" 304 0
+2024-10-21 15:42:56 [django.server] INFO: "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+2024-10-21 15:42:56 [django.server] INFO: "GET /static/admin/css/dashboard.css HTTP/1.1" 304 0
+2024-10-21 15:42:56 [django.server] INFO: "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+2024-10-21 15:42:56 [django.server] INFO: "GET /static/admin/js/theme.js HTTP/1.1" 304 0
+2024-10-21 15:42:56 [django.server] INFO: "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+2024-10-21 15:42:56 [django.server] INFO: "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+2024-10-21 15:42:56 [django.server] INFO: "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 304 0
+2024-10-21 15:43:02 [django.server] INFO: "POST /admin/logout/ HTTP/1.1" 200 3542
+2024-10-21 15:43:04 [django.server] INFO: "GET /admin/ HTTP/1.1" 302 0
+2024-10-21 15:43:04 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4369
+2024-10-21 15:43:04 [django.server] INFO: "GET /static/css/custom_admin.css HTTP/1.1" 304 0
+2024-10-21 16:15:30 [django.server] INFO: "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+2024-10-21 16:15:30 [django.server] INFO: "GET /admin/ HTTP/1.1" 200 15294
+2024-10-21 16:15:33 [django.server] INFO: "GET /admin/web/case/ HTTP/1.1" 200 125292
+2024-10-21 16:15:34 [django.server] INFO: "GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+2024-10-21 16:15:34 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 16:15:34 [django.server] INFO: "GET /static/admin/js/core.js HTTP/1.1" 304 0
+2024-10-21 16:15:34 [django.server] INFO: "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+2024-10-21 16:15:34 [django.server] INFO: "GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+2024-10-21 16:15:34 [django.server] INFO: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+2024-10-21 16:15:34 [django.server] INFO: "GET /static/admin/js/actions.js HTTP/1.1" 304 0
+2024-10-21 16:15:34 [django.server] INFO: "GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+2024-10-21 16:15:34 [django.server] INFO: "GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+2024-10-21 16:15:34 [django.server] INFO: "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+2024-10-21 16:15:34 [django.server] INFO: "GET /static/admin/img/search.svg HTTP/1.1" 304 0
+2024-10-21 16:15:34 [django.server] INFO: "GET /static/admin/js/filters.js HTTP/1.1" 304 0
+2024-10-21 16:15:34 [django.server] INFO: "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 304 0
+2024-10-21 16:15:34 [django.server] INFO: "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 304 0
+2024-10-21 16:15:34 [django.server] INFO: "GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 304 0
+2024-10-21 16:15:37 [django.server] INFO: "GET /admin/web/case/?o=1.-9 HTTP/1.1" 200 135565
+2024-10-21 16:15:37 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 16:15:40 [django.server] INFO: "GET /admin/web/case/?o=-1.-9 HTTP/1.1" 200 133893
+2024-10-21 16:15:40 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 20:27:12 [root] INFO: Init django with environment "dev"
+2024-10-21 20:27:12 [root] INFO: Database: kyrt_dev
+2024-10-21 16:27:13 [root] INFO: Init django with environment "dev"
+2024-10-21 16:27:13 [root] INFO: Database: kyrt_dev
+2024-10-21 16:27:22 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 302 0
+2024-10-21 16:27:23 [django.server] INFO: "GET /admin/ HTTP/1.1" 200 15294
+2024-10-21 20:44:21 [root] INFO: Init django with environment "dev"
+2024-10-21 20:44:21 [root] INFO: Database: kyrt_dev
+2024-10-21 16:44:22 [root] INFO: Init django with environment "dev"
+2024-10-21 16:44:22 [root] INFO: Database: kyrt_dev
+2024-10-21 16:44:27 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 302 0
+2024-10-21 16:44:27 [django.server] INFO: "GET /admin/ HTTP/1.1" 200 15294
+2024-10-21 16:44:30 [django.server] INFO: "POST /admin/logout/ HTTP/1.1" 200 3542
+2024-10-21 16:44:32 [django.server] INFO: "GET /admin/ HTTP/1.1" 302 0
+2024-10-21 16:44:32 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4369
+2024-10-21 16:44:36 [django.server] INFO: "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+2024-10-21 16:44:36 [django.server] INFO: "GET /admin/ HTTP/1.1" 200 15294
+2024-10-21 16:44:38 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:44:38 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:44:38 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:44:38 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:44:38 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:44:38 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:44:39 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:44:39 [django.server] INFO: "GET /admin/django_celery_beat/crontabschedule/ HTTP/1.1" 200 17823
+2024-10-21 16:44:39 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 16:44:46 [django.server] INFO: "GET /admin/django_celery_beat/intervalschedule/ HTTP/1.1" 200 15024
+2024-10-21 16:44:46 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 16:44:48 [django.server] INFO: "GET /admin/django_celery_beat/periodictask/ HTTP/1.1" 200 25167
+2024-10-21 16:44:48 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 16:44:48 [django.server] INFO: "GET /static/admin/img/icon-yes.svg HTTP/1.1" 304 0
+2024-10-21 16:44:49 [django.server] INFO: "GET /static/admin/img/icon-no.svg HTTP/1.1" 304 0
+2024-10-21 16:45:01 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:45:01 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:45:01 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:45:01 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:45:01 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:45:01 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:45:01 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:45:03 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:45:03 [django.server] INFO: "GET /admin/django_celery_beat/periodictask/5/change/ HTTP/1.1" 200 40668
+2024-10-21 16:45:03 [django.server] INFO: "GET /static/admin/css/forms.css HTTP/1.1" 304 0
+2024-10-21 16:45:04 [django.server] INFO: "GET /static/admin/js/calendar.js HTTP/1.1" 304 0
+2024-10-21 16:45:04 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 16:45:04 [django.server] INFO: "GET /static/admin/js/admin/DateTimeShortcuts.js HTTP/1.1" 304 0
+2024-10-21 16:45:04 [django.server] INFO: "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 304 0
+2024-10-21 16:45:04 [django.server] INFO: "GET /static/admin/css/widgets.css HTTP/1.1" 304 0
+2024-10-21 16:45:04 [django.server] INFO: "GET /static/admin/js/change_form.js HTTP/1.1" 304 0
+2024-10-21 16:45:04 [django.server] INFO: "GET /static/admin/img/icon-calendar.svg HTTP/1.1" 304 0
+2024-10-21 16:45:04 [django.server] INFO: "GET /static/admin/img/icon-clock.svg HTTP/1.1" 304 0
+2024-10-21 16:46:41 [django.server] INFO: "GET /static/admin/img/calendar-icons.svg HTTP/1.1" 200 2455
+2024-10-21 16:47:34 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:47:34 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:47:34 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:47:34 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:47:34 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:47:34 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:47:34 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:47:34 [django.server] INFO: "POST /admin/django_celery_beat/periodictask/5/change/ HTTP/1.1" 302 0
+2024-10-21 16:47:34 [django.server] INFO: "GET /admin/django_celery_beat/periodictask/ HTTP/1.1" 200 25637
+2024-10-21 16:47:34 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 16:48:04 [django.server] INFO: "GET /admin/web/case/ HTTP/1.1" 200 125292
+2024-10-21 16:48:04 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 16:48:07 [django.server] INFO: "GET /admin/web/case/?o=1.-9 HTTP/1.1" 200 135565
+2024-10-21 16:48:07 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 16:48:10 [django.server] INFO: "GET /admin/web/case/?o=-1.-9 HTTP/1.1" 200 133893
+2024-10-21 16:48:10 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 16:48:15 [django.server] INFO: "GET /admin/web/case/?o=1.-9 HTTP/1.1" 200 135565
+2024-10-21 16:48:15 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 16:48:19 [django.server] INFO: "GET /admin/web/case/?o=-1.-9 HTTP/1.1" 200 133893
+2024-10-21 16:48:19 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 16:48:22 [django.server] INFO: "GET /admin/web/case/?o=1.-9 HTTP/1.1" 200 135565
+2024-10-21 16:48:22 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 16:48:24 [django.server] INFO: "GET /admin/web/case/?o=-1.-9 HTTP/1.1" 200 133893
+2024-10-21 16:48:25 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 16:49:03 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:03 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:03 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:03 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:03 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:03 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:03 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:03 [django.server] INFO: "GET /admin/django_celery_beat/crontabschedule/ HTTP/1.1" 200 17823
+2024-10-21 16:49:03 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 16:49:09 [django.server] INFO: "GET /admin/django_celery_beat/periodictask/ HTTP/1.1" 200 25355
+2024-10-21 16:49:09 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 16:49:13 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:13 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:13 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:13 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:13 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:13 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:13 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:13 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:13 [django.server] INFO: "GET /admin/django_celery_beat/periodictask/5/change/ HTTP/1.1" 200 40704
+2024-10-21 16:49:13 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 16:49:28 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:28 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:28 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:28 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:28 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:28 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:28 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:28 [django.server] INFO: "POST /admin/django_celery_beat/periodictask/5/change/ HTTP/1.1" 302 0
+2024-10-21 16:49:28 [django.server] INFO: "GET /admin/django_celery_beat/periodictask/ HTTP/1.1" 200 25449
+2024-10-21 16:49:28 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 16:49:31 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:31 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:31 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:31 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:31 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:31 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:31 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:31 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:31 [django.server] INFO: "GET /admin/django_celery_beat/periodictask/5/change/ HTTP/1.1" 200 40668
+2024-10-21 16:49:32 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 16:49:52 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:52 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:52 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:52 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:52 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:52 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:52 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:49:52 [django.server] INFO: "POST /admin/django_celery_beat/periodictask/5/change/ HTTP/1.1" 302 0
+2024-10-21 16:49:52 [django.server] INFO: "GET /admin/django_celery_beat/periodictask/ HTTP/1.1" 200 25449
+2024-10-21 16:49:52 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 16:51:58 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (0/20) now.
+2024-10-21 16:51:58 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (1/20) in 1.00 second.
+2024-10-21 16:51:59 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (2/20) in 1.00 second.
+2024-10-21 16:52:00 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (3/20) in 1.00 second.
+2024-10-21 16:52:01 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (4/20) in 1.00 second.
+2024-10-21 16:52:02 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (5/20) in 1.00 second.
+2024-10-21 16:52:03 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (6/20) in 1.00 second.
+2024-10-21 16:52:04 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (0/20) now.
+2024-10-21 16:52:04 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (1/20) in 1.00 second.
+2024-10-21 16:52:04 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (7/20) in 1.00 second.
+2024-10-21 16:52:05 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (2/20) in 1.00 second.
+2024-10-21 16:52:05 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (8/20) in 1.00 second.
+2024-10-21 16:52:06 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (3/20) in 1.00 second.
+2024-10-21 16:52:06 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (9/20) in 1.00 second.
+2024-10-21 16:52:07 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (4/20) in 1.00 second.
+2024-10-21 16:52:07 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (10/20) in 1.00 second.
+2024-10-21 16:52:08 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (5/20) in 1.00 second.
+2024-10-21 16:52:08 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (11/20) in 1.00 second.
+2024-10-21 16:52:09 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (6/20) in 1.00 second.
+2024-10-21 16:52:09 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (12/20) in 1.00 second.
+2024-10-21 16:52:10 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (7/20) in 1.00 second.
+2024-10-21 16:52:10 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (13/20) in 1.00 second.
+2024-10-21 16:52:11 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (8/20) in 1.00 second.
+2024-10-21 16:52:11 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (14/20) in 1.00 second.
+2024-10-21 16:52:12 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (9/20) in 1.00 second.
+2024-10-21 16:52:12 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (15/20) in 1.00 second.
+2024-10-21 16:52:12 [django.server] INFO: "GET /admin/django_celery_beat/intervalschedule/ HTTP/1.1" 200 15024
+2024-10-21 16:52:13 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 16:52:13 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (10/20) in 1.00 second.
+2024-10-21 16:52:13 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (16/20) in 1.00 second.
+2024-10-21 16:52:14 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (11/20) in 1.00 second.
+2024-10-21 16:52:14 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (17/20) in 1.00 second.
+2024-10-21 16:52:15 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (12/20) in 1.00 second.
+2024-10-21 16:52:15 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (18/20) in 1.00 second.
+2024-10-21 16:52:16 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (13/20) in 1.00 second.
+2024-10-21 16:52:16 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (19/20) in 1.00 second.
+2024-10-21 16:52:17 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (14/20) in 1.00 second.
+2024-10-21 16:52:17 [celery.backends.redis] CRITICAL: 
+Retry limit exceeded while trying to reconnect to the Celery redis result store backend. The Celery application must be restarted.
+
+2024-10-21 16:52:17 [django.request] ERROR: Internal Server Error: /admin/django_celery_beat/periodictask/
+Traceback (most recent call last):
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/redis/connection.py", line 357, in connect
+    sock = self.retry.call_with_retry(
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/redis/retry.py", line 62, in call_with_retry
+    return do()
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/redis/connection.py", line 358, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/redis/connection.py", line 698, in _connect
+    for res in socket.getaddrinfo(
+  File "/usr/lib/python3.10/socket.py", line 955, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/celery/backends/redis.py", line 127, in reconnect_on_error
+    yield
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/celery/backends/redis.py", line 177, in _consume_from
+    self._pubsub.subscribe(key)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/redis/client.py", line 957, in subscribe
+    ret_val = self.execute_command("SUBSCRIBE", *new_channels.keys())
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/redis/client.py", line 786, in execute_command
+    self.connection = self.connection_pool.get_connection(
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/redis/connection.py", line 1422, in get_connection
+    connection.connect()
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/redis/connection.py", line 363, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error -3 connecting to redis:6379. Temporary failure in name resolution.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/redis/connection.py", line 357, in connect
+    sock = self.retry.call_with_retry(
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/redis/retry.py", line 62, in call_with_retry
+    return do()
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/redis/connection.py", line 358, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/redis/connection.py", line 698, in _connect
+    for res in socket.getaddrinfo(
+  File "/usr/lib/python3.10/socket.py", line 955, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/kombu/connection.py", line 472, in _reraise_as_library_errors
+    yield
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/celery/app/base.py", line 800, in send_task
+    self.backend.on_task_call(P, task_id)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/celery/backends/redis.py", line 373, in on_task_call
+    self.result_consumer.consume_from(task_id)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/celery/backends/redis.py", line 169, in consume_from
+    return self.start(task_id)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/celery/backends/redis.py", line 147, in start
+    self._consume_from(initial_task_id)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/celery/backends/redis.py", line 176, in _consume_from
+    with self.reconnect_on_error():
+  File "/usr/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/celery/backends/redis.py", line 130, in reconnect_on_error
+    self._ensure(self._reconnect_pubsub, ())
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/celery/backends/redis.py", line 384, in ensure
+    return retry_over_time(
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/kombu/utils/functional.py", line 318, in retry_over_time
+    return fun(*args, **kwargs)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/celery/backends/redis.py", line 106, in _reconnect_pubsub
+    metas = self.backend.client.mget(self.subscribed_to)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/redis/commands/core.py", line 2009, in mget
+    return self.execute_command("MGET", *args, **options)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/redis/client.py", line 559, in execute_command
+    return self._execute_command(*args, **options)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/redis/client.py", line 565, in _execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/redis/connection.py", line 1422, in get_connection
+    connection.connect()
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/redis/connection.py", line 363, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error -3 connecting to redis:6379. Temporary failure in name resolution.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/contrib/admin/options.py", line 718, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/contrib/admin/sites.py", line 241, in inner
+    return view(request, *args, **kwargs)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django_celery_beat/admin.py", line 166, in changelist_view
+    return super().changelist_view(
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/contrib/admin/options.py", line 2034, in changelist_view
+    response = self.response_action(
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/contrib/admin/options.py", line 1666, in response_action
+    response = func(self, request, queryset)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django_celery_beat/admin.py", line 251, in run_tasks
+    task_ids = [
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django_celery_beat/admin.py", line 255, in <listcomp>
+    else task.apply_async(args=args, kwargs=kwargs,
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/celery/app/task.py", line 594, in apply_async
+    return app.send_task(
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/celery/app/base.py", line 798, in send_task
+    with P.connection._reraise_as_library_errors():
+  File "/usr/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/kombu/connection.py", line 476, in _reraise_as_library_errors
+    raise ConnectionError(str(exc)) from exc
+kombu.exceptions.OperationalError: Error -3 connecting to redis:6379. Temporary failure in name resolution.
+2024-10-21 16:52:18 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (15/20) in 1.00 second.
+2024-10-21 16:52:18 [django.server] INFO: "GET /admin/django_celery_beat/periodictask/ HTTP/1.1" 200 25167
+2024-10-21 16:52:18 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 16:52:19 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (16/20) in 1.00 second.
+2024-10-21 16:52:20 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (17/20) in 1.00 second.
+2024-10-21 16:52:21 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (18/20) in 1.00 second.
+2024-10-21 16:52:22 [celery.backends.redis] ERROR: Connection to Redis lost: Retry (19/20) in 1.00 second.
+2024-10-21 16:52:23 [celery.backends.redis] CRITICAL: 
+Retry limit exceeded while trying to reconnect to the Celery redis result store backend. The Celery application must be restarted.
+
+2024-10-21 16:52:23 [django.request] ERROR: Internal Server Error: /admin/django_celery_beat/periodictask/
+Traceback (most recent call last):
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/redis/connection.py", line 357, in connect
+    sock = self.retry.call_with_retry(
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/redis/retry.py", line 62, in call_with_retry
+    return do()
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/redis/connection.py", line 358, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/redis/connection.py", line 698, in _connect
+    for res in socket.getaddrinfo(
+  File "/usr/lib/python3.10/socket.py", line 955, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/celery/backends/redis.py", line 127, in reconnect_on_error
+    yield
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/celery/backends/redis.py", line 177, in _consume_from
+    self._pubsub.subscribe(key)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/redis/client.py", line 957, in subscribe
+    ret_val = self.execute_command("SUBSCRIBE", *new_channels.keys())
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/redis/client.py", line 786, in execute_command
+    self.connection = self.connection_pool.get_connection(
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/redis/connection.py", line 1422, in get_connection
+    connection.connect()
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/redis/connection.py", line 363, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error -3 connecting to redis:6379. Temporary failure in name resolution.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/redis/connection.py", line 357, in connect
+    sock = self.retry.call_with_retry(
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/redis/retry.py", line 62, in call_with_retry
+    return do()
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/redis/connection.py", line 358, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/redis/connection.py", line 698, in _connect
+    for res in socket.getaddrinfo(
+  File "/usr/lib/python3.10/socket.py", line 955, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/kombu/connection.py", line 472, in _reraise_as_library_errors
+    yield
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/celery/app/base.py", line 800, in send_task
+    self.backend.on_task_call(P, task_id)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/celery/backends/redis.py", line 373, in on_task_call
+    self.result_consumer.consume_from(task_id)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/celery/backends/redis.py", line 169, in consume_from
+    return self.start(task_id)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/celery/backends/redis.py", line 147, in start
+    self._consume_from(initial_task_id)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/celery/backends/redis.py", line 176, in _consume_from
+    with self.reconnect_on_error():
+  File "/usr/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/celery/backends/redis.py", line 130, in reconnect_on_error
+    self._ensure(self._reconnect_pubsub, ())
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/celery/backends/redis.py", line 384, in ensure
+    return retry_over_time(
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/kombu/utils/functional.py", line 318, in retry_over_time
+    return fun(*args, **kwargs)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/celery/backends/redis.py", line 106, in _reconnect_pubsub
+    metas = self.backend.client.mget(self.subscribed_to)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/redis/commands/core.py", line 2009, in mget
+    return self.execute_command("MGET", *args, **options)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/redis/client.py", line 559, in execute_command
+    return self._execute_command(*args, **options)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/redis/client.py", line 565, in _execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/redis/connection.py", line 1422, in get_connection
+    connection.connect()
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/redis/connection.py", line 363, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error -3 connecting to redis:6379. Temporary failure in name resolution.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/contrib/admin/options.py", line 718, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/contrib/admin/sites.py", line 241, in inner
+    return view(request, *args, **kwargs)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django_celery_beat/admin.py", line 166, in changelist_view
+    return super().changelist_view(
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/contrib/admin/options.py", line 2034, in changelist_view
+    response = self.response_action(
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django/contrib/admin/options.py", line 1666, in response_action
+    response = func(self, request, queryset)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django_celery_beat/admin.py", line 251, in run_tasks
+    task_ids = [
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/django_celery_beat/admin.py", line 255, in <listcomp>
+    else task.apply_async(args=args, kwargs=kwargs,
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/celery/app/task.py", line 594, in apply_async
+    return app.send_task(
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/celery/app/base.py", line 798, in send_task
+    with P.connection._reraise_as_library_errors():
+  File "/usr/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/home/ubuntu/KYRT/venv/lib/python3.10/site-packages/kombu/connection.py", line 476, in _reraise_as_library_errors
+    raise ConnectionError(str(exc)) from exc
+kombu.exceptions.OperationalError: Error -3 connecting to redis:6379. Temporary failure in name resolution.
+2024-10-21 16:52:45 [django.server] INFO: "GET /admin/web/case/ HTTP/1.1" 200 125292
+2024-10-21 16:52:45 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 16:53:00 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:53:00 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:53:00 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:53:00 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:53:00 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:53:00 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:53:00 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:53:00 [django.server] INFO: "GET /admin/django_celery_beat/crontabschedule/ HTTP/1.1" 200 17823
+2024-10-21 16:53:00 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 16:53:47 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 16:53:47 [django.server] INFO: "GET /admin/django_celery_beat/crontabschedule/4/change/ HTTP/1.1" 200 58771
+2024-10-21 16:53:48 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 16:53:48 [django.server] INFO: "GET /static/admin/js/inlines.js HTTP/1.1" 304 0
+2024-10-21 16:53:48 [django.server] INFO: "GET /static/admin/img/icon-unknown.svg HTTP/1.1" 200 655
+2024-10-21 21:00:15 [root] INFO: Init django with environment "dev"
+2024-10-21 21:00:15 [root] INFO: Database: kyrt_dev
+2024-10-21 17:00:16 [root] INFO: Init django with environment "dev"
+2024-10-21 17:00:16 [root] INFO: Database: kyrt_dev
+2024-10-21 17:00:18 [django.server] INFO: "GET /admin/login/?next=/admin/ HTTP/1.1" 302 0
+2024-10-21 17:00:18 [django.server] INFO: "GET /admin/ HTTP/1.1" 200 16587
+2024-10-21 17:00:22 [django.server] INFO: "GET /admin/web/case/ HTTP/1.1" 200 125292
+2024-10-21 17:00:22 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 17:00:29 [django.server] INFO: "GET /admin/web/case/?o=1.-9 HTTP/1.1" 200 135565
+2024-10-21 17:00:29 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 17:00:31 [django.server] INFO: "GET /admin/web/case/?o=-1.-9 HTTP/1.1" 200 133893
+2024-10-21 17:00:31 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+2024-10-21 17:03:17 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 17:03:17 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 17:03:17 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 17:03:17 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 17:03:17 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 17:03:17 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 17:03:17 [cron_descriptor.GetText] DEBUG: /home/ubuntu/KYRT/venv/lib/python3.10/site-packages/cron_descriptor/locale/en_US.mo Loaded
+2024-10-21 17:03:17 [django.server] INFO: "GET /admin/django_celery_beat/crontabschedule/ HTTP/1.1" 200 17823
+2024-10-21 17:03:18 [django.server] INFO: "GET /admin/jsi18n/ HTTP/1.1" 200 3342

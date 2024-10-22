@@ -1,0 +1,39 @@
+/* Customize the login page background image with an external URL */
+body.login {
+    background-image: url('https://img1.wsimg.com/isteam/ip/227e7c64-7ef6-41b8-88ef-59e13b15e9b9/Countdown%201.webp/:/rs=h:175,m');
+    background-size: cover;  /* Ensure the image covers the entire background */
+    background-position: center;  /* Center the background image */
+    background-repeat: no-repeat;  /* Prevent the image from repeating */
+}
+
+/* Styling the login form box to stand out over the background */
+#content-main {
+    background: rgba(0, 0, 0, 0.6);  /* Semi-transparent black background for the form */
+    padding: 20px;
+    border-radius: 10px;
+    color: white;  /* White text for contrast */
+}
+
+/* Style adjustments for form fields */
+#content input[type="text"], #content input[type="password"] {
+    border: 2px solid #00BFFF; /* Custom border color for fields */
+    padding: 10px;
+    font-size: 16px;
+    color: white; /* White text inside fields */
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent black background for inputs */
+}
+
+/* Style for the login button */
+#content input[type="submit"] {
+    background-color: #00BFFF; /* Blue color for the button */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#content input[type="submit"]:hover {
+    background-color: #007ACC; /* Slightly darker blue on hover */
+}

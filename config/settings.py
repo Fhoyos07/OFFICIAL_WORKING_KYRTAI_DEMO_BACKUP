@@ -46,7 +46,7 @@ SECRET_KEY = 'django-insecure-xt_$(^cw9bl%qrk85s$9w4_&f*wrra5(*h!l#y+mcl9p+yls%6
 DEBUG = ENVIRONMENT == 'dev'
 
 ALLOWED_HOSTS = [
-    '18.220.92.76',  # New public IP for KYRT_v2.0_Demo
+    '3.17.80.213',  # New public IP for KYRT_v2.0_Demo
     'kyrt.ai',
     'localhost',
     '127.0.0.1'
@@ -89,7 +89,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],  # Make sure Django looks in your templates folder
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -174,8 +174,9 @@ AWS_S3_BUCKET_NAME = os.environ['AWS_S3_BUCKET_NAME']
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'config' / 'static'
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRS = [BASE_DIR / 'static']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

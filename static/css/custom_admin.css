@@ -1,0 +1,78 @@
+/* Ensure the entire viewport is used for centering */
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Customize the login page background image */
+body.login {
+    background-image: url('https://img1.wsimg.com/isteam/ip/227e7c64-7ef6-41b8-88ef-59e13b15e9b9/Countdown%201.webp/:/rs=h:175,m');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Center the login form box */
+#content-main {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    width: 350px;
+    height: auto;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Style adjustments for form fields */
+#content-main .form-row {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+/* Style for input fields */
+#content-main input[type="text"], #content-main input[type="password"] {
+    border: 2px solid #00BFFF;
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* Style for the login button */
+#content-main input[type="submit"] {
+    background-color: #00BFFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#content-main input[type="submit"]:hover {
+    background-color: #007ACC;
+}
