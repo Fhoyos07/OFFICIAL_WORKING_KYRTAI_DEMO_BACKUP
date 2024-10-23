@@ -2,8 +2,11 @@
 # For simplicity, this file contains only settings considered important or commonly used. Documentation:
 #     https://docs.scrapy.org/en/latest/topics/settings.html
 import os
-from django.conf import settings
+import django
+from django.conf import settings # Import Django settings
 
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
+django.setup()
 
 # folders
 BASE_DIR = settings.BASE_DIR
